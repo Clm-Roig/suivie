@@ -1,5 +1,6 @@
 {
   "name": "compte-sur-moi",
+  "homepage": "https://clm-roig.github.io/compte-sur-moi",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
