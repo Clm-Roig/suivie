@@ -1,6 +1,6 @@
 {
-  "name": "compte-sur-moi",
-  "homepage": "https://clm-roig.github.io/compte-sur-moi",
+  "name": "bujo-tracker",
+  "homepage": "https://clm-roig.github.io/bujo-tracker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
