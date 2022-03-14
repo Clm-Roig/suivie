@@ -1,5 +1,3 @@
-# Compte sur moi
-
 ## Pre-requisites
 - nvm aka [Node Version Manager](https://github.com/nvm-sh/nvm)
 
