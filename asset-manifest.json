@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/compte-sur-moi/static/css/main.8ead4c18.css",
+    "main.js": "/compte-sur-moi/static/js/main.ce35f002.js",
+    "static/media/logo.svg": "/compte-sur-moi/static/media/logo.b2e5a01e505f739f1484b881277d5186.svg",
+    "index.html": "/compte-sur-moi/index.html",
+    "main.8ead4c18.css.map": "/compte-sur-moi/static/css/main.8ead4c18.css.map",
+    "main.ce35f002.js.map": "/compte-sur-moi/static/js/main.ce35f002.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8ead4c18.css",
+    "static/js/main.ce35f002.js"
+  ]
+}
