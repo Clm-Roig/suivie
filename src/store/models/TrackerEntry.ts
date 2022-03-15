@@ -1,7 +1,6 @@
 class TrackerEntry {
-  date: Date;
+  date: string;
   quantity: number;
-  entries: TrackerEntry[] = [];
 
   constructor({ date, quantity }: TrackerEntry) {
     this.date = date;
