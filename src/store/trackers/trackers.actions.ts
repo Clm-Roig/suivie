@@ -18,7 +18,7 @@ class TrackersActions {
           status: TrackerStatus.active,
           entries: []
         }
-      ] }), 500)
+      ] }), 900)
     );
 
   }

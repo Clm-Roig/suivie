@@ -20,7 +20,6 @@ function TrackerList() {
   
   return (
     <Box>
-      <Typography variant="h1">Trackers</Typography>
       {status === SliceStatus.loading && <CircularProgress />}
       {trackers && trackers.length === 0 && <Typography>There are no trackers.</Typography>}
       {trackers && trackers.length > 0 && <List>
