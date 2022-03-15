@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { Container, Paper } from '@mui/material';
 import styled from '@emotion/styled';
-import { createTheme, StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
+import {
+  createTheme,
+  StyledEngineProvider,
+  ThemeProvider,
+  responsiveFontSizes
+} from '@mui/material/styles';
 import palette from '../config/CustomTheme';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
@@ -18,10 +23,13 @@ const MainContent = styled(Paper)`
   padding: 1rem;
 `;
 
-const theme = createTheme({
+// Theme configuration
+let theme = createTheme({
   palette: palette
 });
+theme = responsiveFontSizes(theme);
 
+// Main component
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
