@@ -1,7 +1,6 @@
 import PropTypes, { InferProps } from 'prop-types';
 import { AppBar as MuiAppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import './AppBar.css';
 
 function AppBar({ toggleDrawerMenu }: InferProps<typeof AppBar.propTypes>) {
   return (

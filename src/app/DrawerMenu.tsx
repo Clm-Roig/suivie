@@ -4,7 +4,6 @@ import { Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from '
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import TimelineIcon from '@mui/icons-material/Timeline';
-import './DrawerMenu.css';
 
 function DrawerMenu({ toggleDrawerMenu, open, width }: InferProps<typeof DrawerMenu.propTypes>) {
   return (
@@ -44,7 +43,7 @@ function DrawerMenu({ toggleDrawerMenu, open, width }: InferProps<typeof DrawerM
 DrawerMenu.propTypes = {
   open: PropTypes.bool.isRequired,
   toggleDrawerMenu: PropTypes.func.isRequired,
-  width: PropTypes.number.isRequired
+  width: PropTypes.string.isRequired
 };
 
 export default DrawerMenu;
