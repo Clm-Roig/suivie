@@ -6,6 +6,6 @@ const selectTrackers = (state: RootState) => {
     ...state.trackers,
     trackers: state.trackers.trackers?.map((t) => t as Tracker)
   };
-}
+};
 
 export default selectTrackers;

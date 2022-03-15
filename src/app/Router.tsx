@@ -5,10 +5,10 @@ import Statistics from '../pages/Statistics';
 function Router() {
   return (
     <Routes>
-      <Route path="/trackers" element={<Trackers/>}/>
-      <Route path="/stats" element={<Statistics/>} />
+      <Route path="/trackers" element={<Trackers />} />
+      <Route path="/stats" element={<Statistics />} />
     </Routes>
-  )
+  );
 }
 
 export default Router;

@@ -1,5 +1,5 @@
-import PropTypes, { InferProps } from "prop-types";
-import { Link, NavLink } from 'react-router-dom'
+import PropTypes, { InferProps } from 'prop-types';
+import { Link, NavLink } from 'react-router-dom';
 import { Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -8,24 +8,20 @@ import './DrawerMenu.css';
 
 function DrawerMenu({ toggleDrawerMenu, open }: InferProps<typeof DrawerMenu.propTypes>) {
   return (
-    <Drawer
-      variant="persistent"
-      anchor="left"
-      open={open}
-    >
+    <Drawer variant="persistent" anchor="left" open={open}>
       <IconButton onClick={toggleDrawerMenu}>
         <ChevronLeftIcon />
       </IconButton>
       <List>
         <ListItem component={NavLink} to="/trackers" button key={'Mes Trackers'}>
           <ListItemIcon>
-            <ListAltIcon/>
+            <ListAltIcon />
           </ListItemIcon>
           <ListItemText primary={'Mes Trackers'} />
         </ListItem>
         <ListItem component={Link} to="/stats" button key={'Statistiques'}>
           <ListItemIcon>
-            <TimelineIcon/>
+            <TimelineIcon />
           </ListItemIcon>
           <ListItemText primary={'Statistiques'} />
         </ListItem>
@@ -36,7 +32,7 @@ function DrawerMenu({ toggleDrawerMenu, open }: InferProps<typeof DrawerMenu.pro
 
 DrawerMenu.propTypes = {
   open: PropTypes.bool.isRequired,
-  toggleDrawerMenu: PropTypes.func.isRequired,
-}
+  toggleDrawerMenu: PropTypes.func.isRequired
+};
 
 export default DrawerMenu;

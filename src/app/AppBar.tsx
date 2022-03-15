@@ -1,4 +1,4 @@
-import PropTypes, { InferProps } from "prop-types";
+import PropTypes, { InferProps } from 'prop-types';
 import { AppBar as MuiAppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import './AppBar.css';
@@ -14,8 +14,7 @@ function AppBar({ toggleDrawerMenu }: InferProps<typeof AppBar.propTypes>) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={toggleDrawerMenu}
-          >
+            onClick={toggleDrawerMenu}>
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -28,7 +27,7 @@ function AppBar({ toggleDrawerMenu }: InferProps<typeof AppBar.propTypes>) {
 }
 
 AppBar.propTypes = {
-  toggleDrawerMenu: PropTypes.func.isRequired,
-}
+  toggleDrawerMenu: PropTypes.func.isRequired
+};
 
 export default AppBar;

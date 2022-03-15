@@ -11,19 +11,18 @@ const theme = createTheme({
   palette: palette
 });
 
-
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   const toggleDrawerMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <AppBar toggleDrawerMenu={toggleDrawerMenu}/>
-        <DrawerMenu open={isMenuOpen} toggleDrawerMenu={toggleDrawerMenu}/>
+        <AppBar toggleDrawerMenu={toggleDrawerMenu} />
+        <DrawerMenu open={isMenuOpen} toggleDrawerMenu={toggleDrawerMenu} />
         <Router />
       </Container>
     </ThemeProvider>

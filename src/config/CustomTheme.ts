@@ -2,10 +2,10 @@
 
 const CHARCOAL = {
   main: '#2E4057'
-}
+};
 const YELLOW_CRAYOLA = {
   main: '#FFE66D'
-}
+};
 /*
 const WHITE = {
   main: '#EEEEEE'
@@ -18,10 +18,9 @@ const MIDDLE_BLUE = {
 }
 */
 
-
 const palette = {
   primary: CHARCOAL,
-  secondary: YELLOW_CRAYOLA,
-}
+  secondary: YELLOW_CRAYOLA
+};
 
 export default palette;
