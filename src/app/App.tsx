@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Container } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Container, Paper } from '@mui/material';
+import { createTheme, StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import palette from '../config/CustomTheme';
 import './App.css';
 import AppBar from './AppBar';
@@ -11,21 +11,34 @@ const theme = createTheme({
   palette: palette
 });
 
+const DRAWER_MENU_WIDTH = 250;
+
 function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleDrawerMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container>
-        <AppBar toggleDrawerMenu={toggleDrawerMenu} />
-        <DrawerMenu open={isMenuOpen} toggleDrawerMenu={toggleDrawerMenu} />
-        <Router />
-      </Container>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <Container
+          style={isMenuOpen ? { marginLeft: DRAWER_MENU_WIDTH } : {}}
+          maxWidth={false}
+          disableGutters>
+          <AppBar toggleDrawerMenu={toggleDrawerMenu} />
+          <DrawerMenu
+            width={DRAWER_MENU_WIDTH}
+            open={isMenuOpen}
+            toggleDrawerMenu={toggleDrawerMenu}
+          />
+          <Paper style={{ margin: '1rem' }}>
+            <Router />
+          </Paper>
+        </Container>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
 

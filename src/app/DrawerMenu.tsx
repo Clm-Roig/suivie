@@ -6,9 +6,20 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import './DrawerMenu.css';
 
-function DrawerMenu({ toggleDrawerMenu, open }: InferProps<typeof DrawerMenu.propTypes>) {
+function DrawerMenu({ toggleDrawerMenu, open, width }: InferProps<typeof DrawerMenu.propTypes>) {
   return (
-    <Drawer variant="persistent" anchor="left" open={open}>
+    <Drawer
+      sx={{
+        width: width,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: width,
+          boxSizing: 'border-box'
+        }
+      }}
+      variant="persistent"
+      anchor="left"
+      open={open}>
       <IconButton onClick={toggleDrawerMenu}>
         <ChevronLeftIcon />
       </IconButton>
@@ -32,7 +43,8 @@ function DrawerMenu({ toggleDrawerMenu, open }: InferProps<typeof DrawerMenu.pro
 
 DrawerMenu.propTypes = {
   open: PropTypes.bool.isRequired,
-  toggleDrawerMenu: PropTypes.func.isRequired
+  toggleDrawerMenu: PropTypes.func.isRequired,
+  width: PropTypes.number.isRequired
 };
 
 export default DrawerMenu;
