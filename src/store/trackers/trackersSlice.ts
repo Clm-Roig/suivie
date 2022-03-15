@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit
 import { RootState } from '../store';
 
 import TrackersActions from './trackers.actions';
-import Tracker from '../models/Tracker';
-import SliceStatus from '../models/SliceStatus';
+import Tracker from '../../models/Tracker';
+import SliceStatus from '../../models/SliceStatus';
 
 // ===== State 
 

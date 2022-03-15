@@ -1,5 +1,5 @@
-import Tracker from "../models/Tracker";
-import TrackerStatus from "../models/TrackerStatus";
+import Tracker from "../../models/Tracker";
+import TrackerStatus from "../../models/TrackerStatus";
 
 class TrackersActions {
   // A mock function to mimic making an async request for data

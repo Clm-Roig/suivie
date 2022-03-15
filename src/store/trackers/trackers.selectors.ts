@@ -1,5 +1,5 @@
 import { RootState } from '../store';
-import Tracker from '../models/Tracker';
+import Tracker from '../../models/Tracker';
 
 const selectTrackers = (state: RootState) => {
   return {

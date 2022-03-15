@@ -4,7 +4,7 @@ import counterReducer, {
   decrement,
   incrementByAmount,
 } from './counterSlice';
-import SliceStatus from '../models/SliceStatus';
+import SliceStatus from '../../models/SliceStatus';
 
 describe('counter reducer', () => {
   const initialState: CounterState = {

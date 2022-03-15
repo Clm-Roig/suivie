@@ -1,4 +1,4 @@
-import SliceStatus from '../models/SliceStatus';
+import SliceStatus from '../../models/SliceStatus';
 import trackersReducer, {
   TrackersState,
   fetchAllTrackers

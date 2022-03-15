@@ -2,7 +2,7 @@ import { Box, CircularProgress, List, ListItem, Typography } from '@mui/material
 import { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import SliceStatus from '../../store/models/SliceStatus';
+import SliceStatus from '../../models/SliceStatus';
 import {
   fetchAllTrackers,
   selectTrackers
