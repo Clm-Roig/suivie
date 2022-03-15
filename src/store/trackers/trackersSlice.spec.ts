@@ -1,8 +1,5 @@
 import SliceStatus from '../../models/SliceStatus';
-import trackersReducer, {
-  TrackersState,
-  fetchAllTrackers
-} from './trackersSlice';
+import trackersReducer, { TrackersState, fetchAllTrackers } from './trackersSlice';
 
 describe('counter reducer', () => {
   const initialState: TrackersState = {
@@ -14,7 +11,7 @@ describe('counter reducer', () => {
     expect(trackersReducer(undefined, { type: 'unknown' })).toEqual({
       error: {},
       status: SliceStatus.idle,
-      trackers: undefined,
+      trackers: undefined
     });
   });
 
@@ -29,5 +26,4 @@ describe('counter reducer', () => {
     expect(actual.status).toEqual(SliceStatus.failed);
     expect(actual.error).not.toEqual({});
   });
-
 });

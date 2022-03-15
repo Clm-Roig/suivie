@@ -5,7 +5,7 @@ import TrackersActions from './trackers.actions';
 import Tracker from '../../models/Tracker';
 import SliceStatus from '../../models/SliceStatus';
 
-// ===== State 
+// ===== State
 
 export interface TrackersState {
   error: SerializedError;
@@ -16,18 +16,15 @@ export interface TrackersState {
 const initialState: TrackersState = {
   error: {},
   status: SliceStatus.idle,
-  trackers: undefined,
+  trackers: undefined
 };
 
 // ===== Thunk
 
-export const fetchAllTrackers = createAsyncThunk(
-  'trackers/fetchAllTrackers',
-  async () => {
-    const response = await TrackersActions.fetchAll();
-    return response.data;
-  },
-);
+export const fetchAllTrackers = createAsyncThunk('trackers/fetchAllTrackers', async () => {
+  const response = await TrackersActions.fetchAll();
+  return response.data;
+});
 
 // ===== Reducers
 
@@ -50,11 +47,11 @@ export const trackersSlice = createSlice({
         state.status = SliceStatus.failed;
         state.error = action.error;
       });
-  },
+  }
 });
 
 // ===== Selector
 
-export const selectTrackers = (state: RootState) => state.trackers
+export const selectTrackers = (state: RootState) => state.trackers;
 
 export default trackersSlice.reducer;
