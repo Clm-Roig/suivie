@@ -16,6 +16,7 @@ const DRAWER_MENU_WIDTH = '250px';
 
 const StyledContainer = styled(Container)<{ isMenuOpen: boolean }>`
   margin-left: ${(props) => (props.isMenuOpen ? DRAWER_MENU_WIDTH : '')};
+  width: ${(props) => (props.isMenuOpen ? `calc(100% - ${DRAWER_MENU_WIDTH})` : '')};
 `;
 
 const MainContent = styled(Paper)`
