@@ -4,6 +4,12 @@
 ## Setup
 - `npm install`
 
+## Release
+
+This project use conventional commits and standard-version package.
+
+- `npm run release`
+
 ## React Create App info
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
