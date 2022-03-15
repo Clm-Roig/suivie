@@ -7,6 +7,7 @@ export default interface Tracker {
   endDate?: string;
   entries: TrackerEntry[];
   name: string;
+  remainingDays?: number;
   status: TrackerStatus;
   unit?: string;
 }
