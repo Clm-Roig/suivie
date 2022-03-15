@@ -5,6 +5,7 @@ import Statistics from '../pages/Statistics';
 function Router() {
   return (
     <Routes>
+      <Route path="/" element={<Trackers />} />
       <Route path="/trackers" element={<Trackers />} />
       <Route path="/stats" element={<Statistics />} />
     </Routes>

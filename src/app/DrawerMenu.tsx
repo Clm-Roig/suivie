@@ -1,5 +1,5 @@
 import PropTypes, { InferProps } from 'prop-types';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -23,7 +23,7 @@ function DrawerMenu({ toggleDrawerMenu, open, width }: InferProps<typeof DrawerM
         <ChevronLeftIcon />
       </IconButton>
       <List>
-        <ListItem component={NavLink} to="/trackers" button key={'Mes Trackers'}>
+        <ListItem component={Link} to="/trackers" button key={'Mes Trackers'}>
           <ListItemIcon>
             <ListAltIcon />
           </ListItemIcon>
