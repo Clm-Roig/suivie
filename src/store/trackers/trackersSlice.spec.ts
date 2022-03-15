@@ -8,13 +8,13 @@ describe('counter reducer', () => {
   const initialState: TrackersState = {
     error: {},
     status: SliceStatus.idle,
-    trackers: []
+    trackers: undefined
   };
   it('should handle initial state', () => {
     expect(trackersReducer(undefined, { type: 'unknown' })).toEqual({
       error: {},
       status: SliceStatus.idle,
-      trackers: [],
+      trackers: undefined,
     });
   });
 
