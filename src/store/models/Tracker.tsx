@@ -11,7 +11,7 @@ class Tracker {
   status: TrackerStatus = TrackerStatus.active;
   unit?: string;
 
-  constructor({ name }: Tracker) {
+  constructor(name: string) {
     this.name = name;
   }
 }
