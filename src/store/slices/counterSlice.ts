@@ -1,15 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../store';
 import { fetchCount } from '../actions/counter';
+import SliceStatus from '../models/SliceStatus';
 
 export interface CounterState {
   value: number;
-  status: 'idle' | 'loading' | 'failed';
+  status: SliceStatus;
 }
 
 const initialState: CounterState = {
   value: 0,
-  status: 'idle',
+  status: SliceStatus.idle,
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -51,10 +52,10 @@ export const counterSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(incrementAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = SliceStatus.loading;
       })
       .addCase(incrementAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.status = SliceStatus.idle;
         state.value += action.payload;
       });
   },
