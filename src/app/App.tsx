@@ -8,16 +8,10 @@ import {
   responsiveFontSizes
 } from '@mui/material/styles';
 import { palette, typography } from '../config/CustomTheme';
+import { DRAWER_MENU_WIDTH } from '../config/Constants';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';
-
-const DRAWER_MENU_WIDTH = '250px';
-
-const StyledContainer = styled(Container)<{ isMenuOpen: boolean }>`
-  margin-left: ${(props) => (props.isMenuOpen ? DRAWER_MENU_WIDTH : '')};
-  width: ${(props) => (props.isMenuOpen ? `calc(100% - ${DRAWER_MENU_WIDTH})` : '')};
-`;
 
 const MainContent = styled(Container)`
   padding: 1rem;
@@ -41,7 +35,7 @@ function App() {
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <StyledContainer disableGutters isMenuOpen={isMenuOpen} maxWidth={false}>
+        <Container disableGutters maxWidth={false}>
           <AppBar toggleDrawerMenu={toggleDrawerMenu} />
           <DrawerMenu
             width={DRAWER_MENU_WIDTH}
@@ -51,7 +45,7 @@ function App() {
           <MainContent>
             <Router />
           </MainContent>
-        </StyledContainer>
+        </Container>
       </ThemeProvider>
     </StyledEngineProvider>
   );
