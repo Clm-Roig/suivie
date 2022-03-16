@@ -1,11 +1,17 @@
-import PropTypes, { InferProps } from 'prop-types';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import TimelineIcon from '@mui/icons-material/Timeline';
 
-function DrawerMenu({ toggleDrawerMenu, open, width }: InferProps<typeof DrawerMenu.propTypes>) {
+interface Props {
+  open: boolean;
+  toggleDrawerMenu: () => void;
+  width: string;
+}
+
+const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, width }) => {
   return (
     <Drawer
       sx={{
@@ -38,12 +44,6 @@ function DrawerMenu({ toggleDrawerMenu, open, width }: InferProps<typeof DrawerM
       </List>
     </Drawer>
   );
-}
-
-DrawerMenu.propTypes = {
-  open: PropTypes.bool.isRequired,
-  toggleDrawerMenu: PropTypes.func.isRequired,
-  width: PropTypes.string.isRequired
 };
 
 export default DrawerMenu;
