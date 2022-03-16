@@ -8,7 +8,10 @@ interface Props {
 
 const AppBar: FC<Props> = ({ toggleDrawerMenu }) => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{
+        flexGrow: 1
+      }}>
       <MuiAppBar position="static">
         <Toolbar>
           <IconButton
@@ -19,8 +22,8 @@ const AppBar: FC<Props> = ({ toggleDrawerMenu }) => {
             onClick={toggleDrawerMenu}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Bujo Tracker
+          <Typography color="#eee" variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            BUJO TRACKER
           </Typography>
         </Toolbar>
       </MuiAppBar>

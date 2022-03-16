@@ -7,13 +7,13 @@ import {
   CardContent,
   CardHeader,
   IconButton,
-  Chip
+  Chip,
+  Typography
 } from '@mui/material';
 import formatDate from '../../utils/formatDate';
 import Tracker from '../../models/Tracker';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckIcon from '@mui/icons-material/Check';
-import TimerIcon from '@mui/icons-material/Timer';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 interface Props {
@@ -24,24 +24,42 @@ const TrackerCard: FC<Props> = ({ tracker, cardProps }) => {
   const { beginDate, defaultQuantity, name, remainingDays, unit } = tracker;
   return (
     <Card {...cardProps}>
-      <CardHeader title={name} subheader={`Commencé le ${formatDate(new Date(beginDate))}`} />
+      <CardHeader
+        title={name}
+        subheader={
+          <>
+            <Typography display="block" variant="subtitle2">
+              Commencé le {formatDate(new Date(beginDate))}`
+            </Typography>
+            {remainingDays && (
+              <Typography display="block" variant="subtitle2">
+                Reste {remainingDays} jours
+              </Typography>
+            )}
+          </>
+        }
+      />
       {(defaultQuantity || remainingDays) && (
         <CardContent>
-          {defaultQuantity && <Chip label={`${defaultQuantity} ${unit}`} />}
-          {remainingDays && (
-            <Chip color="secondary" label={`Reste ${remainingDays} jours`} icon={<TimerIcon />} />
+          {defaultQuantity && (
+            <Chip
+              clickable={true}
+              color="primary"
+              sx={{ fontSize: 16 }}
+              label={`${defaultQuantity} ${unit}`}
+            />
           )}
         </CardContent>
       )}
       <CardActions>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-          <IconButton color="success" size="large">
+          <IconButton color="primary" size="large">
             <CheckIcon fontSize="large" />
           </IconButton>
-          <IconButton color="success" size="large">
+          <IconButton color="primary" size="large">
             <CheckCircleIcon fontSize="large" />
           </IconButton>
-          <IconButton size="large">
+          <IconButton color="primary" size="large">
             <VisibilityOffIcon fontSize="large" />
           </IconButton>
         </Box>
