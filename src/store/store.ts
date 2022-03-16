@@ -1,13 +1,35 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from './counter/counterSlice';
-import trackersReducer from './trackers/trackersSlice';
+import {
+  persistStore,
+  persistReducer,
+  REHYDRATE,
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import rootReducer from './rootReducer';
+
+const persistConfig = {
+  key: 'root',
+  storage
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-    trackers: trackersReducer
-  }
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER] // redux-persist actions are not serializable, ignore them
+      }
+    })
 });
+
+export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
