@@ -20,7 +20,7 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
-    "no-console": ["error"],
+    "no-console": ["warn"],
     "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
     "no-use-before-define": "off",
     "react/jsx-uses-react": "off",
