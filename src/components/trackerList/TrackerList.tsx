@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import SliceStatus from '../../models/SliceStatus';
-import { fetchAllTrackers, selectTrackers } from '../../store/trackers/trackersSlice';
+import { fetchAllTrackers } from '../../store/trackers/trackersSlice';
+import selectTrackers from '../../store/trackers/trackers.selectors';
 
 function TrackerList() {
   const { status, trackers } = useAppSelector(selectTrackers);
