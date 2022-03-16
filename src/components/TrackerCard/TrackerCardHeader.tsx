@@ -17,7 +17,7 @@ const TrackerCardHeader: FC<Props> = ({ beginDate, cardHeaderProps, name, remain
       subheader={
         <>
           <Typography display="block" variant="subtitle2">
-            Commencé le {formatDate(new Date(beginDate))}`
+            Commencé le {formatDate(new Date(beginDate))}
           </Typography>
           {remainingDays && (
             <Typography display="block" variant="subtitle2">
