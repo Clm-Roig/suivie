@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.2...v0.1.3) (2022-03-16)
+
+
+### Features
+
+* **formatDate:** custom wrapper to format all date to FR ([b1264ae](https://github.com/Clm-Roig/bujo-tracker/commit/b1264ae16d48a59ce10921850119dbdfa499ac0c))
+* **trackerCard:** add TrackerCard and use it on TrackerList ([50de224](https://github.com/Clm-Roig/bujo-tracker/commit/50de224b30504168306546d28d4f105035f26b65))
+* **trackerModel:** add dateHidden attribute ([283d02f](https://github.com/Clm-Roig/bujo-tracker/commit/283d02f94799a0c7b179fcfdf2ce931311f1c823))
+* **trackerSelector:** add computed remainingDays ([d7c0c3a](https://github.com/Clm-Roig/bujo-tracker/commit/d7c0c3a840fcb91060b81ca02bec2835a1bbeea3))
+
+
+### Bug Fixes
+
+* **baseUrl:** fix base url for dev and add home redirection to trackers ([d51e8ce](https://github.com/Clm-Roig/bujo-tracker/commit/d51e8ce9c54f8e077429d904365ec88d6b166989))
+* **mainContainer:** use Container instead of Paper ([f2994a4](https://github.com/Clm-Roig/bujo-tracker/commit/f2994a4cf9b57881a7dc8e55bd3252c4ca080d01))
+* **trackerEntryModel:** switch from class to interface ([f3d0d01](https://github.com/Clm-Roig/bujo-tracker/commit/f3d0d0114a0dfbd08c02347ac0c65507408de050))
+* **trackerStore:** remove selector in slice ([09a0bf4](https://github.com/Clm-Roig/bujo-tracker/commit/09a0bf46527f97aaedd9d1b964738c21e2c05574))
+* **typographySize:** decrease h1 typo size ([b778f32](https://github.com/Clm-Roig/bujo-tracker/commit/b778f32c29f686b2dea51bf2cf824f9f13506c74))
+
 ### [0.1.2](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.1...v0.1.2) (2022-03-15)
 
 
