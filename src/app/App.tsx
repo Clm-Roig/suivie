@@ -7,7 +7,7 @@ import {
   ThemeProvider,
   responsiveFontSizes
 } from '@mui/material/styles';
-import palette from '../config/CustomTheme';
+import { palette, typography } from '../config/CustomTheme';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';
@@ -26,7 +26,8 @@ const MainContent = styled(Paper)`
 
 // Theme configuration
 let theme = createTheme({
-  palette: palette
+  palette: palette,
+  typography: typography
 });
 theme = responsiveFontSizes(theme);
 
