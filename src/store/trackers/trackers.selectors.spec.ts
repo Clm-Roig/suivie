@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import SliceStatus from '../../models/SliceStatus';
 import Tracker from '../../models/Tracker';
 import TrackerStatus from '../../models/TrackerStatus';
@@ -18,6 +19,7 @@ describe('trackers selector', () => {
         ...state.trackers,
         trackers: [
           {
+            id: v4(),
             beginDate: new Date().toString(),
             entries: [],
             name: 'Do',
@@ -26,6 +28,7 @@ describe('trackers selector', () => {
             unit: 'push-ups'
           },
           {
+            id: v4(),
             beginDate: new Date().toString(),
             duration: 10,
             entries: [],
