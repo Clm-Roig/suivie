@@ -50,8 +50,4 @@ export const trackersSlice = createSlice({
   }
 });
 
-// ===== Selector
-
-export const selectTrackers = (state: RootState) => state.trackers;
-
 export default trackersSlice.reducer;
