@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Paper } from '@mui/material';
+import { Container } from '@mui/material';
 import styled from '@emotion/styled';
 import {
   createTheme,
@@ -19,8 +19,7 @@ const StyledContainer = styled(Container)<{ isMenuOpen: boolean }>`
   width: ${(props) => (props.isMenuOpen ? `calc(100% - ${DRAWER_MENU_WIDTH})` : '')};
 `;
 
-const MainContent = styled(Paper)`
-  margin: 1rem;
+const MainContent = styled(Container)`
   padding: 1rem;
 `;
 
