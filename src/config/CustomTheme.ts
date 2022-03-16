@@ -18,9 +18,13 @@ const MIDDLE_BLUE = {
 }
 */
 
-const palette = {
+export const palette = {
   primary: CHARCOAL,
   secondary: YELLOW_CRAYOLA
 };
 
-export default palette;
+export const typography = {
+  h1: {
+    fontSize: '4.3rem'
+  }
+};

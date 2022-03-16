@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Paper } from '@mui/material';
+import { Container } from '@mui/material';
 import styled from '@emotion/styled';
 import {
   createTheme,
@@ -7,7 +7,7 @@ import {
   ThemeProvider,
   responsiveFontSizes
 } from '@mui/material/styles';
-import palette from '../config/CustomTheme';
+import { palette, typography } from '../config/CustomTheme';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';
@@ -19,14 +19,14 @@ const StyledContainer = styled(Container)<{ isMenuOpen: boolean }>`
   width: ${(props) => (props.isMenuOpen ? `calc(100% - ${DRAWER_MENU_WIDTH})` : '')};
 `;
 
-const MainContent = styled(Paper)`
-  margin: 1rem;
+const MainContent = styled(Container)`
   padding: 1rem;
 `;
 
 // Theme configuration
 let theme = createTheme({
-  palette: palette
+  palette: palette,
+  typography: typography
 });
 theme = responsiveFontSizes(theme);
 

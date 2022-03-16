@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit';
-import { RootState } from '../store';
 
 import TrackersActions from './trackers.actions';
 import Tracker from '../../models/Tracker';
@@ -29,7 +28,7 @@ export const fetchAllTrackers = createAsyncThunk('trackers/fetchAllTrackers', as
 // ===== Reducers
 
 export const trackersSlice = createSlice({
-  name: 'counter',
+  name: 'trackers',
   initialState,
   reducers: {},
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -49,9 +48,5 @@ export const trackersSlice = createSlice({
       });
   }
 });
-
-// ===== Selector
-
-export const selectTrackers = (state: RootState) => state.trackers;
 
 export default trackersSlice.reducer;
