@@ -26,5 +26,8 @@ export const palette = {
 export const typography = {
   h1: {
     fontSize: '4.3rem'
+  },
+  allVariants: {
+    color: CHARCOAL.main
   }
 };
