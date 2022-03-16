@@ -28,7 +28,7 @@ export const fetchAllTrackers = createAsyncThunk('trackers/fetchAllTrackers', as
 // ===== Reducers
 
 export const trackersSlice = createSlice({
-  name: 'counter',
+  name: 'trackers',
   initialState,
   reducers: {},
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
