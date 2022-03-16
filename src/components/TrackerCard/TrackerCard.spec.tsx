@@ -3,8 +3,10 @@ import { subDays } from 'date-fns';
 import TrackerStatus from '../../models/TrackerStatus';
 import formatDate from '../../utils/formatDate';
 import TrackerCard from './TrackerCard';
+import { v4 } from 'uuid';
 
 const tracker1 = {
+  id: v4(),
   beginDate: subDays(new Date(), 3).toString(),
   defaultQuantity: 15,
   duration: 13,
