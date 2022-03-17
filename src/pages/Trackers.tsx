@@ -1,4 +1,4 @@
-import TrackerList from '../components/trackerList/TrackerList';
+import TrackerList from '../components/TrackerList/TrackerList';
 
 function Trackers() {
   return (
