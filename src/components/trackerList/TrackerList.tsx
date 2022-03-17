@@ -27,8 +27,8 @@ function TrackerList() {
         </IconButton>
       </Box>
 
-      {trackers && trackers.length === 0 && (
-        <Typography>{"Vous n'avez pas encore de trackers."}</Typography>
+      {((trackers && trackers.length === 0) || !trackers) && (
+        <Typography align="center">{"Vous n'avez pas encore de trackers."}</Typography>
       )}
 
       <Card sx={cardSxProp}>
