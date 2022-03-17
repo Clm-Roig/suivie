@@ -1,20 +1,26 @@
 import { FC } from 'react';
-import { CardContent, CardContentProps, Chip } from '@mui/material';
+import { CardContent, CardContentProps, Chip, Box } from '@mui/material';
+import Completion from '../../models/Completion';
 
 interface Props {
   cardContentProps?: CardContentProps;
-  defaultQuantity: number;
-  unit?: string;
+  requiredCompletions: Completion[];
 }
 
-const TrackerCardContent: FC<Props> = ({ cardContentProps, defaultQuantity, unit }) => {
-  let stringToDisplay = defaultQuantity.toString();
-  if (unit) {
-    stringToDisplay += ' ' + unit;
-  }
+const TrackerCardContent: FC<Props> = ({ cardContentProps, requiredCompletions }) => {
   return (
     <CardContent {...cardContentProps}>
-      <Chip clickable={true} color="primary" sx={{ fontSize: 16 }} label={stringToDisplay} />
+      <Box display="flex" gap={0.5} flexWrap={'wrap'}>
+        {requiredCompletions.map((c, idx) => (
+          <Chip
+            key={c.quantity.toString() + idx}
+            clickable={true}
+            color="primary"
+            label={c.unit ? c.quantity.toString() + ' ' + c.unit : c.quantity.toString()}
+            sx={{ fontSize: 16 }}
+          />
+        ))}
+      </Box>
     </CardContent>
   );
 };

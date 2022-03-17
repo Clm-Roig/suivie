@@ -23,9 +23,17 @@ describe('trackers selector', () => {
             beginDate: new Date().toString(),
             entries: [],
             name: 'Do',
-            quantity: 10,
-            status: TrackerStatus.active,
-            unit: 'push-ups'
+            requiredCompletions: [
+              {
+                quantity: 10,
+                unit: 'push-ups'
+              },
+              {
+                quantity: 15,
+                unit: 'squats'
+              },
+            ],
+            status: TrackerStatus.active
           },
           {
             id: v4(),
@@ -33,9 +41,13 @@ describe('trackers selector', () => {
             duration: 10,
             entries: [],
             name: 'Eat',
-            quantity: 6,
-            status: TrackerStatus.active,
-            unit: 'vegetables or fruits'
+            requiredCompletions: [
+              {
+                quantity: 6,
+                unit: 'vegetables or fruits'
+              }
+            ],
+            status: TrackerStatus.active
           }
         ]
       }
