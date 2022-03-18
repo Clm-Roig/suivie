@@ -13,18 +13,22 @@ const WHITE = {
 const SHIMMERING_BLUSH = {
   main: '#DB7F8E'
 }
+*/
 const MIDDLE_BLUE = {
   main: '#80CBC4'
-}
-*/
+};
 
 export const palette = {
   primary: CHARCOAL,
-  secondary: YELLOW_CRAYOLA
+  secondary: YELLOW_CRAYOLA,
+  accent: MIDDLE_BLUE
 };
 
 export const typography = {
   h1: {
     fontSize: '4.3rem'
+  },
+  allVariants: {
+    color: CHARCOAL.main
   }
 };

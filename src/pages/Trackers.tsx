@@ -1,10 +1,8 @@
-import { Typography } from '@mui/material';
-import TrackerList from '../components/trackerList/TrackerList';
+import TrackerList from '../components/TrackerList/TrackerList';
 
 function Trackers() {
   return (
     <>
-      <Typography variant="h1">Mes Trackers</Typography>
       <TrackerList />
     </>
   );

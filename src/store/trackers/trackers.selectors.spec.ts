@@ -1,3 +1,5 @@
+import { subDays } from 'date-fns';
+import { v4 } from 'uuid';
 import SliceStatus from '../../models/SliceStatus';
 import Tracker from '../../models/Tracker';
 import TrackerStatus from '../../models/TrackerStatus';
@@ -18,21 +20,35 @@ describe('trackers selector', () => {
         ...state.trackers,
         trackers: [
           {
+            id: v4(),
             beginDate: new Date().toString(),
             entries: [],
             name: 'Do',
-            quantity: 10,
-            status: TrackerStatus.active,
-            unit: 'push-ups'
+            requiredCompletions: [
+              {
+                quantity: 10,
+                unit: 'push-ups'
+              },
+              {
+                quantity: 15,
+                unit: 'squats'
+              }
+            ],
+            status: TrackerStatus.active
           },
           {
-            beginDate: new Date().toString(),
-            duration: 10,
+            id: v4(),
+            beginDate: subDays(new Date(), 10).toString(),
+            duration: 70,
             entries: [],
             name: 'Eat',
-            quantity: 6,
-            status: TrackerStatus.active,
-            unit: 'vegetables or fruits'
+            requiredCompletions: [
+              {
+                quantity: 6,
+                unit: 'vegetables or fruits'
+              }
+            ],
+            status: TrackerStatus.active
           }
         ]
       }
@@ -42,6 +58,8 @@ describe('trackers selector', () => {
     expect(status).toEqual(SliceStatus.idle);
     expect(trackers?.length).toEqual(2);
     const tracker2 = trackers?.[1] as Tracker;
-    expect(tracker2.remainingDays).toEqual(10);
+    // begun 10 days ago, duration of 70 days = 60 days remaining but can be 59 depending on the hour of the day
+    expect(tracker2.remainingDays).toBeGreaterThanOrEqual(59);
+    expect(tracker2.remainingDays).toBeLessThanOrEqual(60);
   });
 });

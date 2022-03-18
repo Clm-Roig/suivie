@@ -3,3 +3,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* MUI doesn't use fieldset, copy their Input Outlined border here. */
+fieldset {
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+}

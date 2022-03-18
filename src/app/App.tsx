@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 import { useState } from 'react';
 import { Container } from '@mui/material';
 import styled from '@emotion/styled';
@@ -7,17 +8,14 @@ import {
   ThemeProvider,
   responsiveFontSizes
 } from '@mui/material/styles';
+import DateAdapter from '@mui/lab/AdapterDateFns';
+import frLocale from 'date-fns/locale/fr';
+import { LocalizationProvider } from '@mui/lab';
 import { palette, typography } from '../config/CustomTheme';
+import { DRAWER_MENU_WIDTH } from '../config/Constants';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';
-
-const DRAWER_MENU_WIDTH = '250px';
-
-const StyledContainer = styled(Container)<{ isMenuOpen: boolean }>`
-  margin-left: ${(props) => (props.isMenuOpen ? DRAWER_MENU_WIDTH : '')};
-  width: ${(props) => (props.isMenuOpen ? `calc(100% - ${DRAWER_MENU_WIDTH})` : '')};
-`;
 
 const MainContent = styled(Container)`
   padding: 1rem;
@@ -39,21 +37,23 @@ function App() {
   };
 
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <StyledContainer disableGutters isMenuOpen={isMenuOpen} maxWidth={false}>
-          <AppBar toggleDrawerMenu={toggleDrawerMenu} />
-          <DrawerMenu
-            width={DRAWER_MENU_WIDTH}
-            open={isMenuOpen}
-            toggleDrawerMenu={toggleDrawerMenu}
-          />
-          <MainContent>
-            <Router />
-          </MainContent>
-        </StyledContainer>
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <LocalizationProvider dateAdapter={DateAdapter} locale={frLocale}>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <Container disableGutters maxWidth={false}>
+            <AppBar toggleDrawerMenu={toggleDrawerMenu} />
+            <DrawerMenu
+              width={DRAWER_MENU_WIDTH}
+              open={isMenuOpen}
+              toggleDrawerMenu={toggleDrawerMenu}
+            />
+            <MainContent>
+              <Router />
+            </MainContent>
+          </Container>
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </LocalizationProvider>
   );
 }
 

@@ -1,13 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './counter/counterSlice';
-import trackersReducer from './trackers/trackersSlice';
+import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
+import rootReducer from './rootReducer';
 
-export function createTestStore() {
+export function createTestStore(): EnhancedStore {
   const store = configureStore({
-    reducer: {
-      counter: counterReducer,
-      trackers: trackersReducer
-    }
+    reducer: rootReducer
   });
   return store;
 }
