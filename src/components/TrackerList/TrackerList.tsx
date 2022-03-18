@@ -1,13 +1,13 @@
-import { Box, Card, CardContent, CircularProgress, IconButton, Typography } from '@mui/material';
+import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import { useAppSelector } from '../../app/hooks';
 import formatDate from '../../utils/formatDate';
 import SliceStatus from '../../models/SliceStatus';
 import selectTrackers from '../../store/trackers/trackers.selectors';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import TrackerCard from '../TrackerCard/TrackerCard';
+import AddTrackerCard from './AddTrackerCard';
 
 function TrackerList() {
   const { status, trackers } = useAppSelector(selectTrackers);
@@ -31,20 +31,12 @@ function TrackerList() {
         <Typography align="center">{"Vous n'avez pas encore de trackers."}</Typography>
       )}
 
-      <Card sx={cardSxProp}>
-        <CardContent>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <IconButton>
-              <AddCircleOutlineIcon fontSize="large" color="primary" />
-            </IconButton>
-          </Box>
-        </CardContent>
-      </Card>
+      <AddTrackerCard cardProps={{ sx: cardSxProp }} />
 
       {trackers && trackers.length > 0 && (
         <>
           {trackers.map((t) => (
-            <TrackerCard tracker={t} key={t.name} cardProps={{ sx: cardSxProp }} />
+            <TrackerCard tracker={t} key={t.id} cardProps={{ sx: cardSxProp }} />
           ))}
         </>
       )}
