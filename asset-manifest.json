@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/bujo-tracker/static/css/main.a9041707.css",
-    "main.js": "/bujo-tracker/static/js/main.5be0f482.js",
+    "main.css": "/bujo-tracker/static/css/main.74318444.css",
+    "main.js": "/bujo-tracker/static/js/main.d1c53ca1.js",
     "index.html": "/bujo-tracker/index.html",
-    "main.a9041707.css.map": "/bujo-tracker/static/css/main.a9041707.css.map",
-    "main.5be0f482.js.map": "/bujo-tracker/static/js/main.5be0f482.js.map"
+    "main.74318444.css.map": "/bujo-tracker/static/css/main.74318444.css.map",
+    "main.d1c53ca1.js.map": "/bujo-tracker/static/js/main.d1c53ca1.js.map"
   },
   "entrypoints": [
-    "static/css/main.a9041707.css",
-    "static/js/main.5be0f482.js"
+    "static/css/main.74318444.css",
+    "static/js/main.d1c53ca1.js"
   ]
 }
