@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.3...v0.1.4) (2022-03-18)
+
+
+### Features
+
+* **completions:** display completions ([b439cc0](https://github.com/Clm-Roig/bujo-tracker/commit/b439cc0db6f0414980eb983699093dd6eeff1af2))
+* **createTracker:** add createTracker feature ([a8c0116](https://github.com/Clm-Roig/bujo-tracker/commit/a8c01162ce0071d9d27b889636e024051a62c0c3))
+* **createTracker:** add objectives creation ([be174f3](https://github.com/Clm-Roig/bujo-tracker/commit/be174f39e5cdb8f596bd9db99525e150d82618b7))
+* **emoji:** create Emoji component ([70090a6](https://github.com/Clm-Roig/bujo-tracker/commit/70090a6d4b0a28bc2969eebc238c6fa4673fa5df))
+* **mockupIntegration:** integrate first mockup ([5cd796a](https://github.com/Clm-Roig/bujo-tracker/commit/5cd796a9c96fccf06a097f453e4fbcdcd979aff3))
+* **models:** add Completion model and update Tracker with it ([5848602](https://github.com/Clm-Roig/bujo-tracker/commit/58486020fe3e0519c46c365b148455b2edf0da52))
+* **persistInStorage:** add redux-persist and retrieve from localStorage ([c2a2c2e](https://github.com/Clm-Roig/bujo-tracker/commit/c2a2c2e43e4c3ba5d93f72f47703ca377f3f797f))
+* **uuid:** add uuid to Tracker and TrackerEntry ([fdc9435](https://github.com/Clm-Roig/bujo-tracker/commit/fdc9435e72d87b1d810b40d3f1184c3c69a911be))
+
+
+### Bug Fixes
+
+* **drawer:** let drawer go on app + refactor constant ([25fd25a](https://github.com/Clm-Roig/bujo-tracker/commit/25fd25ae3578a6fb131455d6b16b155d8bd9af8b))
+* **trackerCard:** choose appropriate verb according to date and status ([7891771](https://github.com/Clm-Roig/bujo-tracker/commit/7891771591029d9018ff46dc12392e68295e96ed))
+* **trackerCardHeade:** remove typo ([6ec10a6](https://github.com/Clm-Roig/bujo-tracker/commit/6ec10a6665777b36dcec4a8529f6281472ac42f7))
+* **trackerList:** fix no trackers detection ([ae23094](https://github.com/Clm-Roig/bujo-tracker/commit/ae2309469783333be274e0891dfc6c05a9b08423))
+* **trackerSelector:** fix computation of remainingDays ([5a54f9c](https://github.com/Clm-Roig/bujo-tracker/commit/5a54f9cdd3ad4c3bdef1c01bd8d40d0b7f55eefc))
+* **trackersPage:** fix typo in import ([27354a9](https://github.com/Clm-Roig/bujo-tracker/commit/27354a97680b04ee001185bc6911b62996505846))
+
 ### [0.1.3](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.2...v0.1.3) (2022-03-16)
 
 
