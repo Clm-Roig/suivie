@@ -11,10 +11,10 @@ interface Props {
   cardProps?: CardProps;
 }
 const TrackerCard: FC<Props> = ({ tracker, cardProps }) => {
-  const { beginDate, name, remainingDays, requiredCompletions } = tracker;
+  const { requiredCompletions } = tracker;
   return (
     <Card {...cardProps}>
-      <TrackerCardHeader beginDate={beginDate} name={name} remainingDays={remainingDays} />
+      <TrackerCardHeader tracker={tracker} />
       {requiredCompletions.length > 0 && (
         <TrackerCardContent requiredCompletions={requiredCompletions} />
       )}
