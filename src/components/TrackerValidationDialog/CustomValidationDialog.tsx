@@ -1,3 +1,6 @@
+// TODO : remove next line when the feature is implemented
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { FC } from 'react';
 import {
   Button,

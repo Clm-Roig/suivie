@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Box, CardActions, CardActionsProps, IconButton, Typography } from '@mui/material';
+import { Box, CardActions, CardActionsProps, IconButton } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckIcon from '@mui/icons-material/Check';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -28,8 +28,11 @@ const TrackerCardActions: FC<Props> = ({ cardActionsProps, tracker }) => {
     enqueueSnackbar('Tracker validé !', { variant: 'success' });
   };
 
+  // TODO: remove next line when feature is implemented
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleCustomValidation = (completions: Completion[]) => {
-    console.log('custom validation');
+    // eslint-disable-next-line no-console
+    console.log('custom validation to be implementend');
   };
 
   return (
