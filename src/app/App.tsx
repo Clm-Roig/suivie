@@ -1,6 +1,5 @@
-/* eslint-disable react/jsx-no-undef */
-import { useState } from 'react';
-import { Container } from '@mui/material';
+import { createRef, useState } from 'react';
+import { IconButton, Container } from '@mui/material';
 import styled from '@emotion/styled';
 import {
   createTheme,
@@ -10,6 +9,8 @@ import {
 } from '@mui/material/styles';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import frLocale from 'date-fns/locale/fr';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { SnackbarKey, SnackbarProvider } from 'notistack';
 import { LocalizationProvider } from '@mui/lab';
 import { palette, typography } from '../config/CustomTheme';
 import { DRAWER_MENU_WIDTH } from '../config/Constants';
@@ -31,6 +32,10 @@ theme = responsiveFontSizes(theme);
 // Main component
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const notistackRef = createRef<SnackbarProvider>();
+  const onClickDismiss = (key: SnackbarKey) => () => {
+    notistackRef.current?.closeSnackbar(key);
+  };
 
   const toggleDrawerMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -41,15 +46,25 @@ function App() {
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <Container disableGutters maxWidth={false}>
-            <AppBar toggleDrawerMenu={toggleDrawerMenu} />
-            <DrawerMenu
-              width={DRAWER_MENU_WIDTH}
-              open={isMenuOpen}
-              toggleDrawerMenu={toggleDrawerMenu}
-            />
-            <MainContent>
-              <Router />
-            </MainContent>
+            <SnackbarProvider
+              dense
+              maxSnack={3}
+              ref={notistackRef}
+              action={(key) => (
+                <IconButton onClick={onClickDismiss(key)} size="small">
+                  <VisibilityOffIcon />
+                </IconButton>
+              )}>
+              <AppBar toggleDrawerMenu={toggleDrawerMenu} />
+              <DrawerMenu
+                width={DRAWER_MENU_WIDTH}
+                open={isMenuOpen}
+                toggleDrawerMenu={toggleDrawerMenu}
+              />
+              <MainContent>
+                <Router />
+              </MainContent>
+            </SnackbarProvider>
           </Container>
         </ThemeProvider>
       </StyledEngineProvider>

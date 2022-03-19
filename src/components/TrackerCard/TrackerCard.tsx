@@ -18,7 +18,7 @@ const TrackerCard: FC<Props> = ({ tracker, cardProps }) => {
       {requiredCompletions.length > 0 && (
         <TrackerCardContent requiredCompletions={requiredCompletions} />
       )}
-      <TrackerCardActions />
+      <TrackerCardActions tracker={tracker} />
     </Card>
   );
 };
