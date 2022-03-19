@@ -1,6 +1,15 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import {
+  Box,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  SwipeableDrawer
+} from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import TimelineIcon from '@mui/icons-material/Timeline';
@@ -13,7 +22,11 @@ interface Props {
 
 const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, width }) => {
   return (
-    <Drawer
+    <SwipeableDrawer
+      anchor="left"
+      onClose={toggleDrawerMenu}
+      onOpen={toggleDrawerMenu}
+      open={open}
       sx={{
         width: width,
         flexShrink: 0,
@@ -21,13 +34,13 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, width }) => {
           width: width,
           boxSizing: 'border-box'
         }
-      }}
-      variant="persistent"
-      anchor="left"
-      open={open}>
-      <IconButton onClick={toggleDrawerMenu}>
-        <ChevronLeftIcon />
-      </IconButton>
+      }}>
+      <Box sx={{ display: 'flex', justifyContent: 'right' }}>
+        <IconButton onClick={toggleDrawerMenu}>
+          <ChevronLeftIcon />
+        </IconButton>
+      </Box>
+      <Divider />
       <List>
         <ListItem component={Link} to="/trackers" button key={'Mes Trackers'}>
           <ListItemIcon>
@@ -42,7 +55,7 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, width }) => {
           <ListItemText primary={'Statistiques'} />
         </ListItem>
       </List>
-    </Drawer>
+    </SwipeableDrawer>
   );
 };
 
