@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
 
-import Tracker from '../../models/Tracker';
 import SliceStatus from '../../models/SliceStatus';
+import Tracker from '../../models/Tracker';
+import TrackerEntry from '../../models/TrackerEntry';
+import { v4 } from 'uuid';
 
 // ===== State
 
@@ -36,6 +38,20 @@ export const trackersSlice = createSlice({
       } else {
         state.trackers = [action.payload];
       }
+    },
+    completelyValidate: (state, action: PayloadAction<string>) => {
+      if (state.trackers) {
+        const trackerFound = state.trackers.find((t) => t.id === action.payload);
+        if (trackerFound) {
+          trackerFound.entries.push({
+            id: v4(),
+            completions: trackerFound.requiredCompletions,
+            date: new Date().toString(),
+            trackerId: trackerFound.id
+          } as TrackerEntry);
+        }
+      }
+      return state;
     }
   }
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -43,5 +59,5 @@ export const trackersSlice = createSlice({
   // extraReducers: (builder) => {})
 });
 
-export const { createTracker } = trackersSlice.actions;
+export const { createTracker, completelyValidate } = trackersSlice.actions;
 export default trackersSlice.reducer;
