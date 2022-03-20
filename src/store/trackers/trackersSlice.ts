@@ -39,7 +39,7 @@ export const trackersSlice = createSlice({
         state.trackers = [action.payload];
       }
     },
-    completelyValidate: (state, action: PayloadAction<string>) => {
+    completelyValidate: (state, action: PayloadAction<Tracker['id']>) => {
       if (state.trackers) {
         const trackerFound = state.trackers.find((t) => t.id === action.payload);
         if (trackerFound) {
@@ -52,6 +52,15 @@ export const trackersSlice = createSlice({
         }
       }
       return state;
+    },
+    deleteTracker: (state, action: PayloadAction<Tracker['id']>) => {
+      if (state.trackers) {
+        const filteredTrackers = state.trackers.filter((t) => t.id !== action.payload);
+        return {
+          ...state,
+          trackers: filteredTrackers
+        };
+      }
     }
   }
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -59,5 +68,5 @@ export const trackersSlice = createSlice({
   // extraReducers: (builder) => {})
 });
 
-export const { createTracker, completelyValidate } = trackersSlice.actions;
+export const { createTracker, completelyValidate, deleteTracker } = trackersSlice.actions;
 export default trackersSlice.reducer;
