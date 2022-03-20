@@ -30,7 +30,7 @@ describe('counter reducer', () => {
     expect(trackersReducer(undefined, { type: 'unknown' })).toEqual({
       error: {},
       status: SliceStatus.idle,
-      trackers: undefined
+      trackers: []
     });
   });
   it('should handle a tracker complete validation', () => {
@@ -39,7 +39,7 @@ describe('counter reducer', () => {
       completelyValidate(tracker1Id)
     );
 
-    const res = finalState.trackers?.[0];
+    const res = finalState.trackers[0];
     expect(res).toBeDefined();
     const entries = res?.entries;
     expect(entries?.length).toEqual(1);
@@ -52,6 +52,6 @@ describe('counter reducer', () => {
       { error: {}, status: SliceStatus.idle, trackers: [tracker1] },
       deleteTracker(tracker1Id)
     );
-    expect(finalState.trackers?.length).toEqual(0);
+    expect(finalState.trackers.length).toEqual(0);
   });
 });

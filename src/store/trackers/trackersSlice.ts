@@ -10,13 +10,13 @@ import { v4 } from 'uuid';
 export interface TrackersState {
   error: SerializedError;
   status: SliceStatus;
-  trackers?: Tracker[];
+  trackers: Tracker[];
 }
 
 const initialState: TrackersState = {
   error: {},
   status: SliceStatus.idle,
-  trackers: undefined
+  trackers: []
 };
 
 // ===== Thunk
@@ -33,34 +33,26 @@ export const trackersSlice = createSlice({
   initialState,
   reducers: {
     createTracker: (state, action: PayloadAction<Tracker>) => {
-      if (state.trackers) {
-        state.trackers.unshift(action.payload);
-      } else {
-        state.trackers = [action.payload];
-      }
+      state.trackers.unshift(action.payload);
     },
     completelyValidate: (state, action: PayloadAction<Tracker['id']>) => {
-      if (state.trackers) {
-        const trackerFound = state.trackers.find((t) => t.id === action.payload);
-        if (trackerFound) {
-          trackerFound.entries.push({
-            id: v4(),
-            completions: trackerFound.requiredCompletions,
-            date: new Date().toString(),
-            trackerId: trackerFound.id
-          } as TrackerEntry);
-        }
+      const trackerFound = state.trackers.find((t) => t.id === action.payload);
+      if (trackerFound) {
+        trackerFound.entries.push({
+          id: v4(),
+          completions: trackerFound.requiredCompletions,
+          date: new Date().toString(),
+          trackerId: trackerFound.id
+        } as TrackerEntry);
       }
       return state;
     },
     deleteTracker: (state, action: PayloadAction<Tracker['id']>) => {
-      if (state.trackers) {
-        const filteredTrackers = state.trackers.filter((t) => t.id !== action.payload);
-        return {
-          ...state,
-          trackers: filteredTrackers
-        };
-      }
+      const filteredTrackers = state.trackers.filter((t) => t.id !== action.payload);
+      return {
+        ...state,
+        trackers: filteredTrackers
+      };
     }
   }
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
