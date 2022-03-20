@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.3...v0.1.5) (2022-03-20)
+
+
+### Features
+
+* **completeValidation:** add complete validation on a tracker card ([16730af](https://github.com/Clm-Roig/bujo-tracker/commit/16730aff08b580e9e311f703ae27cdb1bd2da725))
+* **completions:** display completions ([6577d21](https://github.com/Clm-Roig/bujo-tracker/commit/6577d2182db7e157456b8b273345232c8fa4e040))
+* **createTracker:** add createTracker feature ([36554ac](https://github.com/Clm-Roig/bujo-tracker/commit/36554ac54b76ac744ffe0ffbd624e2b4e5987870))
+* **createTracker:** add objectives creation ([066b00a](https://github.com/Clm-Roig/bujo-tracker/commit/066b00ac401211475b46fe8d8bea15bea212488d))
+* **customValidation:** wip add custom validatoin dialog ([fe2a6d5](https://github.com/Clm-Roig/bujo-tracker/commit/fe2a6d566446c208f5d09e782d14cd0bd4b0a98a))
+* **deleteTracker:** add delete tracker on trackerCard ([2c2caee](https://github.com/Clm-Roig/bujo-tracker/commit/2c2caee8eadac4b191cc00cc9f617d4d4715e8ec))
+* **drawerMenu:** make menu swipeable, move icon to right, add divider ([9d6e5f9](https://github.com/Clm-Roig/bujo-tracker/commit/9d6e5f9eefcaaab1ae5522a97fd45bbff6831533))
+* **emoji:** create Emoji component ([9b5a453](https://github.com/Clm-Roig/bujo-tracker/commit/9b5a453168dfb50728ccb7475253e82973fd79fd))
+* **mockupIntegration:** integrate first mockup ([6b3a5e7](https://github.com/Clm-Roig/bujo-tracker/commit/6b3a5e7a1d8d2e57cda226a8378bab3da43835f7))
+* **models:** add Completion model and update Tracker with it ([1ad2710](https://github.com/Clm-Roig/bujo-tracker/commit/1ad2710ab9371ff3edf63e8403fdda2d6b6d9679))
+* **persistInStorage:** add redux-persist and retrieve from localStorage ([a85ce2c](https://github.com/Clm-Roig/bujo-tracker/commit/a85ce2c217e684cd0fe6dd0bff5abbc6e57e8e84))
+* **uuid:** add uuid to Tracker and TrackerEntry ([bd33589](https://github.com/Clm-Roig/bujo-tracker/commit/bd33589a3677ea12fff12fa2051b778ed0cdb47e))
+
+
+### Bug Fixes
+
+* **drawer:** let drawer go on app + refactor constant ([0f284f8](https://github.com/Clm-Roig/bujo-tracker/commit/0f284f86b8664aa18271e26b0b383faa30e63089))
+* **models:** make id readonly ([404dfcc](https://github.com/Clm-Roig/bujo-tracker/commit/404dfcc8c4623c04f2fc25865f1d07466278bf71))
+* **trackerCard:** choose appropriate verb according to date and status ([ab8eb2c](https://github.com/Clm-Roig/bujo-tracker/commit/ab8eb2c9e515001e8d1c191c2893a9b9df93fcae))
+* **trackerCardHeade:** remove typo ([c1caec5](https://github.com/Clm-Roig/bujo-tracker/commit/c1caec5dba4d12454d0636d198f8da9a8678d621))
+* **trackerList:** fix no trackers detection ([9bd2695](https://github.com/Clm-Roig/bujo-tracker/commit/9bd2695579b9e1471232ee322e59fe82c498d22a))
+* **trackerSelector:** fix computation of remainingDays ([cccf097](https://github.com/Clm-Roig/bujo-tracker/commit/cccf0971aceaaaf79e31554b1f589a1a62e7069c))
+* **trackersPage:** fix typo in import ([1502fb1](https://github.com/Clm-Roig/bujo-tracker/commit/1502fb1986ef7f4078e559a30ae948bda638a74b))
+* **trackersStateModel:** make trackers array always defined ([98e75f5](https://github.com/Clm-Roig/bujo-tracker/commit/98e75f54495f324577f8b261dcc5f3fd55b4a617))
+
 ### [0.1.4](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.3...v0.1.4) (2022-03-18)
 
 
