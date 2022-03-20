@@ -4,7 +4,7 @@ import { addDays, differenceInDays } from 'date-fns';
 
 const selectTrackers = (state: RootState) => {
   const prevTrackers = state.trackers.trackers;
-  const newTrackers = prevTrackers?.map((t) => {
+  const newTrackers = prevTrackers.map((t) => {
     let trackerObj = t as Tracker;
     const { beginDate, duration } = trackerObj;
     if (beginDate && duration) {

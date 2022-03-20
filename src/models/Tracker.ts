@@ -19,7 +19,7 @@ import TrackerStatus from './TrackerStatus';
  * @member {TrackerStatus} status @see TrackerStatus
  */
 export default interface Tracker {
-  id: string;
+  readonly id: string;
   beginDate: string;
   dateHidden?: string;
   duration?: number;

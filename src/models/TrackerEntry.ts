@@ -10,7 +10,7 @@ import Completion from './Completion';
  * @member {string} trackerId Tracker the entry is attached to
  */
 export default interface TrackerEntry {
-  id: string;
+  readonly id: string;
   completions: Completion[];
   date: string;
   trackerId: string;

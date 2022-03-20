@@ -1,20 +1,22 @@
 import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
 
-import Tracker from '../../models/Tracker';
 import SliceStatus from '../../models/SliceStatus';
+import Tracker from '../../models/Tracker';
+import TrackerEntry from '../../models/TrackerEntry';
+import { v4 } from 'uuid';
 
 // ===== State
 
 export interface TrackersState {
   error: SerializedError;
   status: SliceStatus;
-  trackers?: Tracker[];
+  trackers: Tracker[];
 }
 
 const initialState: TrackersState = {
   error: {},
   status: SliceStatus.idle,
-  trackers: undefined
+  trackers: []
 };
 
 // ===== Thunk
@@ -31,11 +33,26 @@ export const trackersSlice = createSlice({
   initialState,
   reducers: {
     createTracker: (state, action: PayloadAction<Tracker>) => {
-      if (state.trackers) {
-        state.trackers.unshift(action.payload);
-      } else {
-        state.trackers = [action.payload];
+      state.trackers.unshift(action.payload);
+    },
+    completelyValidate: (state, action: PayloadAction<Tracker['id']>) => {
+      const trackerFound = state.trackers.find((t) => t.id === action.payload);
+      if (trackerFound) {
+        trackerFound.entries.push({
+          id: v4(),
+          completions: trackerFound.requiredCompletions,
+          date: new Date().toString(),
+          trackerId: trackerFound.id
+        } as TrackerEntry);
       }
+      return state;
+    },
+    deleteTracker: (state, action: PayloadAction<Tracker['id']>) => {
+      const filteredTrackers = state.trackers.filter((t) => t.id !== action.payload);
+      return {
+        ...state,
+        trackers: filteredTrackers
+      };
     }
   }
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -43,5 +60,5 @@ export const trackersSlice = createSlice({
   // extraReducers: (builder) => {})
 });
 
-export const { createTracker } = trackersSlice.actions;
+export const { createTracker, completelyValidate, deleteTracker } = trackersSlice.actions;
 export default trackersSlice.reducer;
