@@ -56,8 +56,8 @@ describe('trackers selector', () => {
     const { error, status, trackers } = selectTrackers(stateWithTrackers);
     expect(error).toEqual({});
     expect(status).toEqual(SliceStatus.idle);
-    expect(trackers?.length).toEqual(2);
-    const tracker2 = trackers?.[1] as Tracker;
+    expect(trackers.length).toEqual(2);
+    const tracker2 = trackers[1] as Tracker;
     // begun 10 days ago, duration of 70 days = 60 days remaining but can be 59 depending on the hour of the day
     expect(tracker2.remainingDays).toBeGreaterThanOrEqual(59);
     expect(tracker2.remainingDays).toBeLessThanOrEqual(60);

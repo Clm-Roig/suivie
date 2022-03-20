@@ -1,5 +1,5 @@
 import SliceStatus from '../../models/SliceStatus';
-import trackersReducer, { completelyValidate } from './trackersSlice';
+import trackersReducer, { completelyValidate, deleteTracker } from './trackersSlice';
 import Tracker from '../../models/Tracker';
 import TrackerStatus from '../../models/TrackerStatus';
 import { subDays } from 'date-fns';
@@ -30,7 +30,7 @@ describe('counter reducer', () => {
     expect(trackersReducer(undefined, { type: 'unknown' })).toEqual({
       error: {},
       status: SliceStatus.idle,
-      trackers: undefined
+      trackers: []
     });
   });
   it('should handle a tracker complete validation', () => {
@@ -39,12 +39,19 @@ describe('counter reducer', () => {
       completelyValidate(tracker1Id)
     );
 
-    const res = finalState.trackers?.[0];
+    const res = finalState.trackers[0];
     expect(res).toBeDefined();
     const entries = res?.entries;
     expect(entries?.length).toEqual(1);
     const entry = entries?.[0];
     expect(entry?.completions).toEqual(tracker1.requiredCompletions);
     expect(entry?.trackerId).toEqual(tracker1.id);
+  });
+  it('should handle a tracker deletion', () => {
+    const finalState = trackersReducer(
+      { error: {}, status: SliceStatus.idle, trackers: [tracker1] },
+      deleteTracker(tracker1Id)
+    );
+    expect(finalState.trackers.length).toEqual(0);
   });
 });
