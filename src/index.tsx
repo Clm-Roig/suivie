@@ -3,21 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './app/App';
 import { HashRouter } from 'react-router-dom';
-import { store, persistor } from './store/store';
+import { store } from './store/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import { PersistGate } from 'redux-persist/integration/react';
-import FullScreenLoading from './app/FullScreenLoading';
+import CustomPersistGate from './app/CustomPersistGate';
 
 ReactDOM.render(
   <StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={<FullScreenLoading />} persistor={persistor}>
-        <HashRouter>
+    <HashRouter>
+      <Provider store={store}>
+        <CustomPersistGate>
           <App />
-        </HashRouter>
-      </PersistGate>
-    </Provider>
+        </CustomPersistGate>
+      </Provider>
+    </HashRouter>
   </StrictMode>,
   document.getElementById('root')
 );
