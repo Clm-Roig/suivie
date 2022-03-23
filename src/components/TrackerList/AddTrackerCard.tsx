@@ -35,7 +35,7 @@ const AddTrackerCard: FC<Props> = ({ cardProps }) => {
       </CardActionArea>
       {displayCreateForm && (
         <CardContent>
-          <TrackerForm />
+          <TrackerForm hideForm={() => setDisplayCreateForm(false)} />
         </CardContent>
       )}
     </Card>
