@@ -1,7 +1,7 @@
 {
   "name": "bujo-tracker",
   "homepage": "https://clm-roig.github.io/bujo-tracker",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.2",
