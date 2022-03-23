@@ -1,6 +1,6 @@
 enum TrackerStatus {
   active,
-  archived,
+  done,
   over
 }
 

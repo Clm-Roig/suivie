@@ -18,6 +18,28 @@ const MIDDLE_BLUE = {
   main: '#80CBC4'
 };
 
+export const components = {
+  MuiTabs: {
+    styleOverrides: {
+      indicator: {
+        backgroundColor: MIDDLE_BLUE.main
+      },
+      root: {
+        color: MIDDLE_BLUE.main
+      }
+    }
+  },
+  MuiTab: {
+    styleOverrides: {
+      root: {
+        '&.Mui-selected': {
+          color: MIDDLE_BLUE.main
+        }
+      }
+    }
+  }
+};
+
 export const palette = {
   primary: CHARCOAL,
   secondary: YELLOW_CRAYOLA,
