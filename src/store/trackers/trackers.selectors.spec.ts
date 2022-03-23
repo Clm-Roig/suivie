@@ -1,13 +1,11 @@
-import { subDays } from 'date-fns';
-import { v4 } from 'uuid';
 import SliceStatus from '../../models/SliceStatus';
 import Tracker from '../../models/Tracker';
-import TrackerStatus from '../../models/TrackerStatus';
 import { createTestStore } from '../createTestStore';
 import { RootState } from '../store';
 import { selectAllTrackers } from './trackers.selectors';
+import { testTracker1, testTracker2 } from './FAKE_DATA';
 
-describe('trackers selector', () => {
+describe('selectAllTrackers()', () => {
   let state: RootState;
   beforeEach(() => {
     state = createTestStore().getState();
@@ -18,39 +16,7 @@ describe('trackers selector', () => {
       ...state,
       trackers: {
         ...state.trackers,
-        trackers: [
-          {
-            id: v4(),
-            beginDate: new Date().toString(),
-            entries: [],
-            name: 'Do',
-            requiredCompletions: [
-              {
-                quantity: 10,
-                unit: 'push-ups'
-              },
-              {
-                quantity: 15,
-                unit: 'squats'
-              }
-            ],
-            status: TrackerStatus.active
-          },
-          {
-            id: v4(),
-            beginDate: subDays(new Date(), 10).toString(),
-            duration: 70,
-            entries: [],
-            name: 'Eat',
-            requiredCompletions: [
-              {
-                quantity: 6,
-                unit: 'vegetables or fruits'
-              }
-            ],
-            status: TrackerStatus.active
-          }
-        ]
+        trackers: [testTracker1, testTracker2]
       }
     };
     const { error, status, trackers } = selectAllTrackers(stateWithTrackers);
