@@ -1,26 +1,53 @@
 import { RootState } from '../store';
-import Tracker from '../../models/Tracker';
-import { addDays, differenceInDays } from 'date-fns';
+import TrackerStatus from '../../models/TrackerStatus';
+import {
+  formatTrackers,
+  removeDoneTrackers,
+  removeHiddenTrackers,
+  removeOverTrackers
+} from './utils';
 
-const selectTrackers = (state: RootState) => {
-  const prevTrackers = state.trackers.trackers;
-  const newTrackers = prevTrackers.map((t) => {
-    let trackerObj = t as Tracker;
-    const { beginDate, duration } = trackerObj;
-    if (beginDate && duration) {
-      const estimatedEndDateObj = addDays(new Date(beginDate), duration);
-      const difference = differenceInDays(estimatedEndDateObj, new Date());
-      trackerObj = {
-        ...trackerObj,
-        remainingDays: difference
-      };
-    }
-    return trackerObj;
-  });
+const selectHiddenTrackers = (state: RootState) => {
+  const newTrackers = removeOverTrackers(
+    formatTrackers(state.trackers.trackers).filter((t) => t.dateHidden !== undefined)
+  );
   return {
     ...state.trackers,
-    trackers: newTrackers ? [...newTrackers] : prevTrackers
+    trackers: newTrackers
   };
 };
 
-export default selectTrackers;
+const selectDoneTrackers = (state: RootState) => {
+  const newTrackers = formatTrackers(state.trackers.trackers).filter(
+    (t) => t.status === TrackerStatus.done
+  );
+
+  return {
+    ...state.trackers,
+    trackers: newTrackers
+  };
+};
+
+const selectTodoTrackers = (state: RootState) => {
+  const newTrackers = removeOverTrackers(
+    removeHiddenTrackers(
+      removeDoneTrackers(
+        formatTrackers(state.trackers.trackers).filter((t) => t.dateHidden === undefined)
+      )
+    )
+  );
+  return {
+    ...state.trackers,
+    trackers: newTrackers
+  };
+};
+
+const selectAllTrackers = (state: RootState) => {
+  const newTrackers = formatTrackers(state.trackers.trackers);
+  return {
+    ...state.trackers,
+    trackers: newTrackers
+  };
+};
+
+export { selectAllTrackers, selectDoneTrackers, selectHiddenTrackers, selectTodoTrackers };
