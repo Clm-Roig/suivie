@@ -25,7 +25,7 @@ const tracker1: Tracker = {
   entries: []
 };
 
-describe('counter reducer', () => {
+describe('trackers reducer', () => {
   it('should handle initial state', () => {
     expect(trackersReducer(undefined, { type: 'unknown' })).toEqual({
       error: {},
