@@ -10,6 +10,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { createTracker } from '../../store/trackers/trackersSlice';
 
 import CompletionsForm from './CompletionsForm';
+import { FC } from 'react';
 
 export const CompletionUnitTextField = styled(TextField)`
   fieldset {
@@ -40,7 +41,11 @@ const getDefaultValues = (): FormValues => ({
   status: TrackerStatus.active
 });
 
-function TrackerForm() {
+interface Props {
+  hideForm?: () => void;
+}
+
+const TrackerForm: FC<Props> = ({ hideForm }) => {
   const { control, handleSubmit, reset } = useForm<FormValues>({
     defaultValues: getDefaultValues()
   });
@@ -71,6 +76,9 @@ function TrackerForm() {
       })
     );
     resetToDefault();
+    if (hideForm) {
+      hideForm();
+    }
   };
 
   return (
@@ -156,6 +164,6 @@ function TrackerForm() {
       </Stack>
     </Box>
   );
-}
+};
 
 export default TrackerForm;
