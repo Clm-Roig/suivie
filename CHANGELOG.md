@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.5...v0.1.6) (2022-03-23)
+
+
+### Features
+
+* **cardActions:** add make visible & hidden dialogs (wip) ([b99c0f1](https://github.com/Clm-Roig/bujo-tracker/commit/b99c0f11961dc90d37c266c6c81330eb0205d268))
+* **createTrackerForm:** hide form after creation ([87527c7](https://github.com/Clm-Roig/bujo-tracker/commit/87527c7b3c1f79ae30a71348d554e8228d2473cb))
+* **errorDataLoading:** add a check on trackers data loading ([5a4dba1](https://github.com/Clm-Roig/bujo-tracker/commit/5a4dba15b39e13444e5383ae69eae788a88295b7))
+* **trackersTabs:** display trackers by 3 categories ([2bf3daa](https://github.com/Clm-Roig/bujo-tracker/commit/2bf3daa8b4db314d0bdd0dfc76dd83def6cbbcb5))
+
+
+### Bug Fixes
+
+* **completionChip:** fix css ([177c6c0](https://github.com/Clm-Roig/bujo-tracker/commit/177c6c0544d9c64296fc78e8618bbf33ba6bf2fc))
+* **gitignore:** ignore vscode workspace ([e9cd9e8](https://github.com/Clm-Roig/bujo-tracker/commit/e9cd9e89d7329da7667be504f44f8f4c932cd31f))
+* **trackerCard:** fix translation ([87a97df](https://github.com/Clm-Roig/bujo-tracker/commit/87a97dfbdedb6e22e51ec8889d253912445d3f6a))
+* **trackerFomr:** destructure data & fix duration conditional parsing ([d09e245](https://github.com/Clm-Roig/bujo-tracker/commit/d09e24568a281546de9d7e6c6999193201174660))
+
 ### [0.1.5](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.3...v0.1.5) (2022-03-20)
 
 
