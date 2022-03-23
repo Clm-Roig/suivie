@@ -56,13 +56,14 @@ function TrackerForm() {
   };
 
   const onSubmit = (data: FormValues) => {
+    const { beginDate, duration, requiredCompletions } = data;
     dispatch(
       createTracker({
         ...data,
-        beginDate: data.beginDate.toString(),
-        duration: parseInt(data.duration),
+        beginDate: beginDate.toString(),
+        duration: duration ? parseInt(duration) : undefined,
         requiredCompletions: [
-          ...data.requiredCompletions.map((c) => ({
+          ...requiredCompletions.map((c) => ({
             quantity: parseInt(c.quantity),
             unit: c.unit
           }))
