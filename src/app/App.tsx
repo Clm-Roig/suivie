@@ -12,7 +12,7 @@ import frLocale from 'date-fns/locale/fr';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { SnackbarKey, SnackbarProvider } from 'notistack';
 import { LocalizationProvider } from '@mui/lab';
-import { palette, typography } from '../config/CustomTheme';
+import { components, palette, typography } from '../config/CustomTheme';
 import { DRAWER_MENU_WIDTH } from '../config/Constants';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
@@ -24,6 +24,7 @@ const MainContent = styled(Container)`
 
 // Theme configuration
 let theme = createTheme({
+  components,
   palette: palette,
   typography: typography
 });

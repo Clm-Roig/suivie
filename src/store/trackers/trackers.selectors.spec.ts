@@ -5,7 +5,7 @@ import Tracker from '../../models/Tracker';
 import TrackerStatus from '../../models/TrackerStatus';
 import { createTestStore } from '../createTestStore';
 import { RootState } from '../store';
-import selectTrackers from './trackers.selectors';
+import { selectAllTrackers } from './trackers.selectors';
 
 describe('trackers selector', () => {
   let state: RootState;
@@ -53,7 +53,7 @@ describe('trackers selector', () => {
         ]
       }
     };
-    const { error, status, trackers } = selectTrackers(stateWithTrackers);
+    const { error, status, trackers } = selectAllTrackers(stateWithTrackers);
     expect(error).toEqual({});
     expect(status).toEqual(SliceStatus.idle);
     expect(trackers.length).toEqual(2);

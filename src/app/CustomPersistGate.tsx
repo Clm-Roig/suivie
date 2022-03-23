@@ -3,7 +3,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import FullScreenLoading from './FullScreenLoading';
 import { persistor } from '../store/store';
 import { useAppSelector } from './hooks';
-import selectTrackers from '../store/trackers/trackers.selectors';
+import { selectAllTrackers } from '../store/trackers/trackers.selectors';
 import isATracker from '../utils/isATracker';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const CustomPersistGate: FC<Props> = ({ children }) => {
-  const { trackers } = useAppSelector(selectTrackers);
+  const { trackers } = useAppSelector(selectAllTrackers);
   const navigate = useNavigate();
 
   const handleBeforeLift = () => {
