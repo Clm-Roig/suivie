@@ -66,7 +66,7 @@ const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
               <ListItemIcon>
                 <DeleteIcon fontSize="small" />
               </ListItemIcon>
-              <ListItemText>Delete</ListItemText>
+              <ListItemText>Supprimer</ListItemText>
             </MenuItem>
           </Menu>
         </>

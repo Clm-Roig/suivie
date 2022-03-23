@@ -13,7 +13,7 @@ const CompletionChip: FC<Props> = ({ completion }) => {
       clickable={true}
       color="primary"
       label={quantity.toString() + ' ' + unit}
-      sx={{ fontSize: 16 }}
+      sx={{ '.MuiChip-label': { height: 16 }, borderRadius: 2, fontSize: 16 }}
     />
   );
 };

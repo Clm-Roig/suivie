@@ -9,7 +9,7 @@ interface Props {
 
 const CompletionChipList: FC<Props> = ({ completions }) => {
   return (
-    <Box display="flex" gap={0.5} flexWrap={'wrap'}>
+    <Box display="flex" gap={0.5} flexWrap={'wrap'} sx={{ justifyContent: 'center' }}>
       {completions.map((c, idx) => (
         <CompletionChip key={c.quantity.toString() + idx} completion={c} />
       ))}
