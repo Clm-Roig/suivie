@@ -52,7 +52,7 @@ const CompletionsForm: FC<Props> = ({ append, control, fields, gridProps, remove
             mb: 1
           }}
           {...gridProps}>
-          <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
             <Typography variant="subtitle1">Objectif n°{index + 1}</Typography>
             <IconButton onClick={() => remove(index)} sx={{ p: 0 }}>
               <DeleteIcon color="error" />
