@@ -1,27 +1,15 @@
 import { FC, useEffect } from 'react';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
-import { TextField, Typography, Grid } from '@mui/material';
+import { Typography, Grid } from '@mui/material';
 import styled from '@emotion/styled';
 
-import Completion from '../../models/Completion';
+import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
+import CompletionUnitTextField from '../completions/CompletionUnitTextField';
+import Completion from '../../../models/Completion';
 
 export const FieldsetGrid = styled(Grid)`
   border-radius: 4px;
   padding: 8px;
-`;
-
-export const CompletionUnitTextField = styled(TextField)`
-  fieldset {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-`;
-
-export const CompletionQuantityTextField = styled(TextField)`
-  fieldset {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
 `;
 
 type FormValues = {
@@ -34,6 +22,13 @@ interface Props {
   onSubmit: (completions: Completion[]) => void;
 }
 
+/**
+ * This form is used for entering some quantities on predefined completions.
+ * Completions units are disabled within this form.
+ *
+ * @param {*} { completions, formId, onSubmit }
+ * @return {*}
+ */
 const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) => {
   const { control, handleSubmit, setValue, getValues } = useForm<FormValues>();
   const { fields } = useFieldArray({

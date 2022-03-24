@@ -11,7 +11,7 @@ import {
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import CompletionChipList from '../CompletionChipList/CompletionChipList';
-import ValidateCompletionsForm from '../ValidateCompletionsForm/ValidateCompletionsForm';
+import ValidateCompletionsForm from '../forms/ValidateCompletionsForm/ValidateCompletionsForm';
 
 interface Props {
   dialogProps: DialogProps;

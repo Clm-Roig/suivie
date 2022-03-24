@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button, Grid, GridProps, IconButton, TextField, Typography } from '@mui/material';
+import { Button, Grid, GridProps, IconButton, Typography } from '@mui/material';
 import styled from '@emotion/styled';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -10,26 +10,14 @@ import {
   UseFieldArrayAppend,
   UseFieldArrayRemove
 } from 'react-hook-form';
-import { FormValues } from './types';
+import { FormValues } from '../TrackerForm/types';
+import CompletionUnitTextField from '../completions/CompletionUnitTextField';
+import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
   border-radius: 4px;
   padding: 8px;
-`;
-
-export const CompletionUnitTextField = styled(TextField)`
-  fieldset {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-`;
-
-export const CompletionQuantityTextField = styled(TextField)`
-  fieldset {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
 `;
 
 interface Props {
@@ -40,7 +28,13 @@ interface Props {
   remove: UseFieldArrayRemove;
 }
 
-const CompletionsForm: FC<Props> = ({ append, control, fields, gridProps, remove }) => {
+/**
+ * This forms is used to create one or many requiredCompletions for a new tracker.
+ *
+ * @param {*} { append, control, fields, gridProps, remove }
+ * @return {*}
+ */
+const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps, remove }) => {
   return (
     <>
       {fields.map((field, index) => (
@@ -137,4 +131,4 @@ const CompletionsForm: FC<Props> = ({ append, control, fields, gridProps, remove
   );
 };
 
-export default CompletionsForm;
+export default RequiredCompletionsForm;
