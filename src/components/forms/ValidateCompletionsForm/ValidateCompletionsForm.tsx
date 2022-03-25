@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
-import { Typography, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import styled from '@emotion/styled';
 
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
