@@ -5,13 +5,24 @@ import CompletionChipList from '../CompletionChipList/CompletionChipList';
 
 interface Props {
   cardContentProps?: CardContentProps;
+  onChipClick?: (completion: Completion) => void;
   requiredCompletions: Completion[];
+  selectedCompletions?: Completion[];
 }
 
-const TrackerCardContent: FC<Props> = ({ cardContentProps, requiredCompletions }) => {
+const TrackerCardContent: FC<Props> = ({
+  cardContentProps,
+  onChipClick,
+  requiredCompletions,
+  selectedCompletions
+}) => {
   return (
     <CardContent {...cardContentProps}>
-      <CompletionChipList completions={requiredCompletions} />
+      <CompletionChipList
+        completions={requiredCompletions}
+        onChipClick={onChipClick}
+        selectedCompletions={selectedCompletions}
+      />
     </CardContent>
   );
 };

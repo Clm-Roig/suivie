@@ -8,7 +8,7 @@ import CompleteValidationDialog from '../TrackerValidationDialog/CompleteValidat
 import CustomValidationDialog from '../TrackerValidationDialog/CustomValidationDialog';
 import MakeHiddenDialog from '../TrackerValidationDialog/MakeHiddenDialog';
 import MakeVisibleValidationDialog from '../TrackerValidationDialog/MakeVisibleDialog';
-import { completelyValidate } from '../../store/trackers/trackersSlice';
+import { completelyValidate, customValidate } from '../../store/trackers/trackersSlice';
 import Tracker from '../../models/Tracker';
 import Completion from '../../models/Completion';
 import { useAppDispatch } from '../../app/hooks';
@@ -17,10 +17,17 @@ import { isToday } from 'date-fns';
 
 interface Props {
   cardActionsProps?: CardActionsProps;
+  selectedCompletions?: Completion[];
+  onChipClick?: (completion: Completion) => void;
   tracker: Tracker;
 }
 
-const TrackerCardActions: FC<Props> = ({ cardActionsProps, tracker }) => {
+const TrackerCardActions: FC<Props> = ({
+  cardActionsProps,
+  onChipClick,
+  selectedCompletions,
+  tracker
+}) => {
   const dispatch = useAppDispatch();
   const [isCompleteValidationOpen, setIsCompleteValidationOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -34,11 +41,10 @@ const TrackerCardActions: FC<Props> = ({ cardActionsProps, tracker }) => {
     enqueueSnackbar('Tracker validé !', { variant: 'success' });
   };
 
-  // TODO: remove next line when feature is implemented
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleCustomValidation = (completions: Completion[]) => {
-    // eslint-disable-next-line no-console
-    console.log('custom validation to be implementend');
+    dispatch(customValidate({ id: tracker.id, completions: completions }));
+    setIsCustomValidationOpen(false);
+    enqueueSnackbar('Tracker validé !', { variant: 'success' });
   };
 
   // TODO: remove next line when feature is implemented
@@ -95,7 +101,10 @@ const TrackerCardActions: FC<Props> = ({ cardActionsProps, tracker }) => {
       <CompleteValidationDialog
         dialogProps={{
           open: isCompleteValidationOpen,
-          onClose: () => setIsCompleteValidationOpen(false)
+          onClose: () => setIsCompleteValidationOpen(false),
+          sx: {
+            '.MuiDialog-paper': { bgcolor: 'secondary' }
+          }
         }}
         onValidation={handleCompleteValidation}
         tracker={tracker}
@@ -103,15 +112,23 @@ const TrackerCardActions: FC<Props> = ({ cardActionsProps, tracker }) => {
       <CustomValidationDialog
         dialogProps={{
           open: isCustomValidationOpen,
-          onClose: () => setIsCustomValidationOpen(false)
+          onClose: () => setIsCustomValidationOpen(false),
+          sx: {
+            '.MuiDialog-paper': { bgcolor: 'secondary' }
+          }
         }}
+        onChipClick={onChipClick}
         onValidation={handleCustomValidation}
+        selectedCompletions={selectedCompletions}
         tracker={tracker}
       />
       <MakeVisibleValidationDialog
         dialogProps={{
           open: isMakeVisible,
-          onClose: () => setIsMakeVisible(false)
+          onClose: () => setIsMakeVisible(false),
+          sx: {
+            '.MuiDialog-paper': { bgcolor: 'secondary' }
+          }
         }}
         onValidation={handleMakeVisible}
         tracker={tracker}
@@ -119,7 +136,10 @@ const TrackerCardActions: FC<Props> = ({ cardActionsProps, tracker }) => {
       <MakeHiddenDialog
         dialogProps={{
           open: isMakeHidden,
-          onClose: () => setIsMakeHidden(false)
+          onClose: () => setIsMakeHidden(false),
+          sx: {
+            '.MuiDialog-paper': { bgcolor: 'secondary' }
+          }
         }}
         onValidation={handleMakeHidden}
         tracker={tracker}
