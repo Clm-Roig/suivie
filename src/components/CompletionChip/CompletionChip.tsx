@@ -1,19 +1,22 @@
 import { FC } from 'react';
-import { Chip } from '@mui/material';
+import { Chip, ChipProps } from '@mui/material';
 import Completion from '../../models/Completion';
 
 interface Props {
+  chipProps?: ChipProps;
   completion: Completion;
+  isSelected?: boolean;
 }
 
-const CompletionChip: FC<Props> = ({ completion }) => {
+const CompletionChip: FC<Props> = ({ chipProps, completion, isSelected }) => {
   const { quantity, unit } = completion;
   return (
     <Chip
       clickable={true}
-      color="primary"
+      color={isSelected ? 'info' : 'primary'}
       label={quantity.toString() + ' ' + unit}
       sx={{ '.MuiChip-label': { fontSize: 16 }, borderRadius: 2 }}
+      {...chipProps}
     />
   );
 };
