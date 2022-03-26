@@ -8,7 +8,7 @@ import {
   removeHiddenTrackers,
   formatTrackers
 } from './utils';
-import { testTracker1, testEntry1 } from './FAKE_DATA';
+import { testTracker1, testEntry1, testEntry2 } from './FAKE_DATA';
 
 describe('computeRemainingDays()', () => {
   it('should return the appropriate remaining days', () => {
@@ -35,10 +35,17 @@ describe('computeNewStatus()', () => {
     };
     expect(computeNewStatus(finishedTracker)).toBe(TrackerStatus.over);
   });
-  it('should be done (one a entry for today)', () => {
+  it('should be active (not enough entry for today)', () => {
     const doneTracker = {
       ...testTracker1,
       entries: [testEntry1]
+    };
+    expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.active);
+  });
+  it('should be done (enough entries for today)', () => {
+    const doneTracker = {
+      ...testTracker1,
+      entries: [testEntry1, testEntry2]
     };
     expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.done);
   });

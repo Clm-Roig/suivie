@@ -1,6 +1,32 @@
 import { addDays, differenceInDays, isBefore, isSameDay } from 'date-fns';
+import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
+import TrackerEntry from '../../models/TrackerEntry';
 import TrackerStatus from '../../models/TrackerStatus';
+
+const getTodayAggregatedCompletions = (entries: TrackerEntry[]): Completion[] => {
+  const todayCompletions = entries
+    .filter((e) => isSameDay(new Date(e.date), new Date()))
+    .flatMap((e) => e.completions);
+  if (todayCompletions.length === 0) return [];
+
+  return todayCompletions.reduce<Completion[]>((res, todayCompletion) => {
+    const previousCompletion = res.find((c) => c.unit === todayCompletion.unit);
+    let newRes: Completion[] = [];
+    if (previousCompletion) {
+      newRes = [
+        ...res.filter((c) => c.unit !== todayCompletion.unit),
+        {
+          ...previousCompletion,
+          quantity: previousCompletion.quantity + todayCompletion.quantity
+        }
+      ];
+    } else {
+      newRes = [...res, todayCompletion];
+    }
+    return newRes;
+  }, []);
+};
 
 export const computeRemainingDays = (beginDate: string, duration: number) => {
   const estimatedEndDateObj = addDays(new Date(beginDate), duration);
@@ -9,7 +35,7 @@ export const computeRemainingDays = (beginDate: string, duration: number) => {
 };
 
 export const computeNewStatus = (tracker: Tracker) => {
-  const { beginDate, duration, entries, remainingDays, status } = tracker;
+  const { beginDate, duration, entries, remainingDays, requiredCompletions, status } = tracker;
   let newStatus = status;
   // End tracker if needed
   if (
@@ -18,10 +44,24 @@ export const computeNewStatus = (tracker: Tracker) => {
   ) {
     newStatus = TrackerStatus.over;
   }
-  // Mark Tracker as done if there is a completion for today
-  if (entries.some((e) => isSameDay(new Date(e.date), new Date()))) {
+
+  // Mark Tracker as done if all required completions are done
+  const todayCompletions = getTodayAggregatedCompletions(entries);
+  const remains = [];
+  for (const requiredCompletion of requiredCompletions) {
+    const remain = requiredCompletion.quantity;
+    const todayCompletion = todayCompletions.find((c) => c.unit === requiredCompletion.unit);
+    if (todayCompletion) {
+      remains.push(requiredCompletion.quantity - todayCompletion.quantity);
+    } else {
+      remains.push(remain);
+    }
+  }
+
+  if (remains.every((x) => x <= 0)) {
     newStatus = TrackerStatus.done;
   }
+
   return newStatus;
 };
 
@@ -43,12 +83,10 @@ export const formatTrackers = (trackers: Tracker[]) => {
       };
     }
 
-    trackerObj = {
+    return {
       ...trackerObj,
       status: computeNewStatus(trackerObj)
     };
-
-    return trackerObj;
   });
   return newTrackers;
 };
