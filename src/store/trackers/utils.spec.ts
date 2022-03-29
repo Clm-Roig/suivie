@@ -1,4 +1,4 @@
-import { subDays } from 'date-fns';
+import { addDays, startOfDay, startOfToday, subDays } from 'date-fns';
 import TrackerStatus from '../../models/TrackerStatus';
 import {
   computeRemainingDays,
@@ -6,9 +6,11 @@ import {
   removeOverTrackers,
   removeDoneTrackers,
   removeHiddenTrackers,
-  formatTrackers
+  formatTrackers,
+  getWeekEntries
 } from './utils';
-import { testTracker1, testEntry1, testEntry2 } from './FAKE_DATA';
+import { testTracker1, testEntry1, testEntry2, testEntry3 } from './FAKE_DATA';
+import { SEVEN_DAYS_AGO_DATE, SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
 
 describe('computeRemainingDays()', () => {
   it('should return the appropriate remaining days', () => {
@@ -116,5 +118,21 @@ describe('formatTrackers()', () => {
     ]);
     expect(res[0].dateHidden).toBeUndefined(); // dateHidden removed because it's in the past
     expect(res[1].dateHidden).toBe(trackerWithDateToday.dateHidden); // dateHidden not removed because it's today
+  });
+});
+
+describe('getWeekEntries()', () => {
+  it('should get all the entries from the beginDate to beginDate + 7 days', () => {
+    const entries = [
+      { ...testEntry3, date: subDays(new Date(), 10).toString() },
+      { ...testEntry2, date: SEVEN_DAYS_AGO_STRING },
+      { ...testEntry1, date: subDays(new Date(), 1).toString() },
+      { ...testEntry1, date: new Date().toString() },
+      { ...testEntry3, date: addDays(new Date(), 3).toString() }
+    ];
+    const weekEntries1 = getWeekEntries(startOfDay(SEVEN_DAYS_AGO_DATE), entries);
+    expect(weekEntries1.length).toBe(2);
+    const weekEntries2 = getWeekEntries(startOfToday(), entries);
+    expect(weekEntries2.length).toBe(2);
   });
 });

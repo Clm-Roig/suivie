@@ -1,0 +1,35 @@
+/* Manually hacking CSS because DatePicker doesn't support className prop currently */
+
+.weekPicker {
+  border: 2px solid #FFE66D;
+  margin-bottom: 8px;
+  padding: 5px;
+  position: relative;
+}
+
+.weekPicker * {
+  max-width: 100%;
+}
+
+.weekPicker .PrivatePickersToolbar-root .MuiButtonBase-root {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+
+.weekPicker .MuiPickerStaticWrapper-root {
+  min-width: 270px;
+}
+
+.weekPicker .PrivatePickersToolbar-root {
+  padding: 0;
+}
+
+.weekPicker .MuiCalendarPicker-root div:first-child {
+  margin: 4px;
+  padding: 0;
+}
+
+.weekPicker .PrivatePickersSlideTransition-root {
+  min-height: 210px;
+}

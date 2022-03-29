@@ -1,16 +1,20 @@
-import { addDays, differenceInDays, isBefore, isSameDay } from 'date-fns';
+import {
+  addDays,
+  differenceInDays,
+  isAfter,
+  isBefore,
+  isEqual,
+  isSameDay,
+  isSameMonth
+} from 'date-fns';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import TrackerEntry from '../../models/TrackerEntry';
 import TrackerStatus from '../../models/TrackerStatus';
 
-const getTodayAggregatedCompletions = (entries: TrackerEntry[]): Completion[] => {
-  const todayCompletions = entries
-    .filter((e) => isSameDay(new Date(e.date), new Date()))
-    .flatMap((e) => e.completions);
-  if (todayCompletions.length === 0) return [];
-
-  return todayCompletions.reduce<Completion[]>((res, todayCompletion) => {
+const aggregateCompletions = (completions: Completion[]) => {
+  if (completions.length === 0) return [];
+  return completions.reduce<Completion[]>((res, todayCompletion) => {
     const previousCompletion = res.find((c) => c.unit === todayCompletion.unit);
     let newRes: Completion[] = [];
     if (previousCompletion) {
@@ -26,6 +30,36 @@ const getTodayAggregatedCompletions = (entries: TrackerEntry[]): Completion[] =>
     }
     return newRes;
   }, []);
+};
+
+export const getMonthEntries = (monthDate: Date, entries: TrackerEntry[]): TrackerEntry[] => {
+  const weekEntries = entries
+    .filter((e) => isSameMonth(monthDate, new Date(e.date)))
+    .flatMap((e) => e);
+  return weekEntries;
+};
+
+export const getWeekEntries = (beginDate: Date, entries: TrackerEntry[]): TrackerEntry[] => {
+  const weekEntries = entries
+    .filter((e) => {
+      const isEqualBeginDate = isEqual(new Date(e.date), beginDate);
+      const isAfterBeginDate = isAfter(new Date(e.date), beginDate);
+      const less7Days = differenceInDays(new Date(e.date), beginDate) < 7;
+      return (isEqualBeginDate || isAfterBeginDate) && less7Days;
+    })
+    .flatMap((e) => e);
+  return weekEntries;
+};
+
+export const getAggregatedCompletions = (entries: TrackerEntry[]): Completion[] => {
+  return aggregateCompletions(entries.flatMap((e) => e.completions));
+};
+
+const getTodayAggregatedCompletions = (entries: TrackerEntry[]): Completion[] => {
+  const todayCompletions = entries
+    .filter((e) => isSameDay(new Date(e.date), new Date()))
+    .flatMap((e) => e.completions);
+  return aggregateCompletions(todayCompletions);
 };
 
 export const computeRemainingDays = (beginDate: string, duration: number) => {
