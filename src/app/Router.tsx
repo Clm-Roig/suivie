@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import About from '../pages/About';
 import DataError from '../pages/errors/DataError';
 import Settings from '../pages/Settings';
 import Statistics from '../pages/Statistics';
@@ -8,6 +9,7 @@ function Router() {
   return (
     <Routes>
       <Route path="/" element={<Trackers />} />
+      <Route path="/about" element={<About />} />
       <Route path="/data-error" element={<DataError />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/stats" element={<Statistics />} />
