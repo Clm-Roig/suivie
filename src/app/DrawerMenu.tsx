@@ -13,6 +13,20 @@ import {
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import TimelineIcon from '@mui/icons-material/Timeline';
+import SettingsIcon from '@mui/icons-material/Settings';
+
+interface MenuItemProps {
+  icon: React.ReactNode;
+  name: string;
+  onClick: () => void;
+  url: string;
+}
+const MenuItem: FC<MenuItemProps> = ({ icon, name, onClick, url }) => (
+  <ListItem component={Link} to={url} button key={name} onClick={onClick}>
+    <ListItemIcon>{icon}</ListItemIcon>
+    <ListItemText primary={name} />
+  </ListItem>
+);
 
 interface Props {
   open: boolean;
@@ -42,18 +56,24 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, width }) => {
       </Box>
       <Divider />
       <List>
-        <ListItem component={Link} to="/trackers" button key={'Mes Trackers'}>
-          <ListItemIcon>
-            <ListAltIcon />
-          </ListItemIcon>
-          <ListItemText primary={'Mes Trackers'} />
-        </ListItem>
-        <ListItem component={Link} to="/stats" button key={'Statistiques'}>
-          <ListItemIcon>
-            <TimelineIcon />
-          </ListItemIcon>
-          <ListItemText primary={'Statistiques'} />
-        </ListItem>
+        <MenuItem
+          icon={<ListAltIcon />}
+          name={'Mes Trackers'}
+          onClick={toggleDrawerMenu}
+          url="/trackers"
+        />
+        <MenuItem
+          icon={<TimelineIcon />}
+          name={'Statistiques'}
+          onClick={toggleDrawerMenu}
+          url="/stats"
+        />
+        <MenuItem
+          icon={<SettingsIcon />}
+          name={'Paramètres'}
+          onClick={toggleDrawerMenu}
+          url="/settings"
+        />
       </List>
     </SwipeableDrawer>
   );
