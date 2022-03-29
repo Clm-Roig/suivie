@@ -4,7 +4,7 @@ function Settings() {
   return (
     <>
       <Typography gutterBottom variant="h1">
-        Settings
+        Paramètres
       </Typography>
       <Stack spacing={2} direction="column">
         <Typography>Fonctionnalités en cours de développement</Typography>
