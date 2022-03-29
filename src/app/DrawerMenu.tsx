@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Box,
+  Button,
   Divider,
   IconButton,
   List,
@@ -75,6 +76,12 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, width }) => {
           url="/settings"
         />
       </List>
+      <Divider />
+      <Box display="flex" justifyContent="center" paddingY={1}>
+        <Button variant="contained" component={Link} onClick={toggleDrawerMenu} to="/about">
+          À Propos
+        </Button>
+      </Box>
     </SwipeableDrawer>
   );
 };
