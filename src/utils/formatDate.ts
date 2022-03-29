@@ -8,6 +8,6 @@ import { fr } from 'date-fns/locale';
  * @param formatStr
  * @returns
  */
-export default function (date: Date, formatStr = 'PP'): string {
+export default function (date: Date, formatStr = 'dd MMMM yyyy'): string {
   return format(date, formatStr, { locale: fr });
 }
