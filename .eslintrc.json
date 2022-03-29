@@ -25,7 +25,12 @@
     "no-use-before-define": "off",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
-    "prettier/prettier": "warn",
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "@typescript-eslint/no-use-before-define": ["error"],
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
     "import/extensions": [

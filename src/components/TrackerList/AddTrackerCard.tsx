@@ -3,7 +3,7 @@ import { Box, Card, CardActionArea, CardContent, CardProps } from '@mui/material
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
-import TrackerForm from '../TrackerForm/TrackerForm';
+import TrackerForm from '../forms/TrackerForm/TrackerForm';
 
 interface Props {
   cardProps?: CardProps;

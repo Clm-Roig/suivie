@@ -1,15 +1,19 @@
 import { Route, Routes } from 'react-router-dom';
-import Trackers from '../pages/Trackers';
-import Statistics from '../pages/Statistics';
+import About from '../pages/About';
 import DataError from '../pages/errors/DataError';
+import Settings from '../pages/Settings';
+import Statistics from '../pages/Statistics';
+import Trackers from '../pages/Trackers';
 
 function Router() {
   return (
     <Routes>
       <Route path="/" element={<Trackers />} />
+      <Route path="/about" element={<About />} />
       <Route path="/data-error" element={<DataError />} />
-      <Route path="/trackers" element={<Trackers />} />
+      <Route path="/settings" element={<Settings />} />
       <Route path="/stats" element={<Statistics />} />
+      <Route path="/trackers" element={<Trackers />} />
     </Routes>
   );
 }

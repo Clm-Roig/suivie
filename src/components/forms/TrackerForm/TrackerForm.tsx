@@ -2,29 +2,14 @@ import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { Box, Button, TextField, Stack } from '@mui/material';
 import DatePicker from '@mui/lab/DatePicker';
 import { v4 } from 'uuid';
-import styled from '@emotion/styled';
 
 import { FormValues } from './types';
-import TrackerStatus from '../../models/TrackerStatus';
-import { useAppDispatch } from '../../app/hooks';
-import { createTracker } from '../../store/trackers/trackersSlice';
+import TrackerStatus from '../../../models/TrackerStatus';
+import { useAppDispatch } from '../../../app/hooks';
+import { createTracker } from '../../../store/trackers/trackersSlice';
 
-import CompletionsForm from './CompletionsForm';
+import RequiredCompletionsForm from '../RequiredCompletionsForm/RequiredCompletionsForm';
 import { FC } from 'react';
-
-export const CompletionUnitTextField = styled(TextField)`
-  fieldset {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-`;
-
-export const CompletionQuantityTextField = styled(TextField)`
-  fieldset {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-`;
 
 const getDefaultValues = (): FormValues => ({
   id: v4(),
@@ -154,7 +139,7 @@ const TrackerForm: FC<Props> = ({ hideForm }) => {
         }}
       />
 
-      <CompletionsForm append={append} control={control} fields={fields} remove={remove} />
+      <RequiredCompletionsForm append={append} control={control} fields={fields} remove={remove} />
 
       <Stack direction="row" justifyContent="center" spacing={1}>
         <Button type="submit" onClick={handleSubmit(onSubmit)} variant={'outlined'}>

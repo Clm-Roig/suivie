@@ -4,6 +4,7 @@ import SliceStatus from '../../models/SliceStatus';
 import Tracker from '../../models/Tracker';
 import TrackerEntry from '../../models/TrackerEntry';
 import { v4 } from 'uuid';
+import Completion from '../../models/Completion';
 
 // ===== State
 
@@ -47,6 +48,21 @@ export const trackersSlice = createSlice({
       }
       return state;
     },
+    customValidate: (
+      state,
+      action: PayloadAction<{ id: Tracker['id']; completions: Completion[] }>
+    ) => {
+      const trackerFound = state.trackers.find((t) => t.id === action.payload.id);
+      if (trackerFound) {
+        trackerFound.entries.push({
+          id: v4(),
+          completions: action.payload.completions,
+          date: new Date().toString(),
+          trackerId: trackerFound.id
+        } as TrackerEntry);
+      }
+      return state;
+    },
     deleteTracker: (state, action: PayloadAction<Tracker['id']>) => {
       const filteredTrackers = state.trackers.filter((t) => t.id !== action.payload);
       return {
@@ -60,5 +76,6 @@ export const trackersSlice = createSlice({
   // extraReducers: (builder) => {})
 });
 
-export const { createTracker, completelyValidate, deleteTracker } = trackersSlice.actions;
+export const { createTracker, completelyValidate, customValidate, deleteTracker } =
+  trackersSlice.actions;
 export default trackersSlice.reducer;

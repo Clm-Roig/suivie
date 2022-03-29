@@ -43,7 +43,33 @@ export const testTracker2: Tracker = {
 export const testEntry1Id = '676e4567-e89b-12d3-b456-426614174000';
 export const testEntry1: TrackerEntry = {
   id: testEntry1Id,
-  completions: [],
+  completions: [
+    {
+      quantity: 5,
+      unit: 'push-ups'
+    },
+    {
+      quantity: 20,
+      unit: 'squats'
+    }
+  ],
+  date: new Date().toString(),
+  trackerId: testTracker1Id
+};
+
+export const testEntry2Id = '876e4567-e89b-12e3-b456-426615174000';
+export const testEntry2: TrackerEntry = {
+  id: testEntry2Id,
+  completions: [
+    {
+      quantity: 5,
+      unit: 'push-ups'
+    },
+    {
+      quantity: 5,
+      unit: 'squats'
+    }
+  ],
   date: new Date().toString(),
   trackerId: testTracker1Id
 };

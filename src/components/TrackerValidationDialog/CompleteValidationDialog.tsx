@@ -25,7 +25,7 @@ const CompleteValidationDialog: FC<Props> = ({ dialogProps, onValidation, tracke
         {'Tracker : '}
         <b>{name}</b>
       </DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ pb: 0 }}>
         <DialogContentText>Valider avec :</DialogContentText>
         <CompletionChipList completions={requiredCompletions} />
       </DialogContent>
