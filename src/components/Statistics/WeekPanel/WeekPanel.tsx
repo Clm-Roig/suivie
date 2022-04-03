@@ -1,5 +1,7 @@
 import { startOfDay } from 'date-fns';
 import { FC, useEffect, useState } from 'react';
+import { Box } from '@mui/material';
+import { addDays } from 'date-fns/esm';
 import { SEVEN_DAYS_AGO_DATE } from '../../../config/Constants';
 import Tracker from '../../../models/Tracker';
 import TrackerEntry from '../../../models/TrackerEntry';
@@ -9,8 +11,8 @@ import {
   getWeekEntries
 } from '../../../store/trackers/utils';
 import TotalText from './TotalText';
+import WeekChart from './WeekChart';
 import WeekPicker from '../../WeekPicker/WeekPicker';
-import { addDays } from 'date-fns/esm';
 
 interface Props {
   tracker: Tracker;
@@ -45,7 +47,10 @@ const WeekPanel: FC<Props> = ({ tracker }) => {
         onMonthChange={handleOnMonthChange}
         value={beginDate}
       />
-      <TotalText completions={getAggregatedCompletions(weekEntries)} />
+      <Box sx={{ mb: 1 }}>
+        <TotalText completions={getAggregatedCompletions(weekEntries)} />
+      </Box>
+      <WeekChart beginDate={beginDate} entries={weekEntries} />
     </>
   );
 };
