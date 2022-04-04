@@ -12,7 +12,7 @@ import {
 } from 'recharts';
 import TrackerEntry from '../../../models/TrackerEntry';
 import formatData from './formatWeekData';
-import getChartColors from './getChartColors';
+import getChartColors from '../../../config/getChartColors';
 
 import { DataType } from './types';
 
@@ -25,6 +25,7 @@ const WeekChart: FC<Props> = ({ beginDate, entries }) => {
   const [data, setData] = useState<DataType[]>([]);
   const [allUnits, setAllUnits] = useState<string[]>([]);
   const theme = useTheme();
+  const { fontFamily } = theme.typography;
 
   const CHART_COLORS = useMemo(() => getChartColors(theme), [theme]);
 
@@ -42,10 +43,10 @@ const WeekChart: FC<Props> = ({ beginDate, entries }) => {
       <ResponsiveContainer width="100%" height="100%">
         <LineChart width={300} height={250} data={data}>
           <CartesianGrid />
-          <XAxis dataKey="name" tick={{ fontFamily: theme.typography.fontFamily }} />
+          <XAxis dataKey="name" tick={{ fontFamily: fontFamily }} />
           <YAxis width={25} fontSize={'0.8rem'} />
-          <Tooltip />
-          <Legend />
+          <Tooltip itemStyle={{ fontFamily: fontFamily }} labelStyle={{ fontFamily: fontFamily }} />
+          <Legend wrapperStyle={{ fontFamily: fontFamily }} />
 
           {allUnits.map((u, i) => (
             <Line

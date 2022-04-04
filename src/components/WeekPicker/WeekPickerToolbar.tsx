@@ -11,7 +11,6 @@ const WeekPickerToolbar: FC<Props> = (props) => {
   return (
     <Box
       onClick={toggleMobileKeyboardView}
-      sx={{ p: 0.3 }}
       display="flex"
       alignItems={'center'}
       justifyContent="space-between">
