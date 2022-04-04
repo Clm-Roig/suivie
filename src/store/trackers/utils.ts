@@ -1,12 +1,4 @@
-import {
-  addDays,
-  differenceInDays,
-  isAfter,
-  isBefore,
-  isEqual,
-  isSameDay,
-  isSameMonth
-} from 'date-fns';
+import { addDays, differenceInDays, isBefore, isSameDay } from 'date-fns';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import TrackerEntry from '../../models/TrackerEntry';
@@ -30,25 +22,6 @@ const aggregateCompletions = (completions: Completion[]) => {
     }
     return newRes;
   }, []);
-};
-
-export const getMonthEntries = (monthDate: Date, entries: TrackerEntry[]): TrackerEntry[] => {
-  const weekEntries = entries
-    .filter((e) => isSameMonth(monthDate, new Date(e.date)))
-    .flatMap((e) => e);
-  return weekEntries;
-};
-
-export const getWeekEntries = (beginDate: Date, entries: TrackerEntry[]): TrackerEntry[] => {
-  const weekEntries = entries
-    .filter((e) => {
-      const isEqualBeginDate = isEqual(new Date(e.date), beginDate);
-      const isAfterBeginDate = isAfter(new Date(e.date), beginDate);
-      const less7Days = differenceInDays(new Date(e.date), beginDate) < 7;
-      return (isEqualBeginDate || isAfterBeginDate) && less7Days;
-    })
-    .flatMap((e) => e);
-  return weekEntries;
 };
 
 export const getAggregatedCompletions = (entries: TrackerEntry[]): Completion[] => {
