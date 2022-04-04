@@ -6,5 +6,6 @@ export const PAYPAL_DONATE_LINK =
 
 export const ALL_TRACKERS_ID = 'ALL_TRACKERS_ID';
 
-export const SEVEN_DAYS_AGO_DATE = subDays(new Date(), 7);
-export const SEVEN_DAYS_AGO_STRING = SEVEN_DAYS_AGO_DATE.toString();
+export const SEVEN_DAYS_AGO_DATE: Date = subDays(new Date(), 7);
+export const SEVEN_DAYS_AGO_STRING: string = SEVEN_DAYS_AGO_DATE.toString();
+export const TRACKERS_BEGIN_IN: Date = new Date(2022, 0);

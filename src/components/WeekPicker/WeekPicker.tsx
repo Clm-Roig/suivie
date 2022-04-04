@@ -7,6 +7,7 @@ import { addDays, isBefore, isSameDay, isWithinInterval } from 'date-fns';
 import WeekPickerToolbar from './WeekPickerToolbar';
 import WeekPickerInput from './WeekPickerInput';
 import './WeekPicker.css';
+import { TRACKERS_BEGIN_IN } from '../../config/Constants';
 
 type CustomPickerDayProps = PickersDayProps<Date> & {
   dayIsBetween: boolean;
@@ -102,6 +103,7 @@ const WeekPicker: FC<Props> = ({ highlightedDates, onChange, onMonthChange, valu
       <StaticDatePicker
         label="Choix de la semaine"
         maxDate={new Date()}
+        minDate={TRACKERS_BEGIN_IN}
         onChange={onChange}
         onMonthChange={onMonthChange}
         renderDay={renderWeekPickerDay}

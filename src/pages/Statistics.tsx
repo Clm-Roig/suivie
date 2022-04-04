@@ -7,6 +7,8 @@ import TrackerSelect from '../components/TrackerSelect/TrackerSelect';
 import { selectAllTrackers } from '../store/trackers/trackers.selectors';
 import Tracker from '../models/Tracker';
 import WeekPanel from '../components/Statistics/WeekPanel/WeekPanel';
+import MonthPanel from '../components/Statistics/MonthPanel/MonthPanel';
+import YearPanel from '../components/Statistics/YearPanel/YearPanel';
 
 function Statistics() {
   const { trackers } = useAppSelector(selectAllTrackers);
@@ -70,10 +72,18 @@ function Statistics() {
         )}
       </TabPanel>
       <TabPanel value={selectedTab} index={1}>
-        <Typography>Mois</Typography>
+        {selectedTracker ? (
+          <MonthPanel tracker={selectedTracker} />
+        ) : (
+          <Typography>Veuillez sélectionner un (ou tous les) tracker(s).</Typography>
+        )}
       </TabPanel>
       <TabPanel value={selectedTab} index={2}>
-        <Typography>Années</Typography>
+        {selectedTracker ? (
+          <YearPanel tracker={selectedTracker} />
+        ) : (
+          <Typography>Veuillez sélectionner un (ou tous les) tracker(s).</Typography>
+        )}
       </TabPanel>
     </>
   );

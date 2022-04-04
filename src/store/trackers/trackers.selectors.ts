@@ -6,7 +6,7 @@ import {
   removeHiddenTrackers,
   removeOverTrackers
 } from './utils';
-import { differenceInDays, isAfter, isEqual, isSameMonth } from 'date-fns';
+import { differenceInDays, isAfter, isEqual, isSameMonth, isSameYear } from 'date-fns';
 import TrackerEntry from '../../models/TrackerEntry';
 
 const selectHiddenTrackers = (state: RootState) => {
@@ -52,6 +52,13 @@ const selectAllTrackers = (state: RootState) => {
   };
 };
 
+const selectYearEntries = (state: RootState, yearDate: Date, trackerId: string): TrackerEntry[] => {
+  const tracker = state.trackers.trackers.find((t) => t.id === trackerId);
+  if (tracker) {
+    return tracker.entries.filter((e) => isSameYear(yearDate, new Date(e.date)));
+  } else return [];
+};
+
 const selectMonthEntries = (
   state: RootState,
   monthDate: Date,
@@ -86,6 +93,7 @@ export {
   selectDoneTrackers,
   selectHiddenTrackers,
   selectTodoTrackers,
+  selectYearEntries,
   selectMonthEntries,
   selectWeekEntries
 };
