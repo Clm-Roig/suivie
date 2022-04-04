@@ -6,7 +6,7 @@ import { SEVEN_DAYS_AGO_DATE } from '../../../config/Constants';
 import Tracker from '../../../models/Tracker';
 import { getAggregatedCompletions } from '../../../store/trackers/utils';
 import TotalText from './TotalText';
-import WeekChart from './WeekChart';
+import WeekChart from '../WeekChart/WeekChart';
 import WeekPicker from '../../WeekPicker/WeekPicker';
 import { useAppSelector } from '../../../app/hooks';
 import { selectMonthEntries, selectWeekEntries } from '../../../store/trackers/trackers.selectors';
@@ -44,7 +44,7 @@ const WeekPanel: FC<Props> = ({ tracker }) => {
       <Box sx={{ mb: 1 }}>
         <TotalText completions={getAggregatedCompletions(weekEntries)} />
       </Box>
-      <WeekChart beginDate={beginDate} entries={weekEntries} />
+      {weekEntries.length > 0 && <WeekChart beginDate={beginDate} entries={weekEntries} />}
     </>
   );
 };
