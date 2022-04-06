@@ -131,11 +131,10 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
               render={({ field: { value } }) => (
                 <CompletionQuantityTextField
                   label={'Unité'}
-                  required
                   size="small"
                   sx={{ mb: 1 }}
                   value={value}
-                  disabled
+                  inputProps={{ readOnly: true }}
                 />
               )}
             />

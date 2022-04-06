@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.7...v0.1.8) (2022-04-06)
+
+
+### Features
+
+* **stats:** add month and year tab view ([fd429c0](https://github.com/Clm-Roig/bujo-tracker/commit/fd429c03ff48c8a9db13785dc5b997368e0d4b5d))
+* **stats:** add week basic stats ([6ffc753](https://github.com/Clm-Roig/bujo-tracker/commit/6ffc753895bd9ef4a7a182da69d5de1017bbd2e1))
+* **stats:** add week chart ([0cde370](https://github.com/Clm-Roig/bujo-tracker/commit/0cde37044ba27d279fdbd9e70c2fd9ac53ee37e2))
+* **weekChart:** generate lines, improve style & refactor ([e1684d3](https://github.com/Clm-Roig/bujo-tracker/commit/e1684d30f9a46a993cbbafe4de93d1cbb1cd5086))
+
+
+### Bug Fixes
+
+* **stats:** minor css improvement and display month first letter ([28c7b82](https://github.com/Clm-Roig/bujo-tracker/commit/28c7b826a079769559a210502c332bcaea519102))
+* **weekPicker:** fix first line css ([df4dd5f](https://github.com/Clm-Roig/bujo-tracker/commit/df4dd5fea6afb3c30218de6fa3e7bf354485180c))
+
 ### [0.1.7](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.5...v0.1.7) (2022-03-29)
 
 
