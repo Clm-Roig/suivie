@@ -9,7 +9,7 @@ const formatData = (yearDate: Date, entries: TrackerEntry[]): DataType[] => {
   const startDay = startOfYear(yearDate);
   for (let i = 0; i < 12; i += 1) {
     const month = addMonths(startDay, i);
-    const monthData: DataType = { name: format(month, 'M', { locale: fr }) };
+    const monthData: DataType = { name: format(month, 'MMMMM', { locale: fr }).slice(0, 1) };
     const monthEntries = entries.filter((e) => isSameMonth(new Date(e.date), month));
     const aggCompletions = getAggregatedCompletions(monthEntries);
     aggCompletions.forEach((c) => {

@@ -1,7 +1,8 @@
 /* Manually hacking CSS because DatePicker doesn't support className prop currently */
 
 .weekPicker {
-  border: 2px solid #FFE66D;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
   padding: 5px;
   position: relative;
 }
