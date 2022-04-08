@@ -1,8 +1,9 @@
 import { SelectChangeEvent, Tab, Tabs, Typography } from '@mui/material';
 import { useState } from 'react';
+import { addDays, startOfDay } from 'date-fns';
 import { useAppSelector } from '../app/hooks';
 import TabPanel from '../components/TabPanel/TabPanel';
-import { ALL_TRACKERS_ID } from '../config/Constants';
+import { ALL_TRACKERS_ID, SEVEN_DAYS_AGO_DATE } from '../config/Constants';
 import TrackerSelect from '../components/TrackerSelect/TrackerSelect';
 import { selectAllTrackers } from '../store/trackers/trackers.selectors';
 import Tracker from '../models/Tracker';
@@ -10,8 +11,11 @@ import WeekPanel from '../components/Statistics/WeekPanel/WeekPanel';
 import MonthPanel from '../components/Statistics/MonthPanel/MonthPanel';
 import YearPanel from '../components/Statistics/YearPanel/YearPanel';
 
+const defaultBeginDate = startOfDay(addDays(SEVEN_DAYS_AGO_DATE, 1));
+
 function Statistics() {
   const { trackers } = useAppSelector(selectAllTrackers);
+  const [beginDate, setBeginDate] = useState<Date>(defaultBeginDate);
   const [selectedTab, setSelectedTab] = useState(0);
   const handleTabChange = (event: React.SyntheticEvent, newTab: number) => {
     setSelectedTab(newTab);
@@ -66,21 +70,21 @@ function Statistics() {
 
       <TabPanel value={selectedTab} index={0}>
         {selectedTracker ? (
-          <WeekPanel tracker={selectedTracker} />
+          <WeekPanel beginDate={beginDate} setBeginDate={setBeginDate} tracker={selectedTracker} />
         ) : (
           <Typography>Veuillez sélectionner un (ou tous les) tracker(s).</Typography>
         )}
       </TabPanel>
       <TabPanel value={selectedTab} index={1}>
         {selectedTracker ? (
-          <MonthPanel tracker={selectedTracker} />
+          <MonthPanel beginDate={beginDate} setBeginDate={setBeginDate} tracker={selectedTracker} />
         ) : (
           <Typography>Veuillez sélectionner un (ou tous les) tracker(s).</Typography>
         )}
       </TabPanel>
       <TabPanel value={selectedTab} index={2}>
         {selectedTracker ? (
-          <YearPanel tracker={selectedTracker} />
+          <YearPanel beginDate={beginDate} setBeginDate={setBeginDate} tracker={selectedTracker} />
         ) : (
           <Typography>Veuillez sélectionner un (ou tous les) tracker(s).</Typography>
         )}
