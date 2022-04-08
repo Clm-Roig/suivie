@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { addDays, startOfDay } from 'date-fns';
 import { useAppSelector } from '../app/hooks';
 import TabPanel from '../components/TabPanel/TabPanel';
-import { ALL_TRACKERS_ID, SEVEN_DAYS_AGO_DATE } from '../config/Constants';
+import { SEVEN_DAYS_AGO_DATE } from '../config/Constants';
 import TrackerSelect from '../components/TrackerSelect/TrackerSelect';
 import { selectAllTrackers } from '../store/trackers/trackers.selectors';
 import Tracker from '../models/Tracker';
@@ -23,21 +23,15 @@ function Statistics() {
   const [selectedTracker, setSelectedTracker] = useState<null | Tracker>(null);
   const handleTrackerChange = (event: SelectChangeEvent) => {
     const newId = event.target.value;
-    if (newId === ALL_TRACKERS_ID) {
-      // TODO: find a solution to handle "all trackers"
-      setSelectedTracker(null);
+    const newTracker = trackers.find((t) => t.id === newId);
+    if (newTracker) {
+      setSelectedTracker(newTracker);
     } else {
-      const newTracker = trackers.find((t) => t.id === event.target.value);
-      if (newTracker) {
-        setSelectedTracker(newTracker);
-      } else {
-        throw Error('The selected tracker was not found.');
-      }
+      throw Error('The selected tracker was not found.');
     }
   };
 
   const minTrackerList = [
-    { id: ALL_TRACKERS_ID, name: 'Tous les trackers' },
     ...trackers
       .map((t) => ({ id: t.id, name: t.name }))
       .sort((t1, t2) => t1.name.localeCompare(t2.name))
