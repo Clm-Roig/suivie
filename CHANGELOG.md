@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.9](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.8...v0.1.9) (2022-04-08)
+
+
+### Bug Fixes
+
+* **monthStats:** fix week aggregation computation ([fa2d999](https://github.com/Clm-Roig/bujo-tracker/commit/fa2d999571b1682e5228efcbee3d0ebd5121f0d6))
+* **stats:** all panels now use same date ([cd8840e](https://github.com/Clm-Roig/bujo-tracker/commit/cd8840eb0420884b8d1e213f0f9d3e9d25d13dcf))
+* **statsAllTrackers:** remove all trackers select ([fb435c4](https://github.com/Clm-Roig/bujo-tracker/commit/fb435c4c8bc9e18cbb7a73839f75121b0c230861))
+
 ### [0.1.8](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.7...v0.1.8) (2022-04-06)
 
 

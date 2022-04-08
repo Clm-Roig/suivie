@@ -1,8 +1,6 @@
 import { startOfDay } from 'date-fns';
 import { FC, useState } from 'react';
 import { Box } from '@mui/material';
-import { addDays } from 'date-fns/esm';
-import { SEVEN_DAYS_AGO_DATE } from '../../../config/Constants';
 import Tracker from '../../../models/Tracker';
 import { getAggregatedCompletions } from '../../../store/trackers/utils';
 import TotalText from './TotalText';
@@ -12,14 +10,13 @@ import { useAppSelector } from '../../../app/hooks';
 import { selectMonthEntries, selectWeekEntries } from '../../../store/trackers/trackers.selectors';
 
 interface Props {
+  beginDate: Date;
+  setBeginDate: (date: Date) => void;
   tracker: Tracker;
 }
 
-const defaultBeginDate = startOfDay(addDays(SEVEN_DAYS_AGO_DATE, 1));
-
-const WeekPanel: FC<Props> = ({ tracker }) => {
-  const [beginDate, setBeginDate] = useState<Date>(defaultBeginDate);
-  const [selectedMonth, setSelectedMonth] = useState<Date>(defaultBeginDate);
+const WeekPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
+  const [selectedMonth, setSelectedMonth] = useState<Date>(beginDate);
   const monthEntries = useAppSelector((state) =>
     selectMonthEntries(state, selectedMonth, tracker.id)
   );

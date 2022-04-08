@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Box, TextField } from '@mui/material';
 import { DatePicker } from '@mui/lab';
 import Tracker from '../../../models/Tracker';
@@ -7,21 +7,20 @@ import TotalText from './TotalText';
 import MonthChart from '../../charts/MonthChart/MonthChart';
 import { useAppSelector } from '../../../app/hooks';
 import { selectMonthEntries } from '../../../store/trackers/trackers.selectors';
-import { endOfMonth } from 'date-fns';
+import { endOfMonth, startOfMonth } from 'date-fns';
 import { TRACKERS_BEGIN_IN } from '../../../config/Constants';
 
 interface Props {
+  beginDate: Date;
+  setBeginDate: (date: Date) => void;
   tracker: Tracker;
 }
 
-const MonthPanel: FC<Props> = ({ tracker }) => {
-  const [selectedMonth, setSelectedMonth] = useState<Date>(new Date());
-  const monthEntries = useAppSelector((state) =>
-    selectMonthEntries(state, selectedMonth, tracker.id)
-  );
+const MonthPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
+  const monthEntries = useAppSelector((state) => selectMonthEntries(state, beginDate, tracker.id));
 
   const handleOnMonthChange = (date: unknown) => {
-    if (date) setSelectedMonth(date as Date);
+    if (date) setBeginDate(startOfMonth(date as Date));
   };
 
   return (
@@ -33,14 +32,14 @@ const MonthPanel: FC<Props> = ({ tracker }) => {
           maxDate={endOfMonth(new Date())}
           minDate={TRACKERS_BEGIN_IN}
           onChange={handleOnMonthChange}
-          value={selectedMonth}
+          value={beginDate}
           renderInput={(params) => <TextField sx={{ width: '100%' }} {...params} />}
         />
       </Box>
       <Box sx={{ mb: 1 }}>
         <TotalText completions={getAggregatedCompletions(monthEntries)} />
       </Box>
-      {monthEntries.length > 0 && <MonthChart beginDate={selectedMonth} entries={monthEntries} />}
+      {monthEntries.length > 0 && <MonthChart beginDate={beginDate} entries={monthEntries} />}
     </>
   );
 };
