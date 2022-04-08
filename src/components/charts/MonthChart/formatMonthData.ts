@@ -21,9 +21,11 @@ const formatData = (monthDate: Date, entries: TrackerEntry[]): DataType[] => {
     const weekData: DataType = {
       name: weekBeginDayNumber + '-' + weekEndDayNumber
     };
-    const weekEntries = entries.filter((e) => isSameWeek(new Date(e.date), week), {
-      weekStartsOn: getDay(new Date(week))
-    });
+    const weekEntries = entries.filter((e) =>
+      isSameWeek(new Date(e.date), week, {
+        weekStartsOn: getDay(new Date(week))
+      })
+    );
     const aggCompletions = getAggregatedCompletions(weekEntries);
     aggCompletions.forEach((c) => {
       weekData[c.unit] = c.quantity;
