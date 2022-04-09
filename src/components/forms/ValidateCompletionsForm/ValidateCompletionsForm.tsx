@@ -103,7 +103,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
                   }
                 }
                 return (
-                  <CompletionUnitTextField
+                  <CompletionQuantityTextField
                     error={!!error}
                     helperText={error && errorText}
                     label={'Quantité'}
@@ -129,7 +129,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
               name={`completions.${index}.unit` as const}
               rules={{ required: true }}
               render={({ field: { value } }) => (
-                <CompletionQuantityTextField
+                <CompletionUnitTextField
                   label={'Unité'}
                   size="small"
                   sx={{ mb: 1 }}

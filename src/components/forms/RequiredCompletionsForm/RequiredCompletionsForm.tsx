@@ -15,6 +15,7 @@ import CompletionUnitTextField from '../completions/CompletionUnitTextField';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 
 export const FieldsetGrid = styled(Grid)`
+  background: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.23);
   border-radius: 4px;
   padding: 8px;
@@ -48,9 +49,11 @@ const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps
           {...gridProps}>
           <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
             <Typography variant="subtitle1">Objectif n°{index + 1}</Typography>
-            <IconButton onClick={() => remove(index)} sx={{ p: 0 }}>
-              <DeleteIcon color="error" />
-            </IconButton>
+            {fields.length > 1 && (
+              <IconButton onClick={() => remove(index)} sx={{ p: 0 }}>
+                <DeleteIcon color="error" />
+              </IconButton>
+            )}
           </Grid>
           <Grid item xs={1}>
             <Controller
@@ -79,7 +82,7 @@ const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps
                   }
                 }
                 return (
-                  <CompletionUnitTextField
+                  <CompletionQuantityTextField
                     error={!!error}
                     helperText={error && errorText}
                     label={'Quantité'}
@@ -105,7 +108,7 @@ const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps
               name={`requiredCompletions.${index}.unit` as const}
               rules={{ required: true }}
               render={({ field: { onChange, value }, fieldState: { error } }) => (
-                <CompletionQuantityTextField
+                <CompletionUnitTextField
                   error={!!error}
                   helperText={error ? 'Une unité est requise' : ''}
                   label={'Unité'}

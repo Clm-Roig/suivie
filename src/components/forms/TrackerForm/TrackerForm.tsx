@@ -98,6 +98,7 @@ const TrackerForm: FC<Props> = ({ hideForm }) => {
               <TextField
                 {...params}
                 error={!!error}
+                fullWidth
                 helperText={error ? 'Une date de début est requise.' : ''}
                 label={'Début du tracker'}
                 required
