@@ -3,8 +3,9 @@ import styled from '@emotion/styled';
 
 const CompletionUnitTextField = styled(TextField)`
   fieldset {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-width: 0 0 1px 1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 `;
 
