@@ -1,7 +1,7 @@
-import { FC, useState } from 'react';
-import { Box, Card, CardActionArea, CardContent, CardProps } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { Box, Card, CardActionArea, CardContent, CardProps } from '@mui/material';
+import { FC, useState } from 'react';
 
 import TrackerForm from '../forms/TrackerForm/TrackerForm';
 

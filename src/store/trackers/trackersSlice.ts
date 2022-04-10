@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
+import { PayloadAction, SerializedError, createSlice } from '@reduxjs/toolkit';
+import { v4 } from 'uuid';
 
+import Completion from '../../models/Completion';
 import SliceStatus from '../../models/SliceStatus';
 import Tracker from '../../models/Tracker';
 import TrackerEntry from '../../models/TrackerEntry';
-import { v4 } from 'uuid';
-import Completion from '../../models/Completion';
 
 // ===== State
 

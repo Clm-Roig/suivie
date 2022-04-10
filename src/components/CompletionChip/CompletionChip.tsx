@@ -1,5 +1,6 @@
-import { FC } from 'react';
 import { Chip, ChipProps } from '@mui/material';
+import { FC } from 'react';
+
 import Completion from '../../models/Completion';
 
 interface Props {

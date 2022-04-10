@@ -1,14 +1,15 @@
-import { FC } from 'react';
-import { Box, TextField } from '@mui/material';
 import { DatePicker } from '@mui/lab';
-import Tracker from '../../../models/Tracker';
-import { getAggregatedCompletions } from '../../../store/trackers/utils';
-import TotalText from './TotalText';
-import MonthChart from '../../charts/MonthChart/MonthChart';
-import { useAppSelector } from '../../../app/hooks';
-import { selectMonthEntries } from '../../../store/trackers/trackers.selectors';
+import { Box, TextField } from '@mui/material';
 import { endOfMonth, startOfMonth } from 'date-fns';
+import { FC } from 'react';
+
+import { useAppSelector } from '../../../app/hooks';
 import { TRACKERS_BEGIN_IN } from '../../../config/Constants';
+import Tracker from '../../../models/Tracker';
+import { selectMonthEntries } from '../../../store/trackers/trackers.selectors';
+import { getAggregatedCompletions } from '../../../store/trackers/utils';
+import MonthChart from '../../charts/MonthChart/MonthChart';
+import TotalText from './TotalText';
 
 interface Props {
   beginDate: Date;

@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { Alert, Box, Tab, Tabs, Typography } from '@mui/material';
 import BallotIcon from '@mui/icons-material/Ballot';
 import CheckIcon from '@mui/icons-material/Check';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { Alert, Box, Tab, Tabs, Typography } from '@mui/material';
+import { useState } from 'react';
 
 import { useAppSelector } from '../app/hooks';
+import TabPanel from '../components/TabPanel/TabPanel';
+import AddTrackerCard from '../components/TrackerList/AddTrackerCard';
 import DateSelector from '../components/TrackerList/DateSelector';
 import TrackerList from '../components/TrackerList/TrackerList';
-import AddTrackerCard from '../components/TrackerList/AddTrackerCard';
 import {
-  selectTrackersDone,
   selectHiddenTrackers,
-  selectTodoTrackers
+  selectTodoTrackers,
+  selectTrackersDone
 } from '../store/trackers/trackers.selectors';
-import TabPanel from '../components/TabPanel/TabPanel';
 
 function Trackers() {
   const { trackers: doneTrackers } = useAppSelector(selectTrackersDone);

@@ -1,11 +1,11 @@
-import { FC, useState } from 'react';
 import { Card, CardProps } from '@mui/material';
+import { FC, useState } from 'react';
 
+import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import TrackerCardActions from './TrackerCardActions';
 import TrackerCardContent from './TrackerCardContent';
 import TrackerCardHeader from './TrackerCardHeader';
-import Completion from '../../models/Completion';
 
 interface Props {
   tracker: Tracker;

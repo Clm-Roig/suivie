@@ -1,7 +1,19 @@
+import { addDays, addYears, startOfDay, startOfToday, subDays, subYears } from 'date-fns';
+
+import { SEVEN_DAYS_AGO_DATE, SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
 import SliceStatus from '../../models/SliceStatus';
 import Tracker from '../../models/Tracker';
+import TrackerStatus from '../../models/TrackerStatus';
 import { createTestStore } from '../createTestStore';
 import { RootState } from '../store';
+import {
+  testEntry1,
+  testEntry2,
+  testEntry3,
+  testTracker1,
+  testTracker2,
+  testTracker3
+} from './FAKE_DATA';
 import {
   selectAllTrackers,
   selectHiddenTrackers,
@@ -11,17 +23,6 @@ import {
   selectWeekEntries,
   selectYearEntries
 } from './trackers.selectors';
-import {
-  testEntry1,
-  testEntry2,
-  testEntry3,
-  testTracker1,
-  testTracker2,
-  testTracker3
-} from './FAKE_DATA';
-import { addDays, addYears, startOfDay, startOfToday, subDays, subYears } from 'date-fns';
-import { SEVEN_DAYS_AGO_DATE, SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
-import TrackerStatus from '../../models/TrackerStatus';
 
 let state: RootState;
 describe('selectAllTrackers()', () => {

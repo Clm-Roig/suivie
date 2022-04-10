@@ -6,6 +6,7 @@ import {
   isSameWeek,
   startOfMonth
 } from 'date-fns';
+
 import TrackerEntry from '../../../models/TrackerEntry';
 import { getAggregatedCompletions } from '../../../store/trackers/utils';
 import { DataType } from './types';

@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {
   CardHeader,
   CardHeaderProps,
@@ -9,16 +10,15 @@ import {
   MenuItem,
   Typography
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { isAfter } from 'date-fns';
+import { FC, useState } from 'react';
 
-import formatDate from '../../utils/formatDate';
-import TrackerStatus from '../../models/TrackerStatus';
-import Tracker from '../../models/Tracker';
-import Emoji from '../Emoji/Emoji';
 import { useAppDispatch } from '../../app/hooks';
+import Tracker from '../../models/Tracker';
+import TrackerStatus from '../../models/TrackerStatus';
 import { deleteTracker } from '../../store/trackers/trackersSlice';
+import formatDate from '../../utils/formatDate';
+import Emoji from '../Emoji/Emoji';
 
 interface Props {
   cardHeaderProps?: CardHeaderProps;

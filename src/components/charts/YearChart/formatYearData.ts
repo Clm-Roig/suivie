@@ -1,5 +1,8 @@
-import { addMonths, format, isSameMonth, startOfYear } from 'date-fns'; // eslint-disable-line import/no-duplicates
-import { fr } from 'date-fns/locale'; // eslint-disable-line import/no-duplicates
+import { addMonths, format, isSameMonth, startOfYear } from 'date-fns';
+// eslint-disable-line import/no-duplicates
+import { fr } from 'date-fns/locale';
+
+// eslint-disable-line import/no-duplicates
 import TrackerEntry from '../../../models/TrackerEntry';
 import { getAggregatedCompletions } from '../../../store/trackers/utils';
 import { DataType } from './types';

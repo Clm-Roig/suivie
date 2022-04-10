@@ -1,15 +1,14 @@
-import { useForm, Controller, useFieldArray } from 'react-hook-form';
-import { Box, Button, TextField, Stack } from '@mui/material';
 import DatePicker from '@mui/lab/DatePicker';
+import { Box, Button, Stack, TextField } from '@mui/material';
+import { FC } from 'react';
+import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { v4 } from 'uuid';
 
-import { FormValues } from './types';
-import TrackerStatus from '../../../models/TrackerStatus';
 import { useAppDispatch } from '../../../app/hooks';
+import TrackerStatus from '../../../models/TrackerStatus';
 import { createTracker } from '../../../store/trackers/trackersSlice';
-
 import RequiredCompletionsForm from '../RequiredCompletionsForm/RequiredCompletionsForm';
-import { FC } from 'react';
+import { FormValues } from './types';
 
 const getDefaultValues = (): FormValues => ({
   id: v4(),

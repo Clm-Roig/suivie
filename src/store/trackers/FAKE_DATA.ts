@@ -1,8 +1,9 @@
 import { subDays } from 'date-fns';
+
+import { SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
 import Tracker from '../../models/Tracker';
 import TrackerEntry from '../../models/TrackerEntry';
 import TrackerStatus from '../../models/TrackerStatus';
-import { SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
 
 export const testTracker1Id = '123e4567-e89b-12d3-a456-426614174000';
 export const testTracker1: Tracker = {

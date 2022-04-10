@@ -1,11 +1,11 @@
 import SliceStatus from '../../models/SliceStatus';
+import { testTracker1, testTracker1Id, testTracker2, testTracker2Id } from './FAKE_DATA';
 import trackersReducer, {
-  createTracker,
   completelyValidate,
+  createTracker,
   customValidate,
   deleteTracker
 } from './trackersSlice';
-import { testTracker1Id, testTracker2Id, testTracker1, testTracker2 } from './FAKE_DATA';
 
 describe('trackers reducer', () => {
   it('should handle initial state', () => {

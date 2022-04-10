@@ -1,5 +1,7 @@
-import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import SettingsIcon from '@mui/icons-material/Settings';
+import TimelineIcon from '@mui/icons-material/Timeline';
 import {
   Box,
   Button,
@@ -11,10 +13,8 @@ import {
   ListItemText,
   SwipeableDrawer
 } from '@mui/material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import TimelineIcon from '@mui/icons-material/Timeline';
-import SettingsIcon from '@mui/icons-material/Settings';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 interface MenuItemProps {
   icon: React.ReactNode;

@@ -1,19 +1,20 @@
-import { createRef, useState } from 'react';
-import { IconButton, Container } from '@mui/material';
 import styled from '@emotion/styled';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { LocalizationProvider } from '@mui/lab';
+import DateAdapter from '@mui/lab/AdapterDateFns';
+import { Container, IconButton } from '@mui/material';
 import {
-  createTheme,
   StyledEngineProvider,
   ThemeProvider,
+  createTheme,
   responsiveFontSizes
 } from '@mui/material/styles';
-import DateAdapter from '@mui/lab/AdapterDateFns';
 import frLocale from 'date-fns/locale/fr';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { SnackbarKey, SnackbarProvider } from 'notistack';
-import { LocalizationProvider } from '@mui/lab';
-import { components, palette, typography } from '../config/CustomTheme';
+import { createRef, useState } from 'react';
+
 import { DRAWER_MENU_WIDTH } from '../config/Constants';
+import { components, palette, typography } from '../config/CustomTheme';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';

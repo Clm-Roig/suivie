@@ -1,16 +1,17 @@
 // TODO : remove next line when the feature is implemented
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { FC } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
-  DialogProps
+  DialogProps,
+  DialogTitle
 } from '@mui/material';
+import { FC } from 'react';
+
 import Tracker from '../../models/Tracker';
 
 interface Props {

@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import { AppBar as MuiAppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Box, IconButton, AppBar as MuiAppBar, Toolbar, Typography } from '@mui/material';
+import { FC } from 'react';
 
 interface Props {
   toggleDrawerMenu: () => void;

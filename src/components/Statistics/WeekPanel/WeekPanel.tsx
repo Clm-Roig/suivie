@@ -1,13 +1,14 @@
+import { Box } from '@mui/material';
 import { startOfDay } from 'date-fns';
 import { FC, useState } from 'react';
-import { Box } from '@mui/material';
-import Tracker from '../../../models/Tracker';
-import { getAggregatedCompletions } from '../../../store/trackers/utils';
-import TotalText from './TotalText';
-import WeekChart from '../../charts/WeekChart/WeekChart';
-import WeekPicker from '../../WeekPicker/WeekPicker';
+
 import { useAppSelector } from '../../../app/hooks';
+import Tracker from '../../../models/Tracker';
 import { selectMonthEntries, selectWeekEntries } from '../../../store/trackers/trackers.selectors';
+import { getAggregatedCompletions } from '../../../store/trackers/utils';
+import WeekPicker from '../../WeekPicker/WeekPicker';
+import WeekChart from '../../charts/WeekChart/WeekChart';
+import TotalText from './TotalText';
 
 interface Props {
   beginDate: Date;

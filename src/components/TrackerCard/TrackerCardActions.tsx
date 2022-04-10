@@ -1,19 +1,20 @@
-import { FC, useState } from 'react';
-import { Box, CardActions, CardActionsProps, IconButton } from '@mui/material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckIcon from '@mui/icons-material/Check';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { Box, CardActions, CardActionsProps, IconButton } from '@mui/material';
+import { isToday } from 'date-fns';
+import { useSnackbar } from 'notistack';
+import { FC, useState } from 'react';
+
+import { useAppDispatch } from '../../app/hooks';
+import Completion from '../../models/Completion';
+import Tracker from '../../models/Tracker';
+import { completelyValidate, customValidate } from '../../store/trackers/trackersSlice';
 import CompleteValidationDialog from '../TrackerValidationDialog/CompleteValidationDialog';
 import CustomValidationDialog from '../TrackerValidationDialog/CustomValidationDialog';
 import MakeHiddenDialog from '../TrackerValidationDialog/MakeHiddenDialog';
 import MakeVisibleValidationDialog from '../TrackerValidationDialog/MakeVisibleDialog';
-import { completelyValidate, customValidate } from '../../store/trackers/trackersSlice';
-import Tracker from '../../models/Tracker';
-import Completion from '../../models/Completion';
-import { useAppDispatch } from '../../app/hooks';
-import { useSnackbar } from 'notistack';
-import { isToday } from 'date-fns';
 
 interface Props {
   cardActionsProps?: CardActionsProps;

@@ -1,14 +1,15 @@
 import { subDays } from 'date-fns';
+
 import TrackerStatus from '../../models/TrackerStatus';
+import { testEntry1, testEntry2, testTracker1 } from './FAKE_DATA';
 import {
-  computeRemainingDays,
   computeNewStatus,
-  removeOverTrackers,
+  computeRemainingDays,
+  formatTrackers,
   removeDoneTrackers,
   removeHiddenTrackers,
-  formatTrackers
+  removeOverTrackers
 } from './utils';
-import { testTracker1, testEntry1, testEntry2 } from './FAKE_DATA';
 
 describe('computeRemainingDays()', () => {
   it('should return the appropriate remaining days', () => {

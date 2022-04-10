@@ -1,9 +1,10 @@
-import { Box, Button, Link, Stack, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import { Box, Button, Link, Stack, Typography } from '@mui/material';
+
+import packageInfo from '../../package.json';
 import ExternalLink from '../components/ExternalLink/ExternalLink';
 import { PAYPAL_DONATE_LINK } from '../config/Constants';
-import packageInfo from '../../package.json';
 
 function About() {
   return (

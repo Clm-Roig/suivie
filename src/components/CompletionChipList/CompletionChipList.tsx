@@ -1,5 +1,6 @@
-import { FC } from 'react';
 import { Box, BoxProps } from '@mui/material';
+import { FC } from 'react';
+
 import Completion from '../../models/Completion';
 import CompletionChip from '../CompletionChip/CompletionChip';
 

@@ -1,15 +1,17 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 import {
-  persistStore,
-  persistReducer,
-  REHYDRATE,
   FLUSH,
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER
+  REGISTER,
+  REHYDRATE,
+  persistReducer,
+  persistStore
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import storage from 'redux-persist/lib/storage';
+
+// defaults to localStorage for web
 import rootReducer from './rootReducer';
 
 const persistConfig = {

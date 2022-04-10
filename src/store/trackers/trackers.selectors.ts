@@ -1,13 +1,14 @@
-import { RootState } from '../store';
+import { differenceInDays, isAfter, isEqual, isSameMonth, isSameYear } from 'date-fns';
+
+import TrackerEntry from '../../models/TrackerEntry';
 import TrackerStatus from '../../models/TrackerStatus';
+import { RootState } from '../store';
 import {
   formatTrackers,
   removeDoneTrackers,
   removeHiddenTrackers,
   removeOverTrackers
 } from './utils';
-import { differenceInDays, isAfter, isEqual, isSameMonth, isSameYear } from 'date-fns';
-import TrackerEntry from '../../models/TrackerEntry';
 
 const selectHiddenTrackers = (state: RootState) => {
   const newTrackers = removeOverTrackers(

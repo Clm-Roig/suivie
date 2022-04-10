@@ -1,8 +1,8 @@
-import { FC } from 'react';
-import { Button, Grid, GridProps, IconButton, Typography } from '@mui/material';
 import styled from '@emotion/styled';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Button, Grid, GridProps, IconButton, Typography } from '@mui/material';
+import { FC } from 'react';
 import {
   Control,
   Controller,
@@ -10,9 +10,10 @@ import {
   UseFieldArrayAppend,
   UseFieldArrayRemove
 } from 'react-hook-form';
+
 import { FormValues } from '../TrackerForm/types';
-import CompletionUnitTextField from '../completions/CompletionUnitTextField';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
+import CompletionUnitTextField from '../completions/CompletionUnitTextField';
 
 export const FieldsetGrid = styled(Grid)`
   background: rgba(255, 255, 255, 0.8);
