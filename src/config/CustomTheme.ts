@@ -3,7 +3,8 @@ import { PaletteMode, PaletteOptions } from '@mui/material';
 import { grey } from '@mui/material/colors';
 
 const CHARCOAL = {
-  main: '#2E4057'
+  main: '#2E4057',
+  contrastText: grey[100]
 };
 const YELLOW_CRAYOLA = {
   main: '#FFE66D'
@@ -47,8 +48,7 @@ const commonTheme = {
   primary: CHARCOAL,
   secondary: YELLOW_CRAYOLA,
   text: {
-    primary: CHARCOAL.main,
-    secondary: CHARCOAL.main
+    primary: CHARCOAL.main
   }
 };
 

@@ -1,7 +1,7 @@
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { LocalizationProvider } from '@mui/lab';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import { Container, IconButton, PaletteMode, useMediaQuery } from '@mui/material';
+import { Container, IconButton, PaletteMode, Paper, useMediaQuery } from '@mui/material';
 import {
   StyledEngineProvider,
   ThemeProvider,
@@ -19,7 +19,7 @@ import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';
 
-const MainContent = styled(Container)(({ theme }) => ({
+const MainContent = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2)
 }));
 
