@@ -11,7 +11,7 @@ import {
 } from '@mui/material/styles';
 import frLocale from 'date-fns/locale/fr';
 import { SnackbarKey, SnackbarProvider } from 'notistack';
-import { createRef, useMemo, useState } from 'react';
+import { createRef, useEffect, useMemo, useState } from 'react';
 
 import { DRAWER_MENU_WIDTH } from '../config/Constants';
 import { components, getPalette, typography } from '../config/CustomTheme';
@@ -32,16 +32,18 @@ const MainContainer = styled(Container)(({ theme }) => ({
 function App() {
   // Theme configuration
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [mode, setMode] = useState<PaletteMode>(prefersDarkMode ? 'light' : 'light');
-  let theme = useMemo(
-    () =>
-      createTheme({
-        components,
-        palette: getPalette(mode),
-        typography: typography
-      }),
-    [prefersDarkMode]
-  );
+  const [themeMode, setThemeMode] = useState<PaletteMode>(prefersDarkMode ? 'dark' : 'light');
+  useEffect(() => {
+    setThemeMode(prefersDarkMode ? 'dark' : 'light');
+  }, [prefersDarkMode]);
+  let theme = useMemo(() => {
+    return createTheme({
+      components,
+      palette: getPalette(themeMode),
+      typography: typography
+    });
+  }, [themeMode]);
+
   theme = responsiveFontSizes(theme);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,6 +54,10 @@ function App() {
 
   const toggleDrawerMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleThemeMode = () => {
+    setThemeMode(themeMode === 'light' ? 'dark' : 'light');
   };
 
   return (
@@ -73,6 +79,7 @@ function App() {
                 width={DRAWER_MENU_WIDTH}
                 open={isMenuOpen}
                 toggleDrawerMenu={toggleDrawerMenu}
+                toggleThemeMode={toggleThemeMode}
               />
               <MainContent>
                 <Router />

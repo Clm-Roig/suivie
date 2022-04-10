@@ -1,4 +1,6 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import SettingsIcon from '@mui/icons-material/Settings';
 import TimelineIcon from '@mui/icons-material/Timeline';
@@ -16,6 +18,8 @@ import {
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useThemeMode } from './hooks';
+
 interface MenuItemProps {
   icon: React.ReactNode;
   name: string;
@@ -32,10 +36,12 @@ const MenuItem: FC<MenuItemProps> = ({ icon, name, onClick, url }) => (
 interface Props {
   open: boolean;
   toggleDrawerMenu: () => void;
+  toggleThemeMode: () => void;
   width: string;
 }
 
-const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, width }) => {
+const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width }) => {
+  const themeMode = useThemeMode();
   return (
     <SwipeableDrawer
       anchor="left"
@@ -50,7 +56,10 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, width }) => {
           boxSizing: 'border-box'
         }
       }}>
-      <Box sx={{ display: 'flex', justifyContent: 'right' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <IconButton sx={{ ml: 1 }} onClick={toggleThemeMode} color="inherit">
+          {themeMode === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
+        </IconButton>
         <IconButton onClick={toggleDrawerMenu}>
           <ChevronLeftIcon />
         </IconButton>

@@ -3,8 +3,7 @@ import { PaletteMode, PaletteOptions } from '@mui/material';
 import { grey } from '@mui/material/colors';
 
 const CHARCOAL = {
-  main: '#2E4057',
-  contrastText: grey[100]
+  main: '#2E4057'
 };
 const YELLOW_CRAYOLA = {
   main: '#FFE66D'
@@ -64,6 +63,12 @@ export const getPalette = (mode: PaletteMode): PaletteOptions => ({
         ...commonTheme,
         background: {
           default: grey[900]
+        },
+        primary: {
+          main: '#7792BB'
+        },
+        text: {
+          primary: '#7792BB'
         }
       })
 });

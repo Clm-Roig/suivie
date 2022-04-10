@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button, Grid, GridProps, IconButton, Typography } from '@mui/material';
+import { Button, Grid, GridProps, IconButton, Typography, useTheme } from '@mui/material';
 import { FC } from 'react';
 import {
   Control,
@@ -11,12 +11,12 @@ import {
   UseFieldArrayRemove
 } from 'react-hook-form';
 
+import { useThemeMode } from '../../../app/hooks';
 import { FormValues } from '../TrackerForm/types';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 import CompletionUnitTextField from '../completions/CompletionUnitTextField';
 
 export const FieldsetGrid = styled(Grid)`
-  background: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.23);
   border-radius: 4px;
   padding: 8px;
@@ -37,17 +37,18 @@ interface Props {
  * @return {*}
  */
 const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps, remove }) => {
+  const themeMode = useThemeMode();
+  const theme = useTheme();
+
+  const fieldsetSx = {
+    bgcolor: themeMode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
+    mb: 1
+  };
+
   return (
     <>
       {fields.map((field, index) => (
-        <FieldsetGrid
-          columns={2}
-          container
-          key={field.id}
-          sx={{
-            mb: 1
-          }}
-          {...gridProps}>
+        <FieldsetGrid columns={2} container key={field.id} sx={fieldsetSx} {...gridProps}>
           <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
             <Typography variant="subtitle1">Objectif n°{index + 1}</Typography>
             {fields.length > 1 && (
