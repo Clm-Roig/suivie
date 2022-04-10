@@ -1,6 +1,5 @@
 import { addMonths, format, isSameMonth, startOfYear } from 'date-fns';
-// eslint-disable-line import/no-duplicates
-import { fr } from 'date-fns/locale';
+import * as locale from 'date-fns/locale';
 
 // eslint-disable-line import/no-duplicates
 import TrackerEntry from '../../../models/TrackerEntry';
@@ -12,7 +11,7 @@ const formatData = (yearDate: Date, entries: TrackerEntry[]): DataType[] => {
   const startDay = startOfYear(yearDate);
   for (let i = 0; i < 12; i += 1) {
     const month = addMonths(startDay, i);
-    const monthData: DataType = { name: format(month, 'MMMMM', { locale: fr }).slice(0, 1) };
+    const monthData: DataType = { name: format(month, 'MMMMM', { locale: locale.fr }).slice(0, 1) };
     const monthEntries = entries.filter((e) => isSameMonth(new Date(e.date), month));
     const aggCompletions = getAggregatedCompletions(monthEntries);
     aggCompletions.forEach((c) => {

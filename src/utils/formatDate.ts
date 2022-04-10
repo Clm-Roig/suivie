@@ -1,6 +1,5 @@
-/* eslint-disable import/no-duplicates */
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import * as locale from 'date-fns/locale';
 
 /**
  * Default date-fns format() wrapper to use in the app (all date to french)
@@ -9,5 +8,5 @@ import { fr } from 'date-fns/locale';
  * @returns
  */
 export default function (date: Date, formatStr = 'dd MMMM yyyy'): string {
-  return format(date, formatStr, { locale: fr });
+  return format(date, formatStr, { locale: locale.fr });
 }
