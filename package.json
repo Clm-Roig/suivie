@@ -41,7 +41,7 @@
     "release": "standard-version",
     "lint": "eslint './src/**/*ts*'",
     "lint:fix": "eslint --fix './src/**/*ts*'",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,json}' --config ./.prettierrc"
   },
   "eslintConfig": {},
   "browserslist": {
