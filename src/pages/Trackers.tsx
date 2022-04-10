@@ -9,14 +9,14 @@ import DateSelector from '../components/TrackerList/DateSelector';
 import TrackerList from '../components/TrackerList/TrackerList';
 import AddTrackerCard from '../components/TrackerList/AddTrackerCard';
 import {
-  selectDoneTrackers,
+  selectTrackersDone,
   selectHiddenTrackers,
   selectTodoTrackers
 } from '../store/trackers/trackers.selectors';
 import TabPanel from '../components/TabPanel/TabPanel';
 
 function Trackers() {
-  const { trackers: doneTrackers } = useAppSelector(selectDoneTrackers);
+  const { trackers: doneTrackers } = useAppSelector(selectTrackersDone);
   const { trackers: hiddenTrackers } = useAppSelector(selectHiddenTrackers);
   const { trackers: todoTrackers } = useAppSelector(selectTodoTrackers);
   const [selectedTab, setSelectedTab] = useState(0);

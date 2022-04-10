@@ -41,6 +41,21 @@ export const testTracker2: Tracker = {
   status: TrackerStatus.active
 };
 
+export const testTracker3Id = '656e4567-e89b-12k3-b456-427614174000';
+export const testTracker3: Tracker = {
+  id: testTracker2Id,
+  beginDate: new Date().toString(),
+  entries: [],
+  name: 'Drink',
+  requiredCompletions: [
+    {
+      quantity: 2,
+      unit: 'L of water'
+    }
+  ],
+  status: TrackerStatus.active
+};
+
 export const testEntry1Id = '676e4567-e89b-12d3-b456-426614174000';
 export const testEntry1: TrackerEntry = {
   id: testEntry1Id,

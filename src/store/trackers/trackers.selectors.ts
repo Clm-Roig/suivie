@@ -19,7 +19,7 @@ const selectHiddenTrackers = (state: RootState) => {
   };
 };
 
-const selectDoneTrackers = (state: RootState) => {
+const selectTrackersDone = (state: RootState) => {
   const newTrackers = formatTrackers(state.trackers.trackers).filter(
     (t) => t.status === TrackerStatus.done
   );
@@ -32,11 +32,7 @@ const selectDoneTrackers = (state: RootState) => {
 
 const selectTodoTrackers = (state: RootState) => {
   const newTrackers = removeOverTrackers(
-    removeHiddenTrackers(
-      removeDoneTrackers(
-        formatTrackers(state.trackers.trackers).filter((t) => t.dateHidden === undefined)
-      )
-    )
+    removeHiddenTrackers(removeDoneTrackers(formatTrackers(state.trackers.trackers)))
   );
   return {
     ...state.trackers,
@@ -90,7 +86,7 @@ const selectWeekEntries = (
 
 export {
   selectAllTrackers,
-  selectDoneTrackers,
+  selectTrackersDone,
   selectHiddenTrackers,
   selectTodoTrackers,
   selectYearEntries,
