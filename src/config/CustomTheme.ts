@@ -1,4 +1,6 @@
 // Coolors URL: https://coolors.co/80cbc4-eeeeee-2e4057-db7f8e-ffe66d
+import { PaletteMode, PaletteOptions } from '@mui/material';
+import { grey } from '@mui/material/colors';
 
 const CHARCOAL = {
   main: '#2E4057'
@@ -40,17 +42,34 @@ export const components = {
   }
 };
 
-export const palette = {
+const commonTheme = {
+  accent: MIDDLE_BLUE,
   primary: CHARCOAL,
   secondary: YELLOW_CRAYOLA,
-  accent: MIDDLE_BLUE
+  text: {
+    primary: CHARCOAL.main,
+    secondary: CHARCOAL.main
+  }
 };
+
+export const getPalette = (mode: PaletteMode): PaletteOptions => ({
+  mode,
+  ...(mode === 'light'
+    ? {
+        // palette values for light mode
+        ...commonTheme
+      }
+    : {
+        // palette values for dark mode
+        ...commonTheme,
+        background: {
+          default: grey[900]
+        }
+      })
+});
 
 export const typography = {
   h1: {
     fontSize: '4.3rem'
-  },
-  allVariants: {
-    color: CHARCOAL.main
   }
 };
