@@ -4,5 +4,8 @@
   "printWidth": 100,
   "singleQuote": true,
   "trailingComma": "none",
-  "bracketSameLine": true
+  "bracketSameLine": true,
+  "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }
