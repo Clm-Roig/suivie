@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.10...v0.1.11) (2022-04-11)
+
+
+### Features
+
+* **darkMode:** add darkMode theme ([fc6411c](https://github.com/Clm-Roig/bujo-tracker/commit/fc6411cbb607025544349ae73ec79afc9dccc5d4))
+* **darkMode:** add toggle dark mode button ([e16eac1](https://github.com/Clm-Roig/bujo-tracker/commit/e16eac1a4b50ccb2b3c93fe1e8657e5ed9382885))
+* **darkMode:** store darkMode in Redux store ([45b3313](https://github.com/Clm-Roig/bujo-tracker/commit/45b3313163471bca7535390d4c7f16540b6c1ac9))
+* **hideTracker:** add hide / make visible tracker feature ([c4d7ca1](https://github.com/Clm-Roig/bujo-tracker/commit/c4d7ca1685757a8aefcaff839f1d3e4f29039158))
+* **versionNumber:** add version number in about page ([2328d2f](https://github.com/Clm-Roig/bujo-tracker/commit/2328d2fbdc9f956e8ac49fb976c47fba24ebbae2))
+
+
+### Bug Fixes
+
+* **globalContainer:** make globalContent a Paper to apply text theme css ([4ef3e74](https://github.com/Clm-Roig/bujo-tracker/commit/4ef3e746189ff2868e9031187c4b8623081f032a))
+* **requiredCompletions:** force 1 at least requiredCompletion ([2ebe150](https://github.com/Clm-Roig/bujo-tracker/commit/2ebe15094560c5ec408d47edbaa1573712e75ede))
+* **themeModeTransition:** make theme mode transition last longer ([84fda3c](https://github.com/Clm-Roig/bujo-tracker/commit/84fda3c11eeb921b783a10878ce874c8a09509e1))
+* **trackerBeginDate:** make beginDate full width ([ef931be](https://github.com/Clm-Roig/bujo-tracker/commit/ef931be9ce1a6d0ab61d21c369e87b789e9dec1a))
+* **trackerForm:** improve requiredCompletions css ([714a68d](https://github.com/Clm-Roig/bujo-tracker/commit/714a68d451ed9f66bba8895d1b11baadac1de06e))
+
 ### [0.1.10](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.9...v0.1.10) (2022-04-09)
 
 
