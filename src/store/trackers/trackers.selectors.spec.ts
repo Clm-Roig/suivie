@@ -62,7 +62,8 @@ describe('selectHiddenTrackers()', () => {
         trackers: [
           { ...testTracker1, dateHidden: new Date().toString() },
           testTracker2,
-          { ...testTracker3, dateHidden: new Date().toString() }
+          { ...testTracker3, dateHidden: new Date().toString() },
+          { ...testTracker3, dateHidden: subDays(new Date(), 2).toString() } // Should not be selected because it was hidden in the pas
         ]
       }
     };
