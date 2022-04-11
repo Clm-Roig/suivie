@@ -22,7 +22,25 @@ const MIDDLE_BLUE = {
   main: '#80CBC4'
 };
 
+const THEME_MODE_TRANSITION = '0.5s ease';
+
 export const components = {
+  MuiPaper: {
+    styleOverrides: {
+      root: {
+        transition:
+          'background-image ' + THEME_MODE_TRANSITION + ', background ' + THEME_MODE_TRANSITION + ''
+      }
+    }
+  },
+  MuiContainer: {
+    styleOverrides: {
+      root: {
+        transition:
+          'background-image ' + THEME_MODE_TRANSITION + ', background ' + THEME_MODE_TRANSITION + ''
+      }
+    }
+  },
   MuiTabs: {
     styleOverrides: {
       indicator: {
