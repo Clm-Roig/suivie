@@ -21,8 +21,8 @@ const selectHiddenTrackers = (state: RootState) => {
 };
 
 const selectTrackersDone = (state: RootState) => {
-  const newTrackers = formatTrackers(state.trackers.trackers).filter(
-    (t) => t.status === TrackerStatus.done
+  const newTrackers = removeHiddenTrackers(
+    formatTrackers(state.trackers.trackers).filter((t) => t.status === TrackerStatus.done)
   );
 
   return {

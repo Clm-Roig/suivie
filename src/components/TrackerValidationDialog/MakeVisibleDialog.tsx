@@ -21,7 +21,7 @@ interface Props {
 }
 
 const MakeVisibleValidationDialog: FC<Props> = ({ dialogProps, onValidation, tracker }) => {
-  const { name, requiredCompletions } = tracker;
+  const { name } = tracker;
   return (
     <Dialog {...dialogProps}>
       <DialogTitle id="alert-dialog-title">
@@ -29,10 +29,12 @@ const MakeVisibleValidationDialog: FC<Props> = ({ dialogProps, onValidation, tra
         <b>{name}</b>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>[Rendre visible] En cours de développement...</DialogContentText>
+        <DialogContentText>Voulez-vous afficher ce tracker ?</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button autoFocus>En cours de développement...</Button>
+        <Button onClick={onValidation} autoFocus>
+          Afficher
+        </Button>
       </DialogActions>
     </Dialog>
   );

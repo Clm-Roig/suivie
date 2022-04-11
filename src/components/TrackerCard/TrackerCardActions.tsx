@@ -10,7 +10,12 @@ import { FC, useState } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
-import { completelyValidate, customValidate } from '../../store/trackers/trackersSlice';
+import {
+  completelyValidate,
+  customValidate,
+  hideTracker,
+  makeTrackerVisible
+} from '../../store/trackers/trackersSlice';
 import CompleteValidationDialog from '../TrackerValidationDialog/CompleteValidationDialog';
 import CustomValidationDialog from '../TrackerValidationDialog/CustomValidationDialog';
 import MakeHiddenDialog from '../TrackerValidationDialog/MakeHiddenDialog';
@@ -30,11 +35,11 @@ const TrackerCardActions: FC<Props> = ({
   tracker
 }) => {
   const dispatch = useAppDispatch();
-  const [isCompleteValidationOpen, setIsCompleteValidationOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const [isCompleteValidationOpen, setIsCompleteValidationOpen] = useState(false);
   const [isCustomValidationOpen, setIsCustomValidationOpen] = useState(false);
-  const [isMakeVisible, setIsMakeVisible] = useState(false);
-  const [isMakeHidden, setIsMakeHidden] = useState(false);
+  const [isMakeVisibleOpen, setIsMakeVisibleOpen] = useState(false);
+  const [isMakeHiddenOpen, setIsMakeHiddenOpen] = useState(false);
 
   const handleCompleteValidation = () => {
     dispatch(completelyValidate(tracker.id));
@@ -51,15 +56,15 @@ const TrackerCardActions: FC<Props> = ({
   // TODO: remove next line when feature is implemented
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleMakeVisible = () => {
-    // eslint-disable-next-line no-console
-    console.log('make visible to be implementend');
+    dispatch(makeTrackerVisible(tracker.id));
+    setIsMakeVisibleOpen(false);
+    enqueueSnackbar('Tracker affiché !', { variant: 'success' });
   };
 
-  // TODO: remove next line when feature is implemented
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleMakeHidden = () => {
-    // eslint-disable-next-line no-console
-    console.log('make hidden to be implementend');
+    dispatch(hideTracker(tracker.id));
+    setIsMakeHiddenOpen(false);
+    enqueueSnackbar('Tracker masqué !', { variant: 'success' });
   };
 
   const isHidden = tracker.dateHidden && isToday(new Date(tracker.dateHidden));
@@ -89,11 +94,11 @@ const TrackerCardActions: FC<Props> = ({
           </>
         )}
         {isHidden ? (
-          <IconButton color="primary" size="large" onClick={() => setIsMakeVisible(true)}>
+          <IconButton color="primary" size="large" onClick={() => setIsMakeVisibleOpen(true)}>
             <VisibilityIcon fontSize="large" />
           </IconButton>
         ) : (
-          <IconButton color="primary" size="large" onClick={() => setIsMakeHidden(true)}>
+          <IconButton color="primary" size="large" onClick={() => setIsMakeHiddenOpen(true)}>
             <VisibilityOffIcon fontSize="large" />
           </IconButton>
         )}
@@ -125,8 +130,8 @@ const TrackerCardActions: FC<Props> = ({
       />
       <MakeVisibleValidationDialog
         dialogProps={{
-          open: isMakeVisible,
-          onClose: () => setIsMakeVisible(false),
+          open: isMakeVisibleOpen,
+          onClose: () => setIsMakeVisibleOpen(false),
           sx: {
             '.MuiDialog-paper': { bgcolor: 'secondary' }
           }
@@ -136,8 +141,8 @@ const TrackerCardActions: FC<Props> = ({
       />
       <MakeHiddenDialog
         dialogProps={{
-          open: isMakeHidden,
-          onClose: () => setIsMakeHidden(false),
+          open: isMakeHiddenOpen,
+          onClose: () => setIsMakeHiddenOpen(false),
           sx: {
             '.MuiDialog-paper': { bgcolor: 'secondary' }
           }
