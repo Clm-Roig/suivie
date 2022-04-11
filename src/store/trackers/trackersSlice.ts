@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
+import { PayloadAction, SerializedError, createSlice } from '@reduxjs/toolkit';
+import { v4 } from 'uuid';
 
+import Completion from '../../models/Completion';
 import SliceStatus from '../../models/SliceStatus';
 import Tracker from '../../models/Tracker';
 import TrackerEntry from '../../models/TrackerEntry';
-import { v4 } from 'uuid';
-import Completion from '../../models/Completion';
 
 // ===== State
 
@@ -69,6 +69,18 @@ export const trackersSlice = createSlice({
         ...state,
         trackers: filteredTrackers
       };
+    },
+    hideTracker: (state, action: PayloadAction<Tracker['id']>) => {
+      const idx = state.trackers.findIndex((t) => t.id === action.payload);
+      if (idx !== -1) {
+        state.trackers[idx].dateHidden = new Date().toString();
+      }
+    },
+    makeTrackerVisible: (state, action: PayloadAction<Tracker['id']>) => {
+      const idx = state.trackers.findIndex((t) => t.id === action.payload);
+      if (idx !== -1) {
+        state.trackers[idx].dateHidden = undefined;
+      }
     }
   }
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -76,6 +88,12 @@ export const trackersSlice = createSlice({
   // extraReducers: (builder) => {})
 });
 
-export const { createTracker, completelyValidate, customValidate, deleteTracker } =
-  trackersSlice.actions;
+export const {
+  createTracker,
+  completelyValidate,
+  customValidate,
+  deleteTracker,
+  hideTracker,
+  makeTrackerVisible
+} = trackersSlice.actions;
 export default trackersSlice.reducer;

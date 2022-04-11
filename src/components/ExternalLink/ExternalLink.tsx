@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import { LinkProps, Link } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
+import { Link, LinkProps } from '@mui/material';
+import { FC } from 'react';
 
 const ExternalLink: FC<LinkProps> = (linkProps) => (
   <>

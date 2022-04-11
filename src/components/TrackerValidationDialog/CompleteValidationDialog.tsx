@@ -1,13 +1,14 @@
-import { FC } from 'react';
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
-  DialogProps
+  DialogProps,
+  DialogTitle
 } from '@mui/material';
+import { FC } from 'react';
+
 import Tracker from '../../models/Tracker';
 import CompletionChipList from '../CompletionChipList/CompletionChipList';
 

@@ -1,7 +1,8 @@
-import { FC } from 'react';
-import TrackerCard from '../TrackerCard/TrackerCard';
-import Tracker from '../../models/Tracker';
 import { CardProps } from '@mui/material';
+import { FC } from 'react';
+
+import Tracker from '../../models/Tracker';
+import TrackerCard from '../TrackerCard/TrackerCard';
 
 interface Props {
   trackers: Tracker[];

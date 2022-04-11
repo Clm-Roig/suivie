@@ -10,10 +10,10 @@ import {
   XAxis,
   YAxis
 } from 'recharts';
+
+import getChartColors from '../../../config/getChartColors';
 import TrackerEntry from '../../../models/TrackerEntry';
 import formatData from './formatYearData';
-import getChartColors from '../../../config/getChartColors';
-
 import { DataType } from './types';
 
 interface Props {

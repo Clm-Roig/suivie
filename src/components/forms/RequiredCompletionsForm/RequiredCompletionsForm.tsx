@@ -1,8 +1,8 @@
-import { FC } from 'react';
-import { Button, Grid, GridProps, IconButton, Typography } from '@mui/material';
 import styled from '@emotion/styled';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Button, Grid, GridProps, IconButton, Typography, useTheme } from '@mui/material';
+import { FC } from 'react';
 import {
   Control,
   Controller,
@@ -10,9 +10,13 @@ import {
   UseFieldArrayAppend,
   UseFieldArrayRemove
 } from 'react-hook-form';
+
+import { useAppSelector } from '../../../app/hooks';
+import ThemeMode from '../../../models/ThemeMode';
+import { selectThemeMode } from '../../../store/theme/theme.selectors';
 import { FormValues } from '../TrackerForm/types';
-import CompletionUnitTextField from '../completions/CompletionUnitTextField';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
+import CompletionUnitTextField from '../completions/CompletionUnitTextField';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -35,22 +39,25 @@ interface Props {
  * @return {*}
  */
 const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps, remove }) => {
+  const themeMode = useAppSelector(selectThemeMode);
+  const theme = useTheme();
+
+  const fieldsetSx = {
+    bgcolor: themeMode === ThemeMode.LIGHT ? theme.palette.grey[100] : theme.palette.grey[900],
+    mb: 1
+  };
+
   return (
     <>
       {fields.map((field, index) => (
-        <FieldsetGrid
-          columns={2}
-          container
-          key={field.id}
-          sx={{
-            mb: 1
-          }}
-          {...gridProps}>
+        <FieldsetGrid columns={2} container key={field.id} sx={fieldsetSx} {...gridProps}>
           <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
             <Typography variant="subtitle1">Objectif n°{index + 1}</Typography>
-            <IconButton onClick={() => remove(index)} sx={{ p: 0 }}>
-              <DeleteIcon color="error" />
-            </IconButton>
+            {fields.length > 1 && (
+              <IconButton onClick={() => remove(index)} sx={{ p: 0 }}>
+                <DeleteIcon color="error" />
+              </IconButton>
+            )}
           </Grid>
           <Grid item xs={1}>
             <Controller
@@ -79,7 +86,7 @@ const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps
                   }
                 }
                 return (
-                  <CompletionUnitTextField
+                  <CompletionQuantityTextField
                     error={!!error}
                     helperText={error && errorText}
                     label={'Quantité'}
@@ -105,7 +112,7 @@ const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps
               name={`requiredCompletions.${index}.unit` as const}
               rules={{ required: true }}
               render={({ field: { onChange, value }, fieldState: { error } }) => (
-                <CompletionQuantityTextField
+                <CompletionUnitTextField
                   error={!!error}
                   helperText={error ? 'Une unité est requise' : ''}
                   label={'Unité'}

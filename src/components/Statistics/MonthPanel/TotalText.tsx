@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import { FC } from 'react';
+
 import Completion from '../../../models/Completion';
 import CompletionChipList from '../../CompletionChipList/CompletionChipList';
 

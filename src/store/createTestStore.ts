@@ -1,4 +1,5 @@
-import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
+import { EnhancedStore, configureStore } from '@reduxjs/toolkit';
+
 import rootReducer from './rootReducer';
 
 export function createTestStore(): EnhancedStore {

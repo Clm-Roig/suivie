@@ -1,4 +1,8 @@
 // Coolors URL: https://coolors.co/80cbc4-eeeeee-2e4057-db7f8e-ffe66d
+import { PaletteMode, PaletteOptions } from '@mui/material';
+import { grey } from '@mui/material/colors';
+
+import ThemeMode from '../models/ThemeMode';
 
 const CHARCOAL = {
   main: '#2E4057'
@@ -18,7 +22,25 @@ const MIDDLE_BLUE = {
   main: '#80CBC4'
 };
 
+const THEME_MODE_TRANSITION = '0.5s ease';
+
 export const components = {
+  MuiPaper: {
+    styleOverrides: {
+      root: {
+        transition:
+          'background-image ' + THEME_MODE_TRANSITION + ', background ' + THEME_MODE_TRANSITION + ''
+      }
+    }
+  },
+  MuiContainer: {
+    styleOverrides: {
+      root: {
+        transition:
+          'background-image ' + THEME_MODE_TRANSITION + ', background ' + THEME_MODE_TRANSITION + ''
+      }
+    }
+  },
   MuiTabs: {
     styleOverrides: {
       indicator: {
@@ -40,17 +62,39 @@ export const components = {
   }
 };
 
-export const palette = {
+const commonTheme = {
+  accent: MIDDLE_BLUE,
   primary: CHARCOAL,
   secondary: YELLOW_CRAYOLA,
-  accent: MIDDLE_BLUE
+  text: {
+    primary: CHARCOAL.main
+  }
 };
+
+export const getPalette = (mode: PaletteMode): PaletteOptions => ({
+  mode,
+  ...(mode === ThemeMode.LIGHT
+    ? {
+        // palette values for light mode
+        ...commonTheme
+      }
+    : {
+        // palette values for dark mode
+        ...commonTheme,
+        background: {
+          default: grey[900]
+        },
+        primary: {
+          main: '#7792BB'
+        },
+        text: {
+          primary: '#7792BB'
+        }
+      })
+});
 
 export const typography = {
   h1: {
     fontSize: '4.3rem'
-  },
-  allVariants: {
-    color: CHARCOAL.main
   }
 };

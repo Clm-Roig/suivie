@@ -1,5 +1,6 @@
-import { Paper, Divider, Typography, List, ListItem, ListItemText } from '@mui/material';
-import { useLocation, NavigateOptions } from 'react-router-dom';
+import { Divider, List, ListItem, ListItemText, Paper, Typography } from '@mui/material';
+import { NavigateOptions, useLocation } from 'react-router-dom';
+
 import { NotATrackerResponse } from '../../utils/isATracker';
 
 const DataError = () => {

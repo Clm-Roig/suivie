@@ -1,37 +1,53 @@
-import { createRef, useState } from 'react';
-import { IconButton, Container } from '@mui/material';
-import styled from '@emotion/styled';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { LocalizationProvider } from '@mui/lab';
+import DateAdapter from '@mui/lab/AdapterDateFns';
+import { Container, IconButton, Paper } from '@mui/material';
 import {
-  createTheme,
   StyledEngineProvider,
   ThemeProvider,
-  responsiveFontSizes
+  createTheme,
+  responsiveFontSizes,
+  styled
 } from '@mui/material/styles';
-import DateAdapter from '@mui/lab/AdapterDateFns';
 import frLocale from 'date-fns/locale/fr';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { SnackbarKey, SnackbarProvider } from 'notistack';
-import { LocalizationProvider } from '@mui/lab';
-import { components, palette, typography } from '../config/CustomTheme';
+import { createRef, useMemo, useState } from 'react';
+
 import { DRAWER_MENU_WIDTH } from '../config/Constants';
+import { components, getPalette, typography } from '../config/CustomTheme';
+import ThemeMode from '../models/ThemeMode';
+import { selectThemeMode } from '../store/theme/theme.selectors';
+import { toggleThemeMode } from '../store/theme/themeSlice';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';
+import { useAppDispatch, useAppSelector } from './hooks';
 
-const MainContent = styled(Container)`
-  padding: 1rem;
-`;
+const MainContent = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(2)
+}));
 
-// Theme configuration
-let theme = createTheme({
-  components,
-  palette: palette,
-  typography: typography
-});
-theme = responsiveFontSizes(theme);
+const MainContainer = styled(Container)(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  minHeight: '100vh'
+}));
 
 // Main component
 function App() {
+  // Theme configuration
+  const themeMode = useAppSelector(selectThemeMode);
+  const dispatch = useAppDispatch();
+
+  let theme = useMemo(() => {
+    return createTheme({
+      components,
+      palette: getPalette(themeMode === ThemeMode.LIGHT ? 'light' : 'dark'),
+      typography: typography
+    });
+  }, [themeMode]);
+
+  theme = responsiveFontSizes(theme);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const notistackRef = createRef<SnackbarProvider>();
   const onClickDismiss = (key: SnackbarKey) => () => {
@@ -46,7 +62,7 @@ function App() {
     <LocalizationProvider dateAdapter={DateAdapter} locale={frLocale}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
-          <Container disableGutters maxWidth={false}>
+          <MainContainer disableGutters maxWidth={'md'}>
             <SnackbarProvider
               dense
               maxSnack={3}
@@ -61,12 +77,13 @@ function App() {
                 width={DRAWER_MENU_WIDTH}
                 open={isMenuOpen}
                 toggleDrawerMenu={toggleDrawerMenu}
+                toggleThemeMode={() => dispatch(toggleThemeMode())}
               />
               <MainContent>
                 <Router />
               </MainContent>
             </SnackbarProvider>
-          </Container>
+          </MainContainer>
         </ThemeProvider>
       </StyledEngineProvider>
     </LocalizationProvider>

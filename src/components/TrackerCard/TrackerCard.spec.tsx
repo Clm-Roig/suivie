@@ -1,12 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { subDays } from 'date-fns';
-import TrackerStatus from '../../models/TrackerStatus';
-import formatDate from '../../utils/formatDate';
-import { Provider } from 'react-redux';
-import { createTestStore } from '../../store/createTestStore';
-import TrackerCard from './TrackerCard';
-import { v4 } from 'uuid';
 import { SnackbarProvider } from 'notistack';
+import { Provider } from 'react-redux';
+import { v4 } from 'uuid';
+
+import TrackerStatus from '../../models/TrackerStatus';
+import { createTestStore } from '../../store/createTestStore';
+import formatDate from '../../utils/formatDate';
+import TrackerCard from './TrackerCard';
 
 const tracker1 = {
   id: v4(),

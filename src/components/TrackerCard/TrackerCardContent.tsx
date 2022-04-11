@@ -1,9 +1,10 @@
-import { FC } from 'react';
 import { CardContent, CardContentProps, Typography } from '@mui/material';
-import Completion from '../../models/Completion';
-import CompletionChipList from '../CompletionChipList/CompletionChipList';
-import Tracker from '../../models/Tracker';
 import { isToday } from 'date-fns';
+import { FC } from 'react';
+
+import Completion from '../../models/Completion';
+import Tracker from '../../models/Tracker';
+import CompletionChipList from '../CompletionChipList/CompletionChipList';
 
 interface Props {
   cardContentProps?: CardContentProps;

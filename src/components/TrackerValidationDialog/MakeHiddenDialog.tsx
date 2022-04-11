@@ -1,16 +1,17 @@
 // TODO : remove next line when the feature is implemented
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { FC } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
-  DialogProps
+  DialogProps,
+  DialogTitle
 } from '@mui/material';
+import { FC } from 'react';
+
 import Tracker from '../../models/Tracker';
 
 interface Props {
@@ -20,7 +21,7 @@ interface Props {
 }
 
 const MakeHiddenDialog: FC<Props> = ({ dialogProps, onValidation, tracker }) => {
-  const { name, requiredCompletions } = tracker;
+  const { name } = tracker;
   return (
     <Dialog {...dialogProps}>
       <DialogTitle id="alert-dialog-title">
@@ -28,10 +29,12 @@ const MakeHiddenDialog: FC<Props> = ({ dialogProps, onValidation, tracker }) => 
         <b>{name}</b>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>[Masquer tracker] En cours de développement...</DialogContentText>
+        <DialogContentText>Voulez-vous masquer ce tracker ?</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button autoFocus>En cours de développement...</Button>
+        <Button onClick={onValidation} autoFocus>
+          Masquer
+        </Button>
       </DialogActions>
     </Dialog>
   );

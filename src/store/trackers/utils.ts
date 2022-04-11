@@ -1,4 +1,5 @@
 import { addDays, differenceInDays, isBefore, isSameDay } from 'date-fns';
+
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import TrackerEntry from '../../models/TrackerEntry';

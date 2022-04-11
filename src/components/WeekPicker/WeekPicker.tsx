@@ -1,13 +1,14 @@
+import PickersDay, { PickersDayProps } from '@mui/lab/PickersDay';
+import StaticDatePicker from '@mui/lab/StaticDatePicker';
+import { styled } from '@mui/material/styles';
+import { addDays, isBefore, isSameDay, isWithinInterval } from 'date-fns';
 import * as React from 'react';
 import { FC } from 'react';
-import { styled } from '@mui/material/styles';
-import StaticDatePicker from '@mui/lab/StaticDatePicker';
-import PickersDay, { PickersDayProps } from '@mui/lab/PickersDay';
-import { addDays, isBefore, isSameDay, isWithinInterval } from 'date-fns';
-import WeekPickerToolbar from './WeekPickerToolbar';
-import WeekPickerInput from './WeekPickerInput';
-import './WeekPicker.css';
+
 import { TRACKERS_BEGIN_IN } from '../../config/Constants';
+import './WeekPicker.css';
+import WeekPickerInput from './WeekPickerInput';
+import WeekPickerToolbar from './WeekPickerToolbar';
 
 type CustomPickerDayProps = PickersDayProps<Date> & {
   dayIsBetween: boolean;

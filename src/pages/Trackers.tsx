@@ -1,30 +1,37 @@
-import { useState } from 'react';
-import { Alert, Box, Tab, Tabs, Typography } from '@mui/material';
 import BallotIcon from '@mui/icons-material/Ballot';
 import CheckIcon from '@mui/icons-material/Check';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { Alert, Box, Tab, Tabs, Typography, useTheme } from '@mui/material';
+import { useState } from 'react';
 
 import { useAppSelector } from '../app/hooks';
+import TabPanel from '../components/TabPanel/TabPanel';
+import AddTrackerCard from '../components/TrackerList/AddTrackerCard';
 import DateSelector from '../components/TrackerList/DateSelector';
 import TrackerList from '../components/TrackerList/TrackerList';
-import AddTrackerCard from '../components/TrackerList/AddTrackerCard';
+import ThemeMode from '../models/ThemeMode';
+import { selectThemeMode } from '../store/theme/theme.selectors';
 import {
-  selectDoneTrackers,
   selectHiddenTrackers,
-  selectTodoTrackers
+  selectTodoTrackers,
+  selectTrackersDone
 } from '../store/trackers/trackers.selectors';
-import TabPanel from '../components/TabPanel/TabPanel';
 
 function Trackers() {
-  const { trackers: doneTrackers } = useAppSelector(selectDoneTrackers);
+  const { trackers: doneTrackers } = useAppSelector(selectTrackersDone);
   const { trackers: hiddenTrackers } = useAppSelector(selectHiddenTrackers);
   const { trackers: todoTrackers } = useAppSelector(selectTodoTrackers);
   const [selectedTab, setSelectedTab] = useState(0);
   const handleTabChange = (event: React.SyntheticEvent, newTab: number) => {
     setSelectedTab(newTab);
   };
+  const theme = useTheme();
+  const themeMode = useAppSelector(selectThemeMode);
 
-  const cardSxProp = { mb: 2, bgcolor: 'secondary.main' };
+  const cardSxProp = {
+    mb: 2,
+    bgcolor: themeMode === ThemeMode.LIGHT ? 'secondary.main' : theme.palette.grey[900]
+  };
 
   return (
     <Box>

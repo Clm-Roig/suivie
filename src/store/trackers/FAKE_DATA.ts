@@ -1,8 +1,9 @@
 import { subDays } from 'date-fns';
+
+import { SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
 import Tracker from '../../models/Tracker';
 import TrackerEntry from '../../models/TrackerEntry';
 import TrackerStatus from '../../models/TrackerStatus';
-import { SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
 
 export const testTracker1Id = '123e4567-e89b-12d3-a456-426614174000';
 export const testTracker1: Tracker = {
@@ -36,6 +37,21 @@ export const testTracker2: Tracker = {
     {
       quantity: 6,
       unit: 'vegetables or fruits'
+    }
+  ],
+  status: TrackerStatus.active
+};
+
+export const testTracker3Id = '656e4567-e89b-12k3-b456-427614174000';
+export const testTracker3: Tracker = {
+  id: testTracker2Id,
+  beginDate: new Date().toString(),
+  entries: [],
+  name: 'Drink',
+  requiredCompletions: [
+    {
+      quantity: 2,
+      unit: 'L of water'
     }
   ],
   status: TrackerStatus.active

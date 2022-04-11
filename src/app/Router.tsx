@@ -1,9 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
+
 import About from '../pages/About';
-import DataError from '../pages/errors/DataError';
 import Settings from '../pages/Settings';
 import Statistics from '../pages/Statistics';
 import Trackers from '../pages/Trackers';
+import DataError from '../pages/errors/DataError';
 
 function Router() {
   return (

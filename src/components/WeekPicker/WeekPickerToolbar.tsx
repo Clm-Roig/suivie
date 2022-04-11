@@ -1,8 +1,8 @@
-import { FC } from 'react';
-import { ToolbarComponentProps } from '@mui/lab/internal/pickers/typings/BasePicker';
-import { Box, IconButton, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { ToolbarComponentProps } from '@mui/lab/internal/pickers/typings/BasePicker';
+import { Box, IconButton, Typography } from '@mui/material';
+import { FC } from 'react';
 
 type Props = ToolbarComponentProps<Date | null>;
 

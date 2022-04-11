@@ -1,13 +1,14 @@
-import { RootState } from '../store';
+import { differenceInDays, isAfter, isEqual, isSameMonth, isSameYear } from 'date-fns';
+
+import TrackerEntry from '../../models/TrackerEntry';
 import TrackerStatus from '../../models/TrackerStatus';
+import { RootState } from '../store';
 import {
   formatTrackers,
   removeDoneTrackers,
   removeHiddenTrackers,
   removeOverTrackers
 } from './utils';
-import { differenceInDays, isAfter, isEqual, isSameMonth, isSameYear } from 'date-fns';
-import TrackerEntry from '../../models/TrackerEntry';
 
 const selectHiddenTrackers = (state: RootState) => {
   const newTrackers = removeOverTrackers(
@@ -19,9 +20,9 @@ const selectHiddenTrackers = (state: RootState) => {
   };
 };
 
-const selectDoneTrackers = (state: RootState) => {
-  const newTrackers = formatTrackers(state.trackers.trackers).filter(
-    (t) => t.status === TrackerStatus.done
+const selectTrackersDone = (state: RootState) => {
+  const newTrackers = removeHiddenTrackers(
+    formatTrackers(state.trackers.trackers).filter((t) => t.status === TrackerStatus.done)
   );
 
   return {
@@ -32,11 +33,7 @@ const selectDoneTrackers = (state: RootState) => {
 
 const selectTodoTrackers = (state: RootState) => {
   const newTrackers = removeOverTrackers(
-    removeHiddenTrackers(
-      removeDoneTrackers(
-        formatTrackers(state.trackers.trackers).filter((t) => t.dateHidden === undefined)
-      )
-    )
+    removeHiddenTrackers(removeDoneTrackers(formatTrackers(state.trackers.trackers)))
   );
   return {
     ...state.trackers,
@@ -90,7 +87,7 @@ const selectWeekEntries = (
 
 export {
   selectAllTrackers,
-  selectDoneTrackers,
+  selectTrackersDone,
   selectHiddenTrackers,
   selectTodoTrackers,
   selectYearEntries,

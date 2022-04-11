@@ -1,11 +1,11 @@
-import { FC, useEffect } from 'react';
-import { useForm, Controller, useFieldArray } from 'react-hook-form';
-import { Grid } from '@mui/material';
 import styled from '@emotion/styled';
+import { Grid } from '@mui/material';
+import { FC, useEffect } from 'react';
+import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
+import Completion from '../../../models/Completion';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 import CompletionUnitTextField from '../completions/CompletionUnitTextField';
-import Completion from '../../../models/Completion';
 
 export const FieldsetGrid = styled(Grid)`
   border-radius: 4px;
@@ -103,7 +103,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
                   }
                 }
                 return (
-                  <CompletionUnitTextField
+                  <CompletionQuantityTextField
                     error={!!error}
                     helperText={error && errorText}
                     label={'Quantité'}
@@ -129,7 +129,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
               name={`completions.${index}.unit` as const}
               rules={{ required: true }}
               render={({ field: { value } }) => (
-                <CompletionQuantityTextField
+                <CompletionUnitTextField
                   label={'Unité'}
                   size="small"
                   sx={{ mb: 1 }}
