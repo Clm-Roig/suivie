@@ -9,9 +9,9 @@ import {
   persistReducer,
   persistStore
 } from 'redux-persist';
+// defaults to localStorage for web
 import storage from 'redux-persist/lib/storage';
 
-// defaults to localStorage for web
 import rootReducer from './rootReducer';
 
 const persistConfig = {

@@ -3,6 +3,9 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { Box, Card, CardActionArea, CardContent, CardProps } from '@mui/material';
 import { FC, useState } from 'react';
 
+import { useAppSelector } from '../../app/hooks';
+import ThemeMode from '../../models/ThemeMode';
+import { selectThemeMode } from '../../store/theme/theme.selectors';
 import TrackerForm from '../forms/TrackerForm/TrackerForm';
 
 interface Props {
@@ -10,16 +13,18 @@ interface Props {
 }
 const AddTrackerCard: FC<Props> = ({ cardProps }) => {
   const [displayCreateForm, setDisplayCreateForm] = useState(false);
+  const themeMode = useAppSelector(selectThemeMode);
+
+  const hoverColor = themeMode === ThemeMode.LIGHT ? 'accent.main' : 'secondary.main';
+  const cardActionSx = {
+    '&:hover': {
+      backgroundColor: displayCreateForm ? '' : hoverColor
+    }
+  };
 
   return (
     <Card {...cardProps}>
-      <CardActionArea
-        onClick={() => setDisplayCreateForm(!displayCreateForm)}
-        sx={{
-          '&:hover': {
-            backgroundColor: displayCreateForm ? '' : 'accent.main'
-          }
-        }}>
+      <CardActionArea onClick={() => setDisplayCreateForm(!displayCreateForm)} sx={cardActionSx}>
         <CardContent>
           <Box
             sx={{
