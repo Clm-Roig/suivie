@@ -2,6 +2,8 @@
 import { PaletteMode, PaletteOptions } from '@mui/material';
 import { grey } from '@mui/material/colors';
 
+import ThemeMode from '../models/ThemeMode';
+
 const CHARCOAL = {
   main: '#2E4057'
 };
@@ -53,7 +55,7 @@ const commonTheme = {
 
 export const getPalette = (mode: PaletteMode): PaletteOptions => ({
   mode,
-  ...(mode === 'light'
+  ...(mode === ThemeMode.LIGHT
     ? {
         // palette values for light mode
         ...commonTheme

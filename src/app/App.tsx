@@ -1,7 +1,7 @@
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { LocalizationProvider } from '@mui/lab';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import { Container, IconButton, PaletteMode, Paper, useMediaQuery } from '@mui/material';
+import { Container, IconButton, Paper } from '@mui/material';
 import {
   StyledEngineProvider,
   ThemeProvider,
@@ -11,13 +11,17 @@ import {
 } from '@mui/material/styles';
 import frLocale from 'date-fns/locale/fr';
 import { SnackbarKey, SnackbarProvider } from 'notistack';
-import { createRef, useEffect, useMemo, useState } from 'react';
+import { createRef, useMemo, useState } from 'react';
 
 import { DRAWER_MENU_WIDTH } from '../config/Constants';
 import { components, getPalette, typography } from '../config/CustomTheme';
+import ThemeMode from '../models/ThemeMode';
+import { selectThemeMode } from '../store/theme/theme.selectors';
+import { toggleThemeMode } from '../store/theme/themeSlice';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';
+import { useAppDispatch, useAppSelector } from './hooks';
 
 const MainContent = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2)
@@ -31,15 +35,13 @@ const MainContainer = styled(Container)(({ theme }) => ({
 // Main component
 function App() {
   // Theme configuration
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [themeMode, setThemeMode] = useState<PaletteMode>(prefersDarkMode ? 'dark' : 'light');
-  useEffect(() => {
-    setThemeMode(prefersDarkMode ? 'dark' : 'light');
-  }, [prefersDarkMode]);
+  const themeMode = useAppSelector(selectThemeMode);
+  const dispatch = useAppDispatch();
+
   let theme = useMemo(() => {
     return createTheme({
       components,
-      palette: getPalette(themeMode),
+      palette: getPalette(themeMode === ThemeMode.LIGHT ? 'light' : 'dark'),
       typography: typography
     });
   }, [themeMode]);
@@ -54,10 +56,6 @@ function App() {
 
   const toggleDrawerMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const toggleThemeMode = () => {
-    setThemeMode(themeMode === 'light' ? 'dark' : 'light');
   };
 
   return (
@@ -79,7 +77,7 @@ function App() {
                 width={DRAWER_MENU_WIDTH}
                 open={isMenuOpen}
                 toggleDrawerMenu={toggleDrawerMenu}
-                toggleThemeMode={toggleThemeMode}
+                toggleThemeMode={() => dispatch(toggleThemeMode())}
               />
               <MainContent>
                 <Router />

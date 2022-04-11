@@ -4,11 +4,13 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Alert, Box, Tab, Tabs, Typography, useTheme } from '@mui/material';
 import { useState } from 'react';
 
-import { useAppSelector, useThemeMode } from '../app/hooks';
+import { useAppSelector } from '../app/hooks';
 import TabPanel from '../components/TabPanel/TabPanel';
 import AddTrackerCard from '../components/TrackerList/AddTrackerCard';
 import DateSelector from '../components/TrackerList/DateSelector';
 import TrackerList from '../components/TrackerList/TrackerList';
+import ThemeMode from '../models/ThemeMode';
+import { selectThemeMode } from '../store/theme/theme.selectors';
 import {
   selectHiddenTrackers,
   selectTodoTrackers,
@@ -24,11 +26,11 @@ function Trackers() {
     setSelectedTab(newTab);
   };
   const theme = useTheme();
-  const themeMode = useThemeMode();
+  const themeMode = useAppSelector(selectThemeMode);
 
   const cardSxProp = {
     mb: 2,
-    bgcolor: themeMode === 'light' ? 'secondary.main' : theme.palette.grey[900]
+    bgcolor: themeMode === ThemeMode.LIGHT ? 'secondary.main' : theme.palette.grey[900]
   };
 
   return (

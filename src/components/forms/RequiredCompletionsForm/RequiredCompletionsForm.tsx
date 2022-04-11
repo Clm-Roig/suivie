@@ -11,7 +11,9 @@ import {
   UseFieldArrayRemove
 } from 'react-hook-form';
 
-import { useThemeMode } from '../../../app/hooks';
+import { useAppSelector } from '../../../app/hooks';
+import ThemeMode from '../../../models/ThemeMode';
+import { selectThemeMode } from '../../../store/theme/theme.selectors';
 import { FormValues } from '../TrackerForm/types';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 import CompletionUnitTextField from '../completions/CompletionUnitTextField';
@@ -37,11 +39,11 @@ interface Props {
  * @return {*}
  */
 const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps, remove }) => {
-  const themeMode = useThemeMode();
+  const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
 
   const fieldsetSx = {
-    bgcolor: themeMode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
+    bgcolor: themeMode === ThemeMode.LIGHT ? theme.palette.grey[100] : theme.palette.grey[900],
     mb: 1
   };
 

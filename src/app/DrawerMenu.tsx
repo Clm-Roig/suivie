@@ -18,7 +18,8 @@ import {
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useThemeMode } from './hooks';
+import { selectThemeMode } from '../store/theme/theme.selectors';
+import { useAppSelector } from './hooks';
 
 interface MenuItemProps {
   icon: React.ReactNode;
@@ -41,7 +42,7 @@ interface Props {
 }
 
 const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width }) => {
-  const themeMode = useThemeMode();
+  const themeMode = useAppSelector(selectThemeMode);
   return (
     <SwipeableDrawer
       anchor="left"
