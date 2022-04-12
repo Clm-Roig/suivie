@@ -1,24 +1,25 @@
 # Bujo Tracker
 
-This is inspired by the [Bullet Journal's trackers tool](https://diaryofajournalplanner.com/bullet-journal-habit-tracker/). 
+This is inspired by the [Bullet Journal's trackers tool](https://diaryofajournalplanner.com/bullet-journal-habit-tracker/).
 
 ## Main features
 
 Here are the main features for the incoming v1:
 
-- 🚀 Client-only application, no internet connection needed. Data are stored in locale storage.
+🚀 Client-only application, no internet connection needed. Data are stored in locale storage
 
-- 📄 Create tracker with a name, begin date, duration and as much as objectives as you want
+📄 Create tracker with a name, begin date, duration and add as much as objectives as you want
 
-- ✅ Validate a tracker today or in the past
+✅ Validate a tracker today or in the past
 
-- 👻 Hide a tracker for one day if you are sure you will not validate it
+👻 Hide a tracker for one day if you are sure you will not validate it
 
-- 📊 View statistics about your trackers
+📊 View statistics about your trackers
 
 ### Development
 
 ## Pre-requisites
+
 - nvm aka [Node Version Manager](https://github.com/nvm-sh/nvm)
 
 ## Setup
