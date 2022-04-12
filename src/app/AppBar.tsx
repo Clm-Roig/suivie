@@ -1,6 +1,7 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import { Box, IconButton, AppBar as MuiAppBar, Toolbar, Typography } from '@mui/material';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 interface Props {
   toggleDrawerMenu: () => void;
@@ -22,7 +23,12 @@ const AppBar: FC<Props> = ({ toggleDrawerMenu }) => {
             onClick={toggleDrawerMenu}>
             <MenuIcon />
           </IconButton>
-          <Typography color="#eee" variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            component={Link}
+            to="/"
+            color="#eee"
+            variant="h6"
+            sx={{ flexGrow: 1, textDecoration: 'none' }}>
             BUJO TRACKER
           </Typography>
         </Toolbar>

@@ -25,6 +25,9 @@ const CustomPersistGate: FC<Props> = ({ children }) => {
         });
       }
     }
+    if (trackers.length > 0) {
+      navigate('/trackers');
+    }
   };
 
   return (
