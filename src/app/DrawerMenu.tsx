@@ -1,5 +1,6 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import HomeIcon from '@mui/icons-material/Home';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -67,6 +68,7 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width 
       </Box>
       <Divider />
       <List>
+        <MenuItem icon={<HomeIcon />} name={'Accueil'} onClick={toggleDrawerMenu} url="/" />
         <MenuItem
           icon={<ListAltIcon />}
           name={'Mes Trackers'}
