@@ -1,24 +1,23 @@
-import { Button, Stack, Typography } from '@mui/material';
+import { Divider, Stack, Typography } from '@mui/material';
 
-function Settings() {
+import DeleteSection from '../components/settings/DeleteSection';
+import ExportSection from '../components/settings/ExportSection';
+import ImportSection from '../components/settings/ImportSection';
+
+const Settings = () => {
   return (
     <>
       <Typography gutterBottom variant="h1">
         Paramètres
       </Typography>
       <Stack spacing={2} direction="column">
-        <Typography>Fonctionnalités en cours de développement</Typography>
-        <Button disabled variant="contained">
-          Importer des données
-        </Button>
-        <Button disabled variant="contained">
-          Exporter les données
-        </Button>
-        <Button disabled variant="contained" color="error">
-          Supprimer toutes les données
-        </Button>
+        <ImportSection />
+        <Divider />
+        <ExportSection />
+        <Divider />
+        <DeleteSection />
       </Stack>
     </>
   );
-}
+};
 export default Settings;

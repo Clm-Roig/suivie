@@ -53,8 +53,6 @@ const TrackerCardActions: FC<Props> = ({
     enqueueSnackbar('Tracker validé !', { variant: 'success' });
   };
 
-  // TODO: remove next line when feature is implemented
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleMakeVisible = () => {
     dispatch(makeTrackerVisible(tracker.id));
     setIsMakeVisibleOpen(false);
