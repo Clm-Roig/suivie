@@ -1,5 +1,5 @@
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { Alert, Button } from '@mui/material';
+import { Alert, Button, Stack, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 
@@ -18,9 +18,13 @@ const DeleteSection = () => {
     enqueueSnackbar('Données supprimées !', { variant: 'info' });
   };
   return (
-    <>
+    <Stack spacing={1} alignItems={'center'}>
+      <Typography>
+        Cette action videra votre stockage local de toutes les données créées par Bujo Tracker.
+      </Typography>
       <Alert severity="error">Cette action est irréversible !</Alert>
       <Button
+        fullWidth
         size="large"
         startIcon={<DeleteForeverIcon />}
         onClick={() => setIsDeleteDialogOpen(true)}
@@ -32,7 +36,7 @@ const DeleteSection = () => {
         dialogProps={{ open: isDeleteDialogOpen, onClose: () => setIsDeleteDialogOpen(false) }}
         onDelete={handleOnDelete}
       />
-    </>
+    </Stack>
   );
 };
 export default DeleteSection;

@@ -1,5 +1,5 @@
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import { Button, Typography } from '@mui/material';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { Button, Stack, Typography } from '@mui/material';
 
 import { useAppSelector } from '../../app/hooks';
 import { JSON_DATA_EXTENSION } from '../../config/Constants';
@@ -34,18 +34,19 @@ const Settings = () => {
   };
 
   return (
-    <>
+    <Stack spacing={1} alignItems={'center'}>
       <Typography>
-        Exportez vos données pour pouvoir les importer plus tard, ici ou sur un autre appareil.
+        Téléchargez vos données pour pouvoir les importer plus tard, ici ou sur un autre appareil.
       </Typography>
       <Button
+        fullWidth
         size="large"
-        startIcon={<FileUploadIcon />}
+        startIcon={<FileDownloadIcon />}
         onClick={handleDataExport}
         variant="contained">
-        Exporter les données
+        Télécharger les données
       </Button>
-    </>
+    </Stack>
   );
 };
 export default Settings;
