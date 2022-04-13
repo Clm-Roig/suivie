@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 
 const initialState = {};
@@ -6,7 +6,8 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    createStoreFromJSON: () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    createStoreFromJSONString: (state, action: PayloadAction<string>) => {
       // Redux creation is handled in rootReducer
     },
     deleteStore: () => {
@@ -16,6 +17,6 @@ export const appSlice = createSlice({
   }
 });
 
-export const { deleteStore } = appSlice.actions;
+export const { createStoreFromJSONString, deleteStore } = appSlice.actions;
 
 export default appSlice.reducer;

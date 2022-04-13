@@ -10,10 +10,11 @@ const combinedReducer = combineReducers({
   app: appReducer
 });
 
+// action is of string action because it's the payload of createStoreFromJSONString
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const rootReducer = (state: any, action: PayloadAction) => {
+const rootReducer = (state: any, action: PayloadAction<string>) => {
   let newState = state;
-  if (action.type === 'app/createStoreFromJSON' && action.payload) {
+  if (action.type === 'app/createStoreFromJSONString') {
     newState = JSON.parse(action.payload);
   }
   if (action.type === 'app/deleteStore') {
