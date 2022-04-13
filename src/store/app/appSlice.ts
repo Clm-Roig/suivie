@@ -6,8 +6,12 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    createStoreFromJSON: () => {
+      // Redux creation is handled in rootReducer
+    },
     deleteStore: () => {
       storage.removeItem('persist:root');
+      // Redux deletion is handled in rootReducer
     }
   }
 });

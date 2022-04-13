@@ -14,6 +14,8 @@ const Settings = () => {
   const { enqueueSnackbar } = useSnackbar();
   const store = useAppSelector(selectWholeStore);
 
+  const handleDataImport = () => {};
+
   const handleDataExport = () => {
     const jsonStore = JSON.stringify(store);
 
@@ -46,7 +48,7 @@ const Settings = () => {
       </Typography>
       <Stack spacing={2} direction="column">
         <Typography>Fonctionnalités en cours de développement</Typography>
-        <Button disabled variant="contained">
+        <Button onClick={handleDataImport} variant="contained">
           Importer des données
         </Button>
         <Button onClick={handleDataExport} variant="contained">
