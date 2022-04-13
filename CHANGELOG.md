@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.12](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.11...v0.1.12) (2022-04-13)
+
+
+### Features
+
+* **home:** add home page ([e50ca12](https://github.com/Clm-Roig/bujo-tracker/commit/e50ca1259ed0a177f89f83d1e59adc3d5a8a8ca0))
+* **importData:** import data from JSON ([eed3513](https://github.com/Clm-Roig/bujo-tracker/commit/eed3513152da486ec182d2f772d628e2a02b0ad4))
+* **settings:** delete all data ([4d1fd67](https://github.com/Clm-Roig/bujo-tracker/commit/4d1fd67af0fc3f6a7abea0646b0c775572475f85))
+* **settings:** export all data ([fe4ba96](https://github.com/Clm-Roig/bujo-tracker/commit/fe4ba96cd9a7835dd5fd958f8e9a326e907cd3ab))
+
+
+### Bug Fixes
+
+* **snackBarAction:** replace snackbar action and color ([68bcca5](https://github.com/Clm-Roig/bujo-tracker/commit/68bcca5266293c61c4a8d34165ec9c6a1bba529e))
+
 ### [0.1.11](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.10...v0.1.11) (2022-04-11)
 
 
