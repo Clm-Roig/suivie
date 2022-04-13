@@ -68,6 +68,10 @@ const commonTheme = {
   secondary: YELLOW_CRAYOLA,
   text: {
     primary: CHARCOAL.main
+  },
+  common: {
+    white: '#eee',
+    black: '#111'
   }
 };
 

@@ -1,4 +1,4 @@
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import CloseIcon from '@mui/icons-material/Close';
 import { LocalizationProvider } from '@mui/lab';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import { Container, IconButton, Paper } from '@mui/material';
@@ -68,8 +68,11 @@ function App() {
               maxSnack={3}
               ref={notistackRef}
               action={(key) => (
-                <IconButton onClick={onClickDismiss(key)} size="small">
-                  <VisibilityOffIcon />
+                <IconButton
+                  onClick={onClickDismiss(key)}
+                  size="small"
+                  sx={{ color: 'common.white' }}>
+                  <CloseIcon />
                 </IconButton>
               )}>
               <AppBar toggleDrawerMenu={toggleDrawerMenu} />
