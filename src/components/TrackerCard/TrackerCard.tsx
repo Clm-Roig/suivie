@@ -14,6 +14,7 @@ interface Props {
 const TrackerCard: FC<Props> = ({ tracker, cardProps }) => {
   const { requiredCompletions } = tracker;
   const [selectedCompletions, setSelectedCompletions] = useState<Completion[]>([]);
+  const sectionProps = { sx: { py: 1 } };
 
   const addToSelectedCompletions = (completion: Completion) => {
     setSelectedCompletions([...selectedCompletions, completion]);
@@ -33,15 +34,17 @@ const TrackerCard: FC<Props> = ({ tracker, cardProps }) => {
 
   return (
     <Card {...cardProps}>
-      <TrackerCardHeader tracker={tracker} />
+      <TrackerCardHeader tracker={tracker} cardHeaderProps={sectionProps} />
       {requiredCompletions.length > 0 && (
         <TrackerCardContent
+          cardContentProps={sectionProps}
           onChipClick={onChipClick}
           tracker={tracker}
           selectedCompletions={selectedCompletions}
         />
       )}
       <TrackerCardActions
+        cardActionsProps={sectionProps}
         onChipClick={onChipClick}
         selectedCompletions={selectedCompletions}
         tracker={tracker}
