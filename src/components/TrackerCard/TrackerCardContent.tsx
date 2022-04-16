@@ -52,12 +52,16 @@ const TrackerCardContent: FC<Props> = ({
 
   return (
     <CardContent {...cardContentProps}>
-      <Typography>Requis :</Typography>
-      <CompletionChipList
-        completions={requiredCompletions}
-        onChipClick={onChipClick}
-        selectedCompletions={selectedCompletions}
-      />
+      {requiredCompletions.length > 0 && (
+        <>
+          <Typography>Requis :</Typography>
+          <CompletionChipList
+            completions={requiredCompletions}
+            onChipClick={onChipClick}
+            selectedCompletions={selectedCompletions}
+          />
+        </>
+      )}
       {remainingCompletions.length > 0 && (
         <>
           <Typography>Restants :</Typography>
