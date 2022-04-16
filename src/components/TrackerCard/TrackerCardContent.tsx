@@ -36,6 +36,20 @@ const TrackerCardContent: FC<Props> = ({
     }
   }
 
+  const remainingCompletions = requiredCompletions
+    .map((rc) => {
+      const todayCompletion = aggTodayCompletions.find((c) => rc.unit === c.unit);
+      if (todayCompletion) {
+        const remain = rc.quantity - todayCompletion.quantity;
+        return {
+          ...rc,
+          quantity: remain
+        } as Completion;
+      }
+      return rc;
+    })
+    .filter((c) => c.quantity > 0); // don't take completed completions
+
   return (
     <CardContent {...cardContentProps}>
       <Typography>Requis :</Typography>
@@ -44,10 +58,10 @@ const TrackerCardContent: FC<Props> = ({
         onChipClick={onChipClick}
         selectedCompletions={selectedCompletions}
       />
-      {todayCompletions.length > 0 && (
+      {remainingCompletions.length > 0 && (
         <>
-          <Typography>Effectués :</Typography>
-          <CompletionChipList completions={aggTodayCompletions} />
+          <Typography>Restants :</Typography>
+          <CompletionChipList completions={remainingCompletions} />
         </>
       )}
     </CardContent>

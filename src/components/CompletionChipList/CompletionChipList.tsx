@@ -29,7 +29,7 @@ const CompletionChipList: FC<Props> = ({
           key={c.quantity.toString() + idx}
           completion={c}
           isSelected={selectedCompletions?.includes(c)}
-          chipProps={{ onClick: () => onClick(c) }}
+          chipProps={{ onClick: () => onClick(c), clickable: onChipClick !== undefined }}
         />
       ))}
     </Box>

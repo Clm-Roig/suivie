@@ -47,7 +47,10 @@ describe('<TrackerCard />', () => {
     expect(screen.getByText('Commencé le ' + formatDate(new Date(beginDate)))).toBeInTheDocument();
     for (const completion of requiredCompletions) {
       const { quantity, unit } = completion;
-      expect(screen.getByText(quantity + ' ' + unit)).toBeInTheDocument();
+      const elements = screen.getAllByText(quantity + ' ' + unit);
+      // Present twice in the document (required and remaining)
+      expect(elements[0]).toBeInTheDocument();
+      expect(elements[1]).toBeInTheDocument();
     }
   });
 });
