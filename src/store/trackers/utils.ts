@@ -1,4 +1,4 @@
-import { addDays, differenceInDays, isBefore, isSameDay } from 'date-fns';
+import { addDays, differenceInDays, isBefore, isSameDay, isToday } from 'date-fns';
 
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
@@ -54,20 +54,24 @@ export const computeNewStatus = (tracker: Tracker) => {
   }
 
   // Mark Tracker as done if all required completions are done
+  // If there is no required completions, test if there is an entry for today
   const todayCompletions = getTodayAggregatedCompletions(entries);
   const remains = [];
-  for (const requiredCompletion of requiredCompletions) {
-    const remain = requiredCompletion.quantity;
-    const todayCompletion = todayCompletions.find((c) => c.unit === requiredCompletion.unit);
-    if (todayCompletion) {
-      remains.push(requiredCompletion.quantity - todayCompletion.quantity);
-    } else {
-      remains.push(remain);
+  if (requiredCompletions.length > 0) {
+    for (const requiredCompletion of requiredCompletions) {
+      const remain = requiredCompletion.quantity;
+      const todayCompletion = todayCompletions.find((c) => c.unit === requiredCompletion.unit);
+      remains.push(
+        todayCompletion ? requiredCompletion.quantity - todayCompletion.quantity : remain
+      );
     }
-  }
-
-  if (remains.every((x) => x <= 0)) {
-    newStatus = TrackerStatus.done;
+    if (remains.every((x) => x <= 0)) {
+      newStatus = TrackerStatus.done;
+    }
+  } else {
+    if (entries.filter((e) => isToday(new Date(e.date))).length > 0) {
+      newStatus = TrackerStatus.done;
+    }
   }
 
   return newStatus;

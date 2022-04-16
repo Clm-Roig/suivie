@@ -50,6 +50,27 @@ describe('computeNewStatus()', () => {
     };
     expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.done);
   });
+  it('should be todo (no required completions and no entries for today)', () => {
+    const doneTracker = {
+      ...testTracker1,
+      requiredCompletions: [],
+      entries: []
+    };
+    expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.active);
+  });
+  it('should be done (no required completions but one entry without completions for today)', () => {
+    const doneTracker = {
+      ...testTracker1,
+      requiredCompletions: [],
+      entries: [
+        {
+          ...testEntry1,
+          completions: []
+        }
+      ]
+    };
+    expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.done);
+  });
 });
 
 describe('remove functions', () => {

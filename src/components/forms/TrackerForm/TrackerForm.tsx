@@ -18,12 +18,7 @@ const getDefaultValues = (): FormValues => ({
   defaultCompletions: [],
   entries: [],
   name: '',
-  requiredCompletions: [
-    {
-      quantity: '1',
-      unit: 'fois'
-    }
-  ],
+  requiredCompletions: [],
   status: TrackerStatus.active
 });
 

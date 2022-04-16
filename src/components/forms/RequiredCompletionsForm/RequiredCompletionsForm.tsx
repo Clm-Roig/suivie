@@ -53,11 +53,9 @@ const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps
         <FieldsetGrid columns={2} container key={field.id} sx={fieldsetSx} {...gridProps}>
           <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
             <Typography variant="subtitle1">Objectif n°{index + 1}</Typography>
-            {fields.length > 1 && (
-              <IconButton onClick={() => remove(index)} sx={{ p: 0 }}>
-                <DeleteIcon color="error" />
-              </IconButton>
-            )}
+            <IconButton onClick={() => remove(index)} sx={{ p: 0 }}>
+              <DeleteIcon color="error" />
+            </IconButton>
           </Grid>
           <Grid item xs={1}>
             <Controller
