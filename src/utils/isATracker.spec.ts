@@ -5,6 +5,7 @@ describe('isATracker helper', () => {
   const basicTracker = {
     id: '1234-5678',
     beginDate: 'Thu Mar 17 2022 12:50:05 GMT+0100 (Central European Standard Time)',
+    defaultCompletions: [],
     entries: [],
     name: 'A basic tracker',
     requiredCompletions: [],

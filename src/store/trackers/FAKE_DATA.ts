@@ -9,6 +9,16 @@ export const testTracker1Id = '123e4567-e89b-12d3-a456-426614174000';
 export const testTracker1: Tracker = {
   id: testTracker1Id,
   beginDate: subDays(new Date(), 3).toString(),
+  defaultCompletions: [
+    {
+      quantity: 10,
+      unit: 'push-ups'
+    },
+    {
+      quantity: 15,
+      unit: 'squats'
+    }
+  ],
   duration: 13,
   name: 'Musculation',
   remainingDays: 10,
@@ -46,6 +56,12 @@ export const testTracker3Id = '656e4567-e89b-12k3-b456-427614174000';
 export const testTracker3: Tracker = {
   id: testTracker2Id,
   beginDate: new Date().toString(),
+  defaultCompletions: [
+    {
+      quantity: 0.5,
+      unit: 'L of water'
+    }
+  ],
   entries: [],
   name: 'Drink',
   requiredCompletions: [
