@@ -14,6 +14,7 @@ import {
 import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import getChartColors from '../../../config/getChartColors';
 import TrackerEntry from '../../../models/TrackerEntry';
+import { tooltipProps, xAxisProps } from '../chartProps';
 import formatData from './formatWeekData';
 import { DataType } from './types';
 
@@ -46,9 +47,13 @@ const WeekChart: FC<Props> = ({ beginDate, entries }) => {
       <ResponsiveContainer width="100%" height="100%">
         <LineChart width={300} height={250} data={data}>
           <CartesianGrid />
-          <XAxis dataKey="name" tick={{ fontFamily: fontFamily }} />
+          <XAxis {...xAxisProps} tick={{ fontFamily: fontFamily }} />
           <YAxis width={25} fontSize={'0.8rem'} />
-          <Tooltip itemStyle={{ fontFamily: fontFamily }} labelStyle={{ fontFamily: fontFamily }} />
+          <Tooltip
+            {...tooltipProps}
+            itemStyle={{ fontFamily: fontFamily }}
+            labelStyle={{ fontFamily: fontFamily }}
+          />
           <Legend wrapperStyle={{ fontFamily: fontFamily }} />
 
           {allUnits.length > 0 ? (

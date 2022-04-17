@@ -14,6 +14,7 @@ import {
 import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import getChartColors from '../../../config/getChartColors';
 import TrackerEntry from '../../../models/TrackerEntry';
+import { tooltipProps, xAxisProps } from '../chartProps';
 import formatData from './formatYearData';
 import { DataType } from './types';
 
@@ -46,13 +47,13 @@ const YearChart: FC<Props> = ({ beginDate, entries }) => {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart width={300} height={250} data={data}>
           <CartesianGrid />
-          <XAxis
-            dataKey="name"
-            fontSize={'0.8rem'}
-            tick={{ fontFamily: theme.typography.fontFamily }}
-          />
+          <XAxis {...xAxisProps} tick={{ fontFamily: theme.typography.fontFamily }} />
           <YAxis width={25} fontSize={'0.8rem'} />
-          <Tooltip itemStyle={{ fontFamily: fontFamily }} labelStyle={{ fontFamily: fontFamily }} />
+          <Tooltip
+            {...tooltipProps}
+            itemStyle={{ fontFamily: fontFamily }}
+            labelStyle={{ fontFamily: fontFamily }}
+          />
           <Legend wrapperStyle={{ fontFamily: fontFamily }} />
 
           {allUnits.map((u, i) => (
