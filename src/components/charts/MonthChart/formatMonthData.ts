@@ -7,6 +7,7 @@ import {
   startOfMonth
 } from 'date-fns';
 
+import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import TrackerEntry from '../../../models/TrackerEntry';
 import { getAggregatedCompletions } from '../../../store/trackers/utils';
 import { DataType } from './types';
@@ -28,9 +29,15 @@ const formatData = (monthDate: Date, entries: TrackerEntry[]): DataType[] => {
       })
     );
     const aggCompletions = getAggregatedCompletions(weekEntries);
-    aggCompletions.forEach((c) => {
-      weekData[c.unit] = c.quantity;
-    });
+    if (aggCompletions.length > 0) {
+      aggCompletions.forEach((c) => {
+        weekData[c.unit] = c.quantity;
+      });
+      // Handle entries without completions
+    } else if (weekEntries.length > 0) {
+      weekData[DEFAULT_COMPLETION_NAME] = weekEntries.length;
+    }
+
     data.push(weekData);
   }
   return data;

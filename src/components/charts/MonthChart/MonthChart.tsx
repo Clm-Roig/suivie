@@ -11,6 +11,7 @@ import {
   YAxis
 } from 'recharts';
 
+import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import getChartColors from '../../../config/getChartColors';
 import TrackerEntry from '../../../models/TrackerEntry';
 import formatData from './formatMonthData';
@@ -34,7 +35,9 @@ const MonthChart: FC<Props> = ({ beginDate, entries }) => {
   }, [beginDate, entries]);
 
   useEffect(() => {
-    const units = entries.flatMap((e) => e.completions.map((c) => c.unit));
+    const units = entries
+      .flatMap((e) => e.completions.map((c) => c.unit))
+      .concat(DEFAULT_COMPLETION_NAME);
     setAllUnits(Array.from(new Set(units)));
   }, [entries]);
 

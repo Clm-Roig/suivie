@@ -11,6 +11,7 @@ import {
   YAxis
 } from 'recharts';
 
+import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import getChartColors from '../../../config/getChartColors';
 import TrackerEntry from '../../../models/TrackerEntry';
 import formatData from './formatWeekData';
@@ -34,7 +35,9 @@ const WeekChart: FC<Props> = ({ beginDate, entries }) => {
   }, [beginDate, entries]);
 
   useEffect(() => {
-    const units = entries.flatMap((e) => e.completions.map((c) => c.unit));
+    const units: string[] = entries
+      .flatMap((e) => e.completions.map((c) => c.unit))
+      .concat(DEFAULT_COMPLETION_NAME);
     setAllUnits(Array.from(new Set(units)));
   }, [entries]);
 
@@ -48,18 +51,22 @@ const WeekChart: FC<Props> = ({ beginDate, entries }) => {
           <Tooltip itemStyle={{ fontFamily: fontFamily }} labelStyle={{ fontFamily: fontFamily }} />
           <Legend wrapperStyle={{ fontFamily: fontFamily }} />
 
-          {allUnits.map((u, i) => (
-            <Line
-              connectNulls
-              dataKey={u}
-              isAnimationActive={
-                false /*Disable animation, it's making some dots to disappear: https://github.com/recharts/recharts/issues/804 */
-              }
-              key={u + '-line'}
-              stroke={CHART_COLORS[i % CHART_COLORS.length]}
-              strokeWidth={2}
-            />
-          ))}
+          {allUnits.length > 0 ? (
+            allUnits.map((u, i) => (
+              <Line
+                connectNulls
+                dataKey={u}
+                isAnimationActive={
+                  false /*Disable animation, it's making some dots to disappear: https://github.com/recharts/recharts/issues/804 */
+                }
+                key={u + '-line'}
+                stroke={CHART_COLORS[i % CHART_COLORS.length]}
+                strokeWidth={2}
+              />
+            ))
+          ) : (
+            <p>no unit</p>
+          )}
         </LineChart>
       </ResponsiveContainer>
     </Box>

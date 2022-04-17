@@ -1,7 +1,7 @@
 import { addMonths, format, isSameMonth, startOfYear } from 'date-fns';
 import * as locale from 'date-fns/locale';
 
-// eslint-disable-line import/no-duplicates
+import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import TrackerEntry from '../../../models/TrackerEntry';
 import { getAggregatedCompletions } from '../../../store/trackers/utils';
 import { DataType } from './types';
@@ -14,9 +14,14 @@ const formatData = (yearDate: Date, entries: TrackerEntry[]): DataType[] => {
     const monthData: DataType = { name: format(month, 'MMMMM', { locale: locale.fr }).slice(0, 1) };
     const monthEntries = entries.filter((e) => isSameMonth(new Date(e.date), month));
     const aggCompletions = getAggregatedCompletions(monthEntries);
-    aggCompletions.forEach((c) => {
-      monthData[c.unit] = c.quantity;
-    });
+    if (aggCompletions.length > 0) {
+      aggCompletions.forEach((c) => {
+        monthData[c.unit] = c.quantity;
+      });
+      // Handle entries without completions
+    } else if (monthEntries.length > 0) {
+      monthData[DEFAULT_COMPLETION_NAME] = monthEntries.length;
+    }
     data.push(monthData);
   }
   return data;
