@@ -1,8 +1,9 @@
+import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import TrackerEntry from '../../../models/TrackerEntry';
 import formatMonthDate from './formatMonthData';
 import { DataType } from './types';
 
-describe('isATracker helper', () => {
+describe('formatMonthData()', () => {
   const completions = [
     {
       quantity: 10,
@@ -62,6 +63,18 @@ describe('isATracker helper', () => {
     for (let i = 2; i <= 4; i += 1) {
       expect(data[i]['push-ups']).toBeUndefined();
       expect(data[i]['squats']).toBeUndefined();
+    }
+  });
+
+  it('should return the month data aggregated by week and handle entries with empty completions', () => {
+    const entriesWithoutCompletions = entries.map((e) => ({ ...e, completions: [] }));
+    const data: DataType[] = formatMonthDate(monthDate, entriesWithoutCompletions);
+    expect(data.length).toBe(5); // 5 weeks in April 2022
+    expect(data[0][DEFAULT_COMPLETION_NAME]).toBe(3); // 3 completions on 1rst week
+    expect(data[1][DEFAULT_COMPLETION_NAME]).toBe(2); // 2 completions on 2nd week
+    // no completion on others weeks
+    for (let i = 2; i <= 4; i += 1) {
+      expect(data[i][DEFAULT_COMPLETION_NAME]).toBeUndefined();
     }
   });
 });
