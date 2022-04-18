@@ -65,7 +65,10 @@ const TrackerCardContent: FC<Props> = ({
       {remainingCompletions.length > 0 ? (
         <>
           <Typography>Restants :</Typography>
-          <CompletionChipList completions={remainingCompletions} />
+          <CompletionChipList
+            completions={remainingCompletions}
+            requiredCompletions={requiredCompletions}
+          />
         </>
       ) : (
         <>
