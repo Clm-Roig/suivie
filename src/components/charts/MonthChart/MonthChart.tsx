@@ -11,8 +11,10 @@ import {
   YAxis
 } from 'recharts';
 
+import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import getChartColors from '../../../config/getChartColors';
 import TrackerEntry from '../../../models/TrackerEntry';
+import { tooltipProps, xAxisProps } from '../chartProps';
 import formatData from './formatMonthData';
 import { DataType } from './types';
 
@@ -34,7 +36,9 @@ const MonthChart: FC<Props> = ({ beginDate, entries }) => {
   }, [beginDate, entries]);
 
   useEffect(() => {
-    const units = entries.flatMap((e) => e.completions.map((c) => c.unit));
+    const units = entries
+      .flatMap((e) => e.completions.map((c) => c.unit))
+      .concat(DEFAULT_COMPLETION_NAME);
     setAllUnits(Array.from(new Set(units)));
   }, [entries]);
 
@@ -43,13 +47,13 @@ const MonthChart: FC<Props> = ({ beginDate, entries }) => {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart width={300} height={250} data={data}>
           <CartesianGrid />
-          <XAxis
-            dataKey="name"
-            fontSize={'0.8rem'}
-            tick={{ fontFamily: theme.typography.fontFamily }}
-          />
+          <XAxis {...xAxisProps} tick={{ fontFamily: theme.typography.fontFamily }} />
           <YAxis width={25} fontSize={'0.8rem'} />
-          <Tooltip itemStyle={{ fontFamily: fontFamily }} labelStyle={{ fontFamily: fontFamily }} />
+          <Tooltip
+            {...tooltipProps}
+            itemStyle={{ fontFamily: fontFamily }}
+            labelStyle={{ fontFamily: fontFamily }}
+          />
           <Legend wrapperStyle={{ fontFamily: fontFamily }} />
 
           {allUnits.map((u, i) => (
