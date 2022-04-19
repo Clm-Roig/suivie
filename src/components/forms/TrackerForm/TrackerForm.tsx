@@ -1,5 +1,5 @@
-import DatePicker from '@mui/lab/DatePicker';
 import { Box, Button, Stack, TextField } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { FC } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { v4 } from 'uuid';
