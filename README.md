@@ -61,4 +61,14 @@ I wanted to focus on Github tools in order to have everything I need in one plac
 
 ### If I had more time, I would change...
 
-More on this later because I have time currently and I'm working on it 😛
+More on this later because I have time currently and I'm working on it 😛£
+
+### This project uses
+  
+![React_logo_wordmark](https://user-images.githubusercontent.com/20704943/164058596-3816998c-7d62-4ac9-89ce-e46cb61213db.png)
+![Typescript_logo_2020 svg](https://user-images.githubusercontent.com/20704943/164058603-56bfd228-bfd1-4112-9931-055d48ef0b27.png)
+![mui](https://user-images.githubusercontent.com/20704943/164058591-79c197bf-b4b4-4b5d-88ac-17c97de793d5.png)
+![recharts](https://user-images.githubusercontent.com/20704943/164058599-affd54c1-d7a8-4980-a142-5a0f1b4c8a95.png)
+![Redux](https://user-images.githubusercontent.com/20704943/164058602-b96af456-1e2b-4895-a12e-11b8084dc432.png)
+![eslint](https://user-images.githubusercontent.com/20704943/164058589-a52b0210-1f47-4d8e-a04a-3eff1976dcb7.png)
+![prettier](https://user-images.githubusercontent.com/20704943/164058595-b2912e5f-1eaa-4200-9cc6-4b84b23804f6.png)  
