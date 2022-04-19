@@ -7,9 +7,8 @@ import { useAppSelector } from '../../../app/hooks';
 import { TRACKERS_BEGIN_IN } from '../../../config/Constants';
 import Tracker from '../../../models/Tracker';
 import { selectMonthEntries } from '../../../store/trackers/trackers.selectors';
-import { getAggregatedCompletions } from '../../../store/trackers/utils';
 import MonthChart from '../../charts/MonthChart/MonthChart';
-import TotalText from './TotalText';
+import TotalText from '../TotalText';
 
 interface Props {
   beginDate: Date;
@@ -38,7 +37,10 @@ const MonthPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
         />
       </Box>
       <Box sx={{ mb: 1 }}>
-        <TotalText completions={getAggregatedCompletions(monthEntries)} />
+        <TotalText
+          entries={monthEntries}
+          noCompletionsText="Il n'y a pas eu d'activité durant le mois pour le tracker sélectionné."
+        />
       </Box>
       {monthEntries.length > 0 && <MonthChart beginDate={beginDate} entries={monthEntries} />}
     </>
