@@ -11,10 +11,10 @@ import {
   YAxis
 } from 'recharts';
 
-import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import getChartColors from '../../../config/getChartColors';
 import TrackerEntry from '../../../models/TrackerEntry';
 import { tooltipProps, xAxisProps } from '../chartProps';
+import getAllCompletionUnits from './../getAllCompletionUnits';
 import formatData from './formatWeekData';
 import { DataType } from './types';
 
@@ -36,10 +36,7 @@ const WeekChart: FC<Props> = ({ beginDate, entries }) => {
   }, [beginDate, entries]);
 
   useEffect(() => {
-    const units: string[] = entries
-      .flatMap((e) => e.completions.map((c) => c.unit))
-      .concat(DEFAULT_COMPLETION_NAME);
-    setAllUnits(Array.from(new Set(units)));
+    setAllUnits(getAllCompletionUnits(entries));
   }, [entries]);
 
   return (
@@ -56,22 +53,18 @@ const WeekChart: FC<Props> = ({ beginDate, entries }) => {
           />
           <Legend wrapperStyle={{ fontFamily: fontFamily }} />
 
-          {allUnits.length > 0 ? (
-            allUnits.map((u, i) => (
-              <Line
-                connectNulls
-                dataKey={u}
-                isAnimationActive={
-                  false /*Disable animation, it's making some dots to disappear: https://github.com/recharts/recharts/issues/804 */
-                }
-                key={u + '-line'}
-                stroke={CHART_COLORS[i % CHART_COLORS.length]}
-                strokeWidth={2}
-              />
-            ))
-          ) : (
-            <p>no unit</p>
-          )}
+          {allUnits.map((u, i) => (
+            <Line
+              connectNulls
+              dataKey={u}
+              isAnimationActive={
+                false /*Disable animation, it's making some dots to disappear: https://github.com/recharts/recharts/issues/804 */
+              }
+              key={u + '-line'}
+              stroke={CHART_COLORS[i % CHART_COLORS.length]}
+              strokeWidth={2}
+            />
+          ))}
         </LineChart>
       </ResponsiveContainer>
     </Box>
