@@ -61,7 +61,7 @@ I wanted to focus on Github tools in order to have everything I need in one plac
 
 ### If I had more time, I would change...
 
-More on this later because I have time currently and I'm working on it 😛£
+More on this later because I have time currently and I'm working on it 😛
 
 ### This project uses
   
