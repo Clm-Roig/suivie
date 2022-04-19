@@ -28,6 +28,8 @@ interface Props {
   append: UseFieldArrayAppend<FormValues, 'requiredCompletions'>;
   control: Control<FormValues, any> /* eslint-disable-line @typescript-eslint/no-explicit-any */;
   fields: FieldArrayWithId<FormValues, 'requiredCompletions', 'id'>[];
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  getValues: (payload?: string | string[]) => FormValues;
   gridProps?: GridProps;
   remove: UseFieldArrayRemove;
 }
@@ -38,13 +40,26 @@ interface Props {
  * @param {*} { append, control, fields, gridProps, remove }
  * @return {*}
  */
-const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps, remove }) => {
+const RequiredCompletionsForm: FC<Props> = ({
+  append,
+  control,
+  fields,
+  getValues,
+  gridProps,
+  remove
+}) => {
   const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
 
   const fieldsetSx = {
     bgcolor: themeMode === ThemeMode.LIGHT ? theme.palette.grey[100] : theme.palette.grey[900],
     mb: 1
+  };
+
+  const uniqueUnit = (v: string) => {
+    const requiredCompletions = getValues().requiredCompletions;
+    const nbCompletions = requiredCompletions.filter((v2) => v2.unit === v);
+    return nbCompletions.length < 2;
   };
 
   return (
@@ -108,19 +123,38 @@ const RequiredCompletionsForm: FC<Props> = ({ append, control, fields, gridProps
             <Controller
               control={control}
               name={`requiredCompletions.${index}.unit` as const}
-              rules={{ required: true }}
-              render={({ field: { onChange, value }, fieldState: { error } }) => (
-                <CompletionUnitTextField
-                  error={!!error}
-                  helperText={error ? 'Une unité est requise' : ''}
-                  label={'Unité'}
-                  onChange={onChange}
-                  required
-                  size="small"
-                  sx={{ mb: 1 }}
-                  value={value}
-                />
-              )}
+              rules={{
+                required: true,
+                validate: {
+                  uniqueUnit
+                }
+              }}
+              render={({ field: { onChange, value }, fieldState: { error } }) => {
+                let errorText = '';
+                if (error) {
+                  switch (error.type) {
+                    case 'uniqueUnit':
+                      errorText = 'Les unités doivent toutes être différentes.';
+                      break;
+
+                    case 'required':
+                      errorText = "L'unité est requise";
+                      break;
+                  }
+                }
+                return (
+                  <CompletionUnitTextField
+                    error={!!error}
+                    helperText={error && errorText}
+                    label={'Unité'}
+                    onChange={onChange}
+                    required
+                    size="small"
+                    sx={{ mb: 1 }}
+                    value={value}
+                  />
+                );
+              }}
             />
           </Grid>
         </FieldsetGrid>

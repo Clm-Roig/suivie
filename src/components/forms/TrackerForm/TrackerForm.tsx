@@ -27,7 +27,7 @@ interface Props {
 }
 
 const TrackerForm: FC<Props> = ({ hideForm }) => {
-  const { control, handleSubmit, reset } = useForm<FormValues>({
+  const { control, getValues, handleSubmit, reset } = useForm<FormValues>({
     defaultValues: getDefaultValues()
   });
   const requiredCompletionsFieldArray = useFieldArray({
@@ -144,6 +144,7 @@ const TrackerForm: FC<Props> = ({ hideForm }) => {
         append={requiredCompletionsFieldArray.append}
         control={control}
         fields={requiredCompletionsFieldArray.fields}
+        getValues={getValues}
         remove={requiredCompletionsFieldArray.remove}
       />
 
