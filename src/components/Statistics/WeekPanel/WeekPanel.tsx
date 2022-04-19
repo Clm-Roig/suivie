@@ -5,10 +5,9 @@ import { FC, useState } from 'react';
 import { useAppSelector } from '../../../app/hooks';
 import Tracker from '../../../models/Tracker';
 import { selectMonthEntries, selectWeekEntries } from '../../../store/trackers/trackers.selectors';
-import { getAggregatedCompletions } from '../../../store/trackers/utils';
 import WeekPicker from '../../WeekPicker/WeekPicker';
 import WeekChart from '../../charts/WeekChart/WeekChart';
-import TotalText from './TotalText';
+import TotalText from '../TotalText';
 
 interface Props {
   beginDate: Date;
@@ -42,7 +41,10 @@ const WeekPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
         />
       </Box>
       <Box sx={{ mb: 1 }}>
-        <TotalText completions={getAggregatedCompletions(weekEntries)} />
+        <TotalText
+          entries={weekEntries}
+          noCompletionsText="Il n'y a pas eu d'activité durant la semaine pour le tracker sélectionné."
+        />
       </Box>
       {weekEntries.length > 0 && <WeekChart beginDate={beginDate} entries={weekEntries} />}
     </>
