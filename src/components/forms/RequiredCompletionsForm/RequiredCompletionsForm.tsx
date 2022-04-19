@@ -12,6 +12,7 @@ import {
 } from 'react-hook-form';
 
 import { useAppSelector } from '../../../app/hooks';
+import Completion from '../../../models/Completion';
 import ThemeMode from '../../../models/ThemeMode';
 import { selectThemeMode } from '../../../store/theme/theme.selectors';
 import { FormValues } from '../TrackerForm/types';
@@ -28,8 +29,7 @@ interface Props {
   append: UseFieldArrayAppend<FormValues, 'requiredCompletions'>;
   control: Control<FormValues, any> /* eslint-disable-line @typescript-eslint/no-explicit-any */;
   fields: FieldArrayWithId<FormValues, 'requiredCompletions', 'id'>[];
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  getValues: (payload?: string | string[]) => FormValues;
+  requiredCompletions: Completion[];
   gridProps?: GridProps;
   remove: UseFieldArrayRemove;
 }
@@ -44,7 +44,7 @@ const RequiredCompletionsForm: FC<Props> = ({
   append,
   control,
   fields,
-  getValues,
+  requiredCompletions,
   gridProps,
   remove
 }) => {
@@ -57,7 +57,6 @@ const RequiredCompletionsForm: FC<Props> = ({
   };
 
   const uniqueUnit = (v: string) => {
-    const requiredCompletions = getValues().requiredCompletions;
     const nbCompletions = requiredCompletions.filter((v2) => v2.unit === v);
     return nbCompletions.length < 2;
   };

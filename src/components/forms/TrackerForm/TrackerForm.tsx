@@ -1,10 +1,11 @@
 import { Box, Button, Stack, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { FC } from 'react';
-import { Controller, useFieldArray, useForm } from 'react-hook-form';
+import { Controller, useFieldArray, useForm, useWatch } from 'react-hook-form';
 import { v4 } from 'uuid';
 
 import { useAppDispatch } from '../../../app/hooks';
+import Completion from '../../../models/Completion';
 import TrackerStatus from '../../../models/TrackerStatus';
 import { createTracker } from '../../../store/trackers/trackersSlice';
 import DefaultCompletionsForm from '../DefaultCompletionsForm/DefaultCompletionsForm';
@@ -27,7 +28,8 @@ interface Props {
 }
 
 const TrackerForm: FC<Props> = ({ hideForm }) => {
-  const { control, getValues, handleSubmit, reset } = useForm<FormValues>({
+  const dispatch = useAppDispatch();
+  const { control, handleSubmit, reset } = useForm<FormValues>({
     defaultValues: getDefaultValues()
   });
   const requiredCompletionsFieldArray = useFieldArray({
@@ -38,11 +40,21 @@ const TrackerForm: FC<Props> = ({ hideForm }) => {
     control, // control props comes from useForm
     name: 'defaultCompletions'
   });
-
-  const dispatch = useAppDispatch();
+  const requiredCompletions = useWatch({
+    control,
+    name: 'requiredCompletions'
+  });
 
   const resetToDefault = () => {
     reset(getDefaultValues());
+  };
+
+  const removeRequiredCompletion = (index?: number | number[]) => {
+    // If it's the latest requiredCompletions, defaultCompletions should be emptied
+    if (requiredCompletions.length === 1) {
+      defaultCompletionsFieldArray.replace([]);
+    }
+    requiredCompletionsFieldArray.remove(index);
   };
 
   const onSubmit = (data: FormValues) => {
@@ -144,16 +156,32 @@ const TrackerForm: FC<Props> = ({ hideForm }) => {
         append={requiredCompletionsFieldArray.append}
         control={control}
         fields={requiredCompletionsFieldArray.fields}
-        getValues={getValues}
-        remove={requiredCompletionsFieldArray.remove}
+        remove={removeRequiredCompletion}
+        requiredCompletions={requiredCompletions.map(
+          (rc) =>
+            ({
+              ...rc,
+              quantity: Number(rc.quantity)
+            } as Completion)
+        )}
       />
 
-      <DefaultCompletionsForm
-        append={defaultCompletionsFieldArray.append}
-        control={control}
-        fields={defaultCompletionsFieldArray.fields}
-        remove={defaultCompletionsFieldArray.remove}
-      />
+      {requiredCompletions.length > 0 &&
+        requiredCompletions.some((rc) => rc.unit !== '' && rc.unit !== undefined) && (
+          <DefaultCompletionsForm
+            append={defaultCompletionsFieldArray.append}
+            control={control}
+            fields={defaultCompletionsFieldArray.fields}
+            remove={defaultCompletionsFieldArray.remove}
+            requiredCompletions={requiredCompletions.map(
+              (rc) =>
+                ({
+                  ...rc,
+                  quantity: Number(rc.quantity)
+                } as Completion)
+            )}
+          />
+        )}
 
       <Stack direction="row" justifyContent="center" spacing={1}>
         <Button type="submit" onClick={handleSubmit(onSubmit)} variant={'outlined'}>
