@@ -1,6 +1,4 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { LocalizationProvider } from '@mui/lab';
-import DateAdapter from '@mui/lab/AdapterDateFns';
 import { Container, IconButton, Paper } from '@mui/material';
 import {
   StyledEngineProvider,
@@ -9,6 +7,8 @@ import {
   responsiveFontSizes,
   styled
 } from '@mui/material/styles';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns as DateAdapter } from '@mui/x-date-pickers/AdapterDateFns';
 import frLocale from 'date-fns/locale/fr';
 import { SnackbarKey, SnackbarProvider } from 'notistack';
 import { createRef, useMemo, useState } from 'react';

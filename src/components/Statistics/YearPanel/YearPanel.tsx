@@ -1,5 +1,5 @@
-import { DatePicker } from '@mui/lab';
 import { Box, TextField } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers';
 import { endOfYear, startOfYear } from 'date-fns';
 import { FC } from 'react';
 
