@@ -1,5 +1,7 @@
 # Bujo Tracker
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e3f8d6533d6740849b5f70d3a50f6197)](https://app.codacy.com/gh/Clm-Roig/bujo-tracker?utm_source=github.com&utm_medium=referral&utm_content=Clm-Roig/bujo-tracker&utm_campaign=Badge_Grade_Settings)
+
 This application is inspired by the [Bullet Journal's trackers tool](https://diaryofajournalplanner.com/bullet-journal-habit-tracker/). It aims to track your habits like sports, food, hygiene, self-care, expenses... Even if it works on desktop, it is designed for mobile devices.
 
 ## Table of Contents
