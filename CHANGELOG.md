@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.12...v0.1.13) (2022-04-20)
+
+
+### Features
+
+* **#123:** when tracker card is done, display done completions ([816fa4a](https://github.com/Clm-Roig/bujo-tracker/commit/816fa4a4711dd5e1c1cc00e1f7d1fa5b81112c53)), closes [#123](https://github.com/Clm-Roig/bujo-tracker/issues/123)
+* **completionChip:** display remaining comp as a background gradient ([7c5e8f6](https://github.com/Clm-Roig/bujo-tracker/commit/7c5e8f65640c9e04d7c658ab108f698375d050b8))
+* **createTracker:** units must be all differents ([eb10f80](https://github.com/Clm-Roig/bujo-tracker/commit/eb10f80d7112312f5c96e0af35eda8c9e2bddf77))
+* **defaultCompletions:** add tracker defaultCompletions ([3f94e64](https://github.com/Clm-Roig/bujo-tracker/commit/3f94e64678dd5006b540e9423c814aa6d028f252))
+* **requiredCompletions:** required completions not mandatory anymore ([8bbc254](https://github.com/Clm-Roig/bujo-tracker/commit/8bbc254056511cfdb281b1cd2522ba7c60cf259a))
+* **trackerForm:** populate defaultCompletions with required ones ([c06daef](https://github.com/Clm-Roig/bujo-tracker/commit/c06daefb22eca1a839051cdabb9a851c00772ac4))
+
+
+### Bug Fixes
+
+* **#89:** recovery of PR [#89](https://github.com/Clm-Roig/bujo-tracker/issues/89) which was lost... ([183cd48](https://github.com/Clm-Roig/bujo-tracker/commit/183cd48208d454788410fec144a8610b6f6a8dae))
+* **cardPadding:** reduce vertical card sections padding ([436f33a](https://github.com/Clm-Roig/bujo-tracker/commit/436f33a8372245c625ef800c67e6ccca64562bbc))
+* **charts:** add default completion unit only when needed ([1119382](https://github.com/Clm-Roig/bujo-tracker/commit/111938254493c71625c49cf4d6fdf9f51577fda5))
+* **muiDatePicker:** fix migration of mui datePicker from lab to mui-x ([f7475b1](https://github.com/Clm-Roig/bujo-tracker/commit/f7475b14be66ff4728f4b25c2d4c4ec3602585af))
+* **settings:** improve UI, add delete data text ([3ce085d](https://github.com/Clm-Roig/bujo-tracker/commit/3ce085d6ce8511b12e6a9f0955de8e5eb7fc4c79))
+* **stats:** handle entries without completions ([4cfd078](https://github.com/Clm-Roig/bujo-tracker/commit/4cfd078b6c9238e58d03833cf476ac0f86b08733))
+* **trackerCard:** no custom validation on tracker without requiredComp ([595cf6f](https://github.com/Clm-Roig/bujo-tracker/commit/595cf6f0232aa828e208fbdfd31539506e323677))
+
 ### [0.1.12](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.11...v0.1.12) (2022-04-13)
 
 

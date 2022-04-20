@@ -5,17 +5,19 @@ import Completion from '../../models/Completion';
 import CompletionChip from '../CompletionChip/CompletionChip';
 
 interface Props {
+  boxProps?: BoxProps;
   completions: Completion[];
   onChipClick?: (completion: Completion) => void;
+  requiredCompletions?: Completion[];
   selectedCompletions?: Completion[];
-  boxProps?: BoxProps;
 }
 
 const CompletionChipList: FC<Props> = ({
+  boxProps,
   completions,
   onChipClick,
-  selectedCompletions,
-  boxProps
+  requiredCompletions,
+  selectedCompletions
 }) => {
   const onClick = (completion: Completion) => {
     if (onChipClick) {
@@ -27,9 +29,10 @@ const CompletionChipList: FC<Props> = ({
       {completions.map((c, idx) => (
         <CompletionChip
           key={c.quantity.toString() + idx}
+          chipProps={{ onClick: () => onClick(c), clickable: onChipClick !== undefined }}
           completion={c}
           isSelected={selectedCompletions?.includes(c)}
-          chipProps={{ onClick: () => onClick(c) }}
+          requiredCompletion={requiredCompletions?.find((rc) => rc.unit === c.unit)}
         />
       ))}
     </Box>

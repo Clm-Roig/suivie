@@ -34,6 +34,7 @@ const TrackerCardActions: FC<Props> = ({
   selectedCompletions,
   tracker
 }) => {
+  const { requiredCompletions } = tracker;
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const [isCompleteValidationOpen, setIsCompleteValidationOpen] = useState(false);
@@ -83,12 +84,15 @@ const TrackerCardActions: FC<Props> = ({
               onClick={() => setIsCompleteValidationOpen(true)}>
               <CheckIcon fontSize="large" />
             </IconButton>
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => setIsCustomValidationOpen(true)}>
-              <CheckCircleIcon fontSize="large" />
-            </IconButton>
+
+            {requiredCompletions.length > 0 && (
+              <IconButton
+                color="primary"
+                size="large"
+                onClick={() => setIsCustomValidationOpen(true)}>
+                <CheckCircleIcon fontSize="large" />
+              </IconButton>
+            )}
           </>
         )}
         {isHidden ? (

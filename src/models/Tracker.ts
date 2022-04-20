@@ -10,6 +10,7 @@ import TrackerStatus from './TrackerStatus';
  * @member {string} id a v4 uuid
  * @member {string} beginDate when the completions start (can be in the past or the future)
  * @member {string?} dateHidden when not undefined, specify which day the tracker is ignored. The next day, it's automatically set to "undefined".
+ * @member {Completion[]} defaultCompletions default completions submitted when validating the tracker
  * @member {number?} duration number of days the tracker is active since beginDate
  * @member {string} endDate when the Tracker is over
  * @member {TrackerEntry[]} entries TrackerEntries related to this Tracker
@@ -22,6 +23,7 @@ export default interface Tracker {
   readonly id: string;
   beginDate: string;
   dateHidden?: string;
+  defaultCompletions?: Completion[];
   duration?: number;
   endDate?: string;
   entries: TrackerEntry[];

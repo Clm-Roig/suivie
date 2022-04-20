@@ -7,9 +7,31 @@ import {
   startOfMonth
 } from 'date-fns';
 
+import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
+import Completion from '../../../models/Completion';
 import TrackerEntry from '../../../models/TrackerEntry';
 import { getAggregatedCompletions } from '../../../store/trackers/utils';
 import { DataType } from './types';
+
+const getWeekData = (
+  weekBeginDayNumber: number,
+  weekEndDayNumber: number,
+  aggCompletions: Completion[],
+  weekEntries: TrackerEntry[]
+) => {
+  const weekData: DataType = {
+    name: weekBeginDayNumber + '-' + weekEndDayNumber
+  };
+  if (aggCompletions.length > 0) {
+    aggCompletions.forEach((c) => {
+      weekData[c.unit] = c.quantity;
+    });
+    // Handle entries without completions
+  } else if (weekEntries.length > 0) {
+    weekData[DEFAULT_COMPLETION_NAME] = weekEntries.length;
+  }
+  return weekData;
+};
 
 const formatData = (monthDate: Date, entries: TrackerEntry[]): DataType[] => {
   const data = [];
@@ -19,18 +41,19 @@ const formatData = (monthDate: Date, entries: TrackerEntry[]): DataType[] => {
     const week = addWeeks(startDay, i);
     const weekBeginDayNumber = i === 0 ? 1 : i * 7 + 1;
     const weekEndDayNumber = Math.min(i * 7 + 7, getDaysInMonth(startDay));
-    const weekData: DataType = {
-      name: weekBeginDayNumber + '-' + weekEndDayNumber
-    };
     const weekEntries = entries.filter((e) =>
       isSameWeek(new Date(e.date), week, {
         weekStartsOn: getDay(new Date(week))
       })
     );
-    const aggCompletions = getAggregatedCompletions(weekEntries);
-    aggCompletions.forEach((c) => {
-      weekData[c.unit] = c.quantity;
-    });
+    const aggCompletions: Completion[] = getAggregatedCompletions(weekEntries);
+    const weekData: DataType = getWeekData(
+      weekBeginDayNumber,
+      weekEndDayNumber,
+      aggCompletions,
+      weekEntries
+    );
+
     data.push(weekData);
   }
   return data;

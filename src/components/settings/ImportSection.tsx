@@ -1,5 +1,5 @@
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import { Alert, Button, CircularProgress, Typography } from '@mui/material';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import { Alert, Button, CircularProgress, Stack, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { ChangeEvent, useState } from 'react';
 
@@ -44,7 +44,7 @@ const ImportSection = () => {
     }
   };
   return (
-    <>
+    <Stack spacing={1} alignItems={'center'}>
       <Typography>
         {
           "L'import de données se fait grâce à un fichier exporté au préalable via BujoTracker. Son extension est "
@@ -58,8 +58,9 @@ const ImportSection = () => {
         {", l'importation de nouvelles données écrasera celles déjà présentes."}
       </Alert>
       <Button
+        fullWidth
         size="large"
-        startIcon={<FileDownloadIcon />}
+        startIcon={<FileUploadIcon />}
         onClick={onImportClick}
         variant="contained">
         Importer des données
@@ -72,7 +73,7 @@ const ImportSection = () => {
         style={{ display: 'none' }}
         type="file"
       />
-    </>
+    </Stack>
   );
 };
 

@@ -1,6 +1,6 @@
-import PickersDay, { PickersDayProps } from '@mui/lab/PickersDay';
-import StaticDatePicker from '@mui/lab/StaticDatePicker';
 import { styled } from '@mui/material/styles';
+import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { addDays, isBefore, isSameDay, isWithinInterval } from 'date-fns';
 import * as React from 'react';
 import { FC } from 'react';
