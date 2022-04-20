@@ -1,7 +1,20 @@
 import styled from '@emotion/styled';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Box, Button, Grid, GridProps, IconButton, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormHelperText,
+  Grid,
+  GridProps,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+  useTheme
+} from '@mui/material';
 import { FC } from 'react';
 import {
   Control,
@@ -12,11 +25,11 @@ import {
 } from 'react-hook-form';
 
 import { useAppSelector } from '../../../app/hooks';
+import Completion from '../../../models/Completion';
 import ThemeMode from '../../../models/ThemeMode';
 import { selectThemeMode } from '../../../store/theme/theme.selectors';
 import { FormValues } from '../TrackerForm/types';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
-import CompletionUnitTextField from '../completions/CompletionUnitTextField';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -30,6 +43,7 @@ interface Props {
   fields: FieldArrayWithId<FormValues, 'defaultCompletions', 'id'>[];
   gridProps?: GridProps;
   remove: UseFieldArrayRemove;
+  requiredCompletions: Completion[];
 }
 
 /**
@@ -38,7 +52,14 @@ interface Props {
  * @param {*} { append, control, fields, gridProps, remove }
  * @return {*}
  */
-const DefaultCompletionsForm: FC<Props> = ({ append, control, fields, gridProps, remove }) => {
+const DefaultCompletionsForm: FC<Props> = ({
+  append,
+  control,
+  fields,
+  gridProps,
+  remove,
+  requiredCompletions
+}) => {
   const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
 
@@ -108,19 +129,39 @@ const DefaultCompletionsForm: FC<Props> = ({ append, control, fields, gridProps,
             <Controller
               control={control}
               name={`defaultCompletions.${index}.unit` as const}
-              rules={{ required: true }}
-              render={({ field: { onChange, value }, fieldState: { error } }) => (
-                <CompletionUnitTextField
-                  error={!!error}
-                  helperText={error ? 'Une unité est requise' : ''}
-                  label={'Unité'}
-                  onChange={onChange}
-                  required
-                  size="small"
-                  sx={{ mb: 1 }}
-                  value={value}
-                />
-              )}
+              rules={{
+                required: true
+              }}
+              render={({ field: { onChange, value }, fieldState: { error } }) => {
+                let errorText = '';
+                if (error) {
+                  switch (error.type) {
+                    case 'required':
+                      errorText = "L'unité est requise";
+                      break;
+                  }
+                }
+                return (
+                  <FormControl fullWidth error={!!error} size="small">
+                    <InputLabel>Unité</InputLabel>
+                    <Select
+                      required
+                      value={(requiredCompletions.find((rc) => rc.unit === value) && value) || ''}
+                      label="Unité"
+                      onChange={onChange}
+                      size="small">
+                      {requiredCompletions
+                        .filter((rc) => rc.unit && rc.unit !== '')
+                        .map((rc) => (
+                          <MenuItem key={rc.unit} value={rc.unit}>
+                            {rc.unit}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                    <FormHelperText>{error ? errorText : ''}</FormHelperText>
+                  </FormControl>
+                );
+              }}
             />
           </Grid>
         </FieldsetGrid>
