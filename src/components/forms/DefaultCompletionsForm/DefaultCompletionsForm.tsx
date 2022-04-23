@@ -40,21 +40,17 @@ export const FieldsetGrid = styled(Grid)`
 interface Props {
   append: UseFieldArrayAppend<FormValues, 'defaultCompletions'>;
   control: Control<FormValues, any> /* eslint-disable-line @typescript-eslint/no-explicit-any */;
+  defaultCompletions: Completion[];
   fields: FieldArrayWithId<FormValues, 'defaultCompletions', 'id'>[];
   gridProps?: GridProps;
   remove: UseFieldArrayRemove;
   requiredCompletions: Completion[];
 }
 
-/**
- * This forms is used to create one or many defaultCompletions for a new tracker.
- *
- * @param {*} { append, control, fields, gridProps, remove }
- * @return {*}
- */
 const DefaultCompletionsForm: FC<Props> = ({
   append,
   control,
+  defaultCompletions,
   fields,
   gridProps,
   remove,
@@ -153,7 +149,10 @@ const DefaultCompletionsForm: FC<Props> = ({
                       {requiredCompletions
                         .filter((rc) => rc.unit && rc.unit !== '')
                         .map((rc) => (
-                          <MenuItem key={rc.unit} value={rc.unit}>
+                          <MenuItem
+                            key={rc.unit}
+                            value={rc.unit}
+                            disabled={defaultCompletions.some((dc) => dc.unit === rc.unit)}>
                             {rc.unit}
                           </MenuItem>
                         ))}

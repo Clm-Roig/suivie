@@ -1,7 +1,7 @@
 import { Box, Button, Stack, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { FC } from 'react';
-import { Controller, useFieldArray, useForm, useWatch } from 'react-hook-form';
+import { FC, useEffect } from 'react';
+import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { v4 } from 'uuid';
 
 import { useAppDispatch } from '../../../app/hooks';
@@ -29,9 +29,11 @@ interface Props {
 
 const TrackerForm: FC<Props> = ({ hideForm }) => {
   const dispatch = useAppDispatch();
-  const { control, handleSubmit, reset } = useForm<FormValues>({
+  const { control, handleSubmit, reset, watch } = useForm<FormValues>({
     defaultValues: getDefaultValues()
   });
+  const defaultCompletions = watch('defaultCompletions');
+  const requiredCompletions = watch('requiredCompletions');
   const requiredCompletionsFieldArray = useFieldArray({
     control, // control props comes from useForm
     name: 'requiredCompletions'
@@ -40,22 +42,20 @@ const TrackerForm: FC<Props> = ({ hideForm }) => {
     control, // control props comes from useForm
     name: 'defaultCompletions'
   });
-  const requiredCompletions = useWatch({
-    control,
-    name: 'requiredCompletions'
-  });
 
   const resetToDefault = () => {
     reset(getDefaultValues());
   };
 
-  const removeRequiredCompletion = (index?: number | number[]) => {
-    // If it's the latest requiredCompletions, defaultCompletions should be emptied
-    if (requiredCompletions.length === 1) {
-      defaultCompletionsFieldArray.replace([]);
+  useEffect(() => {
+    // Dinamycally remove defaultCompletion when its requiredCompletion is deleted
+    if (defaultCompletions) {
+      const newDefaultCompletions = defaultCompletions.filter((dc) =>
+        requiredCompletions.some((rc) => rc.unit === dc.unit)
+      );
+      defaultCompletionsFieldArray.replace(newDefaultCompletions);
     }
-    requiredCompletionsFieldArray.remove(index);
-  };
+  }, [requiredCompletions]);
 
   const onSubmit = (data: FormValues) => {
     const { beginDate, duration, requiredCompletions } = data;
@@ -156,7 +156,7 @@ const TrackerForm: FC<Props> = ({ hideForm }) => {
         append={requiredCompletionsFieldArray.append}
         control={control}
         fields={requiredCompletionsFieldArray.fields}
-        remove={removeRequiredCompletion}
+        remove={requiredCompletionsFieldArray.remove}
         requiredCompletions={requiredCompletions.map(
           (rc) =>
             ({
@@ -171,6 +171,7 @@ const TrackerForm: FC<Props> = ({ hideForm }) => {
           <DefaultCompletionsForm
             append={defaultCompletionsFieldArray.append}
             control={control}
+            defaultCompletions={defaultCompletions || []}
             fields={defaultCompletionsFieldArray.fields}
             remove={defaultCompletionsFieldArray.remove}
             requiredCompletions={requiredCompletions.map(
