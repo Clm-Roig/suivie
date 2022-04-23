@@ -11,6 +11,7 @@ import {
   IconButton,
   InputLabel,
   MenuItem,
+  Tooltip,
   Typography,
   useTheme
 } from '@mui/material';
@@ -165,13 +166,24 @@ const DefaultCompletionsForm: FC<Props> = ({
           </Grid>
         </FieldsetGrid>
       ))}
-      <Button
-        onClick={() => append({})}
-        startIcon={<AddCircleOutlineIcon />}
-        sx={{ mb: 2 }}
-        variant="contained">
-        Réalisation par défaut
-      </Button>
+
+      <Tooltip
+        title={
+          requiredCompletions.length === defaultCompletions.length
+            ? 'Tous les objectifs ont déjà une réalisation par défaut.'
+            : ''
+        }>
+        <span>
+          <Button
+            disabled={requiredCompletions.length === defaultCompletions.length}
+            onClick={() => append({})}
+            startIcon={<AddCircleOutlineIcon />}
+            sx={{ mb: 2 }}
+            variant="contained">
+            Réalisation par défaut
+          </Button>
+        </span>
+      </Tooltip>
     </Box>
   );
 };
