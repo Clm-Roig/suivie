@@ -11,7 +11,6 @@ import {
   IconButton,
   InputLabel,
   MenuItem,
-  Select,
   Typography,
   useTheme
 } from '@mui/material';
@@ -30,6 +29,7 @@ import ThemeMode from '../../../models/ThemeMode';
 import { selectThemeMode } from '../../../store/theme/theme.selectors';
 import { FormValues } from '../TrackerForm/types';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
+import CompletionUnitSelect from '../completions/CompletionUnitSelect';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -144,7 +144,7 @@ const DefaultCompletionsForm: FC<Props> = ({
                 return (
                   <FormControl fullWidth error={!!error} size="small">
                     <InputLabel>Unité</InputLabel>
-                    <Select
+                    <CompletionUnitSelect
                       required
                       value={(requiredCompletions.find((rc) => rc.unit === value) && value) || ''}
                       label="Unité"
@@ -157,7 +157,7 @@ const DefaultCompletionsForm: FC<Props> = ({
                             {rc.unit}
                           </MenuItem>
                         ))}
-                    </Select>
+                    </CompletionUnitSelect>
                     <FormHelperText>{error ? errorText : ''}</FormHelperText>
                   </FormControl>
                 );
