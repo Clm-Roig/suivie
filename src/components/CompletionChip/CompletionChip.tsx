@@ -16,7 +16,7 @@ const CompletionChip: FC<Props> = ({ chipProps, completion, isSelected, required
 
   let background = isSelected ? 'info' : 'primary';
   if (requiredCompletion) {
-    const transparentColor = theme.palette.grey[800];
+    const transparentColor = theme.palette.grey[700];
     const remainingPercent = 100 - (completion.quantity / requiredCompletion.quantity) * 100;
     background = `linear-gradient(90deg, ${theme.palette.primary.main} ${
       remainingPercent - 1
