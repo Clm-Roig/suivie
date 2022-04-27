@@ -44,7 +44,7 @@ const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
   };
 
   const beginVerb = isAfter(new Date(beginDate), new Date()) ? 'Commencera le' : 'Commencé le';
-  const trackerIsOver = status === TrackerStatus.over;
+  const trackerIsArchived = status === TrackerStatus.archived;
 
   return (
     <CardHeader
@@ -77,13 +77,13 @@ const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
           <Typography display="block" variant="subtitle2">
             {`${beginVerb} ${formatDate(new Date(beginDate))}`}
           </Typography>
-          {trackerIsOver && (
+          {trackerIsArchived && (
             <>
               <Typography component="span">Terminé</Typography>{' '}
               <Emoji label="green check" symbol="✔️" />
             </>
           )}
-          {remainingDays && !trackerIsOver && (
+          {remainingDays && !trackerIsArchived && (
             <Typography display="block" variant="subtitle2">
               Reste {remainingDays} jours
             </Typography>
