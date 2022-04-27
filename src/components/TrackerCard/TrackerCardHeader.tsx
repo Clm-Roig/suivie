@@ -1,3 +1,4 @@
+import ArchiveIcon from '@mui/icons-material/Archive';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {
@@ -11,12 +12,13 @@ import {
   Typography
 } from '@mui/material';
 import { isAfter } from 'date-fns';
+import { useSnackbar } from 'notistack';
 import { FC, useState } from 'react';
 
 import { useAppDispatch } from '../../app/hooks';
 import Tracker from '../../models/Tracker';
 import TrackerStatus from '../../models/TrackerStatus';
-import { deleteTracker } from '../../store/trackers/trackersSlice';
+import { archiveTracker, deleteTracker } from '../../store/trackers/trackersSlice';
 import formatDate from '../../utils/formatDate';
 import Emoji from '../Emoji/Emoji';
 
@@ -28,6 +30,7 @@ interface Props {
 const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
   const { beginDate, id, name, remainingDays, status } = tracker;
   const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   // Top left menu
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -38,9 +41,19 @@ const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
   const closeMoreMenu = () => {
     setAnchorEl(null);
   };
+  const handleArchiveTracker = () => {
+    dispatch(archiveTracker(id));
+    closeMoreMenu();
+    enqueueSnackbar('Tracker archivé !', {
+      variant: 'info'
+    });
+  };
   const handleDeleteTracker = () => {
     dispatch(deleteTracker(id));
     closeMoreMenu();
+    enqueueSnackbar('Tracker supprimé !', {
+      variant: 'info'
+    });
   };
 
   const beginVerb = isAfter(new Date(beginDate), new Date()) ? 'Commencera le' : 'Commencé le';
@@ -62,6 +75,12 @@ const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
             MenuListProps={{
               'aria-labelledby': 'basic-button'
             }}>
+            <MenuItem onClick={handleArchiveTracker} dense>
+              <ListItemIcon>
+                <ArchiveIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Archiver</ListItemText>
+            </MenuItem>
             <MenuItem onClick={handleDeleteTracker} dense>
               <ListItemIcon>
                 <DeleteIcon fontSize="small" />
