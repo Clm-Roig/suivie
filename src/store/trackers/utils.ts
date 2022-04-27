@@ -50,7 +50,7 @@ export const computeNewStatus = (tracker: Tracker) => {
     (remainingDays !== undefined && remainingDays < 0) ||
     (duration && isBefore(addDays(new Date(beginDate), duration), new Date()))
   ) {
-    newStatus = TrackerStatus.over;
+    newStatus = TrackerStatus.archived;
   }
 
   // Mark Tracker as done if all required completions are done
@@ -103,8 +103,8 @@ export const formatTrackers = (trackers: Tracker[]) => {
   return newTrackers;
 };
 
-export const removeOverTrackers = (trackers: Tracker[]) =>
-  trackers.filter((t) => t.status !== TrackerStatus.over);
+export const removeArchivedTrackers = (trackers: Tracker[]) =>
+  trackers.filter((t) => t.status !== TrackerStatus.archived);
 
 export const removeDoneTrackers = (trackers: Tracker[]) =>
   trackers.filter((t) => t.status !== TrackerStatus.done);

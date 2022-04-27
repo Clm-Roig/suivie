@@ -5,6 +5,7 @@ import Completion from '../../models/Completion';
 import SliceStatus from '../../models/SliceStatus';
 import Tracker from '../../models/Tracker';
 import TrackerEntry from '../../models/TrackerEntry';
+import TrackerStatus from '../../models/TrackerStatus';
 
 // ===== State
 
@@ -81,6 +82,13 @@ export const trackersSlice = createSlice({
       if (idx !== -1) {
         state.trackers[idx].dateHidden = undefined;
       }
+    },
+    archiveTracker: (state, action: PayloadAction<Tracker['id']>) => {
+      const idx = state.trackers.findIndex((t) => t.id === action.payload);
+      if (idx !== -1) {
+        state.trackers[idx].endDate = new Date().toString();
+        state.trackers[idx].status = TrackerStatus.archived;
+      }
     }
   }
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -89,6 +97,7 @@ export const trackersSlice = createSlice({
 });
 
 export const {
+  archiveTracker,
   createTracker,
   completelyValidate,
   customValidate,

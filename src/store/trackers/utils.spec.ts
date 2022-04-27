@@ -6,9 +6,9 @@ import {
   computeNewStatus,
   computeRemainingDays,
   formatTrackers,
+  removeArchivedTrackers,
   removeDoneTrackers,
-  removeHiddenTrackers,
-  removeOverTrackers
+  removeHiddenTrackers
 } from './utils';
 
 describe('computeRemainingDays()', () => {
@@ -21,20 +21,20 @@ describe('computeRemainingDays()', () => {
 });
 
 describe('computeNewStatus()', () => {
-  it('should be over (beginDate + duration in the past)', () => {
+  it('should be archived (beginDate + duration in the past)', () => {
     const finishedTracker = {
       ...testTracker1,
       beginDate: subDays(new Date(), 10).toString(),
       duration: 9
     };
-    expect(computeNewStatus(finishedTracker)).toBe(TrackerStatus.over);
+    expect(computeNewStatus(finishedTracker)).toBe(TrackerStatus.archived);
   });
-  it('should be over (remainingDays negative)', () => {
+  it('should be archived (remainingDays negative)', () => {
     const finishedTracker = {
       ...testTracker1,
       remainingDays: -5
     };
-    expect(computeNewStatus(finishedTracker)).toBe(TrackerStatus.over);
+    expect(computeNewStatus(finishedTracker)).toBe(TrackerStatus.archived);
   });
   it('should be active (not enough entry for today)', () => {
     const doneTracker = {
@@ -77,7 +77,7 @@ describe('remove functions', () => {
   const trackers = [
     {
       ...testTracker1,
-      status: TrackerStatus.over
+      status: TrackerStatus.archived
     },
     {
       ...testTracker1,
@@ -89,22 +89,22 @@ describe('remove functions', () => {
       status: TrackerStatus.active
     }
   ];
-  describe('removeOverTrackers()', () => {
-    it('should remove the trackers over', () => {
-      expect(removeOverTrackers(trackers).length).toBe(2);
+  describe('removeArchivedTrackers()', () => {
+    it('should remove the archived trackers', () => {
+      expect(removeArchivedTrackers(trackers).length).toBe(2);
       const [t1, t2, t3] = trackers; // eslint-disable-line @typescript-eslint/no-unused-vars
-      expect(removeOverTrackers(trackers)).toEqual(expect.arrayContaining([t2, t3]));
+      expect(removeArchivedTrackers(trackers)).toEqual(expect.arrayContaining([t2, t3]));
     });
   });
   describe('removeDoneTrackers()', () => {
-    it('should remove the trackers over', () => {
+    it('should remove the trackers done', () => {
       expect(removeDoneTrackers(trackers).length).toBe(2);
       const [t1, t2, t3] = trackers; // eslint-disable-line @typescript-eslint/no-unused-vars
       expect(removeDoneTrackers(trackers)).toEqual(expect.arrayContaining([t1, t3]));
     });
   });
   describe('removeHiddenTrackers()', () => {
-    it('should remove the trackers over', () => {
+    it('should remove the hidden trackers', () => {
       expect(removeHiddenTrackers(trackers).length).toBe(2);
       const [t1, t2, t3] = trackers; // eslint-disable-line @typescript-eslint/no-unused-vars
       expect(removeHiddenTrackers(trackers)).toEqual(expect.arrayContaining([t1, t2]));

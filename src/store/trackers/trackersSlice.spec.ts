@@ -1,6 +1,10 @@
+import { isSameDay } from 'date-fns';
+
 import SliceStatus from '../../models/SliceStatus';
+import TrackerStatus from '../../models/TrackerStatus';
 import { testTracker1, testTracker1Id, testTracker2, testTracker2Id } from './FAKE_DATA';
 import trackersReducer, {
+  archiveTracker,
   completelyValidate,
   createTracker,
   customValidate,
@@ -27,11 +31,11 @@ describe('trackers reducer', () => {
 
       const res = finalState.trackers[0];
       expect(res).toBeDefined();
-      const entries = res?.entries;
-      expect(entries?.length).toEqual(1);
-      const entry = entries?.[0];
-      expect(entry?.completions).toEqual(testTracker1.requiredCompletions);
-      expect(entry?.trackerId).toEqual(testTracker1.id);
+      const entries = res.entries;
+      expect(entries.length).toEqual(1);
+      const entry = entries[0];
+      expect(entry.completions).toEqual(testTracker1.requiredCompletions);
+      expect(entry.trackerId).toEqual(testTracker1.id);
     });
 
     it('should handle a tracker custom validation', () => {
@@ -52,11 +56,11 @@ describe('trackers reducer', () => {
 
       const res = finalState.trackers[0];
       expect(res).toBeDefined();
-      const entries = res?.entries;
-      expect(entries?.length).toEqual(1);
-      const entry = entries?.[0];
-      expect(entry?.completions).toEqual(partialCompletions);
-      expect(entry?.trackerId).toEqual(testTracker1.id);
+      const entries = res.entries;
+      expect(entries.length).toEqual(1);
+      const entry = entries[0];
+      expect(entry.completions).toEqual(partialCompletions);
+      expect(entry.trackerId).toEqual(testTracker1.id);
     });
   });
   describe('Tracker deletion', () => {
@@ -74,9 +78,11 @@ describe('trackers reducer', () => {
         { error: {}, status: SliceStatus.idle, trackers: [testTracker1] },
         createTracker(testTracker2)
       );
+      const t1 = finalState.trackers.find((t) => t.id === testTracker1Id)!;
+      const t2 = finalState.trackers.find((t) => t.id === testTracker2Id)!;
       expect(finalState.trackers.length).toEqual(2);
-      expect(finalState.trackers.find((t) => t.id === testTracker1Id)).toEqual(testTracker1);
-      expect(finalState.trackers.find((t) => t.id === testTracker2Id)).toEqual(testTracker2);
+      expect(t1).toEqual(testTracker1);
+      expect(t2).toEqual(testTracker2);
     });
   });
   describe('Hide tracker', () => {
@@ -85,10 +91,10 @@ describe('trackers reducer', () => {
         { error: {}, status: SliceStatus.idle, trackers: [testTracker1, testTracker2] },
         hideTracker(testTracker1.id)
       );
-      expect(
-        finalState.trackers.find((t) => t.id === testTracker1Id)?.dateHidden
-      ).not.toBeUndefined();
-      expect(finalState.trackers.find((t) => t.id === testTracker2Id)?.dateHidden).toBeUndefined();
+      const t1 = finalState.trackers.find((t) => t.id === testTracker1Id)!;
+      const t2 = finalState.trackers.find((t) => t.id === testTracker2Id)!;
+      expect(t1.dateHidden).not.toBeUndefined();
+      expect(t2.dateHidden).toBeUndefined();
     });
   });
   describe('Make a tracker visible', () => {
@@ -104,8 +110,30 @@ describe('trackers reducer', () => {
         },
         makeTrackerVisible(testTracker1.id)
       );
-      expect(finalState.trackers.find((t) => t.id === testTracker1Id)?.dateHidden).toBeUndefined();
-      expect(finalState.trackers.find((t) => t.id == testTracker2Id)?.dateHidden).toBeDefined();
+      const t1 = finalState.trackers.find((t) => t.id === testTracker1Id)!;
+      const t2 = finalState.trackers.find((t) => t.id === testTracker2Id)!;
+      expect(t1.dateHidden).toBeUndefined();
+      expect(t2.dateHidden).toBeDefined();
+    });
+  });
+  describe('Archive a tracker', () => {
+    it('should archive a tracker and set its endDate', () => {
+      const finalState = trackersReducer(
+        {
+          error: {},
+          status: SliceStatus.idle,
+          trackers: [
+            { ...testTracker1, status: TrackerStatus.active },
+            { ...testTracker2, status: TrackerStatus.done }
+          ]
+        },
+        archiveTracker(testTracker1.id)
+      );
+      const t1 = finalState.trackers.find((t) => t.id === testTracker1Id)!;
+      const t2 = finalState.trackers.find((t) => t.id === testTracker2Id)!;
+      expect(isSameDay(new Date(t1.endDate!), new Date())).toBeTruthy();
+      expect(t1.status).toBe(TrackerStatus.archived);
+      expect(t2.status).toBe(TrackerStatus.done);
     });
   });
 });
