@@ -71,6 +71,13 @@ export const trackersSlice = createSlice({
         trackers: filteredTrackers
       };
     },
+    deleteTrackers: (state, action: PayloadAction<Array<Tracker['id']>>) => {
+      const filteredTrackers = state.trackers.filter((t) => !action.payload.includes(t.id));
+      return {
+        ...state,
+        trackers: filteredTrackers
+      };
+    },
     hideTracker: (state, action: PayloadAction<Tracker['id']>) => {
       const idx = state.trackers.findIndex((t) => t.id === action.payload);
       if (idx !== -1) {
@@ -89,6 +96,20 @@ export const trackersSlice = createSlice({
         state.trackers[idx].endDate = new Date().toString();
         state.trackers[idx].status = TrackerStatus.archived;
       }
+    },
+    archiveTrackers: (state, action: PayloadAction<Array<Tracker['id']>>) => {
+      const filteredTrackers = state.trackers.filter((t) => action.payload.includes(t.id));
+      for (const tracker of filteredTrackers) {
+        tracker.endDate = new Date().toString();
+        tracker.status = TrackerStatus.archived;
+      }
+    },
+    unarchiveTrackers: (state, action: PayloadAction<Array<Tracker['id']>>) => {
+      const filteredTrackers = state.trackers.filter((t) => action.payload.includes(t.id));
+      for (const tracker of filteredTrackers) {
+        tracker.endDate = undefined;
+        tracker.status = TrackerStatus.active;
+      }
     }
   }
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -98,11 +119,14 @@ export const trackersSlice = createSlice({
 
 export const {
   archiveTracker,
+  archiveTrackers,
   createTracker,
   completelyValidate,
   customValidate,
   deleteTracker,
+  deleteTrackers,
   hideTracker,
-  makeTrackerVisible
+  makeTrackerVisible,
+  unarchiveTrackers
 } = trackersSlice.actions;
 export default trackersSlice.reducer;
