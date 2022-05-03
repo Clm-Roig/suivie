@@ -1,8 +1,21 @@
 import BallotIcon from '@mui/icons-material/Ballot';
 import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ViewListIcon from '@mui/icons-material/ViewList';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { Alert, Box, Tab, Tabs, Typography } from '@mui/material';
+import {
+  Alert,
+  Box,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+  Tab,
+  Tabs,
+  Typography
+} from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../app/hooks';
 import TabPanel from '../components/TabPanel/TabPanel';
@@ -20,6 +33,16 @@ function Trackers() {
   const { trackers: hiddenTrackers } = useAppSelector(selectHiddenTrackers);
   const { trackers: todoTrackers } = useAppSelector(selectTodoTrackers);
   const [selectedTab, setSelectedTab] = useState(0);
+  const navigate = useNavigate();
+
+  const actions = [
+    {
+      icon: <ViewListIcon />,
+      name: 'Voir tous les trackers',
+      onClick: () => navigate('/all-trackers')
+    }
+  ];
+
   const handleTabChange = (event: React.SyntheticEvent, newTab: number) => {
     setSelectedTab(newTab);
   };
@@ -67,6 +90,20 @@ function Trackers() {
           <TrackerCardList trackers={hiddenTrackers} />
         )}
       </TabPanel>
+
+      <SpeedDial
+        ariaLabel="SpeedDial basic example"
+        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        icon={<SpeedDialIcon icon={<MoreVertIcon />} openIcon={<CloseIcon />} />}>
+        {actions.map((action) => (
+          <SpeedDialAction
+            onClick={action.onClick}
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+          />
+        ))}
+      </SpeedDial>
     </Box>
   );
 }
