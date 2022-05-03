@@ -1,7 +1,9 @@
 import ArchiveIcon from '@mui/icons-material/Archive';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DeselectIcon from '@mui/icons-material/Deselect';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import MovingIcon from '@mui/icons-material/Moving';
 import SelectAllIcon from '@mui/icons-material/SelectAll';
 import SortIcon from '@mui/icons-material/Sort';
 import UnarchiveIcon from '@mui/icons-material/Unarchive';
@@ -16,6 +18,8 @@ import TrackerStatus from '../../../models/TrackerStatus';
 import {
   archiveTrackers,
   deleteTrackers,
+  makeTrackersActive,
+  makeTrackersDone,
   unarchiveTrackers
 } from '../../../store/trackers/trackersSlice';
 import Order from '../Order';
@@ -43,6 +47,8 @@ const TrackerListActions: FC<Props> = ({
   const atLeastOneSelectedArchived = selectedTrackers.some(
     (t) => t.status === TrackerStatus.archived
   );
+  const atLeastOneSelectedDone = selectedTrackers.some((t) => t.status === TrackerStatus.done);
+  const atLeastOneSelectedActive = selectedTrackers.some((t) => t.status === TrackerStatus.active);
 
   const allSelectedArchived = selectedTrackers.every((t) => t.status === TrackerStatus.archived);
 
@@ -69,14 +75,18 @@ const TrackerListActions: FC<Props> = ({
     afterAction();
   };
 
-  const handleDeleteTrackers = () => {
-    handleAction(deleteTrackers, 'supprimé', 'info');
-  };
-
   const handleArchiveTrackers = () => {
     handleAction(archiveTrackers, 'archivé', 'success');
   };
-
+  const handleDeleteTrackers = () => {
+    handleAction(deleteTrackers, 'supprimé', 'info');
+  };
+  const handleMakeTrackersActive = () => {
+    handleAction(makeTrackersActive, 'actif', 'success');
+  };
+  const handleMakeTrackersDone = () => {
+    handleAction(makeTrackersDone, 'terminé', 'success');
+  };
   const handleUnrchiveTrackers = () => {
     handleAction(unarchiveTrackers, 'désarchivé', 'success');
   };
@@ -113,6 +123,38 @@ const TrackerListActions: FC<Props> = ({
           MenuListProps={{
             'aria-labelledby': 'basic-button'
           }}>
+          <Tooltip
+            arrow
+            title={
+              selectedTrackers.length === 0 || !atLeastOneSelectedDone
+                ? ''
+                : 'Vous ne pouvez pas terminer un tracker terminé.'
+            }>
+            <span>
+              <MenuItem
+                disabled={selectedTrackers.length === 0 || atLeastOneSelectedDone}
+                onClick={handleMakeTrackersDone}>
+                <DoneAllIcon />
+                &nbsp; Terminer
+              </MenuItem>
+            </span>
+          </Tooltip>
+          <Tooltip
+            arrow
+            title={
+              selectedTrackers.length === 0 || !atLeastOneSelectedActive
+                ? ''
+                : 'Vous ne pouvez pas rendre actif un tracker actif.'
+            }>
+            <span>
+              <MenuItem
+                disabled={selectedTrackers.length === 0 || atLeastOneSelectedActive}
+                onClick={handleMakeTrackersActive}>
+                <MovingIcon />
+                &nbsp; Rendre actif
+              </MenuItem>
+            </span>
+          </Tooltip>
           <MenuItem onClick={handleDeleteTrackers} disabled={selectedTrackers.length === 0}>
             <DeleteForeverIcon />
             &nbsp; Supprimer
@@ -127,9 +169,7 @@ const TrackerListActions: FC<Props> = ({
             <span>
               <MenuItem
                 onClick={handleArchiveTrackers}
-                disabled={
-                  selectedTrackers.length === 0 || atLeastOneSelectedArchived // You can't archive a tracker already archived
-                }>
+                disabled={selectedTrackers.length === 0 || atLeastOneSelectedArchived}>
                 <ArchiveIcon />
                 &nbsp; Archiver
               </MenuItem>

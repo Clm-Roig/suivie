@@ -1,6 +1,6 @@
 import ArchiveIcon from '@mui/icons-material/Archive';
-import BallotIcon from '@mui/icons-material/Ballot';
-import CheckIcon from '@mui/icons-material/Check';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import MovingIcon from '@mui/icons-material/Moving';
 import { List, ListProps } from '@mui/material';
 import { FC, useCallback, useState } from 'react';
 
@@ -51,10 +51,8 @@ const TrackerList: FC<Props> = ({ trackers, listProps }) => {
       />
 
       <List {...listProps}>
-        {archivedTrackers.length > 0 && (
-          <TrackerListSubheader icon={<ArchiveIcon />} text="ARCHIVÉS" />
-        )}
-        {archivedTrackers.map((t) => (
+        {doneTrackers.length > 0 && <TrackerListSubheader icon={<DoneAllIcon />} text="TERMINÉS" />}
+        {doneTrackers.map((t) => (
           <TrackerListItem
             checked={selectedTrackers.indexOf(t) !== -1}
             toggleTrackerChecked={toggleTrackerChecked}
@@ -62,7 +60,7 @@ const TrackerList: FC<Props> = ({ trackers, listProps }) => {
             key={t.id}
           />
         ))}
-        {activeTrackers.length > 0 && <TrackerListSubheader icon={<BallotIcon />} text="ACTIFS" />}
+        {activeTrackers.length > 0 && <TrackerListSubheader icon={<MovingIcon />} text="ACTIFS" />}
         {activeTrackers.map((t) => (
           <TrackerListItem
             checked={selectedTrackers.indexOf(t) !== -1}
@@ -71,8 +69,10 @@ const TrackerList: FC<Props> = ({ trackers, listProps }) => {
             key={t.id}
           />
         ))}
-        {doneTrackers.length > 0 && <TrackerListSubheader icon={<CheckIcon />} text="FAITS" />}
-        {doneTrackers.map((t) => (
+        {archivedTrackers.length > 0 && (
+          <TrackerListSubheader icon={<ArchiveIcon />} text="ARCHIVÉS" />
+        )}
+        {archivedTrackers.map((t) => (
           <TrackerListItem
             checked={selectedTrackers.indexOf(t) !== -1}
             toggleTrackerChecked={toggleTrackerChecked}
