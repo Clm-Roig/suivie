@@ -3,6 +3,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DeselectIcon from '@mui/icons-material/Deselect';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SelectAllIcon from '@mui/icons-material/SelectAll';
+import SortIcon from '@mui/icons-material/Sort';
 import UnarchiveIcon from '@mui/icons-material/Unarchive';
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
@@ -17,14 +18,23 @@ import {
   deleteTrackers,
   unarchiveTrackers
 } from '../../../store/trackers/trackersSlice';
+import Order from '../Order';
 
 interface Props {
+  order: Order;
+  setOrder: (order: Order) => void;
   selectedTrackers: Tracker[];
   setSelectedTrackers: (trackers: Tracker[]) => void;
   trackers: Tracker[];
 }
 
-const TrackerListActions: FC<Props> = ({ selectedTrackers, setSelectedTrackers, trackers }) => {
+const TrackerListActions: FC<Props> = ({
+  order,
+  selectedTrackers,
+  setOrder,
+  setSelectedTrackers,
+  trackers
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const displayMenu = Boolean(anchorEl);
   const dispatch = useAppDispatch();
@@ -79,6 +89,10 @@ const TrackerListActions: FC<Props> = ({ selectedTrackers, setSelectedTrackers, 
         </Typography>
       </Box>
       <Box>
+        <IconButton onClick={() => setOrder(order === Order.asc ? Order.desc : Order.asc)}>
+          <SortIcon sx={{ transform: `rotateX(${order === Order.asc ? '180deg' : '0'})` }} />
+        </IconButton>
+
         {selectedTrackers.length === trackers.length ? (
           <IconButton onClick={() => setSelectedTrackers([])}>
             <DeselectIcon />

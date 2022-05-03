@@ -2,10 +2,11 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import BallotIcon from '@mui/icons-material/Ballot';
 import CheckIcon from '@mui/icons-material/Check';
 import { List, ListProps } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 
 import Tracker from '../../models/Tracker';
 import TrackerStatus from '../../models/TrackerStatus';
+import Order from './Order';
 import TrackerListActions from './TrackerListActions/TrackerListActions';
 import TrackerListItem from './TrackerListItem/TrackerListItem';
 import TrackerListSubheader from './TrackerListSubheader/TrackerListSubheader';
@@ -17,9 +18,17 @@ interface Props {
 
 const TrackerList: FC<Props> = ({ trackers, listProps }) => {
   const [selectedTrackers, setSelectedTrackers] = useState<Tracker[]>([]);
-  const archivedTrackers = trackers.filter((t) => t.status === TrackerStatus.archived);
-  const activeTrackers = trackers.filter((t) => t.status === TrackerStatus.active);
-  const doneTrackers = trackers.filter((t) => t.status === TrackerStatus.done);
+  const [order, setOrder] = useState(Order.asc);
+  const sortByName = useCallback(
+    (t1: Tracker, t2: Tracker) =>
+      order === Order.asc ? t1.name.localeCompare(t2.name) : -t1.name.localeCompare(t2.name),
+    [order]
+  );
+  const archivedTrackers = trackers
+    .filter((t) => t.status === TrackerStatus.archived)
+    .sort(sortByName);
+  const activeTrackers = trackers.filter((t) => t.status === TrackerStatus.active).sort(sortByName);
+  const doneTrackers = trackers.filter((t) => t.status === TrackerStatus.done).sort(sortByName);
 
   const toggleTrackerChecked = (tracker: Tracker) => {
     const trackerIdx = selectedTrackers.indexOf(tracker);
@@ -34,7 +43,9 @@ const TrackerList: FC<Props> = ({ trackers, listProps }) => {
   return (
     <>
       <TrackerListActions
+        order={order}
         selectedTrackers={selectedTrackers}
+        setOrder={setOrder}
         setSelectedTrackers={setSelectedTrackers}
         trackers={trackers}
       />
