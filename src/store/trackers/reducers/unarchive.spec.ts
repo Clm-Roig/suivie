@@ -18,7 +18,7 @@ describe('trackers reducer', () => {
           status: SliceStatus.idle,
           trackers: [
             { ...testTracker1, status: TrackerStatus.active },
-            { ...testTracker2, status: TrackerStatus.done },
+            { ...testTracker2, isDoneForToday: true },
             { ...testTracker3, status: TrackerStatus.archived }
           ]
         },

@@ -42,18 +42,11 @@ export const computeRemainingDays = (beginDate: string, duration: number) => {
   return difference;
 };
 
-export const computeNewStatus = (tracker: Tracker) => {
-  const { beginDate, duration, entries, remainingDays, requiredCompletions, status } = tracker;
-  let newStatus = status;
-  // End tracker if needed
-  if (
-    (remainingDays !== undefined && remainingDays < 0) ||
-    (duration && isBefore(addDays(new Date(beginDate), duration), new Date()))
-  ) {
-    newStatus = TrackerStatus.archived;
-  }
+export const computeIfDone = (tracker: Tracker) => {
+  const { entries, requiredCompletions } = tracker;
+  let res = false;
 
-  // Mark Tracker as done if all required completions are done
+  // Tracker is done if all required completions are done today
   // If there is no required completions, test if there is an entry for today
   const todayCompletions = getTodayAggregatedCompletions(entries);
   const remains = [];
@@ -66,12 +59,26 @@ export const computeNewStatus = (tracker: Tracker) => {
       );
     }
     if (remains.every((x) => x <= 0)) {
-      newStatus = TrackerStatus.done;
+      res = true;
     }
   } else {
     if (entries.filter((e) => isToday(new Date(e.date))).length > 0) {
-      newStatus = TrackerStatus.done;
+      res = true;
     }
+  }
+
+  return res;
+};
+
+export const computeNewStatus = (tracker: Tracker) => {
+  const { beginDate, duration, remainingDays, status } = tracker;
+  let newStatus = status;
+  // Archive tracker if needed
+  if (
+    (remainingDays !== undefined && remainingDays < 0) ||
+    (duration && isBefore(addDays(new Date(beginDate), duration), new Date()))
+  ) {
+    newStatus = TrackerStatus.archived;
   }
 
   return newStatus;
@@ -97,6 +104,7 @@ export const formatTrackers = (trackers: Tracker[]) => {
 
     return {
       ...trackerObj,
+      isDoneForToday: computeIfDone(trackerObj),
       status: computeNewStatus(trackerObj)
     };
   });
@@ -107,7 +115,7 @@ export const removeArchivedTrackers = (trackers: Tracker[]) =>
   trackers.filter((t) => t.status !== TrackerStatus.archived);
 
 export const removeDoneTrackers = (trackers: Tracker[]) =>
-  trackers.filter((t) => t.status !== TrackerStatus.done);
+  trackers.filter((t) => !t.isDoneForToday);
 
 export const removeHiddenTrackers = (trackers: Tracker[]) =>
   trackers.filter((t) => t.dateHidden === undefined);

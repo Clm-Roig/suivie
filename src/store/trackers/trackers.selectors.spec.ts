@@ -88,18 +88,28 @@ describe('selectTrackersDone()', () => {
       trackers: {
         ...state.trackers,
         trackers: [
-          { ...testTracker1, status: TrackerStatus.done },
+          {
+            ...testTracker1,
+            isDoneForToday: true,
+            status: TrackerStatus.active,
+            entries: [{ ...testEntry1, completions: testTracker1.requiredCompletions }]
+          },
           testTracker2,
-          { ...testTracker3, status: TrackerStatus.done }
+          {
+            ...testTracker3,
+            isDoneForToday: true,
+            status: TrackerStatus.active,
+            entries: [{ ...testEntry1 }]
+          }
         ]
       }
     };
     const { error, status, trackers } = selectTrackersDone(stateWithTrackers);
     expect(error).toEqual({});
     expect(status).toEqual(SliceStatus.idle);
-    expect(trackers.length).toEqual(2);
+    expect(trackers.length).toEqual(1);
     for (const tracker of trackers) {
-      expect(tracker.status).toBe(TrackerStatus.done);
+      expect(tracker.isDoneForToday).toBeTruthy();
     }
   });
 });
@@ -115,9 +125,12 @@ describe('selectTodoTrackers()', () => {
       trackers: {
         ...state.trackers,
         trackers: [
-          { ...testTracker1, status: TrackerStatus.archived },
+          {
+            ...testTracker1,
+            entries: [{ ...testEntry1, completions: testTracker1.requiredCompletions }]
+          },
+          { ...testTracker3, status: TrackerStatus.archived },
           { ...testTracker2, dateHidden: new Date().toString() },
-          { ...testTracker3, status: TrackerStatus.done },
           { ...testTracker3, status: TrackerStatus.active }
         ]
       }

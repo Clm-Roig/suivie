@@ -7,7 +7,6 @@ import { createTrackerReducer } from './reducers/create';
 import { deleteTrackerReducer, deleteTrackersReducer } from './reducers/delete';
 import { hideTrackerReducer } from './reducers/hide';
 import { markTrackerAsActiveReducer, markTrackersAsActiveReducer } from './reducers/markAsActive';
-import { markTrackerAsDoneReducer, markTrackersAsDoneReducer } from './reducers/markAsDone';
 import { markTrackerAsVisibleReducer } from './reducers/markAsVisible';
 import { unarchiveTrackersReducer } from './reducers/unarchive';
 import { completelyValidateReducer, customValidateReducer } from './reducers/validate';
@@ -42,9 +41,7 @@ export const trackersSlice = createSlice({
     deleteTrackers: deleteTrackersReducer,
     hideTracker: hideTrackerReducer,
     markTrackersAsActive: markTrackersAsActiveReducer,
-    markTrackersAsDone: markTrackersAsDoneReducer,
     markTrackerAsActive: markTrackerAsActiveReducer,
-    markTrackerAsDone: markTrackerAsDoneReducer,
     markTrackerAsVisible: markTrackerAsVisibleReducer,
     unarchiveTrackers: unarchiveTrackersReducer
   }
@@ -64,8 +61,6 @@ export const {
   hideTracker,
   markTrackerAsActive,
   markTrackersAsActive,
-  markTrackerAsDone,
-  markTrackersAsDone,
   markTrackerAsVisible,
   unarchiveTrackers
 } = trackersSlice.actions;

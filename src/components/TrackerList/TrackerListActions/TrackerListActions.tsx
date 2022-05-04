@@ -1,7 +1,6 @@
 import ArchiveIcon from '@mui/icons-material/Archive';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DeselectIcon from '@mui/icons-material/Deselect';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import MovingIcon from '@mui/icons-material/Moving';
 import SelectAllIcon from '@mui/icons-material/SelectAll';
@@ -19,7 +18,6 @@ import {
   archiveTrackers,
   deleteTrackers,
   markTrackersAsActive,
-  markTrackersAsDone,
   unarchiveTrackers
 } from '../../../store/trackers/trackersSlice';
 import Order from '../Order';
@@ -47,9 +45,7 @@ const TrackerListActions: FC<Props> = ({
   const atLeastOneSelectedArchived = selectedTrackers.some(
     (t) => t.status === TrackerStatus.archived
   );
-  const atLeastOneSelectedDone = selectedTrackers.some((t) => t.status === TrackerStatus.done);
   const atLeastOneSelectedActive = selectedTrackers.some((t) => t.status === TrackerStatus.active);
-
   const allSelectedArchived = selectedTrackers.every((t) => t.status === TrackerStatus.archived);
 
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -83,9 +79,6 @@ const TrackerListActions: FC<Props> = ({
   };
   const handlemarkTrackersAsActive = () => {
     handleAction(markTrackersAsActive, 'actif', 'success');
-  };
-  const handlemarkTrackersAsDone = () => {
-    handleAction(markTrackersAsDone, 'terminé', 'success');
   };
   const handleUnrchiveTrackers = () => {
     handleAction(unarchiveTrackers, 'désarchivé', 'success');
@@ -123,22 +116,6 @@ const TrackerListActions: FC<Props> = ({
           MenuListProps={{
             'aria-labelledby': 'basic-button'
           }}>
-          <Tooltip
-            arrow
-            title={
-              selectedTrackers.length === 0 || !atLeastOneSelectedDone
-                ? ''
-                : 'Vous ne pouvez pas terminer un tracker terminé.'
-            }>
-            <span>
-              <MenuItem
-                disabled={selectedTrackers.length === 0 || atLeastOneSelectedDone}
-                onClick={handlemarkTrackersAsDone}>
-                <DoneAllIcon />
-                &nbsp; Terminer
-              </MenuItem>
-            </span>
-          </Tooltip>
           <Tooltip
             arrow
             title={

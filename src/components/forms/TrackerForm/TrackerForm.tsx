@@ -18,6 +18,7 @@ const getDefaultValues = (): FormValues => ({
   duration: '',
   defaultCompletions: [],
   entries: [],
+  isDoneForToday: false,
   name: '',
   requiredCompletions: [],
   status: TrackerStatus.active
