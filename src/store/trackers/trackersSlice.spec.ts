@@ -18,7 +18,7 @@ import trackersReducer, {
   deleteTracker,
   deleteTrackers,
   hideTracker,
-  makeTrackerVisible,
+  markTrackerAsVisible,
   unarchiveTrackers
 } from './trackersSlice';
 
@@ -128,7 +128,7 @@ describe('trackers reducer', () => {
             { ...testTracker2, dateHidden: new Date().toString() }
           ]
         },
-        makeTrackerVisible(testTracker1.id)
+        markTrackerAsVisible(testTracker1.id)
       );
       const t1 = finalState.trackers.find((t) => t.id === testTracker1Id)!;
       const t2 = finalState.trackers.find((t) => t.id === testTracker2Id)!;

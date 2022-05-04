@@ -14,7 +14,7 @@ import {
   completelyValidate,
   customValidate,
   hideTracker,
-  makeTrackerVisible
+  markTrackerAsVisible
 } from '../../store/trackers/trackersSlice';
 import CompleteValidationDialog from '../TrackerValidationDialog/CompleteValidationDialog';
 import CustomValidationDialog from '../TrackerValidationDialog/CustomValidationDialog';
@@ -55,7 +55,7 @@ const TrackerCardActions: FC<Props> = ({
   };
 
   const handleMakeVisible = () => {
-    dispatch(makeTrackerVisible(tracker.id));
+    dispatch(markTrackerAsVisible(tracker.id));
     setIsMakeVisibleOpen(false);
     enqueueSnackbar('Tracker affiché !', { variant: 'success' });
   };
