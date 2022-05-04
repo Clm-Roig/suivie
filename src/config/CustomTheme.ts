@@ -4,8 +4,12 @@ import { grey } from '@mui/material/colors';
 
 import ThemeMode from '../models/ThemeMode';
 
+const BLACK = '#111';
+const WHITE = '#EEE';
+
 const CHARCOAL = {
-  main: '#2E4057'
+  main: '#2E4057',
+  contrastText: WHITE
 };
 const YELLOW_CRAYOLA = {
   main: '#FFE66D'
@@ -19,7 +23,13 @@ const SHIMMERING_BLUSH = {
 }
 */
 const MIDDLE_BLUE = {
-  main: '#80CBC4'
+  main: '#80CBC4',
+  contrastText: BLACK
+};
+
+const LIGHT_BLUE = {
+  main: '#7792BB',
+  contrastText: BLACK
 };
 
 const THEME_MODE_TRANSITION = '0.5s ease';
@@ -70,8 +80,8 @@ const commonTheme = {
     primary: CHARCOAL.main
   },
   common: {
-    white: '#eee',
-    black: '#111'
+    white: WHITE,
+    black: BLACK
   }
 };
 
@@ -88,11 +98,9 @@ export const getPalette = (mode: PaletteMode): PaletteOptions => ({
         background: {
           default: grey[900]
         },
-        primary: {
-          main: '#7792BB'
-        },
+        primary: LIGHT_BLUE,
         text: {
-          primary: '#7792BB'
+          primary: LIGHT_BLUE.main
         }
       })
 });
