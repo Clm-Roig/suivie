@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import About from '../pages/About';
+import AllTrackers from '../pages/AllTrackers';
 import Home from '../pages/Home';
 import Settings from '../pages/Settings';
 import Statistics from '../pages/Statistics';
@@ -12,6 +13,7 @@ function Router() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
+      <Route path="/all-trackers" element={<AllTrackers />} />
       <Route path="/data-error" element={<DataError />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/stats" element={<Statistics />} />

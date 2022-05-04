@@ -115,7 +115,7 @@ describe('selectTodoTrackers()', () => {
       trackers: {
         ...state.trackers,
         trackers: [
-          { ...testTracker1, status: TrackerStatus.over },
+          { ...testTracker1, status: TrackerStatus.archived },
           { ...testTracker2, dateHidden: new Date().toString() },
           { ...testTracker3, status: TrackerStatus.done },
           { ...testTracker3, status: TrackerStatus.active }

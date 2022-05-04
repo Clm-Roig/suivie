@@ -12,10 +12,10 @@ import TrackerStatus from './TrackerStatus';
  * @member {string?} dateHidden when not undefined, specify which day the tracker is ignored. The next day, it's automatically set to "undefined".
  * @member {Completion[]} defaultCompletions default completions submitted when validating the tracker
  * @member {number?} duration number of days the tracker is active since beginDate
- * @member {string} endDate when the Tracker is over
+ * @member {string} endDate when the Tracker was archived
  * @member {TrackerEntry[]} entries TrackerEntries related to this Tracker
  * @member {string} name
- * @member {number?} remainingDays computed attribute describing the number of days before the tracker is over
+ * @member {number?} remainingDays computed attribute describing the number of days before the tracker is archived
  * @member {Completion[]} requiredCompletions objectives to complete the tracker
  * @member {TrackerStatus} status @see TrackerStatus
  */

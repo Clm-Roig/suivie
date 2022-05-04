@@ -11,7 +11,7 @@ import {
   IconButton,
   InputLabel,
   MenuItem,
-  Select,
+  Tooltip,
   Typography,
   useTheme
 } from '@mui/material';
@@ -30,6 +30,7 @@ import ThemeMode from '../../../models/ThemeMode';
 import { selectThemeMode } from '../../../store/theme/theme.selectors';
 import { FormValues } from '../TrackerForm/types';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
+import CompletionUnitSelect from '../completions/CompletionUnitSelect';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -40,21 +41,17 @@ export const FieldsetGrid = styled(Grid)`
 interface Props {
   append: UseFieldArrayAppend<FormValues, 'defaultCompletions'>;
   control: Control<FormValues, any> /* eslint-disable-line @typescript-eslint/no-explicit-any */;
+  defaultCompletions: Completion[];
   fields: FieldArrayWithId<FormValues, 'defaultCompletions', 'id'>[];
   gridProps?: GridProps;
   remove: UseFieldArrayRemove;
   requiredCompletions: Completion[];
 }
 
-/**
- * This forms is used to create one or many defaultCompletions for a new tracker.
- *
- * @param {*} { append, control, fields, gridProps, remove }
- * @return {*}
- */
 const DefaultCompletionsForm: FC<Props> = ({
   append,
   control,
+  defaultCompletions,
   fields,
   gridProps,
   remove,
@@ -144,7 +141,7 @@ const DefaultCompletionsForm: FC<Props> = ({
                 return (
                   <FormControl fullWidth error={!!error} size="small">
                     <InputLabel>Unité</InputLabel>
-                    <Select
+                    <CompletionUnitSelect
                       required
                       value={(requiredCompletions.find((rc) => rc.unit === value) && value) || ''}
                       label="Unité"
@@ -153,11 +150,14 @@ const DefaultCompletionsForm: FC<Props> = ({
                       {requiredCompletions
                         .filter((rc) => rc.unit && rc.unit !== '')
                         .map((rc) => (
-                          <MenuItem key={rc.unit} value={rc.unit}>
+                          <MenuItem
+                            key={rc.unit}
+                            value={rc.unit}
+                            disabled={defaultCompletions.some((dc) => dc.unit === rc.unit)}>
                             {rc.unit}
                           </MenuItem>
                         ))}
-                    </Select>
+                    </CompletionUnitSelect>
                     <FormHelperText>{error ? errorText : ''}</FormHelperText>
                   </FormControl>
                 );
@@ -166,13 +166,24 @@ const DefaultCompletionsForm: FC<Props> = ({
           </Grid>
         </FieldsetGrid>
       ))}
-      <Button
-        onClick={() => append({})}
-        startIcon={<AddCircleOutlineIcon />}
-        sx={{ mb: 2 }}
-        variant="contained">
-        Réalisation par défaut
-      </Button>
+
+      <Tooltip
+        title={
+          requiredCompletions.length === defaultCompletions.length
+            ? 'Tous les objectifs ont déjà une réalisation par défaut.'
+            : ''
+        }>
+        <span>
+          <Button
+            disabled={requiredCompletions.length === defaultCompletions.length}
+            onClick={() => append({})}
+            startIcon={<AddCircleOutlineIcon />}
+            sx={{ mb: 2 }}
+            variant="contained">
+            Réalisation par défaut
+          </Button>
+        </span>
+      </Tooltip>
     </Box>
   );
 };

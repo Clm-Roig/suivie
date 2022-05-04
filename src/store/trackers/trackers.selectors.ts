@@ -5,13 +5,13 @@ import TrackerStatus from '../../models/TrackerStatus';
 import { RootState } from '../store';
 import {
   formatTrackers,
+  removeArchivedTrackers,
   removeDoneTrackers,
-  removeHiddenTrackers,
-  removeOverTrackers
+  removeHiddenTrackers
 } from './utils';
 
 const selectHiddenTrackers = (state: RootState) => {
-  const newTrackers = removeOverTrackers(
+  const newTrackers = removeArchivedTrackers(
     formatTrackers(state.trackers.trackers).filter((t) => t.dateHidden !== undefined)
   );
   return {
@@ -32,7 +32,7 @@ const selectTrackersDone = (state: RootState) => {
 };
 
 const selectTodoTrackers = (state: RootState) => {
-  const newTrackers = removeOverTrackers(
+  const newTrackers = removeArchivedTrackers(
     removeHiddenTrackers(removeDoneTrackers(formatTrackers(state.trackers.trackers)))
   );
   return {
