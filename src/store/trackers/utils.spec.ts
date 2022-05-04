@@ -3,6 +3,7 @@ import { subDays } from 'date-fns';
 import TrackerStatus from '../../models/TrackerStatus';
 import { testEntry1, testEntry2, testTracker1 } from './FAKE_DATA';
 import {
+  computeIfDone,
   computeNewStatus,
   computeRemainingDays,
   formatTrackers,
@@ -17,6 +18,29 @@ describe('computeRemainingDays()', () => {
     expect(computeRemainingDays(subDays(new Date(), 10).toString(), 50)).toBe(39); // started in the past, finished in the future
     expect(computeRemainingDays(subDays(new Date(), 20).toString(), 20)).toBe(0); // started in the past, finished today
     expect(computeRemainingDays(new Date().toString(), 10)).toBe(9); // started today, finished in the future
+  });
+});
+
+describe('computeIfDone()', () => {
+  it('should be done (enough entries for today)', () => {
+    const doneTracker = {
+      ...testTracker1,
+      entries: [testEntry1, testEntry2]
+    };
+    expect(computeIfDone(doneTracker)).toBeTruthy();
+  });
+  it('should be done (no required completions but one entry without completions for today)', () => {
+    const doneTracker = {
+      ...testTracker1,
+      requiredCompletions: [],
+      entries: [
+        {
+          ...testEntry1,
+          completions: []
+        }
+      ]
+    };
+    expect(computeIfDone(doneTracker)).toBeTruthy();
   });
 });
 
@@ -43,13 +67,6 @@ describe('computeNewStatus()', () => {
     };
     expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.active);
   });
-  it('should be done (enough entries for today)', () => {
-    const doneTracker = {
-      ...testTracker1,
-      entries: [testEntry1, testEntry2]
-    };
-    expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.done);
-  });
   it('should be todo (no required completions and no entries for today)', () => {
     const doneTracker = {
       ...testTracker1,
@@ -57,19 +74,6 @@ describe('computeNewStatus()', () => {
       entries: []
     };
     expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.active);
-  });
-  it('should be done (no required completions but one entry without completions for today)', () => {
-    const doneTracker = {
-      ...testTracker1,
-      requiredCompletions: [],
-      entries: [
-        {
-          ...testEntry1,
-          completions: []
-        }
-      ]
-    };
-    expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.done);
   });
 });
 
@@ -81,7 +85,7 @@ describe('remove functions', () => {
     },
     {
       ...testTracker1,
-      status: TrackerStatus.done
+      isDoneForToday: true
     },
     {
       ...testTracker1,
@@ -92,21 +96,21 @@ describe('remove functions', () => {
   describe('removeArchivedTrackers()', () => {
     it('should remove the archived trackers', () => {
       expect(removeArchivedTrackers(trackers).length).toBe(2);
-      const [t1, t2, t3] = trackers; // eslint-disable-line @typescript-eslint/no-unused-vars
+      const [, t2, t3] = trackers;
       expect(removeArchivedTrackers(trackers)).toEqual(expect.arrayContaining([t2, t3]));
     });
   });
   describe('removeDoneTrackers()', () => {
     it('should remove the trackers done', () => {
       expect(removeDoneTrackers(trackers).length).toBe(2);
-      const [t1, t2, t3] = trackers; // eslint-disable-line @typescript-eslint/no-unused-vars
+      const [t1, , t3] = trackers;
       expect(removeDoneTrackers(trackers)).toEqual(expect.arrayContaining([t1, t3]));
     });
   });
   describe('removeHiddenTrackers()', () => {
     it('should remove the hidden trackers', () => {
       expect(removeHiddenTrackers(trackers).length).toBe(2);
-      const [t1, t2, t3] = trackers; // eslint-disable-line @typescript-eslint/no-unused-vars
+      const [t1, t2] = trackers;
       expect(removeHiddenTrackers(trackers)).toEqual(expect.arrayContaining([t1, t2]));
     });
   });
