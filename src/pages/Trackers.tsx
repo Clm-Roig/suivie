@@ -6,9 +6,9 @@ import { useState } from 'react';
 
 import { useAppSelector } from '../app/hooks';
 import TabPanel from '../components/TabPanel/TabPanel';
-import AddTrackerCard from '../components/TrackerList/AddTrackerCard';
-import DateSelector from '../components/TrackerList/DateSelector';
-import TrackerList from '../components/TrackerList/TrackerList';
+import AddTrackerCard from '../components/TrackerCardList/AddTrackerCard';
+import DateSelector from '../components/TrackerCardList/DateSelector';
+import TrackerList from '../components/TrackerCardList/TrackerCardList';
 import ThemeMode from '../models/ThemeMode';
 import { selectThemeMode } from '../store/theme/theme.selectors';
 import {

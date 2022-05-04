@@ -1,3 +1,4 @@
+import CheckIcon from '@mui/icons-material/Check';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import HomeIcon from '@mui/icons-material/Home';
@@ -70,10 +71,16 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width 
       <List>
         <MenuItem icon={<HomeIcon />} name={'Accueil'} onClick={toggleDrawerMenu} url="/" />
         <MenuItem
+          icon={<CheckIcon />}
+          name={'Valider des trackers'}
+          onClick={toggleDrawerMenu}
+          url="/trackers"
+        />
+        <MenuItem
           icon={<ListAltIcon />}
           name={'Mes Trackers'}
           onClick={toggleDrawerMenu}
-          url="/trackers"
+          url="/all-trackers"
         />
         <MenuItem
           icon={<TimelineIcon />}
