@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.14](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.13...v0.1.14) (2022-05-04)
+
+
+### Features
+
+* **allTrackers:** add actions to all trackers page ([26cf3d4](https://github.com/Clm-Roig/bujo-tracker/commit/26cf3d46f0e945217ed4969eb2e0127683d01524))
+* **allTrackers:** add sort by ([d7f8dcc](https://github.com/Clm-Roig/bujo-tracker/commit/d7f8dcc775d26b0232a4243e6adec129eaf4ea60))
+* **allTrackers:** improve ui ([5c2ecde](https://github.com/Clm-Roig/bujo-tracker/commit/5c2ecdeb085b4cebb2c350a1da3c12bd7d0bb9d2))
+* **allTrackers:** mark (un)done ([d0d2e9c](https://github.com/Clm-Roig/bujo-tracker/commit/d0d2e9c57faafe003127ba2e189797713f8f257c))
+* **allTrackersPage:** add all trackers Page ([406cc03](https://github.com/Clm-Roig/bujo-tracker/commit/406cc03339c5f38ce7d218c140d11e2455eca8e5))
+* **archiveTracker:** add archive tracker action to tracker card ([d67ab3a](https://github.com/Clm-Roig/bujo-tracker/commit/d67ab3a063b094b598bcb19c95fde3d0e19dec12))
+* **archiveTrackerReducer:** add archive tracker reducer ([614cbca](https://github.com/Clm-Roig/bujo-tracker/commit/614cbca1bd2feafbfba76acf0266854cd42849ff))
+* **menu:** add selected attribute & refactor ([1335e62](https://github.com/Clm-Roig/bujo-tracker/commit/1335e62016dd932efb419dfc8247037171495e4e))
+* **trackers:** add speed dial ([64f4452](https://github.com/Clm-Roig/bujo-tracker/commit/64f4452c39b478bbf00451d0a407fe969f569076))
+
+
+### Bug Fixes
+
+* **completionChipBg:** lighten background of chip ([df28bfb](https://github.com/Clm-Roig/bujo-tracker/commit/df28bfb4cd5ec186425ebc07daaacd73baba28cf))
+* **completionUnitSelect:** apply same style as textfield ([7306705](https://github.com/Clm-Roig/bujo-tracker/commit/7306705529d45cd9a0ab798fc32fce6d8bed1608))
+* **trackerForm:** disable add defaultComp if already full ([2198eb3](https://github.com/Clm-Roig/bujo-tracker/commit/2198eb3957e7f90465dddc8f8cdf37e793780d21))
+* **trackerForm:** remove defaultComp when required one is deleted ([8a4e515](https://github.com/Clm-Roig/bujo-tracker/commit/8a4e515e11751440946981aedf7f02c074d52f68))
+
 ### [0.1.13](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.12...v0.1.13) (2022-04-20)
 
 
