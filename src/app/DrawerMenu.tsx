@@ -12,13 +12,13 @@ import {
   Divider,
   IconButton,
   List,
-  ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   SwipeableDrawer
 } from '@mui/material';
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { selectThemeMode } from '../store/theme/theme.selectors';
 import { useAppSelector } from './hooks';
@@ -27,13 +27,14 @@ interface MenuItemProps {
   icon: React.ReactNode;
   name: string;
   onClick: () => void;
+  selected: boolean;
   url: string;
 }
-const MenuItem: FC<MenuItemProps> = ({ icon, name, onClick, url }) => (
-  <ListItem component={Link} to={url} button key={name} onClick={onClick}>
+const MenuItem: FC<MenuItemProps> = ({ icon, name, onClick, selected, url }) => (
+  <ListItemButton selected={selected} component={Link} to={url} key={name} onClick={onClick}>
     <ListItemIcon>{icon}</ListItemIcon>
     <ListItemText primary={name} />
-  </ListItem>
+  </ListItemButton>
 );
 
 interface Props {
@@ -45,6 +46,35 @@ interface Props {
 
 const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width }) => {
   const themeMode = useAppSelector(selectThemeMode);
+  const currentPathName = useLocation().pathname;
+  const menuItems = [
+    {
+      icon: <HomeIcon />,
+      name: 'Accueil',
+      url: '/'
+    },
+    {
+      icon: <CheckIcon />,
+      name: 'Valider mes trackers',
+      url: '/trackers'
+    },
+    {
+      icon: <ListAltIcon />,
+      name: 'Tous mes trackers',
+      url: '/all-trackers'
+    },
+    {
+      icon: <TimelineIcon />,
+      name: 'Statistiques',
+      url: '/stats'
+    },
+    {
+      icon: <SettingsIcon />,
+      name: 'Paramètres',
+      url: '/settings'
+    }
+  ];
+
   return (
     <SwipeableDrawer
       anchor="left"
@@ -69,31 +99,16 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width 
       </Box>
       <Divider />
       <List>
-        <MenuItem icon={<HomeIcon />} name={'Accueil'} onClick={toggleDrawerMenu} url="/" />
-        <MenuItem
-          icon={<CheckIcon />}
-          name={'Valider des trackers'}
-          onClick={toggleDrawerMenu}
-          url="/trackers"
-        />
-        <MenuItem
-          icon={<ListAltIcon />}
-          name={'Mes Trackers'}
-          onClick={toggleDrawerMenu}
-          url="/all-trackers"
-        />
-        <MenuItem
-          icon={<TimelineIcon />}
-          name={'Statistiques'}
-          onClick={toggleDrawerMenu}
-          url="/stats"
-        />
-        <MenuItem
-          icon={<SettingsIcon />}
-          name={'Paramètres'}
-          onClick={toggleDrawerMenu}
-          url="/settings"
-        />
+        {menuItems.map((mi) => (
+          <MenuItem
+            key={mi.name}
+            icon={mi.icon}
+            name={mi.name}
+            onClick={toggleDrawerMenu}
+            selected={currentPathName === mi.url}
+            url={mi.url}
+          />
+        ))}
       </List>
       <Divider />
       <Box display="flex" justifyContent="center" paddingY={1}>
