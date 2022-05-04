@@ -39,7 +39,12 @@ describe('trackers reducer', () => {
           trackers: [
             { ...testTracker1, status: TrackerStatus.archived },
             { ...testTracker2, status: TrackerStatus.active },
-            { ...testTracker3, status: TrackerStatus.done, endDate: new Date().toString() }
+            {
+              ...testTracker3,
+              isDoneForToday: true,
+              status: TrackerStatus.archived,
+              endDate: new Date().toString()
+            }
           ]
         },
         markTrackersAsActive([testTracker1Id, testTracker3Id])

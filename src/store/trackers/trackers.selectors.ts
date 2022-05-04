@@ -1,7 +1,6 @@
 import { differenceInDays, isAfter, isEqual, isSameMonth, isSameYear } from 'date-fns';
 
 import TrackerEntry from '../../models/TrackerEntry';
-import TrackerStatus from '../../models/TrackerStatus';
 import { RootState } from '../store';
 import {
   formatTrackers,
@@ -21,8 +20,8 @@ const selectHiddenTrackers = (state: RootState) => {
 };
 
 const selectTrackersDone = (state: RootState) => {
-  const newTrackers = removeHiddenTrackers(
-    formatTrackers(state.trackers.trackers).filter((t) => t.status === TrackerStatus.done)
+  const newTrackers = removeArchivedTrackers(
+    removeHiddenTrackers(formatTrackers(state.trackers.trackers).filter((t) => t.isDoneForToday))
   );
 
   return {
