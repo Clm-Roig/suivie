@@ -18,8 +18,8 @@ import TrackerStatus from '../../../models/TrackerStatus';
 import {
   archiveTrackers,
   deleteTrackers,
-  makeTrackersActive,
-  makeTrackersDone,
+  markTrackersAsActive,
+  markTrackersAsDone,
   unarchiveTrackers
 } from '../../../store/trackers/trackersSlice';
 import Order from '../Order';
@@ -81,11 +81,11 @@ const TrackerListActions: FC<Props> = ({
   const handleDeleteTrackers = () => {
     handleAction(deleteTrackers, 'supprimé', 'info');
   };
-  const handleMakeTrackersActive = () => {
-    handleAction(makeTrackersActive, 'actif', 'success');
+  const handlemarkTrackersAsActive = () => {
+    handleAction(markTrackersAsActive, 'actif', 'success');
   };
-  const handleMakeTrackersDone = () => {
-    handleAction(makeTrackersDone, 'terminé', 'success');
+  const handlemarkTrackersAsDone = () => {
+    handleAction(markTrackersAsDone, 'terminé', 'success');
   };
   const handleUnrchiveTrackers = () => {
     handleAction(unarchiveTrackers, 'désarchivé', 'success');
@@ -133,7 +133,7 @@ const TrackerListActions: FC<Props> = ({
             <span>
               <MenuItem
                 disabled={selectedTrackers.length === 0 || atLeastOneSelectedDone}
-                onClick={handleMakeTrackersDone}>
+                onClick={handlemarkTrackersAsDone}>
                 <DoneAllIcon />
                 &nbsp; Terminer
               </MenuItem>
@@ -149,7 +149,7 @@ const TrackerListActions: FC<Props> = ({
             <span>
               <MenuItem
                 disabled={selectedTrackers.length === 0 || atLeastOneSelectedActive}
-                onClick={handleMakeTrackersActive}>
+                onClick={handlemarkTrackersAsActive}>
                 <MovingIcon />
                 &nbsp; Rendre actif
               </MenuItem>
