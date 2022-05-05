@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/Clm-Roig/bujo-tracker/compare/v0.1.14...v0.2.0) (2022-05-05)
+
+
+### Features
+
+* **appLogo:** add app logo ([9cfa91a](https://github.com/Clm-Roig/bujo-tracker/commit/9cfa91a8d2f711a0b683c465171f40bd1433d20b))
+
+
+### Bug Fixes
+
+* **doneTracker:** remove TrackerStatus done, use bool instead ([4affe68](https://github.com/Clm-Roig/bujo-tracker/commit/4affe68e6eebf8d96451076219cb618017788695))
+
 ### [0.1.14](https://github.com/Clm-Roig/suivie/compare/v0.1.13...v0.1.14) (2022-05-04)
 
 ### Features
