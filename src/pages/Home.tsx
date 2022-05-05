@@ -2,6 +2,7 @@ import { Box, Button, List, ListItemText, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../app/hooks';
+import { APP_NAME } from '../config/Constants';
 import { selectThemeMode } from '../store/theme/theme.selectors';
 
 const Home = () => {
@@ -17,7 +18,7 @@ const Home = () => {
           fontWeight: 'bold',
           textDecoration: 'none'
         }}>
-        BUJO TRACKER
+        {APP_NAME}
       </Typography>
       <List sx={{ my: 2 }}>
         <ListItemText primary={'✨ Suivez vos habitudes'} />

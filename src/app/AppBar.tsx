@@ -3,6 +3,8 @@ import { Box, IconButton, AppBar as MuiAppBar, Toolbar, Typography } from '@mui/
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
+import { APP_NAME } from '../config/Constants';
+
 interface Props {
   toggleDrawerMenu: () => void;
 }
@@ -29,7 +31,7 @@ const AppBar: FC<Props> = ({ toggleDrawerMenu }) => {
             color="#eee"
             variant="h6"
             sx={{ flexGrow: 1, textDecoration: 'none' }}>
-            BUJO TRACKER
+            {APP_NAME}
           </Typography>
         </Toolbar>
       </MuiAppBar>
