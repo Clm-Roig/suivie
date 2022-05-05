@@ -4,6 +4,7 @@ import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 
 import { useAppDispatch } from '../../app/hooks';
+import { APP_NAME } from '../../config/Constants';
 import { deleteStore } from '../../store/app/appSlice';
 import DeleteDataDialog from './DeleteDataDialog';
 
@@ -20,7 +21,7 @@ const DeleteSection = () => {
   return (
     <Stack spacing={1} alignItems={'center'}>
       <Typography>
-        Cette action videra votre stockage local de toutes les données créées par Bujo Tracker.
+        Cette action videra votre stockage local de toutes les données créées par {APP_NAME}.
       </Typography>
       <Alert severity="error">Cette action est irréversible !</Alert>
       <Button

@@ -1,8 +1,8 @@
-# Bujo Tracker
+# SuiVie
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9f4ce0a620d94a07aad5190f009b9b79)](https://www.codacy.com/gh/Clm-Roig/bujo-tracker/dashboard?utm_source=github.com&utm_medium=referral&utm_content=Clm-Roig/bujo-tracker&utm_campaign=Badge_Grade)
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/clm-roig/bujo-tracker/Build%20&%20test/develop)
-[![GitHub tag](https://img.shields.io/github/tag/clm-roig/bujo-tracker?include_prereleases=&sort=semver&color=blue)](https://github.com/clm-roig/bujo-tracker/releases/)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9f4ce0a620d94a07aad5190f009b9b79)](https://www.codacy.com/gh/Clm-Roig/suivie/dashboard?utm_source=github.com&utm_medium=referral&utm_content=Clm-Roig/suivie&utm_campaign=Badge_Grade)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/clm-roig/suivie/Build%20&%20test/develop)
+[![GitHub tag](https://img.shields.io/github/tag/clm-roig/suivie?include_prereleases=&sort=semver&color=blue)](https://github.com/clm-roig/suivie/releases/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-yellow.svg)](https://github.com/prettier/prettier)
 
 This application is inspired by the [Bullet Journal's trackers tool](https://diaryofajournalplanner.com/bullet-journal-habit-tracker/). It aims to track your habits like sports, food, hygiene, self-care, expenses... Even if it works on desktop, it is designed for mobile devices.
@@ -45,7 +45,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) and [standard-version package](https://github.com/conventional-changelog/standard-version).
 
-The application is deployed on the Github repository page [here](https://clm-roig.github.io/bujo-tracker/).
+The application is deployed on the Github repository page [here](https://clm-roig.github.io/suivie).
 
 ## About
 
@@ -57,12 +57,12 @@ I wanted to build an application with a modern React stack and CI tools I (Types
 
 I wanted to focus on Github tools in order to have everything I need in one place:
 
-- I write notes in a Kanban table ([Project tab](https://github.com/Clm-Roig/bujo-tracker/projects?type=beta))
-- I create an issue related to the note with details and labels ([Issue tab](https://github.com/Clm-Roig/bujo-tracker/issues))
-- I work on a branch and I open a Pull Request when it's done ([PR tab](https://github.com/Clm-Roig/bujo-tracker/pulls))
-- On the PR, the test, linting and code security scripts are run ([Actions tab](https://github.com/Clm-Roig/bujo-tracker/actions))
+- I write notes in a Kanban table ([Project tab](https://github.com/Clm-Roig/suivie/projects?type=beta))
+- I create an issue related to the note with details and labels ([Issue tab](https://github.com/Clm-Roig/suivie/issues))
+- I work on a branch and I open a Pull Request when it's done ([PR tab](https://github.com/Clm-Roig/suivie/pulls))
+- On the PR, the test, linting and code security scripts are run ([Actions tab](https://github.com/Clm-Roig/suivie/actions))
 - I merge the PR after rereading my code.
-- Eventually, I create a new version of the application (see [CHANGELOG.md](https://github.com/Clm-Roig/bujo-tracker/blob/develop/CHANGELOG.md))
+- Eventually, I create a new version of the application (see [CHANGELOG.md](https://github.com/Clm-Roig/suivie/blob/develop/CHANGELOG.md))
 
 ### If I had more time, I would change...
 

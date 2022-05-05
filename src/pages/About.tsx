@@ -4,18 +4,18 @@ import { Box, Button, Link, Stack, Typography } from '@mui/material';
 
 import packageInfo from '../../package.json';
 import ExternalLink from '../components/ExternalLink/ExternalLink';
-import { PAYPAL_DONATE_LINK } from '../config/Constants';
+import { APP_NAME, PAYPAL_DONATE_LINK } from '../config/Constants';
 
 function About() {
   return (
     <>
       <Box display="flex" flexDirection="column">
         <Typography gutterBottom variant="h1">
-          À propos de Bujo Tracker
+          À propos de {APP_NAME}
         </Typography>
         <Stack spacing={2} textAlign="center">
           <Typography>
-            {"L'interface de Bujo Tracker est "}
+            {"L'interface de " + APP_NAME + ' est '}
             <b>optimisée pour mobile</b>.
           </Typography>
           <Typography>
@@ -28,7 +28,7 @@ function About() {
           </Typography>
           <Typography>
             Code source disponible sur{' '}
-            <ExternalLink href="https://github.com/clm-roig/bujo-tracker">Github</ExternalLink>
+            <ExternalLink href="https://github.com/clm-roig/suivie">Github</ExternalLink>
             <GitHubIcon />
           </Typography>
           <Link sx={{ mx: 'auto' }} target="_blank" rel="noreferrer" href={PAYPAL_DONATE_LINK}>
