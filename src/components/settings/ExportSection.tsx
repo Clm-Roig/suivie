@@ -2,7 +2,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { Button, Stack, Typography } from '@mui/material';
 
 import { useAppSelector } from '../../app/hooks';
-import { JSON_DATA_EXTENSION } from '../../config/Constants';
+import { APP_NAME, JSON_DATA_EXTENSION } from '../../config/Constants';
 import { selectWholeStore } from '../../store/app/app.selector';
 import formatDate from '../../utils/formatDate';
 
@@ -24,7 +24,8 @@ const Settings = () => {
     );
     element.setAttribute(
       'download',
-      'bujo-tracker-data-' +
+      APP_NAME.toLowerCase() +
+        '-data-' +
         formatDate(new Date(), "dd-MMMM-yyyy_HH'h'mm'm'ss's'") +
         JSON_DATA_EXTENSION
     );

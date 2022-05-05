@@ -4,7 +4,7 @@ import { useSnackbar } from 'notistack';
 import { ChangeEvent, useState } from 'react';
 
 import { useAppDispatch } from '../../app/hooks';
-import { JSON_DATA_EXTENSION } from '../../config/Constants';
+import { APP_NAME, JSON_DATA_EXTENSION } from '../../config/Constants';
 import { createStoreFromJSONString } from '../../store/app/appSlice';
 
 const ImportSection = () => {
@@ -46,9 +46,9 @@ const ImportSection = () => {
   return (
     <Stack spacing={1} alignItems={'center'}>
       <Typography>
-        {
-          "L'import de données se fait grâce à un fichier exporté au préalable via BujoTracker. Son extension est "
-        }
+        {"L'import de données se fait grâce à un fichier exporté au préalable via " +
+          APP_NAME +
+          '. Son extension est '}
         <b>{JSON_DATA_EXTENSION}</b>
         {'. '}
       </Typography>

@@ -1,13 +1,24 @@
 import MenuIcon from '@mui/icons-material/Menu';
-import { Box, IconButton, AppBar as MuiAppBar, Toolbar, Typography } from '@mui/material';
+import { Box, IconButton, AppBar as MuiAppBar, Toolbar } from '@mui/material';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+
+import AppLogo from '../assets/images/app-logo.png';
+import ThemeMode from '../models/ThemeMode';
+import { selectThemeMode } from '../store/theme/theme.selectors';
+import { useAppSelector } from './hooks';
+
+// Filter generated using https://codepen.io/sosuke/pen/Pjoqqp
+const filterToLightBlueColor =
+  'invert(62%) sepia(49%) saturate(295%) hue-rotate(177deg) brightness(84%) contrast(84%)';
 
 interface Props {
   toggleDrawerMenu: () => void;
 }
 
 const AppBar: FC<Props> = ({ toggleDrawerMenu }) => {
+  const themeMode = useAppSelector(selectThemeMode);
+
   return (
     <Box
       sx={{
@@ -23,14 +34,16 @@ const AppBar: FC<Props> = ({ toggleDrawerMenu }) => {
             onClick={toggleDrawerMenu}>
             <MenuIcon />
           </IconButton>
-          <Typography
-            component={Link}
-            to="/"
-            color="#eee"
-            variant="h6"
-            sx={{ flexGrow: 1, textDecoration: 'none' }}>
-            BUJO TRACKER
-          </Typography>
+          <Link to="/">
+            <img
+              style={{
+                filter: themeMode === ThemeMode.DARK ? filterToLightBlueColor : 'invert(1)'
+              }}
+              height="40px"
+              src={AppLogo}
+              alt="App logo"
+            />
+          </Link>
         </Toolbar>
       </MuiAppBar>
     </Box>

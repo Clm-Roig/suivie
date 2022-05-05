@@ -1,6 +1,6 @@
 {
-  "name": "bujo-tracker",
-  "homepage": "https://clm-roig.github.io/bujo-tracker",
+  "name": "suivie",
+  "homepage": "https://clm-roig.github.io/suivie",
   "version": "0.1.14",
   "private": true,
   "dependencies": {
