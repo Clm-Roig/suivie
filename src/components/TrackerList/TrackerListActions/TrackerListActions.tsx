@@ -112,6 +112,9 @@ const TrackerListActions: FC<Props> = ({
           }}>
           <Tooltip
             arrow
+            // Fix delay enter / leave for mobile use
+            enterTouchDelay={50}
+            leaveTouchDelay={3000}
             title={
               selectedTrackers.length === 0 || !atLeastOneSelectedActive
                 ? ''
@@ -132,6 +135,9 @@ const TrackerListActions: FC<Props> = ({
           </MenuItem>
           <Tooltip
             arrow
+            // Fix delay enter / leave for mobile use
+            enterTouchDelay={50}
+            leaveTouchDelay={3000}
             title={
               selectedTrackers.length === 0 || !atLeastOneSelectedArchived
                 ? ''
