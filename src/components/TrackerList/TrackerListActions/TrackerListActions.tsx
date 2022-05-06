@@ -5,7 +5,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import MovingIcon from '@mui/icons-material/Moving';
 import SelectAllIcon from '@mui/icons-material/SelectAll';
 import SortIcon from '@mui/icons-material/Sort';
-import UnarchiveIcon from '@mui/icons-material/Unarchive';
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { VariantType, useSnackbar } from 'notistack';
@@ -17,8 +16,7 @@ import TrackerStatus from '../../../models/TrackerStatus';
 import {
   archiveTrackers,
   deleteTrackers,
-  markTrackersAsActive,
-  unarchiveTrackers
+  markTrackersAsActive
 } from '../../../store/trackers/trackersSlice';
 import Order from '../Order';
 
@@ -46,7 +44,6 @@ const TrackerListActions: FC<Props> = ({
     (t) => t.status === TrackerStatus.archived
   );
   const atLeastOneSelectedActive = selectedTrackers.some((t) => t.status === TrackerStatus.active);
-  const allSelectedArchived = selectedTrackers.every((t) => t.status === TrackerStatus.archived);
 
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -79,9 +76,6 @@ const TrackerListActions: FC<Props> = ({
   };
   const handlemarkTrackersAsActive = () => {
     handleAction(markTrackersAsActive, 'actif', 'success');
-  };
-  const handleUnrchiveTrackers = () => {
-    handleAction(unarchiveTrackers, 'désarchivé', 'success');
   };
 
   return (
@@ -149,24 +143,6 @@ const TrackerListActions: FC<Props> = ({
                 disabled={selectedTrackers.length === 0 || atLeastOneSelectedArchived}>
                 <ArchiveIcon />
                 &nbsp; Archiver
-              </MenuItem>
-            </span>
-          </Tooltip>
-          <Tooltip
-            arrow
-            title={
-              selectedTrackers.length === 0 || allSelectedArchived
-                ? ''
-                : 'Vous ne pouvez pas désarchiver un tracker non-archivé.'
-            }>
-            <span>
-              <MenuItem
-                onClick={handleUnrchiveTrackers}
-                disabled={
-                  selectedTrackers.length === 0 || !allSelectedArchived // You can't unarchive a tracker already unarchived
-                }>
-                <UnarchiveIcon />
-                &nbsp; Désarchiver
               </MenuItem>
             </span>
           </Tooltip>
