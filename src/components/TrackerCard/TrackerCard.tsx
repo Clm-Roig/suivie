@@ -47,6 +47,7 @@ const TrackerCard: FC<Props> = ({ tracker, cardProps }) => {
         cardActionsProps={sectionProps}
         onChipClick={onChipClick}
         selectedCompletions={selectedCompletions}
+        setSelectedCompletions={setSelectedCompletions}
         tracker={tracker}
       />
     </Card>
