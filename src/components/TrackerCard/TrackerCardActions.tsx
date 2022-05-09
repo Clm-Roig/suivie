@@ -2,7 +2,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { Box, CardActions, CardActionsProps, IconButton } from '@mui/material';
+import { Box, Button, CardActions, CardActionsProps, IconButton } from '@mui/material';
 import { isToday } from 'date-fns';
 import { useSnackbar } from 'notistack';
 import { FC, useState } from 'react';
@@ -11,6 +11,7 @@ import { useAppDispatch } from '../../app/hooks';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import {
+  cancelLatestEntry,
   completelyValidate,
   customValidate,
   hideTracker,
@@ -44,17 +45,27 @@ const TrackerCardActions: FC<Props> = ({
   const [isMakeVisibleOpen, setIsMakeVisibleOpen] = useState(false);
   const [isMakeHiddenOpen, setIsMakeHiddenOpen] = useState(false);
 
+  const cancelLatestValidation = () => {
+    dispatch(cancelLatestEntry(tracker.id));
+    enqueueSnackbar('Validation annulée', { variant: 'info' });
+  };
+  const CancelButton = () => (
+    <Button sx={{ color: 'white' }} onClick={cancelLatestValidation}>
+      ANNULER
+    </Button>
+  );
+
   const handleCompleteValidation = () => {
     dispatch(completelyValidate(tracker.id));
     setIsCompleteValidationOpen(false);
-    enqueueSnackbar('Tracker validé !', { variant: 'success' });
+    enqueueSnackbar('Tracker validé !', { variant: 'success', action: CancelButton });
   };
 
   const handleCustomValidation = (completions: Completion[]) => {
     dispatch(customValidate({ id: tracker.id, completions: completions }));
     setIsCustomValidationOpen(false);
     setSelectedCompletions([]);
-    enqueueSnackbar('Tracker validé !', { variant: 'success' });
+    enqueueSnackbar('Tracker validé !', { variant: 'success', action: CancelButton });
   };
 
   const handleMakeVisible = () => {

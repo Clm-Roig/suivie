@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import SliceStatus from '../../models/SliceStatus';
 import TrackersState from './TrackersState';
 import { archiveTrackerReducer, archiveTrackersReducer } from './reducers/archive';
+import { cancelLatestEntryReducer } from './reducers/cancelLatestEntry';
 import { createTrackerReducer } from './reducers/create';
 import { deleteTrackerReducer, deleteTrackersReducer } from './reducers/delete';
 import { editTrackerReducer } from './reducers/edit';
@@ -34,6 +35,7 @@ export const trackersSlice = createSlice({
   reducers: {
     archiveTracker: archiveTrackerReducer,
     archiveTrackers: archiveTrackersReducer,
+    cancelLatestEntry: cancelLatestEntryReducer,
     completelyValidate: completelyValidateReducer,
     createTracker: createTrackerReducer,
     customValidate: customValidateReducer,
@@ -53,6 +55,7 @@ export const trackersSlice = createSlice({
 export const {
   archiveTracker,
   archiveTrackers,
+  cancelLatestEntry,
   createTracker,
   completelyValidate,
   customValidate,
