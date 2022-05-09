@@ -64,6 +64,10 @@ function App() {
         <ThemeProvider theme={theme}>
           <MainContainer disableGutters maxWidth={'md'}>
             <SnackbarProvider
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'center'
+              }}
               dense
               maxSnack={3}
               ref={notistackRef}

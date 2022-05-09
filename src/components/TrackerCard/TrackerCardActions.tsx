@@ -23,8 +23,9 @@ import MakeVisibleValidationDialog from '../TrackerValidationDialog/MakeVisibleD
 
 interface Props {
   cardActionsProps?: CardActionsProps;
-  selectedCompletions?: Completion[];
   onChipClick?: (completion: Completion) => void;
+  selectedCompletions?: Completion[];
+  setSelectedCompletions: (completions: Completion[]) => void;
   tracker: Tracker;
 }
 
@@ -32,6 +33,7 @@ const TrackerCardActions: FC<Props> = ({
   cardActionsProps,
   onChipClick,
   selectedCompletions,
+  setSelectedCompletions,
   tracker
 }) => {
   const { requiredCompletions } = tracker;
@@ -51,6 +53,7 @@ const TrackerCardActions: FC<Props> = ({
   const handleCustomValidation = (completions: Completion[]) => {
     dispatch(customValidate({ id: tracker.id, completions: completions }));
     setIsCustomValidationOpen(false);
+    setSelectedCompletions([]);
     enqueueSnackbar('Tracker validé !', { variant: 'success' });
   };
 

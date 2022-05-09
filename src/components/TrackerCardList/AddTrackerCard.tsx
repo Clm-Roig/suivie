@@ -3,9 +3,11 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { Box, Card, CardActionArea, CardContent, CardProps, useTheme } from '@mui/material';
 import { FC, useState } from 'react';
 
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import ThemeMode from '../../models/ThemeMode';
+import Tracker from '../../models/Tracker';
 import { selectThemeMode } from '../../store/theme/theme.selectors';
+import { createTracker } from '../../store/trackers/trackersSlice';
 import defaultCardProps from '../TrackerCard/defaultCardProps';
 import TrackerForm from '../forms/TrackerForm/TrackerForm';
 
@@ -13,6 +15,7 @@ interface Props {
   cardProps?: CardProps;
 }
 const AddTrackerCard: FC<Props> = ({ cardProps }) => {
+  const dispatch = useAppDispatch();
   const [displayCreateForm, setDisplayCreateForm] = useState(false);
   const themeMode: ThemeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
@@ -27,6 +30,11 @@ const AddTrackerCard: FC<Props> = ({ cardProps }) => {
   const allCardProps = {
     ...defaultCardProps(themeMode, theme),
     ...cardProps
+  };
+
+  const onSubmit = (tracker: Tracker) => {
+    dispatch(createTracker(tracker));
+    setDisplayCreateForm(false);
   };
 
   return (
@@ -47,7 +55,7 @@ const AddTrackerCard: FC<Props> = ({ cardProps }) => {
       </CardActionArea>
       {displayCreateForm && (
         <CardContent>
-          <TrackerForm hideForm={() => setDisplayCreateForm(false)} />
+          <TrackerForm onSubmit={onSubmit} />
         </CardContent>
       )}
     </Card>
