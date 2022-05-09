@@ -4,10 +4,9 @@ import { FC, useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { v4 } from 'uuid';
 
-import { useAppDispatch } from '../../../app/hooks';
 import Completion from '../../../models/Completion';
+import Tracker from '../../../models/Tracker';
 import TrackerStatus from '../../../models/TrackerStatus';
-import { createTracker } from '../../../store/trackers/trackersSlice';
 import DefaultCompletionsForm from '../DefaultCompletionsForm/DefaultCompletionsForm';
 import RequiredCompletionsForm from '../RequiredCompletionsForm/RequiredCompletionsForm';
 import { FormValues } from './types';
@@ -24,14 +23,27 @@ const getDefaultValues = (): FormValues => ({
   status: TrackerStatus.active
 });
 
+const formatInitialValues = (initialValues: Tracker): FormValues => ({
+  ...initialValues,
+  duration: initialValues.duration ? initialValues.duration.toString() : '',
+  requiredCompletions: initialValues.requiredCompletions.map((rc) => ({
+    quantity: rc.quantity.toString(),
+    unit: rc.unit
+  }))
+});
+
 interface Props {
-  hideForm?: () => void;
+  initialValues?: Tracker;
+  onSubmit: (data: Tracker) => void;
 }
 
-const TrackerForm: FC<Props> = ({ hideForm }) => {
-  const dispatch = useAppDispatch();
+/**
+ * The TrackerForm handles both tracker creation and edition.
+ */
+const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
+  const isNewTracker = initialValues === undefined;
   const { control, handleSubmit, reset, watch } = useForm<FormValues>({
-    defaultValues: getDefaultValues()
+    defaultValues: initialValues ? formatInitialValues(initialValues) : getDefaultValues()
   });
   const defaultCompletions = watch('defaultCompletions');
   const requiredCompletions = watch('requiredCompletions');
@@ -45,7 +57,11 @@ const TrackerForm: FC<Props> = ({ hideForm }) => {
   });
 
   const resetToDefault = () => {
-    reset(getDefaultValues());
+    if (initialValues) {
+      reset(formatInitialValues(initialValues));
+    } else {
+      reset(getDefaultValues());
+    }
   };
 
   useEffect(() => {
@@ -58,25 +74,21 @@ const TrackerForm: FC<Props> = ({ hideForm }) => {
     }
   }, [requiredCompletions]);
 
-  const onSubmit = (data: FormValues) => {
+  const handleOnSubmit = (data: FormValues) => {
     const { beginDate, duration, requiredCompletions } = data;
-    dispatch(
-      createTracker({
-        ...data,
-        beginDate: beginDate.toString(),
-        duration: duration ? parseInt(duration) : undefined,
-        requiredCompletions: [
-          ...requiredCompletions.map((c) => ({
-            quantity: parseInt(c.quantity),
-            unit: c.unit
-          }))
-        ]
-      })
-    );
+    // Convert FormValues to Tracker
+    onSubmit({
+      ...data,
+      beginDate: beginDate.toString(),
+      duration: duration ? parseInt(duration) : undefined,
+      requiredCompletions: [
+        ...requiredCompletions.map((c) => ({
+          quantity: parseInt(c.quantity),
+          unit: c.unit
+        }))
+      ]
+    } as Tracker);
     resetToDefault();
-    if (hideForm) {
-      hideForm();
-    }
   };
 
   return (
@@ -186,8 +198,8 @@ const TrackerForm: FC<Props> = ({ hideForm }) => {
         )}
 
       <Stack direction="row" justifyContent="center" spacing={1}>
-        <Button type="submit" onClick={handleSubmit(onSubmit)} variant={'outlined'}>
-          Créer
+        <Button type="submit" onClick={handleSubmit(handleOnSubmit)} variant={'outlined'}>
+          {isNewTracker ? 'Créer' : 'Éditer'}
         </Button>
         <Button onClick={() => resetToDefault()}>Réinitialiser</Button>
       </Stack>
