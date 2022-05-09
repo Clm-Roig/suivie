@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/clm-roig/suivie/compare/v0.2.0...v0.2.1) (2022-05-09)
+
+
+### Bug Fixes
+
+* **customValidation:** empty selected completions after custom validation ([61caa75](https://github.com/clm-roig/suivie/commit/61caa75d14983ab719783700e1e11d97c2551c9e))
+* **lint:** make lint scripts cross platform by using glob pattern ([fcbfb25](https://github.com/clm-roig/suivie/commit/fcbfb251ee3630de1860dbf32b74f268484d0708))
+* **snackbar:** put snackbar on top center (instead of bottom left) ([802df2e](https://github.com/clm-roig/suivie/commit/802df2efa41266ad7fa05ad3975f22046c5c1ac9))
+* **trackerActions:** display tooltip on single touch on mobile ([8b85f26](https://github.com/clm-roig/suivie/commit/8b85f268c809f4004171debcd8c4ee7ecd9a1f5e))
+* **unarchive:** delete unarchive action (same as mark as active) ([f9806db](https://github.com/clm-roig/suivie/commit/f9806db263344dd8d7235cb599ea74dbeba2c1d4))
+
 ## [0.2.0](https://github.com/Clm-Roig/suivie/compare/v0.1.14...v0.2.0) (2022-05-05)
 
 ### Features
