@@ -5,6 +5,7 @@ import TrackersState from './TrackersState';
 import { archiveTrackerReducer, archiveTrackersReducer } from './reducers/archive';
 import { createTrackerReducer } from './reducers/create';
 import { deleteTrackerReducer, deleteTrackersReducer } from './reducers/delete';
+import { editTrackerReducer } from './reducers/edit';
 import { hideTrackerReducer } from './reducers/hide';
 import { markTrackerAsActiveReducer, markTrackersAsActiveReducer } from './reducers/markAsActive';
 import { markTrackerAsVisibleReducer } from './reducers/markAsVisible';
@@ -38,6 +39,7 @@ export const trackersSlice = createSlice({
     customValidate: customValidateReducer,
     deleteTracker: deleteTrackerReducer,
     deleteTrackers: deleteTrackersReducer,
+    editTracker: editTrackerReducer,
     hideTracker: hideTrackerReducer,
     markTrackersAsActive: markTrackersAsActiveReducer,
     markTrackerAsActive: markTrackerAsActiveReducer,
@@ -56,6 +58,7 @@ export const {
   customValidate,
   deleteTracker,
   deleteTrackers,
+  editTracker,
   hideTracker,
   markTrackerAsActive,
   markTrackersAsActive,
