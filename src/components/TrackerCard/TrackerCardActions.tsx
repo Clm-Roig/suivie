@@ -1,5 +1,5 @@
-import CheckIcon from '@mui/icons-material/Check';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Box, Button, CardActions, CardActionsProps, IconButton } from '@mui/material';
@@ -96,7 +96,7 @@ const TrackerCardActions: FC<Props> = ({
               color="primary"
               size="large"
               onClick={() => setIsCompleteValidationOpen(true)}>
-              <CheckIcon fontSize="large" />
+              <TaskAltIcon fontSize="large" />
             </IconButton>
 
             {requiredCompletions.length > 0 && (
@@ -104,7 +104,7 @@ const TrackerCardActions: FC<Props> = ({
                 color="primary"
                 size="large"
                 onClick={() => setIsCustomValidationOpen(true)}>
-                <CheckCircleIcon fontSize="large" />
+                <AddTaskIcon fontSize="large" />
               </IconButton>
             )}
           </>
