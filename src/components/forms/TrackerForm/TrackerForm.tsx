@@ -42,7 +42,7 @@ interface Props {
  */
 const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
   const isNewTracker = initialValues === undefined;
-  const { control, handleSubmit, reset, watch } = useForm<FormValues>({
+  const { control, handleSubmit, reset, setValue, watch } = useForm<FormValues>({
     defaultValues: initialValues ? formatInitialValues(initialValues) : getDefaultValues()
   });
   const defaultCompletions = watch('defaultCompletions');
@@ -177,6 +177,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
               quantity: Number(rc.quantity)
             } as Completion)
         )}
+        setValue={setValue}
       />
 
       {requiredCompletions.length > 0 &&
@@ -194,6 +195,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
                   quantity: Number(rc.quantity)
                 } as Completion)
             )}
+            setValue={setValue}
           />
         )}
 

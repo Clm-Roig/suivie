@@ -6,6 +6,10 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Completion from '../../../models/Completion';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 import CompletionUnitTextField from '../completions/CompletionUnitTextField';
+import {
+  computeDecrementedStringQuantity,
+  computeIncrementedStringQuantity
+} from '../completions/computeNewQuantity';
 
 export const FieldsetGrid = styled(Grid)`
   border-radius: 4px;
@@ -25,9 +29,6 @@ interface Props {
 /**
  * This form is used for entering some quantities on predefined completions.
  * Completions units are disabled within this form.
- *
- * @param {*} { completions, formId, onSubmit }
- * @return {*}
  */
 const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) => {
   const { control, handleSubmit, setValue, getValues } = useForm<FormValues>();
@@ -85,7 +86,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
                 pattern: /^\d+$/,
                 required: true
               }}
-              render={({ field: { onChange, value }, fieldState: { error } }) => {
+              render={({ field: { name, onChange, value }, fieldState: { error } }) => {
                 let errorText = '';
                 if (error) {
                   switch (error.type) {
@@ -104,20 +105,17 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
                 }
                 return (
                   <CompletionQuantityTextField
-                    error={!!error}
-                    helperText={error && errorText}
-                    label={'Quantité'}
-                    onChange={onChange}
-                    required
-                    size="small"
-                    inputProps={{
-                      style: {
-                        textAlign: 'right'
-                      }
+                    onDecrement={() => setValue(name, computeDecrementedStringQuantity(value))}
+                    onIncrement={() => setValue(name, computeIncrementedStringQuantity(value))}
+                    textFieldProps={{
+                      error: !!error,
+                      helperText: error && errorText,
+                      onChange: onChange,
+                      required: true,
+                      size: 'small',
+                      sx: { mb: 1 },
+                      value: value || ''
                     }}
-                    sx={{ mb: 1 }}
-                    style={{}}
-                    value={value || ''}
                   />
                 );
               }}

@@ -8,7 +8,8 @@ import {
   Controller,
   FieldArrayWithId,
   UseFieldArrayAppend,
-  UseFieldArrayRemove
+  UseFieldArrayRemove,
+  UseFormSetValue
 } from 'react-hook-form';
 
 import { useAppSelector } from '../../../app/hooks';
@@ -18,6 +19,10 @@ import { selectThemeMode } from '../../../store/theme/theme.selectors';
 import { FormValues } from '../TrackerForm/types';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 import CompletionUnitTextField from '../completions/CompletionUnitTextField';
+import {
+  computeDecrementedStringQuantity,
+  computeIncrementedStringQuantity
+} from '../completions/computeNewQuantity';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -29,16 +34,14 @@ interface Props {
   append: UseFieldArrayAppend<FormValues, 'requiredCompletions'>;
   control: Control<FormValues, any> /* eslint-disable-line @typescript-eslint/no-explicit-any */;
   fields: FieldArrayWithId<FormValues, 'requiredCompletions', 'id'>[];
-  requiredCompletions: Completion[];
   gridProps?: GridProps;
   remove: UseFieldArrayRemove;
+  requiredCompletions: Completion[];
+  setValue: UseFormSetValue<FormValues>;
 }
 
 /**
  * This forms is used to create one or many requiredCompletions for a new tracker.
- *
- * @param {*} { append, control, fields, gridProps, remove }
- * @return {*}
  */
 const RequiredCompletionsForm: FC<Props> = ({
   append,
@@ -46,7 +49,8 @@ const RequiredCompletionsForm: FC<Props> = ({
   fields,
   requiredCompletions,
   gridProps,
-  remove
+  remove,
+  setValue
 }) => {
   const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
@@ -80,7 +84,7 @@ const RequiredCompletionsForm: FC<Props> = ({
                 pattern: /^\d+$/,
                 required: true
               }}
-              render={({ field: { onChange, value }, fieldState: { error } }) => {
+              render={({ field: { onChange, value, name }, fieldState: { error } }) => {
                 let errorText = '';
                 if (error) {
                   switch (error.type) {
@@ -99,20 +103,17 @@ const RequiredCompletionsForm: FC<Props> = ({
                 }
                 return (
                   <CompletionQuantityTextField
-                    error={!!error}
-                    helperText={error && errorText}
-                    label={'Quantité'}
-                    onChange={onChange}
-                    required
-                    size="small"
-                    inputProps={{
-                      style: {
-                        textAlign: 'right'
-                      }
+                    onDecrement={() => setValue(name, computeDecrementedStringQuantity(value))}
+                    onIncrement={() => setValue(name, computeIncrementedStringQuantity(value))}
+                    textFieldProps={{
+                      error: !!error,
+                      helperText: error && errorText,
+                      onChange: onChange,
+                      required: true,
+                      size: 'small',
+                      sx: { mb: 1 },
+                      value: value || ''
                     }}
-                    sx={{ mb: 1 }}
-                    style={{}}
-                    value={value || ''}
                   />
                 );
               }}
