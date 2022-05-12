@@ -80,10 +80,11 @@ const TrackerCardContent: FC<Props> = ({
             />
           </Stack>
         ) : (
-          <>
-            <Typography>Effectués :</Typography>
+          <Stack alignItems="center" direction="row">
+            <TextWrapper>Réalisés</TextWrapper>
+            &nbsp;
             <CompletionChipList completions={aggTodayCompletions} />
-          </>
+          </Stack>
         )}
       </Stack>
     </CardContent>
