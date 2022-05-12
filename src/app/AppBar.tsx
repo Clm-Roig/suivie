@@ -26,7 +26,7 @@ const AppBar: FC<Props> = ({ toggleDrawerMenu }) => {
             <MenuIcon />
           </IconButton>
           <Link to="/">
-            <AppLogo />
+            <AppLogo height="40px" />
           </Link>
         </Toolbar>
       </MuiAppBar>

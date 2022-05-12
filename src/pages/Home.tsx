@@ -2,7 +2,7 @@ import { Box, Button, List, ListItemText, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../app/hooks';
-import { APP_NAME } from '../config/Constants';
+import AppLogo from '../components/AppLogo';
 import { selectThemeMode } from '../store/theme/theme.selectors';
 
 const Home = () => {
@@ -18,9 +18,9 @@ const Home = () => {
           fontWeight: 'bold',
           textDecoration: 'none'
         }}>
-        {APP_NAME}
+        <AppLogo height="90px" color="lightBlue" />
       </Typography>
-      <List sx={{ my: 2 }}>
+      <List>
         <ListItemText primary={'✨ Suivez vos habitudes'} />
         <ListItemText primary={'✅ Complétez vos objectifs'} />
         <ListItemText primary={'📊 Consultez vos statistiques à tout moment'} />
