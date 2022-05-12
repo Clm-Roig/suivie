@@ -25,7 +25,7 @@ const CompletionChipList: FC<Props> = ({
     }
   };
   return (
-    <Box display="flex" gap={0.5} flexWrap={'wrap'} sx={{ justifyContent: 'center' }} {...boxProps}>
+    <Box display="flex" gap={0.5} flexWrap={'wrap'} {...boxProps} overflow="hidden">
       {completions.map((c, idx) => (
         <CompletionChip
           key={c.quantity.toString() + idx}

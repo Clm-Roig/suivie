@@ -1,8 +1,8 @@
-import CheckIcon from '@mui/icons-material/Check';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { Box, CardActions, CardActionsProps, IconButton } from '@mui/material';
+import { Box, Button, CardActions, CardActionsProps, IconButton } from '@mui/material';
 import { isToday } from 'date-fns';
 import { useSnackbar } from 'notistack';
 import { FC, useState } from 'react';
@@ -11,6 +11,7 @@ import { useAppDispatch } from '../../app/hooks';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import {
+  cancelLatestEntry,
   completelyValidate,
   customValidate,
   hideTracker,
@@ -44,17 +45,27 @@ const TrackerCardActions: FC<Props> = ({
   const [isMakeVisibleOpen, setIsMakeVisibleOpen] = useState(false);
   const [isMakeHiddenOpen, setIsMakeHiddenOpen] = useState(false);
 
+  const cancelLatestValidation = () => {
+    dispatch(cancelLatestEntry(tracker.id));
+    enqueueSnackbar('Validation annulée', { variant: 'info' });
+  };
+  const CancelButton = () => (
+    <Button sx={{ color: 'white' }} onClick={cancelLatestValidation}>
+      ANNULER
+    </Button>
+  );
+
   const handleCompleteValidation = () => {
     dispatch(completelyValidate(tracker.id));
     setIsCompleteValidationOpen(false);
-    enqueueSnackbar('Tracker validé !', { variant: 'success' });
+    enqueueSnackbar('Tracker validé !', { variant: 'success', action: CancelButton });
   };
 
   const handleCustomValidation = (completions: Completion[]) => {
     dispatch(customValidate({ id: tracker.id, completions: completions }));
     setIsCustomValidationOpen(false);
     setSelectedCompletions([]);
-    enqueueSnackbar('Tracker validé !', { variant: 'success' });
+    enqueueSnackbar('Tracker validé !', { variant: 'success', action: CancelButton });
   };
 
   const handleMakeVisible = () => {
@@ -85,7 +96,7 @@ const TrackerCardActions: FC<Props> = ({
               color="primary"
               size="large"
               onClick={() => setIsCompleteValidationOpen(true)}>
-              <CheckIcon fontSize="large" />
+              <TaskAltIcon fontSize="large" />
             </IconButton>
 
             {requiredCompletions.length > 0 && (
@@ -93,7 +104,7 @@ const TrackerCardActions: FC<Props> = ({
                 color="primary"
                 size="large"
                 onClick={() => setIsCustomValidationOpen(true)}>
-                <CheckCircleIcon fontSize="large" />
+                <AddTaskIcon fontSize="large" />
               </IconButton>
             )}
           </>
@@ -112,10 +123,7 @@ const TrackerCardActions: FC<Props> = ({
       <CompleteValidationDialog
         dialogProps={{
           open: isCompleteValidationOpen,
-          onClose: () => setIsCompleteValidationOpen(false),
-          sx: {
-            '.MuiDialog-paper': { bgcolor: 'secondary' }
-          }
+          onClose: () => setIsCompleteValidationOpen(false)
         }}
         onValidation={handleCompleteValidation}
         tracker={tracker}
@@ -123,10 +131,7 @@ const TrackerCardActions: FC<Props> = ({
       <CustomValidationDialog
         dialogProps={{
           open: isCustomValidationOpen,
-          onClose: () => setIsCustomValidationOpen(false),
-          sx: {
-            '.MuiDialog-paper': { bgcolor: 'secondary' }
-          }
+          onClose: () => setIsCustomValidationOpen(false)
         }}
         onChipClick={onChipClick}
         onValidation={handleCustomValidation}
@@ -136,10 +141,7 @@ const TrackerCardActions: FC<Props> = ({
       <MakeVisibleValidationDialog
         dialogProps={{
           open: isMakeVisibleOpen,
-          onClose: () => setIsMakeVisibleOpen(false),
-          sx: {
-            '.MuiDialog-paper': { bgcolor: 'secondary' }
-          }
+          onClose: () => setIsMakeVisibleOpen(false)
         }}
         onValidation={handleMakeVisible}
         tracker={tracker}
@@ -147,10 +149,7 @@ const TrackerCardActions: FC<Props> = ({
       <MakeHiddenDialog
         dialogProps={{
           open: isMakeHiddenOpen,
-          onClose: () => setIsMakeHiddenOpen(false),
-          sx: {
-            '.MuiDialog-paper': { bgcolor: 'secondary' }
-          }
+          onClose: () => setIsMakeHiddenOpen(false)
         }}
         onValidation={handleMakeHidden}
         tracker={tracker}

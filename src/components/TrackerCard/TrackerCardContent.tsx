@@ -1,10 +1,16 @@
-import { CardContent, CardContentProps, Typography } from '@mui/material';
+import styled from '@emotion/styled';
+import { CardContent, CardContentProps, Divider, Stack, Typography } from '@mui/material';
 import { isToday } from 'date-fns';
 import { FC } from 'react';
 
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import CompletionChipList from '../CompletionChipList/CompletionChipList';
+
+const TextWrapper = styled(Typography)`
+  font-weight: bold;
+  min-width: 64px;
+`;
 
 interface Props {
   cardContentProps?: CardContentProps;
@@ -52,30 +58,34 @@ const TrackerCardContent: FC<Props> = ({
 
   return (
     <CardContent {...cardContentProps}>
-      {requiredCompletions.length > 0 && (
-        <>
-          <Typography>Requis :</Typography>
-          <CompletionChipList
-            completions={requiredCompletions}
-            onChipClick={onChipClick}
-            selectedCompletions={selectedCompletions}
-          />
-        </>
-      )}
-      {remainingCompletions.length > 0 ? (
-        <>
-          <Typography>Restants :</Typography>
-          <CompletionChipList
-            completions={remainingCompletions}
-            requiredCompletions={requiredCompletions}
-          />
-        </>
-      ) : (
-        <>
-          <Typography>Effectués :</Typography>
-          <CompletionChipList completions={aggTodayCompletions} />
-        </>
-      )}
+      <Stack divider={<Divider />} spacing={1}>
+        {requiredCompletions.length > 0 && (
+          <Stack alignItems="center" direction="row">
+            <TextWrapper>Requis</TextWrapper>
+            &nbsp;
+            <CompletionChipList
+              completions={requiredCompletions}
+              onChipClick={onChipClick}
+              selectedCompletions={selectedCompletions}
+            />
+          </Stack>
+        )}
+        {remainingCompletions.length > 0 ? (
+          <Stack alignItems="center" direction="row">
+            <TextWrapper>Reste</TextWrapper>
+            &nbsp;
+            <CompletionChipList
+              completions={remainingCompletions}
+              requiredCompletions={requiredCompletions}
+            />
+          </Stack>
+        ) : (
+          <>
+            <Typography>Effectués :</Typography>
+            <CompletionChipList completions={aggTodayCompletions} />
+          </>
+        )}
+      </Stack>
     </CardContent>
   );
 };

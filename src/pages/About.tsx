@@ -24,7 +24,7 @@ function About() {
           </Typography>
           <Typography>
             Merci à <ExternalLink href="https://laurakaczmarek.fr">Laura KACZMAREK</ExternalLink>{' '}
-            pour le design ❤
+            pour le logo et le design ❤
           </Typography>
           <Typography>
             Code source disponible sur{' '}

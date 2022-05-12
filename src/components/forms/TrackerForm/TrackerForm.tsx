@@ -42,7 +42,7 @@ interface Props {
  */
 const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
   const isNewTracker = initialValues === undefined;
-  const { control, handleSubmit, reset, watch } = useForm<FormValues>({
+  const { control, handleSubmit, reset, setValue, watch } = useForm<FormValues>({
     defaultValues: initialValues ? formatInitialValues(initialValues) : getDefaultValues()
   });
   const defaultCompletions = watch('defaultCompletions');
@@ -138,14 +138,14 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
         control={control}
         name={'duration'}
         rules={{
-          min: 0,
+          min: 1,
           pattern: /^\d+$/
         }}
         render={({ field: { onChange, value }, fieldState: { error } }) => {
           let errorText = '';
           if (error) {
             if (error.type === 'min') {
-              errorText = 'La durée doit être supérieure à 0.';
+              errorText = 'La durée doit être supérieure ou égale à 1.';
             }
             if (error.type === 'pattern') {
               errorText = 'La durée doit être un nombre (de jours).';
@@ -177,6 +177,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
               quantity: Number(rc.quantity)
             } as Completion)
         )}
+        setValue={setValue}
       />
 
       {requiredCompletions.length > 0 &&
@@ -194,6 +195,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
                   quantity: Number(rc.quantity)
                 } as Completion)
             )}
+            setValue={setValue}
           />
         )}
 

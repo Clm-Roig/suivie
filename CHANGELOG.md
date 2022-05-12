@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.2](https://github.com/clm-roig/suivie/compare/v0.2.1...v0.2.2) (2022-05-12)
+
+
+### Features
+
+* **cancelLatestEntry:** add cancel latest entry feature ([833f465](https://github.com/clm-roig/suivie/commit/833f4650de59ae99212aec3fa1d69b122a3c2094))
+* **quantity:** add increment & decrement buttons ([2a530a5](https://github.com/clm-roig/suivie/commit/2a530a5c561ec909b04ade392259c3f5ec3a5c0d))
+
+
+### Bug Fixes
+
+* **cardActions:** use new icons ([a736f69](https://github.com/clm-roig/suivie/commit/a736f6994df1e2ac12208a5a64599c88b420b5d3))
+* **completionChip:** improve chip UX ([1bd11aa](https://github.com/clm-roig/suivie/commit/1bd11aade34dc5829dd85995da0ab57f3e832a95))
+* **homePage:** use app logo instead of app name ([f557746](https://github.com/clm-roig/suivie/commit/f55774629c7bd8d3e779385ca2f0713d04440a0a))
+* **lint:** fix linting error ([8070864](https://github.com/clm-roig/suivie/commit/80708641d393367f7fd3c5f25891bd1576683951))
+* **quantityAndDuration:** set min value to 1 (instead of 0) ([dca6cc8](https://github.com/clm-roig/suivie/commit/dca6cc8a31b64beed78cfd3bd072015dd16d83ae))
+* **trackerCardActions:** remove useless sx ([b28bfe6](https://github.com/clm-roig/suivie/commit/b28bfe63adf8533e24702ad9b482264475fe6021))
+
 ### [0.2.1](https://github.com/clm-roig/suivie/compare/v0.2.0...v0.2.1) (2022-05-09)
 
 
