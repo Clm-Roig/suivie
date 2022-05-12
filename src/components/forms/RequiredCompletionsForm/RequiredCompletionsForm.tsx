@@ -80,7 +80,7 @@ const RequiredCompletionsForm: FC<Props> = ({
               control={control}
               name={`requiredCompletions.${index}.quantity` as const}
               rules={{
-                min: 0,
+                min: 1,
                 pattern: /^\d+$/,
                 required: true
               }}
@@ -89,7 +89,7 @@ const RequiredCompletionsForm: FC<Props> = ({
                 if (error) {
                   switch (error.type) {
                     case 'min':
-                      errorText = 'La quantité doit être supérieure à 0.';
+                      errorText = 'La quantité doit être supérieure ou égale à 1.';
                       break;
 
                     case 'pattern':

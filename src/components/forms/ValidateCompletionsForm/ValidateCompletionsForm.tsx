@@ -82,7 +82,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
               control={control}
               name={`completions.${index}.quantity` as const}
               rules={{
-                min: 0,
+                min: 1,
                 pattern: /^\d+$/,
                 required: true
               }}
@@ -91,7 +91,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
                 if (error) {
                   switch (error.type) {
                     case 'min':
-                      errorText = 'La quantité doit être supérieure à 0.';
+                      errorText = 'La quantité doit être supérieure ou égale à 1.';
                       break;
 
                     case 'pattern':

@@ -138,14 +138,14 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
         control={control}
         name={'duration'}
         rules={{
-          min: 0,
+          min: 1,
           pattern: /^\d+$/
         }}
         render={({ field: { onChange, value }, fieldState: { error } }) => {
           let errorText = '';
           if (error) {
             if (error.type === 'min') {
-              errorText = 'La durée doit être supérieure à 0.';
+              errorText = 'La durée doit être supérieure ou égale à 1.';
             }
             if (error.type === 'pattern') {
               errorText = 'La durée doit être un nombre (de jours).';
