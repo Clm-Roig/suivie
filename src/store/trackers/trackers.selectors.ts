@@ -9,6 +9,10 @@ import {
   removeHiddenTrackers
 } from './utils';
 
+const selectTracker = (state: RootState, trackerId: string) => {
+  return state.trackers.trackers.find((t) => t.id === trackerId);
+};
+
 const selectHiddenTrackers = (state: RootState) => {
   const newTrackers = removeArchivedTrackers(
     formatTrackers(state.trackers.trackers).filter((t) => t.dateHidden !== undefined)
@@ -49,7 +53,7 @@ const selectAllTrackers = (state: RootState) => {
 };
 
 const selectYearEntries = (state: RootState, yearDate: Date, trackerId: string): TrackerEntry[] => {
-  const tracker = state.trackers.trackers.find((t) => t.id === trackerId);
+  const tracker = selectTracker(state, trackerId);
   if (tracker) {
     return tracker.entries.filter((e) => isSameYear(yearDate, new Date(e.date)));
   } else return [];
@@ -60,7 +64,7 @@ const selectMonthEntries = (
   monthDate: Date,
   trackerId: string
 ): TrackerEntry[] => {
-  const tracker = state.trackers.trackers.find((t) => t.id === trackerId);
+  const tracker = selectTracker(state, trackerId);
   if (tracker) {
     return tracker.entries.filter((e) => isSameMonth(monthDate, new Date(e.date)));
   } else return [];
@@ -71,7 +75,7 @@ const selectWeekEntries = (
   beginDate: Date,
   trackerId: string
 ): TrackerEntry[] => {
-  const tracker = state.trackers.trackers.find((t) => t.id === trackerId);
+  const tracker = selectTracker(state, trackerId);
   if (tracker) {
     return tracker.entries
       .filter((e) => {
