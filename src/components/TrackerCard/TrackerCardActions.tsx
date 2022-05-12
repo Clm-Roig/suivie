@@ -123,10 +123,7 @@ const TrackerCardActions: FC<Props> = ({
       <CompleteValidationDialog
         dialogProps={{
           open: isCompleteValidationOpen,
-          onClose: () => setIsCompleteValidationOpen(false),
-          sx: {
-            '.MuiDialog-paper': { bgcolor: 'secondary' }
-          }
+          onClose: () => setIsCompleteValidationOpen(false)
         }}
         onValidation={handleCompleteValidation}
         tracker={tracker}
@@ -134,10 +131,7 @@ const TrackerCardActions: FC<Props> = ({
       <CustomValidationDialog
         dialogProps={{
           open: isCustomValidationOpen,
-          onClose: () => setIsCustomValidationOpen(false),
-          sx: {
-            '.MuiDialog-paper': { bgcolor: 'secondary' }
-          }
+          onClose: () => setIsCustomValidationOpen(false)
         }}
         onChipClick={onChipClick}
         onValidation={handleCustomValidation}
@@ -147,10 +141,7 @@ const TrackerCardActions: FC<Props> = ({
       <MakeVisibleValidationDialog
         dialogProps={{
           open: isMakeVisibleOpen,
-          onClose: () => setIsMakeVisibleOpen(false),
-          sx: {
-            '.MuiDialog-paper': { bgcolor: 'secondary' }
-          }
+          onClose: () => setIsMakeVisibleOpen(false)
         }}
         onValidation={handleMakeVisible}
         tracker={tracker}
@@ -158,10 +149,7 @@ const TrackerCardActions: FC<Props> = ({
       <MakeHiddenDialog
         dialogProps={{
           open: isMakeHiddenOpen,
-          onClose: () => setIsMakeHiddenOpen(false),
-          sx: {
-            '.MuiDialog-paper': { bgcolor: 'secondary' }
-          }
+          onClose: () => setIsMakeHiddenOpen(false)
         }}
         onValidation={handleMakeHidden}
         tracker={tracker}

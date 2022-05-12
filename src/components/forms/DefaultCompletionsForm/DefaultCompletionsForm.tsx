@@ -21,7 +21,8 @@ import {
   Controller,
   FieldArrayWithId,
   UseFieldArrayAppend,
-  UseFieldArrayRemove
+  UseFieldArrayRemove,
+  UseFormSetValue
 } from 'react-hook-form';
 
 import { useAppSelector } from '../../../app/hooks';
@@ -31,6 +32,10 @@ import { selectThemeMode } from '../../../store/theme/theme.selectors';
 import { FormValues } from '../TrackerForm/types';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 import CompletionUnitSelect from '../completions/CompletionUnitSelect';
+import {
+  computeDecrementedQuantity,
+  computeIncrementedQuantity
+} from '../completions/computeNewQuantity';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -46,6 +51,7 @@ interface Props {
   gridProps?: GridProps;
   remove: UseFieldArrayRemove;
   requiredCompletions: Completion[];
+  setValue: UseFormSetValue<FormValues>;
 }
 
 const DefaultCompletionsForm: FC<Props> = ({
@@ -55,7 +61,8 @@ const DefaultCompletionsForm: FC<Props> = ({
   fields,
   gridProps,
   remove,
-  requiredCompletions
+  requiredCompletions,
+  setValue
 }) => {
   const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
@@ -80,16 +87,16 @@ const DefaultCompletionsForm: FC<Props> = ({
               control={control}
               name={`defaultCompletions.${index}.quantity` as const}
               rules={{
-                min: 0,
+                min: 1,
                 pattern: /^\d+$/,
                 required: true
               }}
-              render={({ field: { onChange, value }, fieldState: { error } }) => {
+              render={({ field: { name, onChange, value }, fieldState: { error } }) => {
                 let errorText = '';
                 if (error) {
                   switch (error.type) {
                     case 'min':
-                      errorText = 'La quantité doit être supérieure à 0.';
+                      errorText = 'La quantité doit être supérieure ou égale à 1.';
                       break;
 
                     case 'pattern':
@@ -103,20 +110,17 @@ const DefaultCompletionsForm: FC<Props> = ({
                 }
                 return (
                   <CompletionQuantityTextField
-                    error={!!error}
-                    helperText={error && errorText}
-                    label={'Quantité'}
-                    onChange={onChange}
-                    required
-                    size="small"
-                    inputProps={{
-                      style: {
-                        textAlign: 'right'
-                      }
+                    onDecrement={() => setValue(name, computeDecrementedQuantity(value))}
+                    onIncrement={() => setValue(name, computeIncrementedQuantity(value))}
+                    textFieldProps={{
+                      error: !!error,
+                      helperText: error && errorText,
+                      onChange: onChange,
+                      required: true,
+                      size: 'small',
+                      sx: { mb: 1 },
+                      value: value || ''
                     }}
-                    sx={{ mb: 1 }}
-                    style={{}}
-                    value={value || ''}
                   />
                 );
               }}
