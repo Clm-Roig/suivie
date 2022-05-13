@@ -45,7 +45,7 @@ const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
     setAnchorEl(null);
   };
   const handleArchiveTracker = () => {
-    dispatch(archiveTracker(id));
+    dispatch(archiveTracker({ id: id }));
     closeMoreMenu();
     enqueueSnackbar('Tracker archivé !', {
       variant: 'info'

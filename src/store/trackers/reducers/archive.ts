@@ -5,21 +5,33 @@ import TrackerStatus from '../../../models/TrackerStatus';
 import TrackersState from '../TrackersState';
 import { getTrackers } from './utils';
 
-const archiveTrackerReducer = (state: TrackersState, action: PayloadAction<Tracker['id']>) => {
-  const idx = state.trackers.findIndex((t) => t.id === action.payload);
+type PayloadType = {
+  id: Tracker['id'];
+  archiveDate?: Date;
+};
+
+const archiveTrackerReducer = (state: TrackersState, action: PayloadAction<PayloadType>) => {
+  const { id, archiveDate } = action.payload;
+  const idx = state.trackers.findIndex((t) => t.id === id);
   if (idx !== -1) {
-    state.trackers[idx].endDate = new Date().toString();
+    state.trackers[idx].endDate = (archiveDate ? archiveDate : new Date()).toString();
     state.trackers[idx].status = TrackerStatus.ARCHIVED;
   }
 };
 
+type MultiplePayloadType = {
+  trackerIds: Array<Tracker['id']>;
+  archiveDate?: Date;
+};
+
 const archiveTrackersReducer = (
   state: TrackersState,
-  action: PayloadAction<Array<Tracker['id']>>
+  action: PayloadAction<MultiplePayloadType>
 ) => {
-  const filteredTrackers = getTrackers(state, action.payload);
+  const { trackerIds, archiveDate } = action.payload;
+  const filteredTrackers = getTrackers(state, trackerIds);
   for (const tracker of filteredTrackers) {
-    tracker.endDate = new Date().toString();
+    tracker.endDate = (archiveDate ? archiveDate : new Date()).toString();
     tracker.status = TrackerStatus.ARCHIVED;
   }
 };
