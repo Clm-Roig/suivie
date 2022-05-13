@@ -81,7 +81,7 @@ const TrackerCardActions: FC<Props> = ({
   };
 
   const handleMakeHidden = () => {
-    dispatch(hideTracker(tracker.id));
+    dispatch(hideTracker({ id: tracker.id }));
     setIsMakeHiddenOpen(false);
     enqueueSnackbar('Tracker masqué !', { variant: 'success' });
   };
