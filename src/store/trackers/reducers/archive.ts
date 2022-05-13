@@ -1,37 +1,32 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
-import Tracker from '../../../models/Tracker';
 import TrackerStatus from '../../../models/TrackerStatus';
 import TrackersState from '../TrackersState';
+import { MultipleTrackerIdsAndDate, TrackerIdAndDate } from './types';
 import { getTrackers } from './utils';
 
-type PayloadType = {
-  id: Tracker['id'];
-  archiveDate?: Date;
-};
-
-const archiveTrackerReducer = (state: TrackersState, action: PayloadAction<PayloadType>) => {
-  const { id, archiveDate } = action.payload;
+const archiveTrackerReducer = (state: TrackersState, action: PayloadAction<TrackerIdAndDate>) => {
+  const { id, date } = action.payload;
   const idx = state.trackers.findIndex((t) => t.id === id);
   if (idx !== -1) {
+<<<<<<< develop
     state.trackers[idx].endDate = (archiveDate ? archiveDate : new Date()).toString();
     state.trackers[idx].status = TrackerStatus.ARCHIVED;
+=======
+    state.trackers[idx].endDate = (date ? date : new Date()).toString();
+    state.trackers[idx].status = TrackerStatus.archived;
+>>>>>>> refactor(payloadType): refactor tracker action payload
   }
-};
-
-type MultiplePayloadType = {
-  trackerIds: Array<Tracker['id']>;
-  archiveDate?: Date;
 };
 
 const archiveTrackersReducer = (
   state: TrackersState,
-  action: PayloadAction<MultiplePayloadType>
+  action: PayloadAction<MultipleTrackerIdsAndDate>
 ) => {
-  const { trackerIds, archiveDate } = action.payload;
+  const { trackerIds, date } = action.payload;
   const filteredTrackers = getTrackers(state, trackerIds);
   for (const tracker of filteredTrackers) {
-    tracker.endDate = (archiveDate ? archiveDate : new Date()).toString();
+    tracker.endDate = (date ? date : new Date()).toString();
     tracker.status = TrackerStatus.ARCHIVED;
   }
 };
