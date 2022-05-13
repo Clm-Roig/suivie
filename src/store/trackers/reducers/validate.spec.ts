@@ -1,13 +1,17 @@
+import { isSameDay, subDays } from 'date-fns';
+
 import SliceStatus from '../../../models/SliceStatus';
 import { testTracker1, testTracker1Id } from '../FAKE_DATA';
 import trackersReducer, { completelyValidate, customValidate } from '../trackersSlice';
 
+const sevenDaysAgo = subDays(new Date(), 7);
+
 describe('trackers reducer', () => {
   describe('Tracker validation', () => {
-    it('should handle a tracker complete validation', () => {
+    it('should handle a tracker complete validation at a given date', () => {
       const finalState = trackersReducer(
         { error: {}, status: SliceStatus.IDLE, trackers: [testTracker1] },
-        completelyValidate(testTracker1Id)
+        completelyValidate({ id: testTracker1Id, date: sevenDaysAgo })
       );
 
       const res = finalState.trackers[0];
@@ -17,9 +21,10 @@ describe('trackers reducer', () => {
       const entry = entries[0];
       expect(entry.completions).toEqual(testTracker1.requiredCompletions);
       expect(entry.trackerId).toEqual(testTracker1.id);
+      expect(isSameDay(new Date(entry.date), sevenDaysAgo)).toBeTruthy();
     });
 
-    it('should handle a tracker custom validation', () => {
+    it('should handle a tracker custom validation at a given date', () => {
       const partialCompletions = [
         {
           quantity: 5,
@@ -32,7 +37,7 @@ describe('trackers reducer', () => {
       ];
       const finalState = trackersReducer(
         { error: {}, status: SliceStatus.IDLE, trackers: [testTracker1] },
-        customValidate({ id: testTracker1Id, completions: partialCompletions })
+        customValidate({ id: testTracker1Id, completions: partialCompletions, date: sevenDaysAgo })
       );
 
       const res = finalState.trackers[0];
@@ -42,6 +47,7 @@ describe('trackers reducer', () => {
       const entry = entries[0];
       expect(entry.completions).toEqual(partialCompletions);
       expect(entry.trackerId).toEqual(testTracker1.id);
+      expect(isSameDay(new Date(entry.date), sevenDaysAgo)).toBeTruthy();
     });
   });
 });

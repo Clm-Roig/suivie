@@ -62,7 +62,7 @@ const TrackerCardActions: FC<Props> = ({
   );
 
   const handleCompleteValidation = () => {
-    dispatch(completelyValidate(tracker.id));
+    dispatch(completelyValidate({ id: tracker.id }));
     setIsCompleteValidationOpen(false);
     enqueueSnackbar('Tracker validé !', { variant: 'success', action: CancelSnackbarActions });
   };
