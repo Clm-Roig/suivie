@@ -38,7 +38,7 @@ function Trackers() {
   const actions = [
     {
       icon: <ViewListIcon />,
-      name: 'Voir tous les trackers',
+      name: 'Voir tous mes trackers',
       onClick: () => navigate('/all-trackers')
     }
   ];
