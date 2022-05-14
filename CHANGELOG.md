@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.3](https://github.com/clm-roig/suivie/compare/v0.2.2...v0.2.3) (2022-05-14)
+
+
+### Features
+
+* **archiveTracker:** accept date parameter ([488b394](https://github.com/clm-roig/suivie/commit/488b39492ddf71703555ce373a770826bf91284c))
+* **cancelLatestEntry:** add a close icon ([38acfe0](https://github.com/clm-roig/suivie/commit/38acfe0047548442cc3fb9497df5c0883bc95553))
+* **hideTracker:** accept date parameter ([ddbeea9](https://github.com/clm-roig/suivie/commit/ddbeea912bce6f64ce5be48962fc23371bf6fb43))
+* **selectTrackers:** accept date parameter ([25f1cfd](https://github.com/clm-roig/suivie/commit/25f1cfde3314177024c152c0b278175fde6b1ead))
+* **validateTracker:** accept date parameter ([081894d](https://github.com/clm-roig/suivie/commit/081894d46b146e9e427cb011032966a78706d105))
+* **validateTrackersPage:** change date ([f41f652](https://github.com/clm-roig/suivie/commit/f41f65299fbc9158a66cd62b399ada15c79059a3))
+* **validateTrackersPage:** validate a tracker in the past ([2d68c36](https://github.com/clm-roig/suivie/commit/2d68c36c40c47617410c3bae254c607a9ddd6b7d))
+
+
+### Bug Fixes
+
+* **actionDate:** use string instead of date ([91e6bcb](https://github.com/clm-roig/suivie/commit/91e6bcb11d93d117c8910db1b4443f83e0f9166c))
+* **cancelLatestEntry:** remove sort (they are already ordered) ([2c3a281](https://github.com/clm-roig/suivie/commit/2c3a28147ba67aa7312a53308980d22eef59c918))
+* **donecompletions:** use appropriate style and word ([3b79286](https://github.com/clm-roig/suivie/commit/3b79286b33588782c9296d3992e72b356e647aa5))
+* **enum:** use string in enums ([c88e97b](https://github.com/clm-roig/suivie/commit/c88e97baf9e185198ac842483b2b03cdaf9ab370))
+* **WeekPickerToolbar:** fix required typing ([d195e43](https://github.com/clm-roig/suivie/commit/d195e43b0cb651587acff54449a63d9475397690))
+* **wording:** fix some labels and wordings ([5abc575](https://github.com/clm-roig/suivie/commit/5abc5754ee6b9add197982032a9d0ecd5662492b))
+
 ### [0.2.2](https://github.com/clm-roig/suivie/compare/v0.2.1...v0.2.2) (2022-05-12)
 
 
