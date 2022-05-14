@@ -78,7 +78,7 @@ export const computeNewStatus = (tracker: Tracker) => {
     (remainingDays !== undefined && remainingDays < 0) ||
     (duration && isBefore(addDays(new Date(beginDate), duration), new Date()))
   ) {
-    newStatus = TrackerStatus.archived;
+    newStatus = TrackerStatus.ARCHIVED;
   }
 
   return newStatus;
@@ -112,7 +112,7 @@ export const formatTrackers = (trackers: Tracker[]) => {
 };
 
 export const removeArchivedTrackers = (trackers: Tracker[]) =>
-  trackers.filter((t) => t.status !== TrackerStatus.archived);
+  trackers.filter((t) => t.status !== TrackerStatus.ARCHIVED);
 
 export const removeDoneTrackers = (trackers: Tracker[]) =>
   trackers.filter((t) => !t.isDoneForToday);

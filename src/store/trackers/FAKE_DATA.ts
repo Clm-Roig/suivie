@@ -33,7 +33,7 @@ export const testTracker1: Tracker = {
       unit: 'squats'
     }
   ],
-  status: TrackerStatus.active,
+  status: TrackerStatus.ACTIVE,
   entries: []
 };
 
@@ -51,7 +51,7 @@ export const testTracker2: Tracker = {
       unit: 'vegetables or fruits'
     }
   ],
-  status: TrackerStatus.active
+  status: TrackerStatus.ACTIVE
 };
 
 // Tracker without required and default completions
@@ -64,7 +64,7 @@ export const testTracker4: Tracker = {
   isDoneForToday: false,
   name: 'Wake up',
   requiredCompletions: [],
-  status: TrackerStatus.active
+  status: TrackerStatus.ACTIVE
 };
 
 export const testTracker3Id = '656e4567-e89b-12k3-b456-427614174000';
@@ -86,7 +86,7 @@ export const testTracker3: Tracker = {
       unit: 'L of water'
     }
   ],
-  status: TrackerStatus.active
+  status: TrackerStatus.ACTIVE
 };
 
 export const testEntry1Id = '676e4567-e89b-12d3-b456-426614174000';

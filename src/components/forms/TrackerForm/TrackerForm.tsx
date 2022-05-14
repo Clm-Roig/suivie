@@ -20,7 +20,7 @@ const getDefaultValues = (): FormValues => ({
   isDoneForToday: false,
   name: '',
   requiredCompletions: [],
-  status: TrackerStatus.active
+  status: TrackerStatus.ACTIVE
 });
 
 const formatInitialValues = (initialValues: Tracker): FormValues => ({

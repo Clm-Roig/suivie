@@ -12,7 +12,7 @@ describe('trackers reducer', () => {
       const finalState = trackersReducer(
         {
           error: {},
-          status: SliceStatus.idle,
+          status: SliceStatus.IDLE,
           trackers: [
             {
               ...testTracker1,

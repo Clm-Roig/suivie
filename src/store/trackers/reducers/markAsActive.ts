@@ -8,7 +8,7 @@ import { getTrackers } from './utils';
 /* eslint-disable no-param-reassign */
 const markTrackerAsActive = (tracker: Tracker) => {
   tracker.endDate = undefined;
-  tracker.status = TrackerStatus.active;
+  tracker.status = TrackerStatus.ACTIVE;
 };
 /* eslint-enable no-param-reassign */
 

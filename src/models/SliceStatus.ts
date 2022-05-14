@@ -1,8 +1,8 @@
 enum SliceStatus {
-  idle,
-  loading,
-  succeeded,
-  failed
+  IDLE = 'IDLE',
+  LOADING = 'LOADING',
+  SUCCEEDED = 'SUCCEEDED',
+  FAILED = 'FAILED'
 }
 
 export default SliceStatus;

@@ -9,7 +9,7 @@ const archiveTrackerReducer = (state: TrackersState, action: PayloadAction<Track
   const idx = state.trackers.findIndex((t) => t.id === action.payload);
   if (idx !== -1) {
     state.trackers[idx].endDate = new Date().toString();
-    state.trackers[idx].status = TrackerStatus.archived;
+    state.trackers[idx].status = TrackerStatus.ARCHIVED;
   }
 };
 
@@ -20,7 +20,7 @@ const archiveTrackersReducer = (
   const filteredTrackers = getTrackers(state, action.payload);
   for (const tracker of filteredTrackers) {
     tracker.endDate = new Date().toString();
-    tracker.status = TrackerStatus.archived;
+    tracker.status = TrackerStatus.ARCHIVED;
   }
 };
 

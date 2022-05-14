@@ -5,7 +5,7 @@ describe('trackers reducer', () => {
   it('should handle initial state', () => {
     expect(trackersReducer(undefined, { type: 'unknown' })).toEqual({
       error: {},
-      status: SliceStatus.idle,
+      status: SliceStatus.IDLE,
       trackers: []
     });
   });

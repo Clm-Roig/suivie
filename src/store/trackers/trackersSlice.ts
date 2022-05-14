@@ -16,7 +16,7 @@ import { completelyValidateReducer, customValidateReducer } from './reducers/val
 
 const initialState: TrackersState = {
   error: {},
-  status: SliceStatus.idle,
+  status: SliceStatus.IDLE,
   trackers: []
 };
 

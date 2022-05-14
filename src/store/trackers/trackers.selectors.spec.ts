@@ -40,7 +40,7 @@ describe('selectAllTrackers()', () => {
     };
     const { error, status, trackers } = selectAllTrackers(stateWithTrackers);
     expect(error).toEqual({});
-    expect(status).toEqual(SliceStatus.idle);
+    expect(status).toEqual(SliceStatus.IDLE);
     expect(trackers.length).toEqual(2);
     const tracker2 = trackers[1] as Tracker;
     // begun 10 days ago, duration of 70 days = 60 days remaining but can be 59 depending on the hour of the day
@@ -69,7 +69,7 @@ describe('selectHiddenTrackers()', () => {
     };
     const { error, status, trackers } = selectHiddenTrackers(stateWithTrackers);
     expect(error).toEqual({});
-    expect(status).toEqual(SliceStatus.idle);
+    expect(status).toEqual(SliceStatus.IDLE);
     expect(trackers.length).toEqual(2);
     for (const tracker of trackers) {
       expect(tracker.dateHidden).not.toBeUndefined();
@@ -91,14 +91,14 @@ describe('selectTrackersDone()', () => {
           {
             ...testTracker1,
             isDoneForToday: true,
-            status: TrackerStatus.active,
+            status: TrackerStatus.ACTIVE,
             entries: [{ ...testEntry1, completions: testTracker1.requiredCompletions }]
           },
           testTracker2,
           {
             ...testTracker3,
             isDoneForToday: true,
-            status: TrackerStatus.active,
+            status: TrackerStatus.ACTIVE,
             entries: [{ ...testEntry1 }]
           }
         ]
@@ -106,7 +106,7 @@ describe('selectTrackersDone()', () => {
     };
     const { error, status, trackers } = selectTrackersDone(stateWithTrackers);
     expect(error).toEqual({});
-    expect(status).toEqual(SliceStatus.idle);
+    expect(status).toEqual(SliceStatus.IDLE);
     expect(trackers.length).toEqual(1);
     for (const tracker of trackers) {
       expect(tracker.isDoneForToday).toBeTruthy();
@@ -129,19 +129,19 @@ describe('selectTodoTrackers()', () => {
             ...testTracker1,
             entries: [{ ...testEntry1, completions: testTracker1.requiredCompletions }]
           },
-          { ...testTracker3, status: TrackerStatus.archived },
+          { ...testTracker3, status: TrackerStatus.ARCHIVED },
           { ...testTracker2, dateHidden: new Date().toString() },
-          { ...testTracker3, status: TrackerStatus.active }
+          { ...testTracker3, status: TrackerStatus.ACTIVE }
         ]
       }
     };
     const { error, status, trackers } = selectTodoTrackers(stateWithTrackers);
     expect(error).toEqual({});
-    expect(status).toEqual(SliceStatus.idle);
+    expect(status).toEqual(SliceStatus.IDLE);
     expect(trackers.length).toEqual(1);
     for (const tracker of trackers) {
       expect(tracker.dateHidden).toBeUndefined();
-      expect(tracker.status).toBe(TrackerStatus.active);
+      expect(tracker.status).toBe(TrackerStatus.ACTIVE);
     }
   });
 });

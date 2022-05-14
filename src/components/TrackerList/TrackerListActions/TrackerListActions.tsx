@@ -45,9 +45,9 @@ const TrackerListActions: FC<Props> = ({
   const { enqueueSnackbar } = useSnackbar();
 
   const atLeastOneSelectedArchived = selectedTrackers.some(
-    (t) => t.status === TrackerStatus.archived
+    (t) => t.status === TrackerStatus.ARCHIVED
   );
-  const atLeastOneSelectedActive = selectedTrackers.some((t) => t.status === TrackerStatus.active);
+  const atLeastOneSelectedActive = selectedTrackers.some((t) => t.status === TrackerStatus.ACTIVE);
 
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -100,8 +100,8 @@ const TrackerListActions: FC<Props> = ({
           </Typography>
         </Box>
         <Box>
-          <IconButton onClick={() => setOrder(order === Order.asc ? Order.desc : Order.asc)}>
-            <SortIcon sx={{ transform: `rotateX(${order === Order.asc ? '180deg' : '0'})` }} />
+          <IconButton onClick={() => setOrder(order === Order.ASC ? Order.DESC : Order.ASC)}>
+            <SortIcon sx={{ transform: `rotateX(${order === Order.ASC ? '180deg' : '0'})` }} />
           </IconButton>
 
           {selectedTrackers.length === trackers.length ? (

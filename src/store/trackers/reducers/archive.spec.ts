@@ -17,9 +17,9 @@ describe('trackers reducer', () => {
       const finalState = trackersReducer(
         {
           error: {},
-          status: SliceStatus.idle,
+          status: SliceStatus.IDLE,
           trackers: [
-            { ...testTracker1, status: TrackerStatus.active },
+            { ...testTracker1, status: TrackerStatus.ACTIVE },
             { ...testTracker2, isDoneForToday: true }
           ]
         },
@@ -28,18 +28,18 @@ describe('trackers reducer', () => {
       const t1 = finalState.trackers.find((t) => t.id === testTracker1Id)!;
       const t2 = finalState.trackers.find((t) => t.id === testTracker2Id)!;
       expect(isSameDay(new Date(t1.endDate!), new Date())).toBeTruthy();
-      expect(t1.status).toBe(TrackerStatus.archived);
+      expect(t1.status).toBe(TrackerStatus.ARCHIVED);
       expect(t2.isDoneForToday).toBeTruthy();
     });
     it('should archive multiple trackers and set its endDate', () => {
       const finalState = trackersReducer(
         {
           error: {},
-          status: SliceStatus.idle,
+          status: SliceStatus.IDLE,
           trackers: [
-            { ...testTracker1, status: TrackerStatus.active },
+            { ...testTracker1, status: TrackerStatus.ACTIVE },
             { ...testTracker2, isDoneForToday: true },
-            { ...testTracker3, status: TrackerStatus.active }
+            { ...testTracker3, status: TrackerStatus.ACTIVE }
           ]
         },
         archiveTrackers([testTracker1.id, testTracker2.id])
@@ -48,7 +48,7 @@ describe('trackers reducer', () => {
       const t2 = finalState.trackers.find((t) => t.id === testTracker2Id)!;
       expect(isSameDay(new Date(t1.endDate!), new Date())).toBeTruthy();
       expect(isSameDay(new Date(t2.endDate!), new Date())).toBeTruthy();
-      expect(t1.status).toBe(TrackerStatus.archived);
+      expect(t1.status).toBe(TrackerStatus.ARCHIVED);
       expect(t2.isDoneForToday).toBeTruthy();
     });
   });

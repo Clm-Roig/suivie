@@ -19,12 +19,12 @@ describe('trackers reducer', () => {
             unit: 'things'
           }
         ],
-        status: TrackerStatus.archived
+        status: TrackerStatus.ARCHIVED
       };
       const finalState = trackersReducer(
         {
           error: {},
-          status: SliceStatus.idle,
+          status: SliceStatus.IDLE,
           trackers: [{ ...testTracker1 }]
         },
         editTracker(newValues)
@@ -34,7 +34,7 @@ describe('trackers reducer', () => {
       keys.forEach((key) => {
         expect(t1[key as keyof Tracker]).toEqual(newValues[key as keyof Tracker]);
       });
-      expect(t1.status).toBe(TrackerStatus.archived);
+      expect(t1.status).toBe(TrackerStatus.ARCHIVED);
     });
   });
 });

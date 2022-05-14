@@ -12,7 +12,7 @@ describe('trackers reducer', () => {
   describe('Delete tracker', () => {
     it('should handle a tracker deletion', () => {
       const finalState = trackersReducer(
-        { error: {}, status: SliceStatus.idle, trackers: [testTracker1] },
+        { error: {}, status: SliceStatus.IDLE, trackers: [testTracker1] },
         deleteTracker(testTracker1Id)
       );
       expect(finalState.trackers.length).toEqual(0);
@@ -21,7 +21,7 @@ describe('trackers reducer', () => {
       const finalState = trackersReducer(
         {
           error: {},
-          status: SliceStatus.idle,
+          status: SliceStatus.IDLE,
           trackers: [testTracker1, testTracker2, testTracker3]
         },
         deleteTrackers([testTracker1Id, testTracker2Id])

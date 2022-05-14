@@ -9,7 +9,7 @@ describe('isATracker helper', () => {
     entries: [],
     name: 'A basic tracker',
     requiredCompletions: [],
-    status: TrackerStatus.active
+    status: TrackerStatus.ACTIVE
   };
   const completeTracker = {
     ...basicTracker,

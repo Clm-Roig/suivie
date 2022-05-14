@@ -6,7 +6,7 @@ describe('trackers reducer', () => {
   describe('Create tracker', () => {
     it('should handle a tracker creation', () => {
       const finalState = trackersReducer(
-        { error: {}, status: SliceStatus.idle, trackers: [testTracker1] },
+        { error: {}, status: SliceStatus.IDLE, trackers: [testTracker1] },
         createTracker(testTracker2)
       );
       const t1 = finalState.trackers.find((t) => t.id === testTracker1Id)!;

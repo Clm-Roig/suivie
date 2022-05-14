@@ -6,7 +6,7 @@ describe('trackers reducer', () => {
   describe('Tracker validation', () => {
     it('should handle a tracker complete validation', () => {
       const finalState = trackersReducer(
-        { error: {}, status: SliceStatus.idle, trackers: [testTracker1] },
+        { error: {}, status: SliceStatus.IDLE, trackers: [testTracker1] },
         completelyValidate(testTracker1Id)
       );
 
@@ -31,7 +31,7 @@ describe('trackers reducer', () => {
         }
       ];
       const finalState = trackersReducer(
-        { error: {}, status: SliceStatus.idle, trackers: [testTracker1] },
+        { error: {}, status: SliceStatus.IDLE, trackers: [testTracker1] },
         customValidate({ id: testTracker1Id, completions: partialCompletions })
       );
 

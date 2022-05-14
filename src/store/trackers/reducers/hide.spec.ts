@@ -6,7 +6,7 @@ describe('trackers reducer', () => {
   describe('Hide tracker', () => {
     it('should hide a tracker', () => {
       const finalState = trackersReducer(
-        { error: {}, status: SliceStatus.idle, trackers: [testTracker1, testTracker2] },
+        { error: {}, status: SliceStatus.IDLE, trackers: [testTracker1, testTracker2] },
         hideTracker(testTracker1.id)
       );
       const t1 = finalState.trackers.find((t) => t.id === testTracker1Id)!;

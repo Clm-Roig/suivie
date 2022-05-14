@@ -33,7 +33,7 @@ const isATracker = (tracker: any): NotATrackerResponse => {
     { key: 'name', types: ['string'] },
     { key: 'remainingDays', types: ['number', 'undefined'] },
     { key: 'requiredCompletions', types: ['array'] },
-    { key: 'status', types: ['number'] }
+    { key: 'status', types: ['string'] }
   ];
   const errors = [];
   for (const check of checks) {

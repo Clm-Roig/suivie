@@ -1,6 +1,6 @@
 enum Order {
-  asc,
-  desc
+  ASC = 'ASC',
+  DESC = 'DESC'
 }
 
 export default Order;

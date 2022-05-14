@@ -1,6 +1,6 @@
 enum TrackerStatus {
-  active, // todo for the current day
-  archived // terminated until unarchived
+  ACTIVE = 'ACTIVE',
+  ARCHIVED = 'ARCHIVED'
 }
 
 export default TrackerStatus;

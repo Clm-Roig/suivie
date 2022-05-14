@@ -26,7 +26,7 @@ const tracker1 = {
       unit: 'squats'
     }
   ],
-  status: TrackerStatus.active,
+  status: TrackerStatus.ACTIVE,
   entries: []
 };
 const setup = () =>
