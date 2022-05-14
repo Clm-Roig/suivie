@@ -45,9 +45,9 @@ const TrackerListActions: FC<Props> = ({
   const { enqueueSnackbar } = useSnackbar();
 
   const atLeastOneSelectedArchived = selectedTrackers.some(
-    (t) => t.status === TrackerStatus.archived
+    (t) => t.status === TrackerStatus.ARCHIVED
   );
-  const atLeastOneSelectedActive = selectedTrackers.some((t) => t.status === TrackerStatus.active);
+  const atLeastOneSelectedActive = selectedTrackers.some((t) => t.status === TrackerStatus.ACTIVE);
 
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -68,24 +68,27 @@ const TrackerListActions: FC<Props> = ({
   };
 
   const handleAction = (
-    action: ActionCreatorWithPayload<string[], string>,
     adjective: string,
-    variant: VariantType
+    variant: VariantType,
+    action?: ActionCreatorWithPayload<string[], string>
   ) => {
-    dispatch(action(selectedTrackers.map((t) => t.id)));
+    if (action) {
+      dispatch(action(selectedTrackers.map((t) => t.id)));
+    }
     const plural = selectedTrackers.length > 1 ? 's' : '';
     enqueueSnackbar('Tracker' + plural + ' ' + adjective + plural + ' !', { variant: variant });
     afterAction();
   };
 
   const handleArchiveTrackers = () => {
-    handleAction(archiveTrackers, 'archivé', 'success');
+    dispatch(archiveTrackers({ trackerIds: selectedTrackers.map((t) => t.id) }));
+    handleAction('archivé', 'success');
   };
   const handleDeleteTrackers = () => {
-    handleAction(deleteTrackers, 'supprimé', 'info');
+    handleAction('supprimé', 'info', deleteTrackers);
   };
   const handlemarkTrackersAsActive = () => {
-    handleAction(markTrackersAsActive, 'actif', 'success');
+    handleAction('actif', 'success', markTrackersAsActive);
   };
   const handleOpenTrackerEdit = () => {
     setIsEditOpen(true);
@@ -100,8 +103,8 @@ const TrackerListActions: FC<Props> = ({
           </Typography>
         </Box>
         <Box>
-          <IconButton onClick={() => setOrder(order === Order.asc ? Order.desc : Order.asc)}>
-            <SortIcon sx={{ transform: `rotateX(${order === Order.asc ? '180deg' : '0'})` }} />
+          <IconButton onClick={() => setOrder(order === Order.ASC ? Order.DESC : Order.ASC)}>
+            <SortIcon sx={{ transform: `rotateX(${order === Order.ASC ? '180deg' : '0'})` }} />
           </IconButton>
 
           {selectedTrackers.length === trackers.length ? (

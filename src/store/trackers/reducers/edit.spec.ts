@@ -1,8 +1,7 @@
-import SliceStatus from '../../../models/SliceStatus';
 import Tracker from '../../../models/Tracker';
 import TrackerStatus from '../../../models/TrackerStatus';
 import { testTracker1, testTracker1Id } from '../FAKE_DATA';
-import trackersReducer, { editTracker } from '../trackersSlice';
+import trackersReducer, { editTracker, initialState } from '../trackersSlice';
 
 describe('trackers reducer', () => {
   describe('Edit a tracker', () => {
@@ -19,12 +18,11 @@ describe('trackers reducer', () => {
             unit: 'things'
           }
         ],
-        status: TrackerStatus.archived
+        status: TrackerStatus.ARCHIVED
       };
       const finalState = trackersReducer(
         {
-          error: {},
-          status: SliceStatus.idle,
+          ...initialState,
           trackers: [{ ...testTracker1 }]
         },
         editTracker(newValues)
@@ -34,7 +32,7 @@ describe('trackers reducer', () => {
       keys.forEach((key) => {
         expect(t1[key as keyof Tracker]).toEqual(newValues[key as keyof Tracker]);
       });
-      expect(t1.status).toBe(TrackerStatus.archived);
+      expect(t1.status).toBe(TrackerStatus.ARCHIVED);
     });
   });
 });

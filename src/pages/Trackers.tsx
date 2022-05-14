@@ -14,34 +14,50 @@ import {
   Tabs,
   Typography
 } from '@mui/material';
+import { isToday } from 'date-fns';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import TabPanel from '../components/TabPanel/TabPanel';
 import AddTrackerCard from '../components/TrackerCardList/AddTrackerCard';
-import DateSelector from '../components/TrackerCardList/DateSelector';
+import DateSelector from '../components/TrackerCardList/DaySelector';
 import TrackerCardList from '../components/TrackerCardList/TrackerCardList';
 import {
   selectHiddenTrackers,
+  selectSelectedDate,
   selectTodoTrackers,
   selectTrackersDone
 } from '../store/trackers/trackers.selectors';
+import { setSelectedDate } from '../store/trackers/trackersSlice';
 
 function Trackers() {
-  const { trackers: doneTrackers } = useAppSelector(selectTrackersDone);
+  const selectedDate = new Date(useAppSelector(selectSelectedDate));
+  const isTodaySelected = isToday(new Date(selectedDate));
+  const { trackers: doneTrackers } = useAppSelector((state) =>
+    selectTrackersDone(state, selectedDate)
+  );
+  const { trackers: todoTrackers } = useAppSelector((state) =>
+    selectTodoTrackers(state, selectedDate)
+  );
+
   const { trackers: hiddenTrackers } = useAppSelector(selectHiddenTrackers);
-  const { trackers: todoTrackers } = useAppSelector(selectTodoTrackers);
+
+  const dispatch = useAppDispatch();
   const [selectedTab, setSelectedTab] = useState(0);
   const navigate = useNavigate();
 
   const actions = [
     {
       icon: <ViewListIcon />,
-      name: 'Voir tous les trackers',
+      name: 'Voir tous mes trackers',
       onClick: () => navigate('/all-trackers')
     }
   ];
+
+  const handleSetDate = (date: Date) => {
+    dispatch(setSelectedDate(date.toString()));
+  };
 
   const handleTabChange = (event: React.SyntheticEvent, newTab: number) => {
     setSelectedTab(newTab);
@@ -49,10 +65,10 @@ function Trackers() {
 
   return (
     <Box>
-      <DateSelector />
+      <DateSelector date={selectedDate} setDate={handleSetDate} />
 
       {doneTrackers.length + hiddenTrackers.length + todoTrackers.length === 0 && (
-        <Typography align="center">{"Vous n'avez pas encore de trackers."}</Typography>
+        <Typography align="center">{'Aucun tracker pour ce jour-ci.'}</Typography>
       )}
 
       <Tabs
@@ -65,31 +81,33 @@ function Trackers() {
         value={selectedTab}>
         <Tab icon={<BallotIcon />} label="À FAIRE" />
         <Tab icon={<CheckIcon />} label="FAIT(S)" />
-        <Tab icon={<VisibilityOffIcon />} label="MASQUÉ(S)" />
+        {isTodaySelected && <Tab icon={<VisibilityOffIcon />} label="MASQUÉ(S)" />}
       </Tabs>
 
       <TabPanel value={selectedTab} index={0}>
         <AddTrackerCard />
         {todoTrackers.length === 0 ? (
-          <Alert severity="info">{"Vous n'avez aucun tracker à compléter aujourd'hui."}</Alert>
+          <Alert severity="info">{"Vous n'avez aucun tracker à compléter pour ce jour-ci."}</Alert>
         ) : (
           <TrackerCardList trackers={todoTrackers} />
         )}
       </TabPanel>
       <TabPanel value={selectedTab} index={1}>
         {doneTrackers.length === 0 ? (
-          <Alert severity="info">{"Vous n'avez complété aucun tracker aujourd'hui."}</Alert>
+          <Alert severity="info">{"Vous n'avez complété aucun tracker pour ce jour-ci."}</Alert>
         ) : (
           <TrackerCardList trackers={doneTrackers} />
         )}
       </TabPanel>
-      <TabPanel value={selectedTab} index={2}>
-        {hiddenTrackers.length === 0 ? (
-          <Alert severity="info">{"Vous n'avez aucun tracker masqué aujourd'hui."}</Alert>
-        ) : (
-          <TrackerCardList trackers={hiddenTrackers} />
-        )}
-      </TabPanel>
+      {isTodaySelected && (
+        <TabPanel value={selectedTab} index={2}>
+          {hiddenTrackers.length === 0 ? (
+            <Alert severity="info">{"Vous n'avez aucun tracker masqué pour ce jour-ci."}</Alert>
+          ) : (
+            <TrackerCardList trackers={hiddenTrackers} />
+          )}
+        </TabPanel>
+      )}
 
       <SpeedDial
         ariaLabel="SpeedDial basic example"

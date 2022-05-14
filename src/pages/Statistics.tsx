@@ -67,21 +67,21 @@ function Statistics() {
         {selectedTracker ? (
           <WeekPanel beginDate={beginDate} setBeginDate={setBeginDate} tracker={selectedTracker} />
         ) : (
-          <Typography>Veuillez sélectionner un (ou tous les) tracker(s).</Typography>
+          <Typography>Veuillez sélectionner un tracker.</Typography>
         )}
       </TabPanel>
       <TabPanel value={selectedTab} index={1}>
         {selectedTracker ? (
           <MonthPanel beginDate={beginDate} setBeginDate={setBeginDate} tracker={selectedTracker} />
         ) : (
-          <Typography>Veuillez sélectionner un (ou tous les) tracker(s).</Typography>
+          <Typography>Veuillez sélectionner un tracker.</Typography>
         )}
       </TabPanel>
       <TabPanel value={selectedTab} index={2}>
         {selectedTracker ? (
           <YearPanel beginDate={beginDate} setBeginDate={setBeginDate} tracker={selectedTracker} />
         ) : (
-          <Typography>Veuillez sélectionner un (ou tous les) tracker(s).</Typography>
+          <Typography>Veuillez sélectionner un tracker.</Typography>
         )}
       </TabPanel>
     </>

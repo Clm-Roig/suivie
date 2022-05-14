@@ -45,7 +45,7 @@ const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
     setAnchorEl(null);
   };
   const handleArchiveTracker = () => {
-    dispatch(archiveTracker(id));
+    dispatch(archiveTracker({ id: id }));
     closeMoreMenu();
     enqueueSnackbar('Tracker archivé !', {
       variant: 'info'
@@ -71,7 +71,7 @@ const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
   };
 
   const beginVerb = isAfter(new Date(beginDate), new Date()) ? 'Commencera le' : 'Commencé le';
-  const trackerIsArchived = status === TrackerStatus.archived;
+  const trackerIsArchived = status === TrackerStatus.ARCHIVED;
 
   return (
     <>

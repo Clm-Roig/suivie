@@ -1,15 +1,17 @@
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import CloseIcon from '@mui/icons-material/Close';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Box, Button, CardActions, CardActionsProps, IconButton } from '@mui/material';
 import { isToday } from 'date-fns';
-import { useSnackbar } from 'notistack';
+import { SnackbarKey, useSnackbar } from 'notistack';
 import { FC, useState } from 'react';
 
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
+import { selectSelectedDate } from '../../store/trackers/trackers.selectors';
 import {
   cancelLatestEntry,
   completelyValidate,
@@ -38,8 +40,9 @@ const TrackerCardActions: FC<Props> = ({
   tracker
 }) => {
   const { requiredCompletions } = tracker;
+  const selectedDate = useAppSelector(selectSelectedDate);
   const dispatch = useAppDispatch();
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [isCompleteValidationOpen, setIsCompleteValidationOpen] = useState(false);
   const [isCustomValidationOpen, setIsCustomValidationOpen] = useState(false);
   const [isMakeVisibleOpen, setIsMakeVisibleOpen] = useState(false);
@@ -49,23 +52,28 @@ const TrackerCardActions: FC<Props> = ({
     dispatch(cancelLatestEntry(tracker.id));
     enqueueSnackbar('Validation annulée', { variant: 'info' });
   };
-  const CancelButton = () => (
-    <Button sx={{ color: 'white' }} onClick={cancelLatestValidation}>
-      ANNULER
-    </Button>
+  const CancelSnackbarActions = (key: SnackbarKey) => (
+    <>
+      <Button sx={{ color: 'white' }} onClick={cancelLatestValidation}>
+        ANNULER
+      </Button>
+      <IconButton onClick={() => closeSnackbar(key)} size="small" sx={{ color: 'common.white' }}>
+        <CloseIcon />
+      </IconButton>
+    </>
   );
 
   const handleCompleteValidation = () => {
-    dispatch(completelyValidate(tracker.id));
+    dispatch(completelyValidate({ id: tracker.id, date: selectedDate }));
     setIsCompleteValidationOpen(false);
-    enqueueSnackbar('Tracker validé !', { variant: 'success', action: CancelButton });
+    enqueueSnackbar('Tracker validé !', { variant: 'success', action: CancelSnackbarActions });
   };
 
   const handleCustomValidation = (completions: Completion[]) => {
-    dispatch(customValidate({ id: tracker.id, completions: completions }));
+    dispatch(customValidate({ id: tracker.id, completions: completions, date: selectedDate }));
     setIsCustomValidationOpen(false);
     setSelectedCompletions([]);
-    enqueueSnackbar('Tracker validé !', { variant: 'success', action: CancelButton });
+    enqueueSnackbar('Tracker validé !', { variant: 'success', action: CancelSnackbarActions });
   };
 
   const handleMakeVisible = () => {
@@ -75,7 +83,7 @@ const TrackerCardActions: FC<Props> = ({
   };
 
   const handleMakeHidden = () => {
-    dispatch(hideTracker(tracker.id));
+    dispatch(hideTracker({ id: tracker.id }));
     setIsMakeHiddenOpen(false);
     enqueueSnackbar('Tracker masqué !', { variant: 'success' });
   };

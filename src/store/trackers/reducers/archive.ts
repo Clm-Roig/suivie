@@ -1,25 +1,28 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
-import Tracker from '../../../models/Tracker';
 import TrackerStatus from '../../../models/TrackerStatus';
 import TrackersState from '../TrackersState';
+import { MultipleTrackerIdsAndDate, TrackerIdAndDate } from './types';
+import { getTrackers } from './utils';
 
-const archiveTrackerReducer = (state: TrackersState, action: PayloadAction<Tracker['id']>) => {
-  const idx = state.trackers.findIndex((t) => t.id === action.payload);
+const archiveTrackerReducer = (state: TrackersState, action: PayloadAction<TrackerIdAndDate>) => {
+  const { id, date } = action.payload;
+  const idx = state.trackers.findIndex((t) => t.id === id);
   if (idx !== -1) {
-    state.trackers[idx].endDate = new Date().toString();
-    state.trackers[idx].status = TrackerStatus.archived;
+    state.trackers[idx].endDate = (date ? date : new Date()).toString();
+    state.trackers[idx].status = TrackerStatus.ARCHIVED;
   }
 };
 
 const archiveTrackersReducer = (
   state: TrackersState,
-  action: PayloadAction<Array<Tracker['id']>>
+  action: PayloadAction<MultipleTrackerIdsAndDate>
 ) => {
-  const filteredTrackers = state.trackers.filter((t) => action.payload.includes(t.id));
+  const { trackerIds, date } = action.payload;
+  const filteredTrackers = getTrackers(state, trackerIds);
   for (const tracker of filteredTrackers) {
-    tracker.endDate = new Date().toString();
-    tracker.status = TrackerStatus.archived;
+    tracker.endDate = (date ? date : new Date()).toString();
+    tracker.status = TrackerStatus.ARCHIVED;
   }
 };
 

@@ -17,16 +17,16 @@ interface Props {
 
 const TrackerList: FC<Props> = ({ trackers, listProps }) => {
   const [selectedTrackers, setSelectedTrackers] = useState<Tracker[]>([]);
-  const [order, setOrder] = useState(Order.asc);
+  const [order, setOrder] = useState(Order.ASC);
   const sortByName = useCallback(
     (t1: Tracker, t2: Tracker) =>
-      order === Order.asc ? t1.name.localeCompare(t2.name) : -t1.name.localeCompare(t2.name),
+      order === Order.ASC ? t1.name.localeCompare(t2.name) : -t1.name.localeCompare(t2.name),
     [order]
   );
   const archivedTrackers = trackers
-    .filter((t) => t.status === TrackerStatus.archived)
+    .filter((t) => t.status === TrackerStatus.ARCHIVED)
     .sort(sortByName);
-  const activeTrackers = trackers.filter((t) => t.status === TrackerStatus.active).sort(sortByName);
+  const activeTrackers = trackers.filter((t) => t.status === TrackerStatus.ACTIVE).sort(sortByName);
 
   const toggleTrackerChecked = (tracker: Tracker) => {
     const trackerIdx = selectedTrackers.indexOf(tracker);

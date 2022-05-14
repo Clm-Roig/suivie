@@ -8,7 +8,6 @@ import {
   computeRemainingDays,
   formatTrackers,
   removeArchivedTrackers,
-  removeDoneTrackers,
   removeHiddenTrackers
 } from './utils';
 
@@ -51,21 +50,21 @@ describe('computeNewStatus()', () => {
       beginDate: subDays(new Date(), 10).toString(),
       duration: 9
     };
-    expect(computeNewStatus(finishedTracker)).toBe(TrackerStatus.archived);
+    expect(computeNewStatus(finishedTracker)).toBe(TrackerStatus.ARCHIVED);
   });
   it('should be archived (remainingDays negative)', () => {
     const finishedTracker = {
       ...testTracker1,
       remainingDays: -5
     };
-    expect(computeNewStatus(finishedTracker)).toBe(TrackerStatus.archived);
+    expect(computeNewStatus(finishedTracker)).toBe(TrackerStatus.ARCHIVED);
   });
   it('should be active (not enough entry for today)', () => {
     const doneTracker = {
       ...testTracker1,
       entries: [testEntry1]
     };
-    expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.active);
+    expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.ACTIVE);
   });
   it('should be todo (no required completions and no entries for today)', () => {
     const doneTracker = {
@@ -73,7 +72,7 @@ describe('computeNewStatus()', () => {
       requiredCompletions: [],
       entries: []
     };
-    expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.active);
+    expect(computeNewStatus(doneTracker)).toBe(TrackerStatus.ACTIVE);
   });
 });
 
@@ -81,7 +80,7 @@ describe('remove functions', () => {
   const trackers = [
     {
       ...testTracker1,
-      status: TrackerStatus.archived
+      status: TrackerStatus.ARCHIVED
     },
     {
       ...testTracker1,
@@ -90,7 +89,7 @@ describe('remove functions', () => {
     {
       ...testTracker1,
       dateHidden: new Date().toString(),
-      status: TrackerStatus.active
+      status: TrackerStatus.ACTIVE
     }
   ];
   describe('removeArchivedTrackers()', () => {
@@ -98,13 +97,6 @@ describe('remove functions', () => {
       expect(removeArchivedTrackers(trackers).length).toBe(2);
       const [, t2, t3] = trackers;
       expect(removeArchivedTrackers(trackers)).toEqual(expect.arrayContaining([t2, t3]));
-    });
-  });
-  describe('removeDoneTrackers()', () => {
-    it('should remove the trackers done', () => {
-      expect(removeDoneTrackers(trackers).length).toBe(2);
-      const [t1, , t3] = trackers;
-      expect(removeDoneTrackers(trackers)).toEqual(expect.arrayContaining([t1, t3]));
     });
   });
   describe('removeHiddenTrackers()', () => {

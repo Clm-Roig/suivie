@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
 import { CardContent, CardContentProps, Divider, Stack, Typography } from '@mui/material';
-import { isToday } from 'date-fns';
+import { isSameDay } from 'date-fns';
 import { FC } from 'react';
 
+import { useAppSelector } from '../../app/hooks';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
+import { selectSelectedDate } from '../../store/trackers/trackers.selectors';
 import CompletionChipList from '../CompletionChipList/CompletionChipList';
 
 const TextWrapper = styled(Typography)`
@@ -25,26 +27,28 @@ const TrackerCardContent: FC<Props> = ({
   selectedCompletions,
   tracker
 }) => {
+  const selectedDate = new Date(useAppSelector(selectSelectedDate));
+
   const { entries, requiredCompletions } = tracker;
-  const todayEntries = entries.filter((e) => isToday(new Date(e.date)));
-  const todayCompletions = todayEntries.flatMap((e) => e.completions);
-  const aggTodayCompletions: Completion[] = [];
-  for (const completion of todayCompletions) {
-    const completionIdx = aggTodayCompletions.findIndex((c) => c.unit === completion.unit);
+  const selectedDayEntries = entries.filter((e) => isSameDay(new Date(e.date), selectedDate));
+  const selectedDayCompletions = selectedDayEntries.flatMap((e) => e.completions);
+  const aggCompletions: Completion[] = [];
+  for (const completion of selectedDayCompletions) {
+    const completionIdx = aggCompletions.findIndex((c) => c.unit === completion.unit);
     if (completionIdx !== -1) {
       // Add quantity
-      aggTodayCompletions[completionIdx] = {
-        ...aggTodayCompletions[completionIdx],
-        quantity: aggTodayCompletions[completionIdx].quantity + completion.quantity
+      aggCompletions[completionIdx] = {
+        ...aggCompletions[completionIdx],
+        quantity: aggCompletions[completionIdx].quantity + completion.quantity
       };
     } else {
-      aggTodayCompletions.push(completion);
+      aggCompletions.push(completion);
     }
   }
 
   const remainingCompletions = requiredCompletions
     .map((rc) => {
-      const todayCompletion = aggTodayCompletions.find((c) => rc.unit === c.unit);
+      const todayCompletion = aggCompletions.find((c) => rc.unit === c.unit);
       if (todayCompletion) {
         const remain = rc.quantity - todayCompletion.quantity;
         return {
@@ -80,10 +84,11 @@ const TrackerCardContent: FC<Props> = ({
             />
           </Stack>
         ) : (
-          <>
-            <Typography>Effectués :</Typography>
-            <CompletionChipList completions={aggTodayCompletions} />
-          </>
+          <Stack alignItems="center" direction="row">
+            <TextWrapper>Réalisés</TextWrapper>
+            &nbsp;
+            <CompletionChipList completions={aggCompletions} />
+          </Stack>
         )}
       </Stack>
     </CardContent>

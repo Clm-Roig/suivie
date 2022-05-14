@@ -1,4 +1,3 @@
-import SliceStatus from '../../../models/SliceStatus';
 import Tracker from '../../../models/Tracker';
 import TrackerStatus from '../../../models/TrackerStatus';
 import {
@@ -8,20 +7,23 @@ import {
   testTracker3,
   testTracker3Id
 } from '../FAKE_DATA';
-import trackersReducer, { markTrackerAsActive, markTrackersAsActive } from '../trackersSlice';
+import trackersReducer, {
+  initialState,
+  markTrackerAsActive,
+  markTrackersAsActive
+} from '../trackersSlice';
 
 const isActive = (tracker: Tracker) =>
-  tracker.status === TrackerStatus.active && tracker.endDate === undefined;
+  tracker.status === TrackerStatus.ACTIVE && tracker.endDate === undefined;
 
 describe('trackers reducer', () => {
   describe('Mark a tracker as active', () => {
     it('should mark a tracker as active', () => {
       const finalState = trackersReducer(
         {
-          error: {},
-          status: SliceStatus.idle,
+          ...initialState,
           trackers: [
-            { ...testTracker1, status: TrackerStatus.archived, endDate: new Date().toString() }
+            { ...testTracker1, status: TrackerStatus.ARCHIVED, endDate: new Date().toString() }
           ]
         },
         markTrackerAsActive(testTracker1.id)
@@ -34,15 +36,14 @@ describe('trackers reducer', () => {
     it('should mark multiple trackers as active', () => {
       const finalState = trackersReducer(
         {
-          error: {},
-          status: SliceStatus.idle,
+          ...initialState,
           trackers: [
-            { ...testTracker1, status: TrackerStatus.archived },
-            { ...testTracker2, status: TrackerStatus.active },
+            { ...testTracker1, status: TrackerStatus.ARCHIVED },
+            { ...testTracker2, status: TrackerStatus.ACTIVE },
             {
               ...testTracker3,
               isDoneForToday: true,
-              status: TrackerStatus.archived,
+              status: TrackerStatus.ARCHIVED,
               endDate: new Date().toString()
             }
           ]

@@ -4,7 +4,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { BaseToolbarProps } from '@mui/x-date-pickers/internals/models/props/baseToolbarProps';
 import { FC } from 'react';
 
-type Props = BaseToolbarProps<Date | null>;
+type Props = BaseToolbarProps<Date, Date | null>;
 
 const WeekPickerToolbar: FC<Props> = (props) => {
   const { isMobileKeyboardViewOpen, toggleMobileKeyboardView } = props;
