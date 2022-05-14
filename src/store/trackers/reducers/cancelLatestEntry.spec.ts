@@ -1,18 +1,16 @@
 import { subHours } from 'date-fns';
 
-import SliceStatus from '../../../models/SliceStatus';
 import { testEntry1, testTracker1, testTracker1Id } from '../FAKE_DATA';
-import trackersReducer, { cancelLatestEntry } from '../trackersSlice';
+import trackersReducer, { cancelLatestEntry, initialState } from '../trackersSlice';
 
 describe('trackers reducer', () => {
   describe('Cancel latest entry validation', () => {
-    it('should remove the latest entry of the tracker', () => {
+    it('should remove the latest entry of the tracker (independently of the date)', () => {
       const t1 = { ...testEntry1, date: subHours(new Date(), 5).toString() };
       const t2 = { ...testEntry1, id: '1234-5678', date: subHours(new Date(), 2).toString() };
       const finalState = trackersReducer(
         {
-          error: {},
-          status: SliceStatus.IDLE,
+          ...initialState,
           trackers: [
             {
               ...testTracker1,
@@ -28,7 +26,7 @@ describe('trackers reducer', () => {
       const entries = res.entries;
       expect(entries.length).toEqual(1);
       const entry1 = entries[0];
-      expect(entry1).toEqual(t1);
+      expect(entry1).toEqual(t2);
     });
   });
 });

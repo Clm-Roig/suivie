@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Dialog,
   DialogActions,
@@ -7,10 +8,14 @@ import {
   DialogProps,
   DialogTitle
 } from '@mui/material';
+import { isToday } from 'date-fns';
 import { FC } from 'react';
 
+import { useAppSelector } from '../../app/hooks';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
+import { selectSelectedDate } from '../../store/trackers/trackers.selectors';
+import formatDate from '../../utils/formatDate';
 import CompletionChipList from '../CompletionChipList/CompletionChipList';
 import ValidateCompletionsForm from '../forms/ValidateCompletionsForm/ValidateCompletionsForm';
 
@@ -29,6 +34,7 @@ const CustomValidationDialog: FC<Props> = ({
   selectedCompletions,
   tracker
 }) => {
+  const selectedDate = new Date(useAppSelector(selectSelectedDate));
   const { name, requiredCompletions } = tracker;
   return (
     <Dialog {...dialogProps}>
@@ -41,7 +47,7 @@ const CustomValidationDialog: FC<Props> = ({
           Sélectionnez les objectifs à valider parmi ceux ci-dessous :
         </DialogContentText>
         <CompletionChipList
-          boxProps={{ sx: { mb: 2 } }}
+          boxProps={{ sx: { mb: 1 } }}
           completions={requiredCompletions}
           onChipClick={onChipClick}
           selectedCompletions={selectedCompletions}
@@ -51,6 +57,11 @@ const CustomValidationDialog: FC<Props> = ({
           formId={'completions-form-' + tracker.name}
           onSubmit={onValidation}
         />
+        {!isToday(selectedDate) && (
+          <Alert icon={false} severity="warning">
+            Vous validez ce tracker pour le <b>{formatDate(selectedDate)}</b>.
+          </Alert>
+        )}
       </DialogContent>
       <DialogActions>
         <Button

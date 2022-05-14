@@ -12,7 +12,8 @@ import {
   testEntry3,
   testTracker1,
   testTracker2,
-  testTracker3
+  testTracker3,
+  testTracker3Id
 } from './FAKE_DATA';
 import {
   selectAllTrackers,
@@ -23,8 +24,11 @@ import {
   selectWeekEntries,
   selectYearEntries
 } from './trackers.selectors';
+import { computeIfDone } from './utils';
 
 let state: RootState;
+const threeDaysAgo = subDays(new Date(), 3);
+
 describe('selectAllTrackers()', () => {
   beforeEach(() => {
     state = createTestStore().getState();
@@ -82,35 +86,57 @@ describe('selectTrackersDone()', () => {
     state = createTestStore().getState();
   });
 
-  it('should return only trackers done', () => {
-    const stateWithTrackers = {
-      ...state,
-      trackers: {
-        ...state.trackers,
-        trackers: [
-          {
-            ...testTracker1,
-            isDoneForToday: true,
-            status: TrackerStatus.ACTIVE,
-            entries: [{ ...testEntry1, completions: testTracker1.requiredCompletions }]
-          },
-          testTracker2,
-          {
-            ...testTracker3,
-            isDoneForToday: true,
-            status: TrackerStatus.ACTIVE,
-            entries: [{ ...testEntry1 }]
-          }
-        ]
-      }
-    };
+  const getState = (state: RootState): RootState => ({
+    ...state,
+    trackers: {
+      ...state.trackers,
+      trackers: [
+        {
+          ...testTracker1,
+          isDoneForToday: false,
+          status: TrackerStatus.ACTIVE,
+          entries: [
+            {
+              ...testEntry1,
+              completions: testTracker1.requiredCompletions,
+              date: threeDaysAgo.toString()
+            }
+          ]
+        },
+        testTracker2,
+        {
+          ...testTracker3,
+          isDoneForToday: true,
+          status: TrackerStatus.ACTIVE,
+          entries: [
+            {
+              id: '1234-540934-absfdsd',
+              completions: testTracker3.requiredCompletions,
+              date: new Date().toString(),
+              trackerId: testTracker3Id
+            }
+          ]
+        }
+      ]
+    }
+  });
+
+  it('should return only trackers done for today', () => {
+    const stateWithTrackers = getState(state);
     const { error, status, trackers } = selectTrackersDone(stateWithTrackers);
     expect(error).toEqual({});
     expect(status).toEqual(SliceStatus.IDLE);
     expect(trackers.length).toEqual(1);
-    for (const tracker of trackers) {
-      expect(tracker.isDoneForToday).toBeTruthy();
-    }
+    expect(trackers[0].name).toEqual(testTracker3.name);
+  });
+
+  it('should return only trackers done for the specified date', () => {
+    const stateWithTrackers = getState(state);
+    const { error, status, trackers } = selectTrackersDone(stateWithTrackers, threeDaysAgo);
+    expect(error).toEqual({});
+    expect(status).toEqual(SliceStatus.IDLE);
+    expect(trackers.length).toEqual(1);
+    expect(trackers[0].name).toEqual(testTracker1.name);
   });
 });
 
@@ -119,22 +145,34 @@ describe('selectTodoTrackers()', () => {
     state = createTestStore().getState();
   });
 
-  it('should return only todo trackers', () => {
-    const stateWithTrackers = {
-      ...state,
-      trackers: {
-        ...state.trackers,
-        trackers: [
-          {
-            ...testTracker1,
-            entries: [{ ...testEntry1, completions: testTracker1.requiredCompletions }]
-          },
-          { ...testTracker3, status: TrackerStatus.ARCHIVED },
-          { ...testTracker2, dateHidden: new Date().toString() },
-          { ...testTracker3, status: TrackerStatus.ACTIVE }
-        ]
-      }
-    };
+  const getState = (state: RootState): RootState => ({
+    ...state,
+    trackers: {
+      ...state.trackers,
+      trackers: [
+        {
+          ...testTracker1,
+          entries: [{ ...testEntry1, completions: testTracker1.requiredCompletions }]
+        },
+        { ...testTracker3, status: TrackerStatus.ARCHIVED },
+        {
+          ...testTracker1,
+          dateHidden: new Date().toString(),
+          entries: [
+            {
+              ...testEntry1,
+              completions: testTracker1.requiredCompletions,
+              date: threeDaysAgo.toString()
+            }
+          ]
+        },
+        { ...testTracker3, status: TrackerStatus.ACTIVE }
+      ]
+    }
+  });
+
+  it('should return only todo trackers for today', () => {
+    const stateWithTrackers = getState(state);
     const { error, status, trackers } = selectTodoTrackers(stateWithTrackers);
     expect(error).toEqual({});
     expect(status).toEqual(SliceStatus.IDLE);
@@ -142,6 +180,18 @@ describe('selectTodoTrackers()', () => {
     for (const tracker of trackers) {
       expect(tracker.dateHidden).toBeUndefined();
       expect(tracker.status).toBe(TrackerStatus.ACTIVE);
+    }
+  });
+
+  it('should return only todo trackers 3 days ago', () => {
+    const stateWithTrackers = getState(state);
+    const { error, status, trackers } = selectTodoTrackers(stateWithTrackers, threeDaysAgo);
+    expect(error).toEqual({});
+    expect(status).toEqual(SliceStatus.IDLE);
+    expect(trackers.length).toEqual(1);
+    for (const tracker of trackers) {
+      expect(tracker.status).toBe(TrackerStatus.ACTIVE);
+      expect(computeIfDone(tracker, threeDaysAgo)).toBeFalsy();
     }
   });
 });

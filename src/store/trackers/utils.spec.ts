@@ -8,7 +8,6 @@ import {
   computeRemainingDays,
   formatTrackers,
   removeArchivedTrackers,
-  removeDoneTrackers,
   removeHiddenTrackers
 } from './utils';
 
@@ -98,13 +97,6 @@ describe('remove functions', () => {
       expect(removeArchivedTrackers(trackers).length).toBe(2);
       const [, t2, t3] = trackers;
       expect(removeArchivedTrackers(trackers)).toEqual(expect.arrayContaining([t2, t3]));
-    });
-  });
-  describe('removeDoneTrackers()', () => {
-    it('should remove the trackers done', () => {
-      expect(removeDoneTrackers(trackers).length).toBe(2);
-      const [t1, , t3] = trackers;
-      expect(removeDoneTrackers(trackers)).toEqual(expect.arrayContaining([t1, t3]));
     });
   });
   describe('removeHiddenTrackers()', () => {

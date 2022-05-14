@@ -68,24 +68,27 @@ const TrackerListActions: FC<Props> = ({
   };
 
   const handleAction = (
-    action: ActionCreatorWithPayload<string[], string>,
     adjective: string,
-    variant: VariantType
+    variant: VariantType,
+    action?: ActionCreatorWithPayload<string[], string>
   ) => {
-    dispatch(action(selectedTrackers.map((t) => t.id)));
+    if (action) {
+      dispatch(action(selectedTrackers.map((t) => t.id)));
+    }
     const plural = selectedTrackers.length > 1 ? 's' : '';
     enqueueSnackbar('Tracker' + plural + ' ' + adjective + plural + ' !', { variant: variant });
     afterAction();
   };
 
   const handleArchiveTrackers = () => {
-    handleAction(archiveTrackers, 'archivé', 'success');
+    dispatch(archiveTrackers({ trackerIds: selectedTrackers.map((t) => t.id) }));
+    handleAction('archivé', 'success');
   };
   const handleDeleteTrackers = () => {
-    handleAction(deleteTrackers, 'supprimé', 'info');
+    handleAction('supprimé', 'info', deleteTrackers);
   };
   const handlemarkTrackersAsActive = () => {
-    handleAction(markTrackersAsActive, 'actif', 'success');
+    handleAction('actif', 'success', markTrackersAsActive);
   };
   const handleOpenTrackerEdit = () => {
     setIsEditOpen(true);

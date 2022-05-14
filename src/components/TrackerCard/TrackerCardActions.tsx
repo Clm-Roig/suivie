@@ -8,9 +8,10 @@ import { isToday } from 'date-fns';
 import { SnackbarKey, useSnackbar } from 'notistack';
 import { FC, useState } from 'react';
 
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
+import { selectSelectedDate } from '../../store/trackers/trackers.selectors';
 import {
   cancelLatestEntry,
   completelyValidate,
@@ -39,6 +40,7 @@ const TrackerCardActions: FC<Props> = ({
   tracker
 }) => {
   const { requiredCompletions } = tracker;
+  const selectedDate = useAppSelector(selectSelectedDate);
   const dispatch = useAppDispatch();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [isCompleteValidationOpen, setIsCompleteValidationOpen] = useState(false);
@@ -62,13 +64,13 @@ const TrackerCardActions: FC<Props> = ({
   );
 
   const handleCompleteValidation = () => {
-    dispatch(completelyValidate(tracker.id));
+    dispatch(completelyValidate({ id: tracker.id, date: selectedDate }));
     setIsCompleteValidationOpen(false);
     enqueueSnackbar('Tracker validé !', { variant: 'success', action: CancelSnackbarActions });
   };
 
   const handleCustomValidation = (completions: Completion[]) => {
-    dispatch(customValidate({ id: tracker.id, completions: completions }));
+    dispatch(customValidate({ id: tracker.id, completions: completions, date: selectedDate }));
     setIsCustomValidationOpen(false);
     setSelectedCompletions([]);
     enqueueSnackbar('Tracker validé !', { variant: 'success', action: CancelSnackbarActions });
@@ -81,7 +83,7 @@ const TrackerCardActions: FC<Props> = ({
   };
 
   const handleMakeHidden = () => {
-    dispatch(hideTracker(tracker.id));
+    dispatch(hideTracker({ id: tracker.id }));
     setIsMakeHiddenOpen(false);
     enqueueSnackbar('Tracker masqué !', { variant: 'success' });
   };
