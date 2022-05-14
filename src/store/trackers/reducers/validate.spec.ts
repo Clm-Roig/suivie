@@ -1,8 +1,11 @@
 import { isSameDay, subDays } from 'date-fns';
 
-import SliceStatus from '../../../models/SliceStatus';
 import { testTracker1, testTracker1Id } from '../FAKE_DATA';
-import trackersReducer, { completelyValidate, customValidate } from '../trackersSlice';
+import trackersReducer, {
+  completelyValidate,
+  customValidate,
+  initialState
+} from '../trackersSlice';
 
 const sevenDaysAgo = subDays(new Date(), 7);
 
@@ -10,7 +13,7 @@ describe('trackers reducer', () => {
   describe('Tracker validation', () => {
     it('should handle a tracker complete validation at a given date', () => {
       const finalState = trackersReducer(
-        { error: {}, status: SliceStatus.IDLE, trackers: [testTracker1] },
+        { ...initialState, trackers: [testTracker1] },
         completelyValidate({ id: testTracker1Id, date: sevenDaysAgo })
       );
 
@@ -36,7 +39,7 @@ describe('trackers reducer', () => {
         }
       ];
       const finalState = trackersReducer(
-        { error: {}, status: SliceStatus.IDLE, trackers: [testTracker1] },
+        { ...initialState, trackers: [testTracker1] },
         customValidate({ id: testTracker1Id, completions: partialCompletions, date: sevenDaysAgo })
       );
 

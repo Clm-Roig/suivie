@@ -188,7 +188,7 @@ describe('selectTodoTrackers()', () => {
     const { error, status, trackers } = selectTodoTrackers(stateWithTrackers, threeDaysAgo);
     expect(error).toEqual({});
     expect(status).toEqual(SliceStatus.IDLE);
-    expect(trackers.length).toEqual(2);
+    expect(trackers.length).toEqual(1);
     for (const tracker of trackers) {
       expect(tracker.status).toBe(TrackerStatus.ACTIVE);
       expect(computeIfDone(tracker, threeDaysAgo)).toBeFalsy();

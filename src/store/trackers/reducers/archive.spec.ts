@@ -1,6 +1,5 @@
 import { isSameDay, subDays } from 'date-fns';
 
-import SliceStatus from '../../../models/SliceStatus';
 import TrackerStatus from '../../../models/TrackerStatus';
 import {
   testTracker1,
@@ -9,7 +8,7 @@ import {
   testTracker2Id,
   testTracker3
 } from '../FAKE_DATA';
-import trackersReducer, { archiveTracker, archiveTrackers } from '../trackersSlice';
+import trackersReducer, { archiveTracker, archiveTrackers, initialState } from '../trackersSlice';
 
 const tenDaysAgo = subDays(new Date(), 10);
 
@@ -18,8 +17,7 @@ describe('trackers reducer', () => {
     it('should archive a tracker and set its endDate ten days ago.', () => {
       const finalState = trackersReducer(
         {
-          error: {},
-          status: SliceStatus.IDLE,
+          ...initialState,
           trackers: [{ ...testTracker1, status: TrackerStatus.ACTIVE }]
         },
         archiveTracker({ id: testTracker1.id, date: tenDaysAgo })
@@ -32,8 +30,7 @@ describe('trackers reducer', () => {
     it('should archive multiple trackers and set its endDate ten days ago', () => {
       const finalState = trackersReducer(
         {
-          error: {},
-          status: SliceStatus.IDLE,
+          ...initialState,
           trackers: [
             { ...testTracker1, status: TrackerStatus.ACTIVE },
             { ...testTracker2, isDoneForToday: true },

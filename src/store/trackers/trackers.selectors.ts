@@ -104,6 +104,10 @@ const selectWeekEntries = (
   } else return [];
 };
 
+const selectSelectedDate = (state: RootState) => {
+  return state.trackers.selectedDate;
+};
+
 export {
   selectAllTrackers,
   selectTrackersDone,
@@ -111,5 +115,6 @@ export {
   selectTodoTrackers,
   selectYearEntries,
   selectMonthEntries,
-  selectWeekEntries
+  selectWeekEntries,
+  selectSelectedDate
 };

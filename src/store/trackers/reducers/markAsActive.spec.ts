@@ -1,4 +1,3 @@
-import SliceStatus from '../../../models/SliceStatus';
 import Tracker from '../../../models/Tracker';
 import TrackerStatus from '../../../models/TrackerStatus';
 import {
@@ -8,7 +7,11 @@ import {
   testTracker3,
   testTracker3Id
 } from '../FAKE_DATA';
-import trackersReducer, { markTrackerAsActive, markTrackersAsActive } from '../trackersSlice';
+import trackersReducer, {
+  initialState,
+  markTrackerAsActive,
+  markTrackersAsActive
+} from '../trackersSlice';
 
 const isActive = (tracker: Tracker) =>
   tracker.status === TrackerStatus.ACTIVE && tracker.endDate === undefined;
@@ -18,8 +21,7 @@ describe('trackers reducer', () => {
     it('should mark a tracker as active', () => {
       const finalState = trackersReducer(
         {
-          error: {},
-          status: SliceStatus.IDLE,
+          ...initialState,
           trackers: [
             { ...testTracker1, status: TrackerStatus.ARCHIVED, endDate: new Date().toString() }
           ]
@@ -34,8 +36,7 @@ describe('trackers reducer', () => {
     it('should mark multiple trackers as active', () => {
       const finalState = trackersReducer(
         {
-          error: {},
-          status: SliceStatus.IDLE,
+          ...initialState,
           trackers: [
             { ...testTracker1, status: TrackerStatus.ARCHIVED },
             { ...testTracker2, status: TrackerStatus.ACTIVE },

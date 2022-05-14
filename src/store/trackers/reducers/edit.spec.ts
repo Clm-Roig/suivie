@@ -1,8 +1,7 @@
-import SliceStatus from '../../../models/SliceStatus';
 import Tracker from '../../../models/Tracker';
 import TrackerStatus from '../../../models/TrackerStatus';
 import { testTracker1, testTracker1Id } from '../FAKE_DATA';
-import trackersReducer, { editTracker } from '../trackersSlice';
+import trackersReducer, { editTracker, initialState } from '../trackersSlice';
 
 describe('trackers reducer', () => {
   describe('Edit a tracker', () => {
@@ -23,8 +22,7 @@ describe('trackers reducer', () => {
       };
       const finalState = trackersReducer(
         {
-          error: {},
-          status: SliceStatus.IDLE,
+          ...initialState,
           trackers: [{ ...testTracker1 }]
         },
         editTracker(newValues)
