@@ -112,8 +112,5 @@ export const formatTrackers = (trackers: Tracker[]) => {
 export const removeArchivedTrackers = (trackers: Tracker[]) =>
   trackers.filter((t) => t.status !== TrackerStatus.ARCHIVED);
 
-export const removeDoneTrackers = (trackers: Tracker[]) =>
-  trackers.filter((t) => !t.isDoneForToday);
-
 export const removeHiddenTrackers = (trackers: Tracker[]) =>
   trackers.filter((t) => t.dateHidden === undefined);

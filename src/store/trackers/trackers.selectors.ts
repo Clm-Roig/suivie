@@ -1,11 +1,19 @@
-import { differenceInDays, isAfter, isEqual, isSameMonth, isSameYear } from 'date-fns';
+import {
+  differenceInDays,
+  isAfter,
+  isBefore,
+  isEqual,
+  isSameMonth,
+  isSameYear,
+  startOfDay
+} from 'date-fns';
 
 import TrackerEntry from '../../models/TrackerEntry';
 import { RootState } from '../store';
 import {
+  computeIfDone,
   formatTrackers,
   removeArchivedTrackers,
-  removeDoneTrackers,
   removeHiddenTrackers
 } from './utils';
 
@@ -23,9 +31,13 @@ const selectHiddenTrackers = (state: RootState) => {
   };
 };
 
-const selectTrackersDone = (state: RootState) => {
+const selectTrackersDone = (state: RootState, date?: Date) => {
   const newTrackers = removeArchivedTrackers(
-    removeHiddenTrackers(formatTrackers(state.trackers.trackers).filter((t) => t.isDoneForToday))
+    removeHiddenTrackers(formatTrackers(state.trackers.trackers))
+  ).filter(
+    (t) =>
+      computeIfDone(t, date) &&
+      isBefore(startOfDay(new Date(t.beginDate)), date ? date : new Date())
   );
 
   return {
@@ -34,9 +46,13 @@ const selectTrackersDone = (state: RootState) => {
   };
 };
 
-const selectTodoTrackers = (state: RootState) => {
+const selectTodoTrackers = (state: RootState, date?: Date) => {
   const newTrackers = removeArchivedTrackers(
-    removeHiddenTrackers(removeDoneTrackers(formatTrackers(state.trackers.trackers)))
+    removeHiddenTrackers(formatTrackers(state.trackers.trackers))
+  ).filter(
+    (t) =>
+      !computeIfDone(t, date) &&
+      isBefore(startOfDay(new Date(t.beginDate)), date ? date : new Date())
   );
   return {
     ...state.trackers,

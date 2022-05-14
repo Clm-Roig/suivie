@@ -9,13 +9,8 @@ const archiveTrackerReducer = (state: TrackersState, action: PayloadAction<Track
   const { id, date } = action.payload;
   const idx = state.trackers.findIndex((t) => t.id === id);
   if (idx !== -1) {
-<<<<<<< develop
-    state.trackers[idx].endDate = (archiveDate ? archiveDate : new Date()).toString();
-    state.trackers[idx].status = TrackerStatus.ARCHIVED;
-=======
     state.trackers[idx].endDate = (date ? date : new Date()).toString();
-    state.trackers[idx].status = TrackerStatus.archived;
->>>>>>> refactor(payloadType): refactor tracker action payload
+    state.trackers[idx].status = TrackerStatus.ARCHIVED;
   }
 };
 
