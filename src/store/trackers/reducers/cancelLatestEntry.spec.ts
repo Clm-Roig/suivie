@@ -5,7 +5,7 @@ import trackersReducer, { cancelLatestEntry, initialState } from '../trackersSli
 
 describe('trackers reducer', () => {
   describe('Cancel latest entry validation', () => {
-    it('should remove the latest entry of the tracker', () => {
+    it('should remove the latest entry of the tracker (independently of the date)', () => {
       const t1 = { ...testEntry1, date: subHours(new Date(), 5).toString() };
       const t2 = { ...testEntry1, id: '1234-5678', date: subHours(new Date(), 2).toString() };
       const finalState = trackersReducer(
@@ -26,7 +26,7 @@ describe('trackers reducer', () => {
       const entries = res.entries;
       expect(entries.length).toEqual(1);
       const entry1 = entries[0];
-      expect(entry1).toEqual(t1);
+      expect(entry1).toEqual(t2);
     });
   });
 });
