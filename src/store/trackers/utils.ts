@@ -1,4 +1,4 @@
-import { addDays, differenceInDays, isBefore, isSameDay, isToday } from 'date-fns';
+import { addDays, differenceInDays, isBefore, isSameDay } from 'date-fns';
 
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
@@ -7,33 +7,30 @@ import TrackerStatus from '../../models/TrackerStatus';
 
 const aggregateCompletions = (completions: Completion[]) => {
   if (completions.length === 0) return [];
-  return completions.reduce<Completion[]>((res, todayCompletion) => {
-    const previousCompletion = res.find((c) => c.unit === todayCompletion.unit);
+  return completions.reduce<Completion[]>((res, completion) => {
+    const previousCompletion = res.find((c) => c.unit === completion.unit);
     let newRes: Completion[] = [];
     if (previousCompletion) {
       newRes = [
-        ...res.filter((c) => c.unit !== todayCompletion.unit),
+        ...res.filter((c) => c.unit !== completion.unit),
         {
           ...previousCompletion,
-          quantity: previousCompletion.quantity + todayCompletion.quantity
+          quantity: previousCompletion.quantity + completion.quantity
         }
       ];
     } else {
-      newRes = [...res, todayCompletion];
+      newRes = [...res, completion];
     }
     return newRes;
   }, []);
 };
 
-export const getAggregatedCompletions = (entries: TrackerEntry[]): Completion[] => {
-  return aggregateCompletions(entries.flatMap((e) => e.completions));
-};
-
-const getTodayAggregatedCompletions = (entries: TrackerEntry[]): Completion[] => {
-  const todayCompletions = entries
-    .filter((e) => isSameDay(new Date(e.date), new Date()))
-    .flatMap((e) => e.completions);
-  return aggregateCompletions(todayCompletions);
+export const getAggregatedCompletions = (entries: TrackerEntry[], date?: Date): Completion[] => {
+  let filteredEntries = entries;
+  if (date) {
+    filteredEntries = entries.filter((e) => isSameDay(new Date(e.date), date));
+  }
+  return aggregateCompletions(filteredEntries.flatMap((e) => e.completions));
 };
 
 export const computeRemainingDays = (beginDate: string, duration: number) => {
@@ -42,27 +39,28 @@ export const computeRemainingDays = (beginDate: string, duration: number) => {
   return difference;
 };
 
-export const computeIfDone = (tracker: Tracker) => {
+export const computeIfDone = (tracker: Tracker, dateToCheck: Date = new Date()) => {
   const { entries, requiredCompletions } = tracker;
   let res = false;
 
-  // Tracker is done if all required completions are done today
-  // If there is no required completions, test if there is an entry for today
-  const todayCompletions = getTodayAggregatedCompletions(entries);
+  // Tracker is done if all required completions are done for the provided date.
+  // If there is no required completions, test if there is an entry for this date.
+  const dayCompletions = getAggregatedCompletions(entries, dateToCheck);
   const remains = [];
   if (requiredCompletions.length > 0) {
     for (const requiredCompletion of requiredCompletions) {
       const remain = requiredCompletion.quantity;
-      const todayCompletion = todayCompletions.find((c) => c.unit === requiredCompletion.unit);
-      remains.push(
-        todayCompletion ? requiredCompletion.quantity - todayCompletion.quantity : remain
-      );
+      const dayCompletion = dayCompletions.find((c) => c.unit === requiredCompletion.unit);
+      remains.push(dayCompletion ? requiredCompletion.quantity - dayCompletion.quantity : remain);
     }
     if (remains.every((x) => x <= 0)) {
       res = true;
     }
   } else {
-    if (entries.filter((e) => isToday(new Date(e.date))).length > 0) {
+    if (
+      entries.filter((e) => isSameDay(new Date(e.date), dateToCheck ? dateToCheck : new Date()))
+        .length > 0
+    ) {
       res = true;
     }
   }
