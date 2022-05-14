@@ -40,7 +40,7 @@ const TrackerCardActions: FC<Props> = ({
   tracker
 }) => {
   const { requiredCompletions } = tracker;
-  const selectedDate = new Date(useAppSelector(selectSelectedDate));
+  const selectedDate = useAppSelector(selectSelectedDate);
   const dispatch = useAppDispatch();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [isCompleteValidationOpen, setIsCompleteValidationOpen] = useState(false);

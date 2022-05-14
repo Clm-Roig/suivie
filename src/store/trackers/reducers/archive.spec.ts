@@ -20,7 +20,7 @@ describe('trackers reducer', () => {
           ...initialState,
           trackers: [{ ...testTracker1, status: TrackerStatus.ACTIVE }]
         },
-        archiveTracker({ id: testTracker1.id, date: tenDaysAgo })
+        archiveTracker({ id: testTracker1.id, date: tenDaysAgo.toString() })
       );
       const t1 = finalState.trackers.find((t) => t.id === testTracker1Id)!;
 
@@ -37,7 +37,10 @@ describe('trackers reducer', () => {
             { ...testTracker3, status: TrackerStatus.ACTIVE }
           ]
         },
-        archiveTrackers({ trackerIds: [testTracker1.id, testTracker2.id], date: tenDaysAgo })
+        archiveTrackers({
+          trackerIds: [testTracker1.id, testTracker2.id],
+          date: tenDaysAgo.toString()
+        })
       );
       const t1 = finalState.trackers.find((t) => t.id === testTracker1Id)!;
       const t2 = finalState.trackers.find((t) => t.id === testTracker2Id)!;

@@ -14,7 +14,7 @@ describe('trackers reducer', () => {
     it('should handle a tracker complete validation at a given date', () => {
       const finalState = trackersReducer(
         { ...initialState, trackers: [testTracker1] },
-        completelyValidate({ id: testTracker1Id, date: sevenDaysAgo })
+        completelyValidate({ id: testTracker1Id, date: sevenDaysAgo.toString() })
       );
 
       const res = finalState.trackers[0];
@@ -40,7 +40,11 @@ describe('trackers reducer', () => {
       ];
       const finalState = trackersReducer(
         { ...initialState, trackers: [testTracker1] },
-        customValidate({ id: testTracker1Id, completions: partialCompletions, date: sevenDaysAgo })
+        customValidate({
+          id: testTracker1Id,
+          completions: partialCompletions,
+          date: sevenDaysAgo.toString()
+        })
       );
 
       const res = finalState.trackers[0];

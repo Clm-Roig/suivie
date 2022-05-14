@@ -17,7 +17,7 @@ describe('trackers reducer', () => {
       const fiveDaysAgo = subDays(new Date(), 5);
       const finalState = trackersReducer(
         { ...initialState, trackers: [testTracker1] },
-        hideTracker({ id: testTracker1.id, date: fiveDaysAgo })
+        hideTracker({ id: testTracker1.id, date: fiveDaysAgo.toString() })
       );
       const t1 = finalState.trackers.find((t) => t.id === testTracker1Id)!;
       expect(isSameDay(new Date(t1.dateHidden!), fiveDaysAgo)).toBeTruthy();
