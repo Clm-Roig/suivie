@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
-import { Button, TextField, TextFieldProps } from '@mui/material';
+import { Button, TextFieldProps } from '@mui/material';
 import React, { FC } from 'react';
+
+import NumberTextField from '../NumberTextField/NumberTextField';
 
 const StyledButton = styled(Button)`
   min-width: auto;
 `;
-const StyledTextField = styled(TextField)`
+const StyledTextField = styled(NumberTextField)`
   fieldset {
     border-width: 0 1px 1px 0;
     border-top-right-radius: 0;

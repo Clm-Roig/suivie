@@ -8,6 +8,7 @@ import Completion from '../../../models/Completion';
 import Tracker from '../../../models/Tracker';
 import TrackerStatus from '../../../models/TrackerStatus';
 import DefaultCompletionsForm from '../DefaultCompletionsForm/DefaultCompletionsForm';
+import NumberTextField from '../NumberTextField/NumberTextField';
 import RequiredCompletionsForm from '../RequiredCompletionsForm/RequiredCompletionsForm';
 import { FormValues } from './types';
 
@@ -152,7 +153,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
             }
           }
           return (
-            <TextField
+            <NumberTextField
               error={!!error}
               fullWidth
               helperText={error && errorText}
