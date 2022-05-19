@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4](https://github.com/clm-roig/suivie/compare/v0.2.3...v0.2.4) (2022-05-19)
+
+
+### Features
+
+* **numberInput:** use number keyboard ([d920f36](https://github.com/clm-roig/suivie/commit/d920f36a9aa8c3b507a6eb7e2ac9e55bca421ac3))
+
+
+### Bug Fixes
+
+* **selectedDate:** at launch, set selectedDate to today ([6eb70bd](https://github.com/clm-roig/suivie/commit/6eb70bd261a51040060182b2a776e116de5022ae))
+
 ### [0.2.3](https://github.com/clm-roig/suivie/compare/v0.2.2...v0.2.3) (2022-05-14)
 
 
