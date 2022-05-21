@@ -7,7 +7,7 @@ import {
   responsiveFontSizes,
   styled
 } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers';
+import { LocalizationProvider, frFR } from '@mui/x-date-pickers';
 import { AdapterDateFns as DateAdapter } from '@mui/x-date-pickers/AdapterDateFns';
 import frLocale from 'date-fns/locale/fr';
 import { SnackbarKey, SnackbarProvider } from 'notistack';
@@ -59,7 +59,10 @@ function App() {
   };
 
   return (
-    <LocalizationProvider dateAdapter={DateAdapter} locale={frLocale}>
+    <LocalizationProvider
+      dateAdapter={DateAdapter}
+      locale={frLocale}
+      localeText={frFR.components.MuiLocalizationProvider.defaultProps.localeText}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <MainContainer disableGutters maxWidth={'md'}>
