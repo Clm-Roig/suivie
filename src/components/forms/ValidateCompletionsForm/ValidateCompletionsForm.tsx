@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Grid } from '@mui/material';
 import { FC, useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
@@ -31,6 +32,7 @@ interface Props {
  * Completions units are disabled within this form.
  */
 const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) => {
+  const [animateRef] = useAutoAnimate<HTMLFormElement>();
   const { control, handleSubmit, setValue, getValues } = useForm<FormValues>();
   const { fields } = useFieldArray({
     control, // control props comes from useForm
@@ -68,7 +70,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
   };
 
   return (
-    <form id={formId} onSubmit={handleSubmit(formatAndSubmit)}>
+    <form id={formId} onSubmit={handleSubmit(formatAndSubmit)} ref={animateRef}>
       {fields.map((field, index) => (
         <FieldsetGrid
           columns={2}

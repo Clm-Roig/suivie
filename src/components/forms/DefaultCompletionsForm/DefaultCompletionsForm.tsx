@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
@@ -66,6 +67,7 @@ const DefaultCompletionsForm: FC<Props> = ({
 }) => {
   const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
+  const [animateRef] = useAutoAnimate<HTMLDivElement>();
 
   const fieldsetSx = {
     bgcolor: themeMode === ThemeMode.LIGHT ? theme.palette.grey[100] : theme.palette.grey[900],
@@ -73,7 +75,7 @@ const DefaultCompletionsForm: FC<Props> = ({
   };
 
   return (
-    <Box>
+    <Box ref={animateRef}>
       {fields.map((field, index) => (
         <FieldsetGrid columns={2} container key={field.id} sx={fieldsetSx} {...gridProps}>
           <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
