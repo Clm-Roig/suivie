@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Grid } from '@mui/material';
 import { FC, useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
@@ -36,6 +37,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
     control, // control props comes from useForm
     name: 'completions'
   });
+  const [animateRef] = useAutoAnimate<HTMLFormElement>();
 
   useEffect(() => {
     const previousCompletions = getValues().completions;
@@ -68,7 +70,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
   };
 
   return (
-    <form id={formId} onSubmit={handleSubmit(formatAndSubmit)}>
+    <form id={formId} onSubmit={handleSubmit(formatAndSubmit)} ref={animateRef}>
       {fields.map((field, index) => (
         <FieldsetGrid
           columns={2}
