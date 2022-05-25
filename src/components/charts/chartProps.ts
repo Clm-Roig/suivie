@@ -7,3 +7,8 @@ export const xAxisProps = {
   dataKey: 'name',
   fontSize: '0.8rem'
 };
+
+export const cartesianGridProps = {
+  horizontal: true,
+  vertical: true
+};

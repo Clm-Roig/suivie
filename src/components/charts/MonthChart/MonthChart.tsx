@@ -13,7 +13,7 @@ import {
 
 import getChartColors from '../../../config/getChartColors';
 import TrackerEntry from '../../../models/TrackerEntry';
-import { tooltipProps, xAxisProps } from '../chartProps';
+import { cartesianGridProps, tooltipProps, xAxisProps } from '../chartProps';
 import getAllCompletionUnits from '../getAllCompletionUnits';
 import formatData from './formatMonthData';
 import { DataType } from './types';
@@ -43,7 +43,7 @@ const MonthChart: FC<Props> = ({ beginDate, entries }) => {
     <Box height="250px" width="100%">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart width={300} height={250} data={data}>
-          <CartesianGrid />
+          <CartesianGrid {...cartesianGridProps} />
           <XAxis {...xAxisProps} tick={{ fontFamily: theme.typography.fontFamily }} />
           <YAxis width={25} fontSize={'0.8rem'} />
           <Tooltip
