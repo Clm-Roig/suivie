@@ -25,10 +25,26 @@ const aggregateCompletions = (completions: Completion[]) => {
   }, []);
 };
 
-export const getAggregatedCompletions = (entries: TrackerEntry[], date?: Date): Completion[] => {
+/**
+ * - If no date provided, return the aggregated completions of the provided entries.
+ * - If only one date is provided, return the completions of this day.
+ * - If two dates are provided, return the completions between both days (included).
+ *
+ * @param {TrackerEntry[]} entries
+ * @param {Date?} date1
+ * @param {Date?} date2
+ * @return {*}  {Completion[]}
+ */
+export const getAggregatedCompletions = (
+  entries: TrackerEntry[],
+  date1?: Date,
+  date2?: Date
+): Completion[] => {
   let filteredEntries = entries;
-  if (date) {
-    filteredEntries = entries.filter((e) => isSameDay(new Date(e.date), date));
+  if (date1 && date2) {
+    filteredEntries = entries.filter((e) => new Date(e.date) > date1 && new Date(e.date) < date2);
+  } else if (date1 && !date2) {
+    filteredEntries = entries.filter((e) => isSameDay(new Date(e.date), date1));
   }
   return aggregateCompletions(filteredEntries.flatMap((e) => e.completions));
 };

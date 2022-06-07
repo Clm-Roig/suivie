@@ -1,4 +1,4 @@
-import { subDays } from 'date-fns';
+import { addDays, subDays } from 'date-fns';
 
 import { SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
 import Tracker from '../../models/Tracker';
@@ -143,3 +143,99 @@ export const testEntry3: TrackerEntry = {
   date: SEVEN_DAYS_AGO_STRING,
   trackerId: testTracker1Id
 };
+
+export const todayEntries = [
+  {
+    id: '2',
+    completions: [
+      {
+        quantity: 3,
+        unit: 'x'
+      },
+      {
+        quantity: 6,
+        unit: 'y'
+      }
+    ],
+    date: new Date().toString(),
+    trackerId: '1'
+  } as TrackerEntry,
+  {
+    id: '3',
+    completions: [
+      {
+        quantity: 7,
+        unit: 'x'
+      },
+      {
+        quantity: 10,
+        unit: 'y'
+      }
+    ],
+    date: new Date().toString(),
+    trackerId: '1'
+  } as TrackerEntry
+];
+
+export const variousEntries = [
+  {
+    id: '2',
+    completions: [
+      {
+        quantity: 3,
+        unit: 'x'
+      },
+      {
+        quantity: 6,
+        unit: 'y'
+      }
+    ],
+    date: subDays(new Date(), 3).toString(),
+    trackerId: '1'
+  } as TrackerEntry,
+  {
+    id: '3',
+    completions: [
+      {
+        quantity: 7,
+        unit: 'x'
+      },
+      {
+        quantity: 10,
+        unit: 'y'
+      }
+    ],
+    date: addDays(new Date(), 3).toString(),
+    trackerId: '1'
+  } as TrackerEntry,
+  {
+    id: '4',
+    completions: [
+      {
+        quantity: 7,
+        unit: 'x'
+      },
+      {
+        quantity: 10,
+        unit: 'y'
+      }
+    ],
+    date: new Date().toString(),
+    trackerId: '1'
+  } as TrackerEntry,
+  {
+    id: '5',
+    completions: [
+      {
+        quantity: 7,
+        unit: 'x'
+      },
+      {
+        quantity: 10,
+        unit: 'y'
+      }
+    ],
+    date: new Date().toString(),
+    trackerId: '1'
+  } as TrackerEntry
+];
