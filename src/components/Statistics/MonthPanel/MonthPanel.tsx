@@ -3,8 +3,8 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { endOfMonth, startOfMonth } from 'date-fns';
 import { FC } from 'react';
 
-import { useAppSelector } from '../../../app/hooks';
 import { TRACKERS_BEGIN_IN } from '../../../config/Constants';
+import { useAppSelector } from '../../../hooks/redux';
 import Tracker from '../../../models/Tracker';
 import { selectMonthEntries } from '../../../store/trackers/trackers.selectors';
 import MonthChart from '../../charts/MonthChart/MonthChart';

@@ -8,7 +8,7 @@ import { isToday } from 'date-fns';
 import { SnackbarKey, useSnackbar } from 'notistack';
 import { FC, useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import { selectSelectedDate } from '../../store/trackers/trackers.selectors';

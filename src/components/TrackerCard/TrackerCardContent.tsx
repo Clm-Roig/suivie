@@ -3,7 +3,7 @@ import { CardContent, CardContentProps, Divider, Stack, Typography } from '@mui/
 import { isSameDay } from 'date-fns';
 import { FC } from 'react';
 
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../hooks/redux';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import { selectSelectedDate } from '../../store/trackers/trackers.selectors';

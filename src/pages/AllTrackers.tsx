@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 
-import { useAppSelector } from '../app/hooks';
 import AddTrackerCard from '../components/TrackerCardList/AddTrackerCard';
 import TrackerList from '../components/TrackerList/TrackerList';
+import { useAppSelector } from '../hooks/redux';
 import { selectAllTrackers } from '../store/trackers/trackers.selectors';
 
 function AllTrackers() {

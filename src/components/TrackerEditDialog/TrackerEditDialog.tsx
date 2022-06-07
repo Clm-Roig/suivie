@@ -12,7 +12,7 @@ import {
 import { TransitionProps } from '@mui/material/transitions';
 import React, { FC } from 'react';
 
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch } from '../../hooks/redux';
 import Tracker from '../../models/Tracker';
 import { editTracker } from '../../store/trackers/trackersSlice';
 import TrackerForm from '../forms/TrackerForm/TrackerForm';

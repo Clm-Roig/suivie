@@ -3,8 +3,8 @@ import { Alert, Button, CircularProgress, Stack, Typography } from '@mui/materia
 import { useSnackbar } from 'notistack';
 import { ChangeEvent, useState } from 'react';
 
-import { useAppDispatch } from '../../app/hooks';
 import { APP_NAME, JSON_DATA_EXTENSION } from '../../config/Constants';
+import { useAppDispatch } from '../../hooks/redux';
 import { createStoreFromJSONString } from '../../store/app/appSlice';
 
 const ImportSection = () => {

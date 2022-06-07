@@ -2,7 +2,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { CardProps, useTheme } from '@mui/material';
 import { FC } from 'react';
 
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../hooks/redux';
 import Tracker from '../../models/Tracker';
 import { selectThemeMode } from '../../store/theme/theme.selectors';
 import TrackerCard from '../TrackerCard/TrackerCard';

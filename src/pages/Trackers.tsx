@@ -18,11 +18,11 @@ import { isToday } from 'date-fns';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../app/hooks';
 import TabPanel from '../components/TabPanel/TabPanel';
 import AddTrackerCard from '../components/TrackerCardList/AddTrackerCard';
 import DateSelector from '../components/TrackerCardList/DaySelector';
 import TrackerCardList from '../components/TrackerCardList/TrackerCardList';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import {
   selectHiddenTrackers,
   selectSelectedDate,

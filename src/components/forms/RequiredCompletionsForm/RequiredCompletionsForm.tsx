@@ -13,7 +13,7 @@ import {
   UseFormSetValue
 } from 'react-hook-form';
 
-import { useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from '../../../hooks/redux';
 import Completion from '../../../models/Completion';
 import ThemeMode from '../../../models/ThemeMode';
 import { selectThemeMode } from '../../../store/theme/theme.selectors';
