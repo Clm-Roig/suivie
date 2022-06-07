@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, Grid, GridProps, IconButton, Typography, useTheme } from '@mui/material';
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import {
   Control,
   Controller,
@@ -14,6 +13,7 @@ import {
 } from 'react-hook-form';
 
 import { useAppSelector } from '../../../hooks/redux';
+import { useAutoAnimate } from '../../../hooks/useAutoAnimate';
 import Completion from '../../../models/Completion';
 import ThemeMode from '../../../models/ThemeMode';
 import { selectThemeMode } from '../../../store/theme/theme.selectors';
@@ -55,7 +55,8 @@ const RequiredCompletionsForm: FC<Props> = ({
 }) => {
   const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
-  const [animateRef] = useAutoAnimate<HTMLDivElement>();
+  const animateRef = useRef(null);
+  useAutoAnimate(animateRef);
 
   const fieldsetSx = {
     bgcolor: themeMode === ThemeMode.LIGHT ? theme.palette.grey[100] : theme.palette.grey[900],
