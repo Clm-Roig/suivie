@@ -16,7 +16,7 @@ import { isAfter } from 'date-fns';
 import { useSnackbar } from 'notistack';
 import React, { FC, useState } from 'react';
 
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch } from '../../hooks/redux';
 import Tracker from '../../models/Tracker';
 import TrackerStatus from '../../models/TrackerStatus';
 import { archiveTracker, deleteTracker } from '../../store/trackers/trackersSlice';

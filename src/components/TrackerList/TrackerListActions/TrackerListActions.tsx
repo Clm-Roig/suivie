@@ -11,7 +11,7 @@ import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { VariantType, useSnackbar } from 'notistack';
 import { FC, useState } from 'react';
 
-import { useAppDispatch } from '../../../app/hooks';
+import { useAppDispatch } from '../../../hooks/redux';
 import Tracker from '../../../models/Tracker';
 import TrackerStatus from '../../../models/TrackerStatus';
 import {

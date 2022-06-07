@@ -15,13 +15,13 @@ import { createRef, useMemo, useState } from 'react';
 
 import { DRAWER_MENU_WIDTH } from '../config/Constants';
 import { components, getPalette, typography } from '../config/CustomTheme';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import ThemeMode from '../models/ThemeMode';
 import { selectThemeMode } from '../store/theme/theme.selectors';
 import { toggleThemeMode } from '../store/theme/themeSlice';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';
-import { useAppDispatch, useAppSelector } from './hooks';
 
 const MainContent = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2)

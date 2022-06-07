@@ -1,8 +1,8 @@
 import { Box, Button, List, ListItemText, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import { useAppSelector } from '../app/hooks';
 import AppLogo from '../components/AppLogo';
+import { useAppSelector } from '../hooks/redux';
 import { selectThemeMode } from '../store/theme/theme.selectors';
 
 const Home = () => {

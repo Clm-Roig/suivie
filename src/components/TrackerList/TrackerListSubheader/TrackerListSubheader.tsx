@@ -1,7 +1,7 @@
 import { ListSubheader, Stack } from '@mui/material';
 import { FC } from 'react';
 
-import { useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from '../../../hooks/redux';
 import ThemeMode from '../../../models/ThemeMode';
 import { selectThemeMode } from '../../../store/theme/theme.selectors';
 

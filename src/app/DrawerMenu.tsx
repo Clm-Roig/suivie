@@ -20,8 +20,8 @@ import {
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import { useAppSelector } from '../hooks/redux';
 import { selectThemeMode } from '../store/theme/theme.selectors';
-import { useAppSelector } from './hooks';
 
 interface MenuItemProps {
   icon: React.ReactNode;

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { useAppSelector } from '../app/hooks';
 import AppLogoImg from '../assets/images/app-logo.png';
+import { useAppSelector } from '../hooks/redux';
 import ThemeMode from '../models/ThemeMode';
 import { selectThemeMode } from '../store/theme/theme.selectors';
 
