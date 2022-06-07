@@ -1,15 +1,60 @@
-import { subDays } from 'date-fns';
+import { addDays, subDays } from 'date-fns';
 
 import TrackerStatus from '../../models/TrackerStatus';
-import { testEntry1, testEntry2, testTracker1 } from './FAKE_DATA';
+import { testEntry1, testEntry2, testTracker1, todayEntries, variousEntries } from './FAKE_DATA';
 import {
   computeIfDone,
   computeNewStatus,
   computeRemainingDays,
   formatTrackers,
+  getAggregatedCompletions,
   removeArchivedTrackers,
   removeHiddenTrackers
 } from './utils';
+
+describe('getAggregatedCompletions()', () => {
+  it('should return the aggregated completions from an entries list', () => {
+    expect(getAggregatedCompletions(todayEntries)).toStrictEqual([
+      {
+        quantity: 10,
+        unit: 'x'
+      },
+      {
+        quantity: 16,
+        unit: 'y'
+      }
+    ]);
+  });
+
+  it('should return the aggregated completions of today from an entries list', () => {
+    expect(getAggregatedCompletions(variousEntries, new Date())).toStrictEqual([
+      // Entries 4 & 5 with same quantity (7 & 10)
+      {
+        quantity: 14,
+        unit: 'x'
+      },
+      {
+        quantity: 20,
+        unit: 'y'
+      }
+    ]);
+  });
+  it('should return the aggregated completions between tw odates from an entries list', () => {
+    expect(
+      getAggregatedCompletions(variousEntries, subDays(new Date(), 4), addDays(new Date(), 4))
+    ).toStrictEqual([
+      // All entries
+      {
+        quantity: 24,
+        unit: 'x'
+      },
+      {
+        quantity: 36,
+        unit: 'y'
+      }
+    ]);
+  });
+});
 
 describe('computeRemainingDays()', () => {
   it('should return the appropriate remaining days', () => {
