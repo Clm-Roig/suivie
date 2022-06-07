@@ -7,7 +7,7 @@ import {
   responsiveFontSizes,
   styled
 } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers';
+import { LocalizationProvider, frFR } from '@mui/x-date-pickers';
 import { AdapterDateFns as DateAdapter } from '@mui/x-date-pickers/AdapterDateFns';
 import frLocale from 'date-fns/locale/fr';
 import { SnackbarKey, SnackbarProvider } from 'notistack';
@@ -15,13 +15,13 @@ import { createRef, useMemo, useState } from 'react';
 
 import { DRAWER_MENU_WIDTH } from '../config/Constants';
 import { components, getPalette, typography } from '../config/CustomTheme';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import ThemeMode from '../models/ThemeMode';
 import { selectThemeMode } from '../store/theme/theme.selectors';
 import { toggleThemeMode } from '../store/theme/themeSlice';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';
-import { useAppDispatch, useAppSelector } from './hooks';
 
 const MainContent = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2)
@@ -59,7 +59,10 @@ function App() {
   };
 
   return (
-    <LocalizationProvider dateAdapter={DateAdapter} locale={frLocale}>
+    <LocalizationProvider
+      dateAdapter={DateAdapter}
+      locale={frLocale}
+      localeText={frFR.components.MuiLocalizationProvider.defaultProps.localeText}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <MainContainer disableGutters maxWidth={'md'}>

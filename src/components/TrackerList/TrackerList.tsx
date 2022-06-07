@@ -1,3 +1,4 @@
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import MovingIcon from '@mui/icons-material/Moving';
 import { List, ListProps } from '@mui/material';
@@ -18,6 +19,7 @@ interface Props {
 const TrackerList: FC<Props> = ({ trackers, listProps }) => {
   const [selectedTrackers, setSelectedTrackers] = useState<Tracker[]>([]);
   const [order, setOrder] = useState(Order.ASC);
+  const [animateRef] = useAutoAnimate<HTMLUListElement>();
   const sortByName = useCallback(
     (t1: Tracker, t2: Tracker) =>
       order === Order.ASC ? t1.name.localeCompare(t2.name) : -t1.name.localeCompare(t2.name),
@@ -48,7 +50,7 @@ const TrackerList: FC<Props> = ({ trackers, listProps }) => {
         trackers={trackers}
       />
 
-      <List {...listProps}>
+      <List {...listProps} ref={animateRef}>
         {activeTrackers.length > 0 && <TrackerListSubheader icon={<MovingIcon />} text="ACTIFS" />}
         {activeTrackers.map((t) => (
           <TrackerListItem

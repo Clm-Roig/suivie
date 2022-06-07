@@ -19,7 +19,11 @@ const DaySelector: FC<Props> = ({ date, setDate }) => {
         <ChevronLeftIcon fontSize="large" />
       </IconButton>
       <MobileDatePicker
-        cancelText="Annuler"
+        componentsProps={{
+          actionBar: {
+            actions: ['cancel', 'today']
+          }
+        }}
         value={date}
         maxDate={new Date()}
         onChange={(newValue) => {

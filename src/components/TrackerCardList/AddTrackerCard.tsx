@@ -3,7 +3,7 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { Box, Card, CardActionArea, CardContent, CardProps, useTheme } from '@mui/material';
 import { FC, useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import ThemeMode from '../../models/ThemeMode';
 import Tracker from '../../models/Tracker';
 import { selectThemeMode } from '../../store/theme/theme.selectors';

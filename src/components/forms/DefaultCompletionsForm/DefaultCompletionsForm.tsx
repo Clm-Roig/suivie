@@ -15,7 +15,7 @@ import {
   Typography,
   useTheme
 } from '@mui/material';
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import {
   Control,
   Controller,
@@ -25,7 +25,8 @@ import {
   UseFormSetValue
 } from 'react-hook-form';
 
-import { useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from '../../../hooks/redux';
+import { useAutoAnimate } from '../../../hooks/useAutoAnimate';
 import Completion from '../../../models/Completion';
 import ThemeMode from '../../../models/ThemeMode';
 import { selectThemeMode } from '../../../store/theme/theme.selectors';
@@ -66,6 +67,8 @@ const DefaultCompletionsForm: FC<Props> = ({
 }) => {
   const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
+  const animateRef = useRef(null);
+  useAutoAnimate(animateRef);
 
   const fieldsetSx = {
     bgcolor: themeMode === ThemeMode.LIGHT ? theme.palette.grey[100] : theme.palette.grey[900],
@@ -73,7 +76,7 @@ const DefaultCompletionsForm: FC<Props> = ({
   };
 
   return (
-    <Box>
+    <Box ref={animateRef}>
       {fields.map((field, index) => (
         <FieldsetGrid columns={2} container key={field.id} sx={fieldsetSx} {...gridProps}>
           <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>

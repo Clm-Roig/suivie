@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/clm-roig/suivie/compare/v0.2.4...v0.2.5) (2022-06-07)
+
+
+### Features
+
+* **#172:** animate tracker lists ([9e9e434](https://github.com/clm-roig/suivie/commit/9e9e434dc5a661801b70c7a7e6c82ae7cd2249e1)), closes [#172](https://github.com/clm-roig/suivie/issues/172)
+* **completions:** animate completions in form ([965041e](https://github.com/clm-roig/suivie/commit/965041e1109fabfa3a636a9e103596215fe6fa51))
+
+
+### Bug Fixes
+
+* **autoAnimte:** fix auto-animate module hook ([39aacbf](https://github.com/clm-roig/suivie/commit/39aacbfe50af4ce7fbc8043ebf9b13e54f36803e))
+* **muiDatePicker:** fix action breaking change ([05a8dd2](https://github.com/clm-roig/suivie/commit/05a8dd20a4892374faa69e01abc0d0d49fff759e))
+* **numberTextField:** fix overriding of inputProps ([85fde7a](https://github.com/clm-roig/suivie/commit/85fde7acd6d2c9187aa12c4c7c18daf36ed49050))
+* **trackerForm:** keep default completions without unit ([312aa5e](https://github.com/clm-roig/suivie/commit/312aa5e01433e2b2dfdc7b496bc80f0ea431552e))
+
 ### [0.2.4](https://github.com/clm-roig/suivie/compare/v0.2.3...v0.2.4) (2022-05-19)
 
 

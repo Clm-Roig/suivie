@@ -1,10 +1,10 @@
 import { Box, useTheme } from '@mui/material';
 import { FC, useEffect, useMemo, useState } from 'react';
 import {
+  Bar,
+  BarChart,
   CartesianGrid,
   Legend,
-  Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -13,7 +13,7 @@ import {
 
 import getChartColors from '../../../config/getChartColors';
 import TrackerEntry from '../../../models/TrackerEntry';
-import { tooltipProps, xAxisProps } from '../chartProps';
+import { cartesianGridProps, tooltipProps, xAxisProps } from '../chartProps';
 import getAllCompletionUnits from './../getAllCompletionUnits';
 import formatData from './formatWeekData';
 import { DataType } from './types';
@@ -42,9 +42,9 @@ const WeekChart: FC<Props> = ({ beginDate, entries }) => {
   return (
     <Box height="250px" width="100%">
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart width={300} height={250} data={data}>
-          <CartesianGrid />
-          <XAxis {...xAxisProps} tick={{ fontFamily: fontFamily }} />
+        <BarChart width={300} height={250} data={data}>
+          <CartesianGrid {...cartesianGridProps} />
+          <XAxis {...xAxisProps} tick={{ fontFamily: theme.typography.fontFamily }} />
           <YAxis width={25} fontSize={'0.8rem'} />
           <Tooltip
             {...tooltipProps}
@@ -54,18 +54,17 @@ const WeekChart: FC<Props> = ({ beginDate, entries }) => {
           <Legend wrapperStyle={{ fontFamily: fontFamily }} />
 
           {allUnits.map((u, i) => (
-            <Line
-              connectNulls
+            <Bar
               dataKey={u}
               isAnimationActive={
-                false /*Disable animation, it's making some dots to disappear: https://github.com/recharts/recharts/issues/804 */
+                false /*Disable animation, it's making some values to disappear: https://github.com/recharts/recharts/issues/804 */
               }
-              key={u + '-line'}
-              stroke={CHART_COLORS[i % CHART_COLORS.length]}
+              key={u + '-bar'}
+              fill={CHART_COLORS[i % CHART_COLORS.length]}
               strokeWidth={2}
             />
           ))}
-        </LineChart>
+        </BarChart>
       </ResponsiveContainer>
     </Box>
   );

@@ -11,7 +11,7 @@ import {
 import { isToday } from 'date-fns';
 import { FC } from 'react';
 
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../hooks/redux';
 import Tracker from '../../models/Tracker';
 import { selectSelectedDate } from '../../store/trackers/trackers.selectors';
 import formatDate from '../../utils/formatDate';

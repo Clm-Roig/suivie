@@ -2,12 +2,12 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { persistor } from '../store/store';
 import { selectAllTrackers } from '../store/trackers/trackers.selectors';
 import { setSelectedDate } from '../store/trackers/trackersSlice';
 import isATracker from '../utils/isATracker';
 import FullScreenLoading from './FullScreenLoading';
-import { useAppDispatch, useAppSelector } from './hooks';
 
 interface Props {
   children: React.ReactNode;

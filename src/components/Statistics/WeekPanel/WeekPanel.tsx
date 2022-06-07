@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { startOfDay } from 'date-fns';
 import { FC, useState } from 'react';
 
-import { useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from '../../../hooks/redux';
 import Tracker from '../../../models/Tracker';
 import { selectMonthEntries, selectWeekEntries } from '../../../store/trackers/trackers.selectors';
 import WeekPicker from '../../WeekPicker/WeekPicker';

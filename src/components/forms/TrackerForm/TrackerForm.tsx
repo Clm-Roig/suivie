@@ -68,8 +68,8 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
   useEffect(() => {
     // Dinamycally remove defaultCompletion when its requiredCompletion is deleted
     if (defaultCompletions) {
-      const newDefaultCompletions = defaultCompletions.filter((dc) =>
-        requiredCompletions.some((rc) => rc.unit === dc.unit)
+      const newDefaultCompletions = defaultCompletions.filter(
+        (dc) => requiredCompletions.some((rc) => rc.unit === dc.unit) || !dc.unit // keep default completions without unit too
       );
       defaultCompletionsFieldArray.replace(newDefaultCompletions);
     }

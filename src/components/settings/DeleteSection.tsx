@@ -3,8 +3,8 @@ import { Alert, Button, Stack, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 
-import { useAppDispatch } from '../../app/hooks';
 import { APP_NAME } from '../../config/Constants';
+import { useAppDispatch } from '../../hooks/redux';
 import { deleteStore } from '../../store/app/appSlice';
 import DeleteDataDialog from './DeleteDataDialog';
 

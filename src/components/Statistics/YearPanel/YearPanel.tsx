@@ -3,8 +3,8 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { endOfYear, startOfYear } from 'date-fns';
 import { FC } from 'react';
 
-import { useAppSelector } from '../../../app/hooks';
 import { TRACKERS_BEGIN_IN } from '../../../config/Constants';
+import { useAppSelector } from '../../../hooks/redux';
 import Tracker from '../../../models/Tracker';
 import { selectYearEntries } from '../../../store/trackers/trackers.selectors';
 import YearChart from '../../charts/YearChart/YearChart';
