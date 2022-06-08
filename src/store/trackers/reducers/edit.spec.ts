@@ -11,6 +11,7 @@ describe('trackers reducer', () => {
         name: 'New name',
         beginDate: new Date().toString(),
         entries: [],
+        frequency: 1,
         isDoneForToday: false,
         requiredCompletions: [
           {

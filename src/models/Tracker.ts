@@ -14,6 +14,7 @@ import TrackerStatus from './TrackerStatus';
  * @member {number?} duration number of days the tracker is active since beginDate
  * @member {string} endDate when the Tracker was archived
  * @member {TrackerEntry[]} entries TrackerEntries related to this Tracker
+ * @member {number} frequency number of days before the tracker is "to do" again
  * @member {boolean} isDoneForToday
  * @member {string} name
  * @member {number?} remainingDays computed attribute describing the number of days before the tracker is archived
@@ -28,6 +29,7 @@ export default interface Tracker {
   duration?: number;
   endDate?: string;
   entries: TrackerEntry[];
+  frequency: number;
   isDoneForToday: boolean;
   name: string;
   remainingDays?: number;

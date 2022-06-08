@@ -18,6 +18,7 @@ const getDefaultValues = (): FormValues => ({
   duration: '',
   defaultCompletions: [],
   entries: [],
+  frequency: '1',
   isDoneForToday: false,
   name: '',
   requiredCompletions: [],
@@ -27,6 +28,7 @@ const getDefaultValues = (): FormValues => ({
 const formatInitialValues = (initialValues: Tracker): FormValues => ({
   ...initialValues,
   duration: initialValues.duration ? initialValues.duration.toString() : '',
+  frequency: initialValues.frequency ? initialValues.frequency.toString() : '',
   requiredCompletions: initialValues.requiredCompletions.map((rc) => ({
     quantity: rc.quantity.toString(),
     unit: rc.unit
@@ -76,12 +78,13 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
   }, [requiredCompletions]);
 
   const handleOnSubmit = (data: FormValues) => {
-    const { beginDate, duration, requiredCompletions } = data;
+    const { beginDate, duration, frequency, requiredCompletions } = data;
     // Convert FormValues to Tracker
     onSubmit({
       ...data,
       beginDate: beginDate.toString(),
       duration: duration ? parseInt(duration) : undefined,
+      frequency: frequency ? parseInt(frequency) : undefined,
       requiredCompletions: [
         ...requiredCompletions.map((c) => ({
           quantity: parseInt(c.quantity),
@@ -103,7 +106,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
             error={!!error}
             fullWidth
             helperText={error ? 'Un nom est requis' : ''}
-            label={'Nom du tracker'}
+            label={'Nom'}
             onChange={onChange}
             required
             sx={{ mb: 2 }}
@@ -126,7 +129,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
                 error={!!error}
                 fullWidth
                 helperText={error ? 'Une date de début est requise.' : ''}
-                label={'Début du tracker'}
+                label={'Date de début'}
                 required
                 sx={{ mb: 2 }}
               />
@@ -157,7 +160,43 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
               error={!!error}
               fullWidth
               helperText={error && errorText}
-              label={'Durée du tracker (en jours)'}
+              label={'Durée (en jours)'}
+              onChange={onChange}
+              sx={{ mb: 2 }}
+              value={value}
+            />
+          );
+        }}
+      />
+
+      <Controller
+        control={control}
+        name={'frequency'}
+        rules={{
+          min: 1,
+          pattern: /^\d+$/,
+          required: true
+        }}
+        render={({ field: { onChange, value }, fieldState: { error } }) => {
+          let errorText = '';
+          if (error) {
+            if (error.type === 'min') {
+              errorText = 'La fréquence doit être supérieure ou égale à 1.';
+            }
+            if (error.type === 'pattern') {
+              errorText = 'La fréquence doit être un nombre (de jours).';
+            }
+            if (error.type === 'required') {
+              errorText = 'La fréquence est requise.';
+            }
+          }
+          return (
+            <NumberTextField
+              required
+              error={!!error}
+              fullWidth
+              helperText={error && errorText}
+              label={'Fréquence de répétition (en jours)'}
               onChange={onChange}
               sx={{ mb: 2 }}
               value={value}

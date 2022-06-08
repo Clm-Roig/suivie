@@ -30,7 +30,7 @@ interface Props {
 }
 
 const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
-  const { beginDate, id, name, remainingDays, status } = tracker;
+  const { beginDate, frequency, id, name, remainingDays, status } = tracker;
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -71,6 +71,12 @@ const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
   };
 
   const beginVerb = isAfter(new Date(beginDate), new Date()) ? 'Commencera le' : 'Commencé le';
+  const frequencyText =
+    frequency === 1
+      ? 'Quotidien'
+      : frequency === 7
+      ? 'Hedbomadaire'
+      : `Tous les ${frequency} jours`;
   const trackerIsArchived = status === TrackerStatus.ARCHIVED;
 
   return (
@@ -116,6 +122,9 @@ const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
           <>
             <Typography display="block" variant="subtitle2">
               {`${beginVerb} ${formatDate(new Date(beginDate))}`}
+            </Typography>
+            <Typography display="block" variant="caption">
+              <b>{frequencyText}</b>
             </Typography>
             {trackerIsArchived && (
               <>
