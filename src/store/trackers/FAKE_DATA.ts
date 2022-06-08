@@ -20,6 +20,7 @@ export const testTracker1: Tracker = {
     }
   ],
   duration: 13,
+  frequency: 1,
   isDoneForToday: false,
   name: 'Musculation',
   remainingDays: 10,
@@ -43,6 +44,7 @@ export const testTracker2: Tracker = {
   beginDate: subDays(new Date(), 10).toString(),
   duration: 70,
   entries: [],
+  frequency: 1,
   isDoneForToday: false,
   name: 'Eat',
   requiredCompletions: [
@@ -61,6 +63,7 @@ export const testTracker4: Tracker = {
   beginDate: new Date().toString(),
   defaultCompletions: [],
   entries: [],
+  frequency: 1,
   isDoneForToday: false,
   name: 'Wake up',
   requiredCompletions: [],
@@ -78,6 +81,7 @@ export const testTracker3: Tracker = {
     }
   ],
   entries: [],
+  frequency: 1,
   isDoneForToday: false,
   name: 'Drink',
   requiredCompletions: [

@@ -13,6 +13,7 @@ const tracker1 = {
   id: v4(),
   beginDate: subDays(new Date(), 3).toString(),
   duration: 13,
+  frequency: 1,
   isDoneForToday: false,
   name: 'Musculation',
   remainingDays: 10,
