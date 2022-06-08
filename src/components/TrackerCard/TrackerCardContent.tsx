@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
 import { CardContent, CardContentProps, Divider, Stack, Typography } from '@mui/material';
-import { isSameDay } from 'date-fns';
+import { subDays } from 'date-fns';
 import { FC } from 'react';
 
 import { useAppSelector } from '../../hooks/redux';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import { selectSelectedDate } from '../../store/trackers/trackers.selectors';
+import { getAggregatedCompletions } from '../../store/trackers/utils';
 import CompletionChipList from '../CompletionChipList/CompletionChipList';
 
 const TextWrapper = styled(Typography)`
@@ -29,22 +30,13 @@ const TrackerCardContent: FC<Props> = ({
 }) => {
   const selectedDate = new Date(useAppSelector(selectSelectedDate));
 
-  const { entries, requiredCompletions } = tracker;
-  const selectedDayEntries = entries.filter((e) => isSameDay(new Date(e.date), selectedDate));
-  const selectedDayCompletions = selectedDayEntries.flatMap((e) => e.completions);
-  const aggCompletions: Completion[] = [];
-  for (const completion of selectedDayCompletions) {
-    const completionIdx = aggCompletions.findIndex((c) => c.unit === completion.unit);
-    if (completionIdx !== -1) {
-      // Add quantity
-      aggCompletions[completionIdx] = {
-        ...aggCompletions[completionIdx],
-        quantity: aggCompletions[completionIdx].quantity + completion.quantity
-      };
-    } else {
-      aggCompletions.push(completion);
-    }
-  }
+  const { entries, frequency, requiredCompletions } = tracker;
+
+  const aggCompletions = getAggregatedCompletions(
+    entries,
+    subDays(selectedDate, frequency),
+    selectedDate
+  );
 
   const remainingCompletions = requiredCompletions
     .map((rc) => {

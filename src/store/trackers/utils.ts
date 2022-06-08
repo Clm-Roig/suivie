@@ -1,9 +1,18 @@
-import { addDays, differenceInDays, isBefore, isSameDay } from 'date-fns';
+import {
+  addDays,
+  differenceInDays,
+  endOfDay,
+  isBefore,
+  isSameDay,
+  startOfDay,
+  subDays
+} from 'date-fns';
 
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import TrackerEntry from '../../models/TrackerEntry';
 import TrackerStatus from '../../models/TrackerStatus';
+import { isBetween } from '../../utils/isBetween';
 
 const aggregateCompletions = (completions: Completion[]) => {
   if (completions.length === 0) return [];
@@ -42,7 +51,9 @@ export const getAggregatedCompletions = (
 ): Completion[] => {
   let filteredEntries = entries;
   if (date1 && date2) {
-    filteredEntries = entries.filter((e) => new Date(e.date) > date1 && new Date(e.date) < date2);
+    filteredEntries = entries.filter((e) =>
+      isBetween(new Date(e.date), startOfDay(date1), endOfDay(date2))
+    );
   } else if (date1 && !date2) {
     filteredEntries = entries.filter((e) => isSameDay(new Date(e.date), date1));
   }
@@ -56,26 +67,35 @@ export const computeRemainingDays = (beginDate: string, duration: number) => {
 };
 
 export const computeIfDone = (tracker: Tracker, dateToCheck: Date = new Date()) => {
-  const { entries, requiredCompletions } = tracker;
+  const { entries, frequency, requiredCompletions } = tracker;
   let res = false;
 
-  // Tracker is done if all required completions are done for the provided date.
+  // Tracker is done if all required completions are done for the provided date (or before if the frequency is superior to 1)
   // If there is no required completions, test if there is an entry for this date.
-  const dayCompletions = getAggregatedCompletions(entries, dateToCheck);
+  const completions =
+    tracker.frequency === 1
+      ? getAggregatedCompletions(entries, dateToCheck)
+      : getAggregatedCompletions(entries, subDays(dateToCheck, frequency), dateToCheck);
+
   const remains = [];
   if (requiredCompletions.length > 0) {
     for (const requiredCompletion of requiredCompletions) {
       const remain = requiredCompletion.quantity;
-      const dayCompletion = dayCompletions.find((c) => c.unit === requiredCompletion.unit);
-      remains.push(dayCompletion ? requiredCompletion.quantity - dayCompletion.quantity : remain);
+      const completion = completions.find((c) => c.unit === requiredCompletion.unit);
+      remains.push(completion ? requiredCompletion.quantity - completion.quantity : remain);
     }
     if (remains.every((x) => x <= 0)) {
       res = true;
     }
   } else {
     if (
-      entries.filter((e) => isSameDay(new Date(e.date), dateToCheck ? dateToCheck : new Date()))
-        .length > 0
+      entries.filter((e) =>
+        isBetween(
+          new Date(e.date),
+          startOfDay(subDays(dateToCheck, frequency)),
+          endOfDay(dateToCheck)
+        )
+      ).length > 0
     ) {
       res = true;
     }
