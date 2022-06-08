@@ -1,5 +1,6 @@
 import {
   differenceInDays,
+  endOfDay,
   isAfter,
   isBefore,
   isEqual,
@@ -105,7 +106,7 @@ const selectWeekEntries = (
 };
 
 const selectSelectedDate = (state: RootState) => {
-  return state.trackers.selectedDate;
+  return endOfDay(new Date(state.trackers.selectedDate)).toString();
 };
 
 export {
