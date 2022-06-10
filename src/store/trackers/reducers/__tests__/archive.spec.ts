@@ -1,14 +1,18 @@
 import { isSameDay, subDays } from 'date-fns';
 
-import TrackerStatus from '../../../models/TrackerStatus';
+import TrackerStatus from '../../../../models/TrackerStatus';
 import {
   testTracker1,
   testTracker1Id,
   testTracker2,
   testTracker2Id,
   testTracker3
-} from '../FAKE_DATA';
-import trackersReducer, { archiveTracker, archiveTrackers, initialState } from '../trackersSlice';
+} from '../../FAKE_DATA';
+import trackersReducer, {
+  archiveTracker,
+  archiveTrackers,
+  initialState
+} from '../../trackersSlice';
 
 const tenDaysAgo = subDays(new Date(), 10);
 

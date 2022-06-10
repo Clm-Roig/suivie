@@ -1,7 +1,7 @@
 import { addDays, subDays } from 'date-fns';
 
-import TrackerStatus from '../../models/TrackerStatus';
-import { testEntry1, testEntry2, testTracker1, todayEntries, variousEntries } from './FAKE_DATA';
+import TrackerStatus from '../../../models/TrackerStatus';
+import { testEntry1, testEntry2, testTracker1, todayEntries, variousEntries } from '../FAKE_DATA';
 import {
   computeIfDone,
   computeNewStatus,
@@ -10,7 +10,7 @@ import {
   getAggregatedCompletions,
   removeArchivedTrackers,
   removeHiddenTrackers
-} from './utils';
+} from '../utils';
 
 describe('getAggregatedCompletions()', () => {
   it('should return the aggregated completions from an entries list', () => {

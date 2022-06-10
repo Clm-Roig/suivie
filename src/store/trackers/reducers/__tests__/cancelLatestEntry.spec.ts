@@ -1,7 +1,7 @@
 import { subHours } from 'date-fns';
 
-import { testEntry1, testTracker1, testTracker1Id } from '../FAKE_DATA';
-import trackersReducer, { cancelLatestEntry, initialState } from '../trackersSlice';
+import { testEntry1, testTracker1, testTracker1Id } from '../../FAKE_DATA';
+import trackersReducer, { cancelLatestEntry, initialState } from '../../trackersSlice';
 
 describe('trackers reducer', () => {
   describe('Cancel latest entry validation', () => {

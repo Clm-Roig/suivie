@@ -1,11 +1,11 @@
 import { addDays, addYears, startOfDay, startOfToday, subDays, subYears } from 'date-fns';
 
-import { SEVEN_DAYS_AGO_DATE, SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
-import SliceStatus from '../../models/SliceStatus';
-import Tracker from '../../models/Tracker';
-import TrackerStatus from '../../models/TrackerStatus';
-import { createTestStore } from '../createTestStore';
-import { RootState } from '../store';
+import { SEVEN_DAYS_AGO_DATE, SEVEN_DAYS_AGO_STRING } from '../../../config/Constants';
+import SliceStatus from '../../../models/SliceStatus';
+import Tracker from '../../../models/Tracker';
+import TrackerStatus from '../../../models/TrackerStatus';
+import { createTestStore } from '../../createTestStore';
+import { RootState } from '../../store';
 import {
   testEntry1,
   testEntry2,
@@ -14,7 +14,7 @@ import {
   testTracker2,
   testTracker3,
   testTracker3Id
-} from './FAKE_DATA';
+} from '../FAKE_DATA';
 import {
   selectAllTrackers,
   selectHiddenTrackers,
@@ -23,8 +23,8 @@ import {
   selectTrackersDone,
   selectWeekEntries,
   selectYearEntries
-} from './trackers.selectors';
-import { computeIfDone } from './utils';
+} from '../trackers.selectors';
+import { computeIfDone } from '../utils';
 
 let state: RootState;
 const threeDaysAgo = subDays(new Date(), 3);

@@ -1,5 +1,5 @@
-import ThemeMode from '../../models/ThemeMode';
-import themeReducer, { setThemeMode, toggleThemeMode } from './themeSlice';
+import ThemeMode from '../../../models/ThemeMode';
+import themeReducer, { setThemeMode, toggleThemeMode } from '../themeSlice';
 
 describe('theme reducer', () => {
   describe('set theme mode', () => {
