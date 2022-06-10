@@ -51,7 +51,7 @@ function Trackers() {
     {
       icon: <ViewListIcon />,
       name: 'Voir tous mes trackers',
-      onClick: () => navigate('/all-trackers')
+      onClick: () => navigate('/trackers/manage')
     }
   ];
 
