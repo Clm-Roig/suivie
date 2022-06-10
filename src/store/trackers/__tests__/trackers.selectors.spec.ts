@@ -13,7 +13,8 @@ import {
   testTracker1,
   testTracker2,
   testTracker3,
-  testTracker3Id
+  testTracker3Id,
+  testTracker5
 } from '../FAKE_DATA';
 import {
   selectAllTrackers,
@@ -116,7 +117,8 @@ describe('selectTrackersDone()', () => {
               trackerId: testTracker3Id
             }
           ]
-        }
+        },
+        testTracker5
       ]
     }
   });
@@ -130,13 +132,14 @@ describe('selectTrackersDone()', () => {
     expect(trackers[0].name).toEqual(testTracker3.name);
   });
 
-  it('should return only trackers done for the specified date', () => {
+  it('should return only trackers done for the specified date, according to the frequency', () => {
     const stateWithTrackers = getState(state);
     const { error, status, trackers } = selectTrackersDone(stateWithTrackers, threeDaysAgo);
     expect(error).toEqual({});
     expect(status).toEqual(SliceStatus.IDLE);
-    expect(trackers.length).toEqual(1);
+    expect(trackers.length).toEqual(2);
     expect(trackers[0].name).toEqual(testTracker1.name);
+    expect(trackers[1].name).toEqual(testTracker5.name); // Done 4 days ago, frequency of 3 days = done 3 days ago
   });
 });
 

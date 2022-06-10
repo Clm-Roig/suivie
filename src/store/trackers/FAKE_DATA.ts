@@ -56,20 +56,6 @@ export const testTracker2: Tracker = {
   status: TrackerStatus.ACTIVE
 };
 
-// Tracker without required and default completions
-export const testTracker4Id = '123e4567-e59b-12k3-a456-429114174000';
-export const testTracker4: Tracker = {
-  id: testTracker4Id,
-  beginDate: new Date().toString(),
-  defaultCompletions: [],
-  entries: [],
-  frequency: 1,
-  isDoneForToday: false,
-  name: 'Wake up',
-  requiredCompletions: [],
-  status: TrackerStatus.ACTIVE
-};
-
 export const testTracker3Id = '656e4567-e89b-12k3-b456-427614174000';
 export const testTracker3: Tracker = {
   id: testTracker3Id,
@@ -88,6 +74,67 @@ export const testTracker3: Tracker = {
     {
       quantity: 2,
       unit: 'L of water'
+    }
+  ],
+  status: TrackerStatus.ACTIVE
+};
+
+// Tracker without required and default completions
+export const testTracker4Id = '123e4567-e59b-12k3-a456-429114174000';
+export const testTracker4: Tracker = {
+  id: testTracker4Id,
+  beginDate: new Date().toString(),
+  defaultCompletions: [],
+  entries: [],
+  frequency: 1,
+  isDoneForToday: false,
+  name: 'Wake up',
+  requiredCompletions: [],
+  status: TrackerStatus.ACTIVE
+};
+
+export const testTracker5Id = '766e4567-e19b-12k3-x456-427614174570';
+export const testTracker5: Tracker = {
+  id: testTracker5Id,
+  beginDate: SEVEN_DAYS_AGO_STRING,
+  defaultCompletions: [
+    {
+      quantity: 3,
+      unit: 'x'
+    },
+    {
+      quantity: 4,
+      unit: 'y'
+    }
+  ],
+  entries: [
+    {
+      id: '1234-5432-azer',
+      completions: [
+        {
+          quantity: 3,
+          unit: 'x'
+        },
+        {
+          quantity: 4,
+          unit: 'y'
+        }
+      ],
+      date: subDays(new Date(), 4).toString(),
+      trackerId: testTracker5Id
+    }
+  ],
+  frequency: 3,
+  isDoneForToday: false,
+  name: 'Tracker 5',
+  requiredCompletions: [
+    {
+      quantity: 3,
+      unit: 'x'
+    },
+    {
+      quantity: 4,
+      unit: 'y'
     }
   ],
   status: TrackerStatus.ACTIVE
