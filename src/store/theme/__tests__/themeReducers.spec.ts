@@ -16,7 +16,8 @@ describe('theme reducer', () => {
   });
   describe('toggle theme mode', () => {
     it('should toggle the theme mode', () => {
-      const finalState = themeReducer(
+      // From DARK to LIGHT
+      let finalState = themeReducer(
         {
           themeMode: ThemeMode.DARK
         },
@@ -24,6 +25,11 @@ describe('theme reducer', () => {
       );
       const { themeMode } = finalState;
       expect(themeMode).toEqual(ThemeMode.LIGHT);
+
+      // From LIGHT to DARK
+      finalState = themeReducer(finalState, toggleThemeMode());
+      const { themeMode: newThemeMode } = finalState;
+      expect(newThemeMode).toEqual(ThemeMode.DARK);
     });
   });
 });
