@@ -1,7 +1,7 @@
 import { isSameMinute } from 'date-fns';
 
-import SliceStatus from '../../models/SliceStatus';
-import trackersReducer from './trackersSlice';
+import SliceStatus from '../../../models/SliceStatus';
+import trackersReducer from '../trackersSlice';
 
 describe('trackers reducer', () => {
   it('should handle initial state', () => {

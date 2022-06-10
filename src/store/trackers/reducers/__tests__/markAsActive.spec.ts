@@ -1,17 +1,17 @@
-import Tracker from '../../../models/Tracker';
-import TrackerStatus from '../../../models/TrackerStatus';
+import Tracker from '../../../../models/Tracker';
+import TrackerStatus from '../../../../models/TrackerStatus';
 import {
   testTracker1,
   testTracker1Id,
   testTracker2,
   testTracker3,
   testTracker3Id
-} from '../FAKE_DATA';
+} from '../../FAKE_DATA';
 import trackersReducer, {
   initialState,
   markTrackerAsActive,
   markTrackersAsActive
-} from '../trackersSlice';
+} from '../../trackersSlice';
 
 const isActive = (tracker: Tracker) =>
   tracker.status === TrackerStatus.ACTIVE && tracker.endDate === undefined;

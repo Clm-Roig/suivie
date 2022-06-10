@@ -1,7 +1,7 @@
-import Tracker from '../../../models/Tracker';
-import TrackerStatus from '../../../models/TrackerStatus';
-import { testTracker1, testTracker1Id } from '../FAKE_DATA';
-import trackersReducer, { editTracker, initialState } from '../trackersSlice';
+import Tracker from '../../../../models/Tracker';
+import TrackerStatus from '../../../../models/TrackerStatus';
+import { testTracker1, testTracker1Id } from '../../FAKE_DATA';
+import trackersReducer, { editTracker, initialState } from '../../trackersSlice';
 
 describe('trackers reducer', () => {
   describe('Edit a tracker', () => {
