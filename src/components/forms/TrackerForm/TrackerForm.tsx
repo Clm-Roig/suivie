@@ -19,6 +19,7 @@ import Completion from '../../../models/Completion';
 import Tracker from '../../../models/Tracker';
 import TrackerStatus from '../../../models/TrackerStatus';
 import DefaultCompletionsForm from '../DefaultCompletionsForm/DefaultCompletionsForm';
+import HelperAdornment from '../HelperAdornment/HelperAdornment';
 import NumberTextField from '../NumberTextField/NumberTextField';
 import RequiredCompletionsForm from '../RequiredCompletionsForm/RequiredCompletionsForm';
 import { FormValues } from './types';
@@ -181,6 +182,17 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
               onChange={onChange}
               sx={{ mb: 2 }}
               value={value}
+              InputProps={{
+                endAdornment: (
+                  <HelperAdornment
+                    name={'duration'}
+                    text={
+                      "Une fois la durée écoulée, le tracker sera automatiquement archivé, sans vous que vous n'ayez à le faire manuellement."
+                    }
+                    position={'end'}
+                  />
+                )
+              }}
             />
           );
         }}
@@ -211,6 +223,18 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
             <FormControl fullWidth sx={{ mb: 2 }}>
               <InputLabel id="frequency">Fréquence de répétition (en jours)</InputLabel>
               <Select
+                IconComponent={() => null}
+                endAdornment={
+                  <HelperAdornment
+                    name={'frequency'}
+                    text={
+                      'La fréquence définit la durée avant laquelle un tracker validé est de nouveau marqué comme "à faire". ' +
+                      '\n\nAttention : choisir la fréquence "7 (Hebdomadaire)" et valider le tracker le vendredi 1er juin par exemple ' +
+                      'fera que le tracker sera de nouveau à faire seulement à partir du vendredi 8 juin.'
+                    }
+                    position={'end'}
+                  />
+                }
                 onChange={onChange}
                 value={value}
                 label={'Fréquence de répétition (en jours)'}>
