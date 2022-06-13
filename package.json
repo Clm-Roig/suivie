@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
+    "@emotion/styled": "^11.9.3",
     "@formkit/auto-animate": "^1.0.0-beta.1",
     "@mui/icons-material": "^5.8.3",
     "@mui/lab": "^5.0.0-alpha.84",
@@ -20,7 +20,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.2.0",
-    "@types/node": "^17.0.40",
+    "@types/node": "^17.0.42",
     "@types/jest": "^28.1.1",
     "@types/react": "^18.0.1",
     "@types/uuid": "^8.3.4",
