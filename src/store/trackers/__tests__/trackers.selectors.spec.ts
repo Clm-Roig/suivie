@@ -1,11 +1,11 @@
 import { addDays, addYears, startOfDay, startOfToday, subDays, subYears } from 'date-fns';
 
-import { SEVEN_DAYS_AGO_DATE, SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
-import SliceStatus from '../../models/SliceStatus';
-import Tracker from '../../models/Tracker';
-import TrackerStatus from '../../models/TrackerStatus';
-import { createTestStore } from '../createTestStore';
-import { RootState } from '../store';
+import { SEVEN_DAYS_AGO_DATE, SEVEN_DAYS_AGO_STRING } from '../../../config/Constants';
+import SliceStatus from '../../../models/SliceStatus';
+import Tracker from '../../../models/Tracker';
+import TrackerStatus from '../../../models/TrackerStatus';
+import { createTestStore } from '../../createTestStore';
+import { RootState } from '../../store';
 import {
   testEntry1,
   testEntry2,
@@ -13,8 +13,9 @@ import {
   testTracker1,
   testTracker2,
   testTracker3,
-  testTracker3Id
-} from './FAKE_DATA';
+  testTracker3Id,
+  testTracker5
+} from '../FAKE_DATA';
 import {
   selectAllTrackers,
   selectHiddenTrackers,
@@ -23,8 +24,8 @@ import {
   selectTrackersDone,
   selectWeekEntries,
   selectYearEntries
-} from './trackers.selectors';
-import { computeIfDone } from './utils';
+} from '../trackers.selectors';
+import { computeIfDone } from '../utils';
 
 let state: RootState;
 const threeDaysAgo = subDays(new Date(), 3);
@@ -116,7 +117,8 @@ describe('selectTrackersDone()', () => {
               trackerId: testTracker3Id
             }
           ]
-        }
+        },
+        testTracker5
       ]
     }
   });
@@ -130,13 +132,14 @@ describe('selectTrackersDone()', () => {
     expect(trackers[0].name).toEqual(testTracker3.name);
   });
 
-  it('should return only trackers done for the specified date', () => {
+  it('should return only trackers done for the specified date, according to the frequency', () => {
     const stateWithTrackers = getState(state);
     const { error, status, trackers } = selectTrackersDone(stateWithTrackers, threeDaysAgo);
     expect(error).toEqual({});
     expect(status).toEqual(SliceStatus.IDLE);
-    expect(trackers.length).toEqual(1);
+    expect(trackers.length).toEqual(2);
     expect(trackers[0].name).toEqual(testTracker1.name);
+    expect(trackers[1].name).toEqual(testTracker5.name); // Done 4 days ago, frequency of 3 days = done 3 days ago
   });
 });
 

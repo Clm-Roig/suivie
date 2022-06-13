@@ -1,11 +1,11 @@
 import { isSameDay, subDays } from 'date-fns';
 
-import { testTracker1, testTracker1Id } from '../FAKE_DATA';
+import { testTracker1, testTracker1Id } from '../../FAKE_DATA';
 import trackersReducer, {
   completelyValidate,
   customValidate,
   initialState
-} from '../trackersSlice';
+} from '../../trackersSlice';
 
 const sevenDaysAgo = subDays(new Date(), 7);
 

@@ -61,7 +61,7 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width 
     {
       icon: <ListAltIcon />,
       name: 'Tous mes trackers',
-      url: '/all-trackers'
+      url: '/trackers/manage'
     },
     {
       icon: <TimelineIcon />,

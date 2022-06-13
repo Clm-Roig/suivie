@@ -7,6 +7,7 @@ describe('isATracker helper', () => {
     beginDate: 'Thu Mar 17 2022 12:50:05 GMT+0100 (Central European Standard Time)',
     defaultCompletions: [],
     entries: [],
+    frequency: 1,
     name: 'A basic tracker',
     requiredCompletions: [],
     status: TrackerStatus.ACTIVE

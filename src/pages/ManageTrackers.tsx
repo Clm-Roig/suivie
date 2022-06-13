@@ -5,7 +5,7 @@ import TrackerList from '../components/TrackerList/TrackerList';
 import { useAppSelector } from '../hooks/redux';
 import { selectAllTrackers } from '../store/trackers/trackers.selectors';
 
-function AllTrackers() {
+function ManageTrackers() {
   const { trackers } = useAppSelector(selectAllTrackers);
 
   return (
@@ -20,4 +20,4 @@ function AllTrackers() {
     </Box>
   );
 }
-export default AllTrackers;
+export default ManageTrackers;
