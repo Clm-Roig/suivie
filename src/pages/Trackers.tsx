@@ -110,7 +110,7 @@ function Trackers() {
       )}
 
       <SpeedDial
-        ariaLabel="SpeedDial basic example"
+        ariaLabel="SuiVie SpeedDial menu"
         sx={{ position: 'fixed', bottom: 16, right: 16 }}
         icon={<SpeedDialIcon icon={<MoreVertIcon />} openIcon={<CloseIcon />} />}>
         {actions.map((action) => (
