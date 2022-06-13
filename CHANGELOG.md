@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.6](https://github.com/clm-roig/suivie/compare/v0.2.5...v0.2.6) (2022-06-13)
+
+
+### Features
+
+* **#173:** add frequency property ([ba44fe4](https://github.com/clm-roig/suivie/commit/ba44fe4ff0d87d5ec0aebf3789add4c03c0fc79a)), closes [#173](https://github.com/clm-roig/suivie/issues/173)
+* **#291:** add popover helper in tracker form ([5862c32](https://github.com/clm-roig/suivie/commit/5862c32e36de20da124e0da0f56062bbb368bb58)), closes [#291](https://github.com/clm-roig/suivie/issues/291)
+
+
+### Bug Fixes
+
+* **completeValidation:** display alert even if no required completions ([5739941](https://github.com/clm-roig/suivie/commit/5739941570c756a374c3997acb1b9d854bfd94fb))
+* **manageTrackers:** rename AllTrackers to ManageTrackers ([e3f338a](https://github.com/clm-roig/suivie/commit/e3f338a990a79c5d586cfb72b4717ad1249e40e5))
+* **speedDial:** label ([d5aa428](https://github.com/clm-roig/suivie/commit/d5aa428ce70af14ceeb8ffaa266f4cd5253e2470))
+* **trackerForm:** use select for frequency instead of textfield ([1b3efe2](https://github.com/clm-roig/suivie/commit/1b3efe2096d3b1a12f67c987eade096884173e35))
+* **trackerSelect:** improve label ([320d270](https://github.com/clm-roig/suivie/commit/320d27071a04f052d984cd51501d6de1a202ad12))
+* **trackersFrequency:** fix selector and utils functions ([0702f27](https://github.com/clm-roig/suivie/commit/0702f2793ca3ffeb591bf14308f0b5b7db1495fc))
+* **trackerUtils:** update getAggregatedCompletions to accept 2 dates ([35d6e6b](https://github.com/clm-roig/suivie/commit/35d6e6bfe7580bd84dba17214748f159dc0d2823))
+
 ### [0.2.5](https://github.com/clm-roig/suivie/compare/v0.2.4...v0.2.5) (2022-06-07)
 
 
