@@ -33,10 +33,7 @@ import { selectThemeMode } from '../../../store/theme/theme.selectors';
 import { FormValues } from '../TrackerForm/types';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 import CompletionUnitSelect from '../completions/CompletionUnitSelect';
-import {
-  computeDecrementedQuantity,
-  computeIncrementedQuantity
-} from '../completions/computeNewQuantity';
+import { computeDecrementedQuantity, computeIncrementedQuantity } from '../completions/utils';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);

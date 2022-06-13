@@ -10,7 +10,7 @@ import CompletionUnitTextField from '../completions/CompletionUnitTextField';
 import {
   computeDecrementedStringQuantity,
   computeIncrementedStringQuantity
-} from '../completions/computeNewQuantity';
+} from '../completions/utils';
 
 export const FieldsetGrid = styled(Grid)`
   border-radius: 4px;
