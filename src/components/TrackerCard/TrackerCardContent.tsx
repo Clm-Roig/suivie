@@ -34,7 +34,7 @@ const TrackerCardContent: FC<Props> = ({
 
   const aggCompletions = getAggregatedCompletions(
     entries,
-    subDays(selectedDate, frequency),
+    subDays(selectedDate, frequency - 1),
     selectedDate
   );
 
