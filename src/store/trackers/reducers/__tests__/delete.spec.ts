@@ -4,8 +4,8 @@ import {
   testTracker2,
   testTracker2Id,
   testTracker3
-} from '../FAKE_DATA';
-import trackersReducer, { deleteTracker, deleteTrackers, initialState } from '../trackersSlice';
+} from '../../FAKE_DATA';
+import trackersReducer, { deleteTracker, deleteTrackers, initialState } from '../../trackersSlice';
 
 describe('trackers reducer', () => {
   describe('Delete tracker', () => {

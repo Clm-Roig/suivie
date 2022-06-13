@@ -30,6 +30,7 @@ const isATracker = (tracker: any): NotATrackerResponse => {
     { key: 'duration', types: ['number', 'undefined'] },
     { key: 'endDate', types: ['string', 'undefined'] },
     { key: 'entries', types: ['array'] },
+    { key: 'frequency', types: ['number'] },
     { key: 'name', types: ['string'] },
     { key: 'remainingDays', types: ['number', 'undefined'] },
     { key: 'requiredCompletions', types: ['array'] },

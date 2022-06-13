@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button, Grid, GridProps, IconButton, Typography, useTheme } from '@mui/material';
-import { FC, useRef } from 'react';
+import HelpIcon from '@mui/icons-material/Help';
+import { Box, Button, Grid, GridProps, IconButton, Typography, useTheme } from '@mui/material';
+import { FC, useRef, useState } from 'react';
 import {
   Control,
   Controller,
@@ -17,13 +18,14 @@ import { useAutoAnimate } from '../../../hooks/useAutoAnimate';
 import Completion from '../../../models/Completion';
 import ThemeMode from '../../../models/ThemeMode';
 import { selectThemeMode } from '../../../store/theme/theme.selectors';
+import Popover from '../../Popover/Popover';
 import { FormValues } from '../TrackerForm/types';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 import CompletionUnitTextField from '../completions/CompletionUnitTextField';
 import {
   computeDecrementedStringQuantity,
   computeIncrementedStringQuantity
-} from '../completions/computeNewQuantity';
+} from '../completions/utils';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -67,6 +69,17 @@ const RequiredCompletionsForm: FC<Props> = ({
     const nbCompletions = requiredCompletions.filter((v2) => v2.unit === v);
     return nbCompletions.length < 2;
   };
+
+  // Popover management
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+  const id = open ? 'popover-' + name : undefined;
 
   return (
     <div ref={animateRef}>
@@ -162,13 +175,23 @@ const RequiredCompletionsForm: FC<Props> = ({
           </Grid>
         </FieldsetGrid>
       ))}
-      <Button
-        onClick={() => append({})}
-        startIcon={<AddCircleOutlineIcon />}
-        sx={{ mb: 2 }}
-        variant="contained">
-        Objectif
-      </Button>
+      <Box mb={2} display="flex" justifyContent="center" alignItems="center">
+        <Button onClick={() => append({})} startIcon={<AddCircleOutlineIcon />} variant="contained">
+          Objectif
+        </Button>
+        <IconButton color="primary" onClick={handleClick}>
+          <HelpIcon />
+        </IconButton>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          text={
+            "Les objectifs définissent ce que vous devez accomplir pour valider le tracker. Ils se component d'une quantité et d'une unité."
+          }
+        />
+      </Box>
     </div>
   );
 };

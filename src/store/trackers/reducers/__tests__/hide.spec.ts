@@ -1,7 +1,7 @@
 import { isSameDay, isToday, subDays } from 'date-fns';
 
-import { testTracker1, testTracker1Id } from '../FAKE_DATA';
-import trackersReducer, { hideTracker, initialState } from '../trackersSlice';
+import { testTracker1, testTracker1Id } from '../../FAKE_DATA';
+import trackersReducer, { hideTracker, initialState } from '../../trackersSlice';
 
 describe('trackers reducer', () => {
   describe('Hide tracker', () => {

@@ -1,4 +1,4 @@
-import { subDays } from 'date-fns';
+import { addDays, subDays } from 'date-fns';
 
 import { SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
 import Tracker from '../../models/Tracker';
@@ -20,6 +20,7 @@ export const testTracker1: Tracker = {
     }
   ],
   duration: 13,
+  frequency: 1,
   isDoneForToday: false,
   name: 'Musculation',
   remainingDays: 10,
@@ -43,6 +44,7 @@ export const testTracker2: Tracker = {
   beginDate: subDays(new Date(), 10).toString(),
   duration: 70,
   entries: [],
+  frequency: 1,
   isDoneForToday: false,
   name: 'Eat',
   requiredCompletions: [
@@ -51,19 +53,6 @@ export const testTracker2: Tracker = {
       unit: 'vegetables or fruits'
     }
   ],
-  status: TrackerStatus.ACTIVE
-};
-
-// Tracker without required and default completions
-export const testTracker4Id = '123e4567-e59b-12k3-a456-429114174000';
-export const testTracker4: Tracker = {
-  id: testTracker4Id,
-  beginDate: new Date().toString(),
-  defaultCompletions: [],
-  entries: [],
-  isDoneForToday: false,
-  name: 'Wake up',
-  requiredCompletions: [],
   status: TrackerStatus.ACTIVE
 };
 
@@ -78,12 +67,74 @@ export const testTracker3: Tracker = {
     }
   ],
   entries: [],
+  frequency: 1,
   isDoneForToday: false,
   name: 'Drink',
   requiredCompletions: [
     {
       quantity: 2,
       unit: 'L of water'
+    }
+  ],
+  status: TrackerStatus.ACTIVE
+};
+
+// Tracker without required and default completions
+export const testTracker4Id = '123e4567-e59b-12k3-a456-429114174000';
+export const testTracker4: Tracker = {
+  id: testTracker4Id,
+  beginDate: new Date().toString(),
+  defaultCompletions: [],
+  entries: [],
+  frequency: 1,
+  isDoneForToday: false,
+  name: 'Wake up',
+  requiredCompletions: [],
+  status: TrackerStatus.ACTIVE
+};
+
+export const testTracker5Id = '766e4567-e19b-12k3-x456-427614174570';
+export const testTracker5: Tracker = {
+  id: testTracker5Id,
+  beginDate: SEVEN_DAYS_AGO_STRING,
+  defaultCompletions: [
+    {
+      quantity: 3,
+      unit: 'x'
+    },
+    {
+      quantity: 4,
+      unit: 'y'
+    }
+  ],
+  entries: [
+    {
+      id: '1234-5432-azer',
+      completions: [
+        {
+          quantity: 3,
+          unit: 'x'
+        },
+        {
+          quantity: 4,
+          unit: 'y'
+        }
+      ],
+      date: subDays(new Date(), 4).toString(),
+      trackerId: testTracker5Id
+    }
+  ],
+  frequency: 3,
+  isDoneForToday: false,
+  name: 'Tracker 5',
+  requiredCompletions: [
+    {
+      quantity: 3,
+      unit: 'x'
+    },
+    {
+      quantity: 4,
+      unit: 'y'
     }
   ],
   status: TrackerStatus.ACTIVE
@@ -139,3 +190,99 @@ export const testEntry3: TrackerEntry = {
   date: SEVEN_DAYS_AGO_STRING,
   trackerId: testTracker1Id
 };
+
+export const todayEntries = [
+  {
+    id: '2',
+    completions: [
+      {
+        quantity: 3,
+        unit: 'x'
+      },
+      {
+        quantity: 6,
+        unit: 'y'
+      }
+    ],
+    date: new Date().toString(),
+    trackerId: '1'
+  } as TrackerEntry,
+  {
+    id: '3',
+    completions: [
+      {
+        quantity: 7,
+        unit: 'x'
+      },
+      {
+        quantity: 10,
+        unit: 'y'
+      }
+    ],
+    date: new Date().toString(),
+    trackerId: '1'
+  } as TrackerEntry
+];
+
+export const variousEntries = [
+  {
+    id: '2',
+    completions: [
+      {
+        quantity: 3,
+        unit: 'x'
+      },
+      {
+        quantity: 6,
+        unit: 'y'
+      }
+    ],
+    date: subDays(new Date(), 3).toString(),
+    trackerId: '1'
+  } as TrackerEntry,
+  {
+    id: '3',
+    completions: [
+      {
+        quantity: 7,
+        unit: 'x'
+      },
+      {
+        quantity: 10,
+        unit: 'y'
+      }
+    ],
+    date: addDays(new Date(), 3).toString(),
+    trackerId: '1'
+  } as TrackerEntry,
+  {
+    id: '4',
+    completions: [
+      {
+        quantity: 7,
+        unit: 'x'
+      },
+      {
+        quantity: 10,
+        unit: 'y'
+      }
+    ],
+    date: new Date().toString(),
+    trackerId: '1'
+  } as TrackerEntry,
+  {
+    id: '5',
+    completions: [
+      {
+        quantity: 7,
+        unit: 'x'
+      },
+      {
+        quantity: 10,
+        unit: 'y'
+      }
+    ],
+    date: new Date().toString(),
+    trackerId: '1'
+  } as TrackerEntry
+];

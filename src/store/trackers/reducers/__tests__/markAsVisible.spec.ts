@@ -1,6 +1,6 @@
-import Tracker from '../../../models/Tracker';
-import { testTracker1, testTracker1Id, testTracker2, testTracker2Id } from '../FAKE_DATA';
-import trackersReducer, { initialState, markTrackerAsVisible } from '../trackersSlice';
+import Tracker from '../../../../models/Tracker';
+import { testTracker1, testTracker1Id, testTracker2, testTracker2Id } from '../../FAKE_DATA';
+import trackersReducer, { initialState, markTrackerAsVisible } from '../../trackersSlice';
 
 const isVisible = (tracker: Tracker) => tracker.dateHidden === undefined;
 

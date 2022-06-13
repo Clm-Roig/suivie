@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import HelpIcon from '@mui/icons-material/Help';
 import {
   Box,
   Button,
@@ -15,7 +16,7 @@ import {
   Typography,
   useTheme
 } from '@mui/material';
-import { FC, useRef } from 'react';
+import { FC, useRef, useState } from 'react';
 import {
   Control,
   Controller,
@@ -30,13 +31,11 @@ import { useAutoAnimate } from '../../../hooks/useAutoAnimate';
 import Completion from '../../../models/Completion';
 import ThemeMode from '../../../models/ThemeMode';
 import { selectThemeMode } from '../../../store/theme/theme.selectors';
+import Popover from '../../Popover/Popover';
 import { FormValues } from '../TrackerForm/types';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 import CompletionUnitSelect from '../completions/CompletionUnitSelect';
-import {
-  computeDecrementedQuantity,
-  computeIncrementedQuantity
-} from '../completions/computeNewQuantity';
+import { computeDecrementedQuantity, computeIncrementedQuantity } from '../completions/utils';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -74,6 +73,17 @@ const DefaultCompletionsForm: FC<Props> = ({
     bgcolor: themeMode === ThemeMode.LIGHT ? theme.palette.grey[100] : theme.palette.grey[900],
     mb: 1
   };
+
+  // Popover management
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+  const id = open ? 'popover-' + name : undefined;
 
   return (
     <Box ref={animateRef}>
@@ -174,23 +184,36 @@ const DefaultCompletionsForm: FC<Props> = ({
         </FieldsetGrid>
       ))}
 
-      <Tooltip
-        title={
-          requiredCompletions.length === defaultCompletions.length
-            ? 'Tous les objectifs ont déjà une réalisation par défaut.'
-            : ''
-        }>
-        <span>
-          <Button
-            disabled={requiredCompletions.length === defaultCompletions.length}
-            onClick={() => append({})}
-            startIcon={<AddCircleOutlineIcon />}
-            sx={{ mb: 2 }}
-            variant="contained">
-            Réalisation par défaut
-          </Button>
-        </span>
-      </Tooltip>
+      <Box mb={2} display="flex" justifyContent="center" alignItems="center">
+        <Tooltip
+          title={
+            requiredCompletions.length === defaultCompletions.length
+              ? 'Tous les objectifs ont déjà une réalisation par défaut.'
+              : ''
+          }>
+          <span>
+            <Button
+              disabled={requiredCompletions.length === defaultCompletions.length}
+              onClick={() => append({})}
+              startIcon={<AddCircleOutlineIcon />}
+              variant="contained">
+              Réalisation par défaut
+            </Button>
+          </span>
+        </Tooltip>
+        <IconButton color="primary" onClick={handleClick}>
+          <HelpIcon />
+        </IconButton>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          text={
+            "Les réalisations par défaut définissent, lors de la validation du tracker, quelle portion de l'objectif vous réalisez. Si vous n'en spécifiez aucune, celles-ci seront égales aux objectifs."
+          }
+        />
+      </Box>
     </Box>
   );
 };

@@ -32,17 +32,19 @@ const CompleteValidationDialog: FC<Props> = ({ dialogProps, onValidation, tracke
         {'Tracker : '}
         <b>{name}</b>
       </DialogTitle>
-      {requiredCompletions.length > 0 && (
-        <DialogContent sx={{ pb: 0 }}>
-          <DialogContentText>Valider avec :</DialogContentText>
-          <CompletionChipList boxProps={{ sx: { mb: 1 } }} completions={requiredCompletions} />
-          {!isToday(selectedDate) && (
-            <Alert icon={false} severity="warning">
-              Vous validez ce tracker pour le <b>{formatDate(selectedDate)}</b>.
-            </Alert>
-          )}
-        </DialogContent>
-      )}
+      <DialogContent sx={{ pb: 0 }}>
+        {requiredCompletions.length > 0 && (
+          <>
+            <DialogContentText>Valider avec :</DialogContentText>
+            <CompletionChipList boxProps={{ sx: { mb: 1 } }} completions={requiredCompletions} />
+          </>
+        )}
+        {!isToday(selectedDate) && (
+          <Alert icon={false} severity="warning">
+            Vous validez ce tracker pour le <b>{formatDate(selectedDate)}</b>.
+          </Alert>
+        )}
+      </DialogContent>
 
       <DialogActions>
         <Button onClick={onValidation} autoFocus>

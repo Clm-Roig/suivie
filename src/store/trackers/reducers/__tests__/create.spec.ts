@@ -1,5 +1,5 @@
-import { testTracker1, testTracker1Id, testTracker2, testTracker2Id } from '../FAKE_DATA';
-import trackersReducer, { createTracker, initialState } from '../trackersSlice';
+import { testTracker1, testTracker1Id, testTracker2, testTracker2Id } from '../../FAKE_DATA';
+import trackersReducer, { createTracker, initialState } from '../../trackersSlice';
 
 describe('trackers reducer', () => {
   describe('Create tracker', () => {

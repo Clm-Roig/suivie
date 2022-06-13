@@ -1,7 +1,7 @@
-import ThemeMode from '../../models/ThemeMode';
-import { createTestStore } from '../createTestStore';
-import { RootState } from '../store';
-import { selectThemeMode } from './theme.selectors';
+import ThemeMode from '../../../models/ThemeMode';
+import { createTestStore } from '../../createTestStore';
+import { RootState } from '../../store';
+import { selectThemeMode } from '../theme.selectors';
 
 let state: RootState;
 describe('selectThemeMode()', () => {
