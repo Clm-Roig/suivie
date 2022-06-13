@@ -13,7 +13,7 @@
     "@emotion/styled": "^11.9.3",
     "@formkit/auto-animate": "^1.0.0-beta.1",
     "@mui/icons-material": "^5.8.3",
-    "@mui/lab": "^5.0.0-alpha.84",
+    "@mui/lab": "^5.0.0-alpha.85",
     "@mui/material": "^5.8.3",
     "@mui/x-date-pickers": "^5.0.0-alpha.5",
     "@reduxjs/toolkit": "^1.8.2",
