@@ -1,4 +1,15 @@
-import { Box, Button, Stack, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  Divider,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField
+} from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { FC, useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
@@ -11,6 +22,12 @@ import DefaultCompletionsForm from '../DefaultCompletionsForm/DefaultCompletions
 import NumberTextField from '../NumberTextField/NumberTextField';
 import RequiredCompletionsForm from '../RequiredCompletionsForm/RequiredCompletionsForm';
 import { FormValues } from './types';
+
+const MAX_NUMBER_OF_DAYS_FOR_FREQUENCY = 120;
+const NUMBER_OF_DAYS_FOR_FREQUENCY = Array.from(
+  Array(MAX_NUMBER_OF_DAYS_FOR_FREQUENCY),
+  (e, i) => i + 1
+);
 
 const getDefaultValues = (): FormValues => ({
   id: v4(),
@@ -170,8 +187,8 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
       />
 
       <Controller
-        control={control}
         name={'frequency'}
+        control={control}
         rules={{
           min: 1,
           pattern: /^\d+$/,
@@ -191,16 +208,25 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
             }
           }
           return (
-            <NumberTextField
-              required
-              error={!!error}
-              fullWidth
-              helperText={error && errorText}
-              label={'Fréquence de répétition (en jours)'}
-              onChange={onChange}
-              sx={{ mb: 2 }}
-              value={value}
-            />
+            <FormControl fullWidth sx={{ mb: 2 }}>
+              <InputLabel id="frequency">Fréquence de répétition (en jours)</InputLabel>
+              <Select
+                onChange={onChange}
+                value={value}
+                label={'Fréquence de répétition (en jours)'}>
+                <MenuItem value={1}>1 (Quotidien)</MenuItem>
+                <MenuItem value={7}>7 (Hebdomadaire)</MenuItem>
+                <MenuItem value={14}>14 (Bihebdomadaire)</MenuItem>
+                <MenuItem value={365}>365 (Annuel)</MenuItem>
+                <Divider />
+                {NUMBER_OF_DAYS_FOR_FREQUENCY.map((x) => (
+                  <MenuItem key={x} value={x}>
+                    {x}
+                  </MenuItem>
+                ))}
+              </Select>
+              {error && errorText && <FormHelperText>{errorText}</FormHelperText>}
+            </FormControl>
           );
         }}
       />
