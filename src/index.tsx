@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 
@@ -9,7 +9,9 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { store } from './store/store';
 
-ReactDOM.render(
+const container = document.getElementById('root') as HTMLElement;
+const root = createRoot(container);
+root.render(
   <StrictMode>
     <HashRouter>
       <Provider store={store}>
@@ -18,8 +20,7 @@ ReactDOM.render(
         </CustomPersistGate>
       </Provider>
     </HashRouter>
-  </StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change
