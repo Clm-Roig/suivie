@@ -43,7 +43,8 @@
     "release": "standard-version",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "lint:fix": "eslint --fix \"**/*.{js,ts,tsx}\"",
-    "format": "prettier --write \"**/*.{js,ts,tsx,css,json}\" --config ./.prettierrc"
+    "format": "prettier --write \"**/*.{js,ts,tsx,css,json}\" --config ./.prettierrc",
+    "e2e": "npx cypress open"
   },
   "eslintConfig": {},
   "browserslist": {
@@ -69,6 +70,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.27.1",
+    "cypress": "^10.1.0",
     "eslint": "^8.17.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
