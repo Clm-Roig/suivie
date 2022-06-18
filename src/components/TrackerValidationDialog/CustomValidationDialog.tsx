@@ -47,10 +47,10 @@ const CustomValidationDialog: FC<Props> = ({
           Sélectionnez les objectifs à valider parmi ceux ci-dessous :
         </DialogContentText>
         <CompletionChipList
-          boxProps={{ sx: { mb: 1 } }}
           completions={requiredCompletions}
           onChipClick={onChipClick}
           selectedCompletions={selectedCompletions}
+          sx={{ mb: 1 }}
         />
         <ValidateCompletionsForm
           completions={selectedCompletions || []}

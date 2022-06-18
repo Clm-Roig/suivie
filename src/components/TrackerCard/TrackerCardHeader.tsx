@@ -24,12 +24,11 @@ import formatDate from '../../utils/formatDate';
 import Emoji from '../Emoji/Emoji';
 import TrackerEditDialog from '../TrackerEditDialog/TrackerEditDialog';
 
-interface Props {
-  cardHeaderProps?: CardHeaderProps;
+interface Props extends CardHeaderProps {
   tracker: Tracker;
 }
 
-const TrackerCardHeader: FC<Props> = ({ cardHeaderProps, tracker }) => {
+const TrackerCardHeader: FC<Props> = ({ tracker, ...cardHeaderProps }) => {
   const { beginDate, frequency, id, name, remainingDays, status } = tracker;
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();

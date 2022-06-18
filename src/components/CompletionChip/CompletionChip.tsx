@@ -3,14 +3,18 @@ import { FC } from 'react';
 
 import Completion from '../../models/Completion';
 
-interface Props {
-  chipProps?: ChipProps;
+interface Props extends ChipProps {
   completion: Completion;
   isSelected?: boolean;
   requiredCompletion?: Completion;
 }
 
-const CompletionChip: FC<Props> = ({ chipProps, completion, isSelected, requiredCompletion }) => {
+const CompletionChip: FC<Props> = ({
+  completion,
+  isSelected,
+  requiredCompletion,
+  ...chipProps
+}) => {
   const { quantity, unit } = completion;
   const theme = useTheme();
 
