@@ -24,7 +24,7 @@ const TrackerCardList: FC<Props> = ({ trackers, cardProps }) => {
   return (
     <div ref={animateRef}>
       {trackers.map((t) => (
-        <TrackerCard tracker={t} key={t.id} cardProps={allCardProps} />
+        <TrackerCard tracker={t} key={t.id} {...allCardProps} />
       ))}
     </div>
   );

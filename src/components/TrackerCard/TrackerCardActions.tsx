@@ -24,8 +24,7 @@ import CustomValidationDialog from '../TrackerValidationDialog/CustomValidationD
 import MakeHiddenDialog from '../TrackerValidationDialog/MakeHiddenDialog';
 import MakeVisibleValidationDialog from '../TrackerValidationDialog/MakeVisibleDialog';
 
-interface Props {
-  cardActionsProps?: CardActionsProps;
+interface Props extends CardActionsProps {
   onChipClick?: (completion: Completion) => void;
   selectedCompletions?: Completion[];
   setSelectedCompletions: (completions: Completion[]) => void;
@@ -33,11 +32,11 @@ interface Props {
 }
 
 const TrackerCardActions: FC<Props> = ({
-  cardActionsProps,
   onChipClick,
   selectedCompletions,
   setSelectedCompletions,
-  tracker
+  tracker,
+  ...cardActionsProps
 }) => {
   const { requiredCompletions } = tracker;
   const selectedDate = useAppSelector(selectSelectedDate);

@@ -4,8 +4,7 @@ import { FC } from 'react';
 import Completion from '../../models/Completion';
 import CompletionChip from '../CompletionChip/CompletionChip';
 
-interface Props {
-  boxProps?: BoxProps;
+interface Props extends BoxProps {
   completions: Completion[];
   onChipClick?: (completion: Completion) => void;
   requiredCompletions?: Completion[];
@@ -13,11 +12,11 @@ interface Props {
 }
 
 const CompletionChipList: FC<Props> = ({
-  boxProps,
   completions,
   onChipClick,
   requiredCompletions,
-  selectedCompletions
+  selectedCompletions,
+  ...boxProps
 }) => {
   const onClick = (completion: Completion) => {
     if (onChipClick) {
@@ -25,11 +24,12 @@ const CompletionChipList: FC<Props> = ({
     }
   };
   return (
-    <Box display="flex" gap={0.5} flexWrap={'wrap'} {...boxProps} overflow="hidden">
+    <Box display="flex" gap={0.5} flexWrap={'wrap'} overflow="hidden" {...boxProps}>
       {completions.map((c, idx) => (
         <CompletionChip
           key={c.quantity.toString() + idx}
-          chipProps={{ onClick: () => onClick(c), clickable: onChipClick !== undefined }}
+          onClick={() => onClick(c)}
+          clickable={onChipClick !== undefined}
           completion={c}
           isSelected={selectedCompletions?.includes(c)}
           requiredCompletion={requiredCompletions?.find((rc) => rc.unit === c.unit)}

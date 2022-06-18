@@ -11,12 +11,11 @@ import TrackerListActions from './TrackerListActions/TrackerListActions';
 import TrackerListItem from './TrackerListItem/TrackerListItem';
 import TrackerListSubheader from './TrackerListSubheader/TrackerListSubheader';
 
-interface Props {
-  listProps?: ListProps;
+interface Props extends ListProps {
   trackers: Tracker[];
 }
 
-const TrackerList: FC<Props> = ({ trackers, listProps }) => {
+const TrackerList: FC<Props> = ({ trackers, ...listProps }) => {
   const [selectedTrackers, setSelectedTrackers] = useState<Tracker[]>([]);
   const [order, setOrder] = useState(Order.ASC);
   const [animateRef] = useAutoAnimate<HTMLUListElement>();
