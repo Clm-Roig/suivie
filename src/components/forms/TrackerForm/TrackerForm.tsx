@@ -121,6 +121,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
         rules={{ required: true }}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <TextField
+            id="name"
             error={!!error}
             fullWidth
             helperText={error ? 'Un nom est requis' : ''}
@@ -144,6 +145,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
             renderInput={(params) => (
               <TextField
                 {...params}
+                id="begin-date"
                 error={!!error}
                 fullWidth
                 helperText={error ? 'Une date de début est requise.' : ''}
@@ -175,6 +177,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
           }
           return (
             <NumberTextField
+              id="duration"
               error={!!error}
               fullWidth
               helperText={error && errorText}
@@ -221,8 +224,9 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
           }
           return (
             <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel id="frequency">Fréquence de répétition (en jours)</InputLabel>
+              <InputLabel htmlFor="frequency">Fréquence de répétition (en jours)</InputLabel>
               <Select
+                id="frequency"
                 IconComponent={() => null}
                 endAdornment={
                   <HelperAdornment
