@@ -26,9 +26,10 @@ const CustomPersistGate: FC<Props> = ({ children }) => {
     for (const tracker of trackers) {
       const data = isATracker(tracker);
       if (data.errors.length !== 0) {
-        navigate('./data-error', {
+        navigate('/data-error', {
           state: data
         });
+        return;
       }
     }
     // Move to the validate trackers page
