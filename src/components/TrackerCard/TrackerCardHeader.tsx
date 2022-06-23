@@ -1,5 +1,7 @@
+import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import DeleteIcon from '@mui/icons-material/Delete';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {
@@ -25,10 +27,17 @@ import Emoji from '../Emoji/Emoji';
 import TrackerEditDialog from '../TrackerEditDialog/TrackerEditDialog';
 
 interface Props extends CardHeaderProps {
+  dragHandleRef?: (element: HTMLElement | null) => void;
+  dragListeners?: SyntheticListenerMap | undefined;
   tracker: Tracker;
 }
 
-const TrackerCardHeader: FC<Props> = ({ tracker, ...cardHeaderProps }) => {
+const TrackerCardHeader: FC<Props> = ({
+  dragHandleRef,
+  dragListeners,
+  tracker,
+  ...cardHeaderProps
+}) => {
   const { beginDate, frequency, id, name, remainingDays, status } = tracker;
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -84,6 +93,11 @@ const TrackerCardHeader: FC<Props> = ({ tracker, ...cardHeaderProps }) => {
         {...cardHeaderProps}
         action={
           <>
+            {dragHandleRef && dragListeners && (
+              <IconButton color="primary" ref={dragHandleRef} {...dragListeners}>
+                <DragIndicatorIcon />
+              </IconButton>
+            )}
             <IconButton aria-label="tracker-settings" onClick={handleMoreActionsClick}>
               <MoreVertIcon />
             </IconButton>
