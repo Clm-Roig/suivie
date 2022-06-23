@@ -3,9 +3,10 @@ import { CardProps, useTheme } from '@mui/material';
 import { FC } from 'react';
 import { DragDropContext, DragUpdate, Draggable, Droppable } from 'react-beautiful-dnd';
 
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Tracker from '../../models/Tracker';
 import { selectThemeMode } from '../../store/theme/theme.selectors';
+import { orderTracker } from '../../store/trackers/trackersSlice';
 import TrackerCard from '../TrackerCard/TrackerCard';
 import defaultCardProps from '../TrackerCard/defaultCardProps';
 
