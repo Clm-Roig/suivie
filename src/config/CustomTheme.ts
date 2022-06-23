@@ -106,6 +106,7 @@ export const getPalette = (mode: PaletteMode): PaletteOptions => ({
 });
 
 export const typography = {
+  fontFamily: ['Poppins', 'sans-serif'].join(','),
   h1: {
     fontSize: '4.3rem'
   }

@@ -36,7 +36,7 @@ const CompleteValidationDialog: FC<Props> = ({ dialogProps, onValidation, tracke
         {requiredCompletions.length > 0 && (
           <>
             <DialogContentText>Valider avec :</DialogContentText>
-            <CompletionChipList boxProps={{ sx: { mb: 1 } }} completions={requiredCompletions} />
+            <CompletionChipList sx={{ mb: 1 }} completions={requiredCompletions} />
           </>
         )}
         {!isToday(selectedDate) && (

@@ -4,13 +4,17 @@ import { FC } from 'react';
 import Tracker from '../../../models/Tracker';
 import formatDate from '../../../utils/formatDate';
 
-interface Props {
+interface Props extends ListItemProps {
   checked: boolean;
-  listItemProps?: ListItemProps;
   toggleTrackerChecked: (tracker: Tracker) => void;
   tracker: Tracker;
 }
-const TrackerListItem: FC<Props> = ({ checked, toggleTrackerChecked, tracker, listItemProps }) => {
+const TrackerListItem: FC<Props> = ({
+  checked,
+  toggleTrackerChecked,
+  tracker,
+  ...listItemProps
+}) => {
   return (
     <ListItem disablePadding divider {...listItemProps}>
       <ListItemButton onClick={() => toggleTrackerChecked(tracker)} dense>

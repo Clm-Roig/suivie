@@ -4,6 +4,7 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Box, Button, CardActions, CardActionsProps, IconButton } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { isToday } from 'date-fns';
 import { SnackbarKey, useSnackbar } from 'notistack';
 import { FC, useState } from 'react';
@@ -24,8 +25,11 @@ import CustomValidationDialog from '../TrackerValidationDialog/CustomValidationD
 import MakeHiddenDialog from '../TrackerValidationDialog/MakeHiddenDialog';
 import MakeVisibleValidationDialog from '../TrackerValidationDialog/MakeVisibleDialog';
 
-interface Props {
-  cardActionsProps?: CardActionsProps;
+const StyledIconButton = styled(IconButton)(({}) => ({
+  padding: 0
+}));
+
+interface Props extends CardActionsProps {
   onChipClick?: (completion: Completion) => void;
   selectedCompletions?: Completion[];
   setSelectedCompletions: (completions: Completion[]) => void;
@@ -33,11 +37,11 @@ interface Props {
 }
 
 const TrackerCardActions: FC<Props> = ({
-  cardActionsProps,
   onChipClick,
   selectedCompletions,
   setSelectedCompletions,
-  tracker
+  tracker,
+  ...cardActionsProps
 }) => {
   const { requiredCompletions } = tracker;
   const selectedDate = useAppSelector(selectSelectedDate);
@@ -100,31 +104,31 @@ const TrackerCardActions: FC<Props> = ({
         }}>
         {!isHidden && (
           <>
-            <IconButton
+            <StyledIconButton
               color="primary"
               size="large"
               onClick={() => setIsCompleteValidationOpen(true)}>
               <TaskAltIcon fontSize="large" />
-            </IconButton>
+            </StyledIconButton>
 
             {requiredCompletions.length > 0 && (
-              <IconButton
+              <StyledIconButton
                 color="primary"
                 size="large"
                 onClick={() => setIsCustomValidationOpen(true)}>
                 <AddTaskIcon fontSize="large" />
-              </IconButton>
+              </StyledIconButton>
             )}
           </>
         )}
         {isHidden ? (
-          <IconButton color="primary" size="large" onClick={() => setIsMakeVisibleOpen(true)}>
+          <StyledIconButton color="primary" size="large" onClick={() => setIsMakeVisibleOpen(true)}>
             <VisibilityIcon fontSize="large" />
-          </IconButton>
+          </StyledIconButton>
         ) : (
-          <IconButton color="primary" size="large" onClick={() => setIsMakeHiddenOpen(true)}>
+          <StyledIconButton color="primary" size="large" onClick={() => setIsMakeHiddenOpen(true)}>
             <VisibilityOffIcon fontSize="large" />
-          </IconButton>
+          </StyledIconButton>
         )}
       </Box>
 

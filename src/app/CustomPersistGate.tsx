@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -18,7 +18,7 @@ const CustomPersistGate: FC<Props> = ({ children }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleBeforeLift = () => {
+  useEffect(() => {
     // Change date to today
     dispatch(setSelectedDate(new Date().toString()));
 
@@ -26,23 +26,21 @@ const CustomPersistGate: FC<Props> = ({ children }) => {
     for (const tracker of trackers) {
       const data = isATracker(tracker);
       if (data.errors.length !== 0) {
-        navigate('./data-error', {
+        navigate('/data-error', {
           state: data
         });
+        return;
       }
     }
-
     // Move to the validate trackers page
     if (trackers.length > 0) {
       navigate('/trackers');
     }
-  };
+  }, []);
 
   return (
-    <PersistGate
-      loading={<FullScreenLoading />}
-      persistor={persistor}
-      onBeforeLift={handleBeforeLift}>
+    <PersistGate loading={<FullScreenLoading />} persistor={persistor}>
+      {' '}
       {children}
     </PersistGate>
   );

@@ -15,18 +15,17 @@ const TextWrapper = styled(Typography)`
   min-width: 64px;
 `;
 
-interface Props {
-  cardContentProps?: CardContentProps;
+interface Props extends CardContentProps {
   onChipClick?: (completion: Completion) => void;
   selectedCompletions?: Completion[];
   tracker: Tracker;
 }
 
 const TrackerCardContent: FC<Props> = ({
-  cardContentProps,
   onChipClick,
   selectedCompletions,
-  tracker
+  tracker,
+  ...cardContentProps
 }) => {
   const selectedDate = new Date(useAppSelector(selectSelectedDate));
 

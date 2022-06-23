@@ -30,7 +30,7 @@ const tracker1 = {
   status: TrackerStatus.ACTIVE,
   entries: []
 };
-const setup = () =>
+const setup = () => {
   // TODO: refactor Providers elsewhere
   render(
     <Provider store={createTestStore()}>
@@ -39,6 +39,7 @@ const setup = () =>
       </SnackbarProvider>
     </Provider>
   );
+};
 
 describe('<TrackerCard />', () => {
   it('shows tracker informations', () => {

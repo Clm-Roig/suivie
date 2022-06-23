@@ -61,7 +61,7 @@ function App() {
   return (
     <LocalizationProvider
       dateAdapter={DateAdapter}
-      locale={frLocale}
+      adapterLocale={frLocale}
       localeText={frFR.components.MuiLocalizationProvider.defaultProps.localeText}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>

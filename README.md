@@ -85,3 +85,5 @@ More on this later because I have time currently and I'm working on it 😛
 ![Redux](https://user-images.githubusercontent.com/20704943/164058602-b96af456-1e2b-4895-a12e-11b8084dc432.png)
 ![eslint](https://user-images.githubusercontent.com/20704943/164058589-a52b0210-1f47-4d8e-a04a-3eff1976dcb7.png)
 ![prettier](https://user-images.githubusercontent.com/20704943/164058595-b2912e5f-1eaa-4200-9cc6-4b84b23804f6.png)
+![cypress](https://user-images.githubusercontent.com/20704943/174458261-43b98d1c-121c-4750-af50-00f50f87892e.png)
+
