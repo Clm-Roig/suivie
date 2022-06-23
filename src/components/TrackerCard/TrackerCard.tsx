@@ -13,7 +13,7 @@ interface Props extends CardProps {
 const TrackerCard: FC<Props> = ({ tracker, ...cardProps }) => {
   const { requiredCompletions } = tracker;
   const [selectedCompletions, setSelectedCompletions] = useState<Completion[]>([]);
-  const sxProps = { py: 1 };
+  const sxProps = { px: 1, py: 1 };
 
   const addToSelectedCompletions = (completion: Completion) => {
     setSelectedCompletions([...selectedCompletions, completion]);
