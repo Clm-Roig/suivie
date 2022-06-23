@@ -1,5 +1,6 @@
 import ArchiveIcon from '@mui/icons-material/Archive';
 import DeleteIcon from '@mui/icons-material/Delete';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {
@@ -10,11 +11,13 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  Stack,
   Typography
 } from '@mui/material';
 import { isAfter } from 'date-fns';
 import { useSnackbar } from 'notistack';
 import React, { FC, useState } from 'react';
+import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 
 import { useAppDispatch } from '../../hooks/redux';
 import Tracker from '../../models/Tracker';
@@ -25,10 +28,11 @@ import Emoji from '../Emoji/Emoji';
 import TrackerEditDialog from '../TrackerEditDialog/TrackerEditDialog';
 
 interface Props extends CardHeaderProps {
+  dragHandleProps?: DraggableProvidedDragHandleProps;
   tracker: Tracker;
 }
 
-const TrackerCardHeader: FC<Props> = ({ tracker, ...cardHeaderProps }) => {
+const TrackerCardHeader: FC<Props> = ({ dragHandleProps, tracker, ...cardHeaderProps }) => {
   const { beginDate, frequency, id, name, remainingDays, status } = tracker;
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -82,6 +86,7 @@ const TrackerCardHeader: FC<Props> = ({ tracker, ...cardHeaderProps }) => {
     <>
       <CardHeader
         {...cardHeaderProps}
+        disableTypography
         action={
           <>
             <IconButton aria-label="tracker-settings" onClick={handleMoreActionsClick}>
@@ -116,7 +121,16 @@ const TrackerCardHeader: FC<Props> = ({ tracker, ...cardHeaderProps }) => {
             </Menu>
           </>
         }
-        title={name}
+        title={
+          <Stack direction="row" alignItems="center" gap={1}>
+            {dragHandleProps && (
+              <span {...dragHandleProps}>
+                <DragIndicatorIcon sx={{ fontSize: 18 }} aria-label="tracker-drag-handle" />
+              </span>
+            )}
+            <Typography variant="h5">{name}</Typography>
+          </Stack>
+        }
         subheader={
           <>
             <Typography display="block" variant="subtitle2">
