@@ -10,6 +10,7 @@ import { editTrackerReducer } from './reducers/edit';
 import { hideTrackerReducer } from './reducers/hide';
 import { markTrackerAsActiveReducer, markTrackersAsActiveReducer } from './reducers/markAsActive';
 import { markTrackerAsVisibleReducer } from './reducers/markAsVisible';
+import { orderTrackerReducer } from './reducers/order';
 import { setSelectedDateReducer } from './reducers/setSelectedDate';
 import { completelyValidateReducer, customValidateReducer } from './reducers/validate';
 
@@ -48,6 +49,7 @@ export const trackersSlice = createSlice({
     markTrackersAsActive: markTrackersAsActiveReducer,
     markTrackerAsActive: markTrackerAsActiveReducer,
     markTrackerAsVisible: markTrackerAsVisibleReducer,
+    orderTracker: orderTrackerReducer,
     setSelectedDate: setSelectedDateReducer
   }
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -69,6 +71,7 @@ export const {
   markTrackerAsActive,
   markTrackersAsActive,
   markTrackerAsVisible,
+  orderTracker,
   setSelectedDate
 } = trackersSlice.actions;
 export default trackersSlice.reducer;
