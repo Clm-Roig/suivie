@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7](https://github.com/clm-roig/suivie/compare/v0.2.6...v0.2.7) (2022-06-23)
+
+
+### Features
+
+* **#159:** make tracker cards sortable ([c6e8912](https://github.com/clm-roig/suivie/commit/c6e891208729323f05072e7f0c2f9f000f8b7b37)), closes [#159](https://github.com/clm-roig/suivie/issues/159)
+* **font:** use new font, Poppins ([08c3711](https://github.com/clm-roig/suivie/commit/08c37113e0a09e0e6b95bf2c3c1946518e841061))
+* **trackersOrder:** add orderTracker reducer ([e627fbc](https://github.com/clm-roig/suivie/commit/e627fbcb5df4039c8d11f4221689b168b2770a65))
+
+
+### Bug Fixes
+
+* **#310:** fix initial data loading ([a9952cf](https://github.com/clm-roig/suivie/commit/a9952cfd4dfc9c6db6f8db157325a34e4a4ae7cb))
+* **completionsDone:** fix computation of done completions ([6b5428b](https://github.com/clm-roig/suivie/commit/6b5428b365e52c7b2202cd7cc4ff8aa47595813b))
+* **ghAction:** remove duplicated run build action (now run by Cypress) ([09fa2e3](https://github.com/clm-roig/suivie/commit/09fa2e3414f354d36ce038ca31823397f0fb64ee))
+* **localizationProvider:** rename deprecated prop ([92ef3d9](https://github.com/clm-roig/suivie/commit/92ef3d9f084fbe07787ba235f2bfbeae367f7108))
+* **rehydrateRedux:** fix redirection to error page ([508800c](https://github.com/clm-roig/suivie/commit/508800c899c9c02526c1b78391a976b7e6e0f1d7))
+* **trackerCard:** make tracker card more compact by reducing paddings ([ea5ed33](https://github.com/clm-roig/suivie/commit/ea5ed331d4c529af1cb8cb3221f2ede61de32c3d))
+* **trackerForm:** add id to inputs ([5a0f838](https://github.com/clm-roig/suivie/commit/5a0f838f14ef026358bf052e4ec1fbcc63f1d63b))
+
 ### [0.2.6](https://github.com/clm-roig/suivie/compare/v0.2.5...v0.2.6) (2022-06-13)
 
 
