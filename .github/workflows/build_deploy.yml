@@ -1,10 +1,10 @@
 # This script deploys your website automatically
-name: Build and deploy
+name: Build & deploy
 
 # Only trigger this script when you push to the master branch
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 # Specify the tasks to run when this script gets triggered
 jobs:
@@ -13,12 +13,12 @@ jobs:
 
     # Download our main branch
     steps:
-    - uses: actions/checkout@v3
-    - run: npm ci
-    - run: npm run build --if-present
-    # Run our deployment command
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4.3.3
-      with:
-        branch: gh-pages # The branch the action should deploy to.
-        folder: build # The folder the action should deploy.
+      - uses: actions/checkout@v3
+      - run: npm ci
+      - run: npm run build --if-present
+      # Run our deployment command
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
