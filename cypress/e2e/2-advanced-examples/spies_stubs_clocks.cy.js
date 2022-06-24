@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /// <reference types="cypress" />
 // remove no check once Cypress.sinon is typed
 // https://github.com/cypress-io/cypress/issues/6720
@@ -8,6 +9,7 @@ context('Spies, Stubs, and Clock', () => {
     cy.visit('https://example.cypress.io/commands/spies-stubs-clocks');
 
     const obj = {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       foo() {}
     };
 
