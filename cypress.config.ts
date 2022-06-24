@@ -1,6 +1,7 @@
 import { defineConfig } from 'cypress';
 
 export default defineConfig({
+  projectId: 'i4ns1y',
   viewportWidth: 325,
   viewportHeight: 650,
   e2e: {
