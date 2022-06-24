@@ -16,7 +16,7 @@ describe('trackers reducer', () => {
           ...initialState,
           trackers: [testTracker1, testTracker2, testTracker3]
         },
-        orderTracker({ trackerIdSource: testTracker1Id, trackerIdDestination: testTracker1Id })
+        orderTracker({ sourceTrackerId: testTracker1Id, destinationTrackerId: testTracker1Id })
       );
       const { trackers: trackers } = finalState;
       expect(trackers[0].id).toBe(testTracker1Id);
@@ -29,7 +29,7 @@ describe('trackers reducer', () => {
           ...initialState,
           trackers: [testTracker1, testTracker2, testTracker3]
         },
-        orderTracker({ trackerIdSource: testTracker1Id, trackerIdDestination: testTracker3Id })
+        orderTracker({ sourceTrackerId: testTracker1Id, destinationTrackerId: testTracker3Id })
       );
       const { trackers: trackers } = finalState;
       expect(trackers[0].id).toBe(testTracker2Id);
@@ -42,7 +42,7 @@ describe('trackers reducer', () => {
           ...initialState,
           trackers: [testTracker1, testTracker2, testTracker3]
         },
-        orderTracker({ trackerIdSource: testTracker3Id, trackerIdDestination: testTracker1Id })
+        orderTracker({ sourceTrackerId: testTracker3Id, destinationTrackerId: testTracker1Id })
       );
       const { trackers: trackers } = finalState;
       expect(trackers[0].id).toBe(testTracker3Id);

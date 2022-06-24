@@ -1,8 +1,7 @@
-import { DndContext, DragEndEvent } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { CardProps, useTheme } from '@mui/material';
 import { FC } from 'react';
+import { DragDropContext, DragUpdate, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Tracker from '../../models/Tracker';
@@ -20,39 +19,52 @@ const TrackerCardList: FC<Props> = ({ trackers, cardProps }) => {
   const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
   const dispatch = useAppDispatch();
-
   const [animateRef] = useAutoAnimate<HTMLDivElement>();
   const allCardProps = {
     ...defaultCardProps(themeMode, theme),
     ...cardProps
   };
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const {
-      active: { id: draggedTrackerId },
-      over: hoveredTracker
-    } = event;
-    if (hoveredTracker) {
-      const { id: droppedOverTrackerId } = hoveredTracker;
-      dispatch(
-        orderTracker({
-          trackerIdSource: draggedTrackerId as string,
-          trackerIdDestination: droppedOverTrackerId as string
-        })
-      );
+  const handleOnDragUpdate = (updateResult: DragUpdate) => {
+    const { draggableId: draggedTrackerId, destination } = updateResult;
+    if (destination) {
+      const { index: destinationIndex } = destination;
+      const destinationTrackerId = trackers[destinationIndex].id;
+      dispatch(orderTracker({ sourceTrackerId: draggedTrackerId, destinationTrackerId }));
     }
   };
 
   return (
-    <div ref={animateRef}>
-      <DndContext onDragEnd={handleDragEnd}>
-        <SortableContext items={trackers.map((t) => t.id)} strategy={verticalListSortingStrategy}>
-          {trackers.map((t) => (
-            <TrackerCard key={t.id} tracker={t} {...allCardProps} />
-          ))}
-        </SortableContext>
-      </DndContext>
-    </div>
+    <DragDropContext
+      onDragUpdate={handleOnDragUpdate}
+      onDragEnd={() => {
+        // onDragUpdate already updated the state
+        return;
+      }}>
+      <Droppable droppableId="trackerCardList">
+        {(provided) => (
+          <div ref={animateRef}>
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {trackers.map((t, idx) => (
+                <Draggable key={t.id} draggableId={t.id} index={idx}>
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.draggableProps}>
+                      <TrackerCard
+                        dragHandleProps={provided.dragHandleProps}
+                        tracker={t}
+                        key={t.id}
+                        {...allCardProps}
+                      />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 };
 
