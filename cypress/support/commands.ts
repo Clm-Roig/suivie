@@ -35,3 +35,11 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add('clickIfExists', (label: string) => {
+  cy.get('body').then((body) => {
+    if (body.find(label).length > 0) {
+      cy.get(label).click();
+    }
+  });
+});

@@ -6,6 +6,6 @@ export default defineConfig({
   viewportHeight: 650,
   e2e: {
     baseUrl: 'http://localhost:3000/suivie#',
-    excludeSpecPattern: '**/*-examples/*.cy.js'
+    excludeSpecPattern: '**/*.cy.js'
   }
 });
