@@ -60,8 +60,8 @@ jobs:
       fail-fast: false
       matrix:
         # If there are a lot of tests, add more containers to run copies of the job in parallel.
-        # Currently, one is enough.
-        containers: [1]
+        # Currently, two is enough.
+        containers: [1, 2]
         browsers: [firefox, chrome]
 
     steps:

@@ -45,7 +45,8 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "lint:fix": "eslint --fix \"**/*.{js,ts,tsx}\"",
     "format": "prettier --write \"**/*.{js,ts,tsx,css,json}\" --config ./.prettierrc",
-    "e2e": "npx cypress open"
+    "e2e": "npx cypress open",
+    "perform-e2e": "npx cypress run"
   },
   "eslintConfig": {},
   "browserslist": {
