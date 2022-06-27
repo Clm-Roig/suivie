@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.8](https://github.com/clm-roig/suivie/compare/v0.2.7...v0.2.8) (2022-06-27)
+
+
+### Features
+
+* **#159:** make tracker cards sortable ([6fd7066](https://github.com/clm-roig/suivie/commit/6fd7066f8f14939aded409bd74439468df158737)), closes [#159](https://github.com/clm-roig/suivie/issues/159)
+
 ### [0.2.7](https://github.com/clm-roig/suivie/compare/v0.2.6...v0.2.7) (2022-06-23)
 
 
