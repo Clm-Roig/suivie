@@ -18,13 +18,6 @@ const AddTrackerCard: FC<Props> = (cardProps) => {
   const themeMode: ThemeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
 
-  const hoverColor = themeMode === ThemeMode.LIGHT ? 'accent.main' : 'secondary.main';
-  const cardActionSx = {
-    '&:hover': {
-      backgroundColor: displayCreateForm ? '' : hoverColor
-    }
-  };
-
   const allCardProps = {
     ...defaultCardProps(themeMode, theme),
     ...cardProps
@@ -37,7 +30,7 @@ const AddTrackerCard: FC<Props> = (cardProps) => {
 
   return (
     <Card {...allCardProps}>
-      <CardActionArea onClick={() => setDisplayCreateForm(!displayCreateForm)} sx={cardActionSx}>
+      <CardActionArea onClick={() => setDisplayCreateForm(!displayCreateForm)}>
         <CardContent>
           <Box
             sx={{
