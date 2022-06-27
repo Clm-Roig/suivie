@@ -45,7 +45,8 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "lint:fix": "eslint --fix \"**/*.{js,ts,tsx}\"",
     "format": "prettier --write \"**/*.{js,ts,tsx,css,json}\" --config ./.prettierrc",
-    "e2e": "npx cypress open"
+    "e2e": "npx cypress open",
+    "perform-e2e": "npx cypress run"
   },
   "eslintConfig": {},
   "browserslist": {
@@ -63,6 +64,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
+    "@faker-js/faker": "^7.3.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.2.0",

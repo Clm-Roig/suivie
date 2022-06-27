@@ -1,4 +1,8 @@
 /// <reference types="cypress" />
+import Tracker from '../../src/models/Tracker';
+import makeFakeTracker from '../../src/models/factories/makeFakeTracker';
+import { createTracker } from '../../src/store/trackers/trackersSlice';
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -35,3 +39,16 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add('clickIfExists', (label: string) => {
+  cy.get('body').then((body) => {
+    if (body.find(label).length > 0) {
+      cy.get(label).click();
+    }
+  });
+});
+
+Cypress.Commands.add('createTracker', (trackerValues?: Partial<Tracker>) => {
+  const tracker = makeFakeTracker(trackerValues);
+  cy.window().its('store').invoke('dispatch', createTracker(tracker));
+});

@@ -126,6 +126,7 @@ const DefaultCompletionsForm: FC<Props> = ({
                     onDecrement={() => setValue(name, computeDecrementedQuantity(value))}
                     onIncrement={() => setValue(name, computeIncrementedQuantity(value))}
                     textFieldProps={{
+                      id: 'default-completion-quantity-' + index,
                       error: !!error,
                       helperText: error && errorText,
                       onChange: onChange,
@@ -159,6 +160,7 @@ const DefaultCompletionsForm: FC<Props> = ({
                   <FormControl fullWidth error={!!error} size="small">
                     <InputLabel>Unité</InputLabel>
                     <CompletionUnitSelect
+                      id={'default-completion-unit-' + index}
                       required
                       value={(requiredCompletions.find((rc) => rc.unit === value) && value) || ''}
                       label="Unité"

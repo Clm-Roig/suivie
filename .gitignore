@@ -25,3 +25,7 @@ npm-debug.log*
 
 # Vscode
 *.code-workspace
+
+# Cypress
+cypress/videos
+cypress/screenshots
