@@ -109,5 +109,11 @@ export const typography = {
   fontFamily: ['Poppins', 'sans-serif'].join(','),
   h1: {
     fontSize: '4.3rem'
+  },
+  caption: {
+    color: grey[700]
+  },
+  subtitle2: {
+    color: grey[700]
   }
 };
