@@ -60,7 +60,7 @@ jobs:
       fail-fast: false
       matrix:
         # Containers to run copies of the job in parallel.
-        containers: [1, 2, 3, 4, 5]
+        containers: [1, 2, 3]
         browsers: [firefox, chrome]
 
     steps:
@@ -82,3 +82,7 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # overwrite commit message sent to Dashboard
+          COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
+          # re-enable PR comment bot
+          COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
