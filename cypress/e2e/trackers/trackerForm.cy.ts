@@ -54,8 +54,9 @@ context('Trackers', () => {
     });
 
     it('creates a complex tracker and displays it as a card', () => {
-      // Open form
+      // Open form and "more options" section
       cy.get('.MuiCardContent-root').click();
+      cy.get('#more-options-header').click();
 
       // Fill fields
       cy.get('#name').type(complexTracker.name);
