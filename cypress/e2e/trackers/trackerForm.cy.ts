@@ -65,8 +65,9 @@ context('Trackers', () => {
       cy.get('#duration').type(complexTracker.duration);
       // MUI select are not <select>, see https://stackoverflow.com/questions/65363508/how-to-trigger-material-ui-select-in-cypress
       cy.get('#frequency').parent().click();
-      cy.get('ul > li[data-value="' + complexTracker.frequency + '"]').as('valueToSelect');
-      cy.get('@valueToSelect').click({ multiple: true });
+      cy.getDetached('ul > li[data-value="' + complexTracker.frequency + '"]').click({
+        multiple: true
+      });
 
       // Fill Completions
       for (const [i, completion] of complexTracker.requiredCompletions.entries()) {
@@ -81,8 +82,7 @@ context('Trackers', () => {
         cy.get('#default-completion-unit-' + i)
           .parent()
           .click();
-        cy.get('ul > li[data-value="' + completion.unit + '"]').as('valueToSelect');
-        cy.get('@valueToSelect').click({ multiple: true });
+        cy.getDetached('ul > li[data-value="' + completion.unit + '"]').click({ multiple: true });
       }
       cy.get('button').contains('Réalisation par défaut').should('be.disabled');
       cy.get('button').contains('Créer').click();

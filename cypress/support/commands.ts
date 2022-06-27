@@ -52,3 +52,7 @@ Cypress.Commands.add('createTracker', (trackerValues?: Partial<Tracker>) => {
   const tracker = makeFakeTracker(trackerValues);
   cy.window().its('store').invoke('dispatch', createTracker(tracker));
 });
+
+Cypress.Commands.add('getDetached', (selector: string) => {
+  return cy.wrap(Cypress.$(selector)).should('have.length.gte', 1);
+});

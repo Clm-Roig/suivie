@@ -15,6 +15,13 @@ declare global {
        * @example cy.createTracker({ name: 'my tracker' })
        */
       createTracker(trackerValues?: Partial<Tracker>): Chainable<Element>;
+      /**
+       * Retry get() command until it returns a non-empty result. Useful for detached element.
+       * Workaround of this issue: https://github.com/cypress-io/cypress/issues/7306
+       * Remove it when the issue is solved.
+       * @example cy.getDetached('#myButton')
+       */
+      getDetached(selector: string): Chainable<unknown>;
     }
   }
 }
