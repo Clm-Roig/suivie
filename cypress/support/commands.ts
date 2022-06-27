@@ -53,7 +53,14 @@ Cypress.Commands.add('createTracker', (trackerValues?: Partial<Tracker>) => {
   cy.window().its('store').invoke('dispatch', createTracker(tracker));
 });
 
-Cypress.Commands.add('getDetached', (selector: string) => {
-  cy.wait(2000);
-  return cy.get(selector).should('be.visible');
+Cypress.Commands.add('getAttached', (selector: string) => {
+  const getElement = typeof selector === 'function' ? selector : ($d) => $d.find(selector);
+  let $el = null;
+  return cy
+    .document()
+    .should(($d) => {
+      $el = getElement(Cypress.$($d));
+      expect(Cypress.dom.isDetached($el)).to.be.false;
+    })
+    .then(() => cy.wrap($el));
 });
