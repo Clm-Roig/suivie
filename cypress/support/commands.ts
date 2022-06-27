@@ -54,6 +54,6 @@ Cypress.Commands.add('createTracker', (trackerValues?: Partial<Tracker>) => {
 });
 
 Cypress.Commands.add('getDetached', (selector: string) => {
-  cy.wait(200);
-  return cy.get(selector);
+  cy.wait(2000);
+  return cy.get(selector).should('be.visible');
 });
