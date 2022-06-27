@@ -1,14 +1,10 @@
 import { subDays } from 'date-fns';
 
-import makeFakeTracker from '../../../src/models/factories/makeFakeTracker';
-import { createTracker } from '../../../src/store/trackers/trackersSlice';
-
 context('Trackers', () => {
   before(() => {
     cy.visit('/trackers');
     // Tracker created yesterday
-    const simpleTracker = makeFakeTracker({ beginDate: subDays(new Date(), 1).toString() });
-    cy.window().its('store').invoke('dispatch', createTracker(simpleTracker));
+    cy.createTracker({ beginDate: subDays(new Date(), 1).toString() });
   });
 
   beforeEach(() => {

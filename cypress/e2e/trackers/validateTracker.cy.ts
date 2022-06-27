@@ -1,11 +1,7 @@
-import makeFakeTracker from '../../../src/models/factories/makeFakeTracker';
-import { createTracker } from '../../../src/store/trackers/trackersSlice';
-
 context('Trackers', () => {
   before(() => {
     cy.visit('/trackers');
-    const simpleTracker = makeFakeTracker();
-    cy.window().its('store').invoke('dispatch', createTracker(simpleTracker));
+    cy.createTracker();
   });
 
   describe('validate tracker', () => {
