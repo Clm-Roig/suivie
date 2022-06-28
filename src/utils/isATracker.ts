@@ -25,6 +25,7 @@ const isATracker = (tracker: any): NotATrackerResponse => {
   const checks = [
     { key: 'id', types: ['string'] },
     { key: 'beginDate', types: ['string'] },
+    { key: 'color', types: ['string'] },
     { key: 'dateHidden', types: ['string', 'undefined'] },
     { key: 'defaultCompletions', types: ['array'] },
     { key: 'duration', types: ['number', 'undefined'] },

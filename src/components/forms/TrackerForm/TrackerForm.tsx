@@ -22,11 +22,13 @@ import { v4 } from 'uuid';
 
 import Completion from '../../../models/Completion';
 import Tracker from '../../../models/Tracker';
+import TrackerColor from '../../../models/TrackerColor';
 import TrackerStatus from '../../../models/TrackerStatus';
 import DefaultCompletionsForm from '../DefaultCompletionsForm/DefaultCompletionsForm';
 import HelperAdornment from '../HelperAdornment/HelperAdornment';
 import NumberTextField from '../NumberTextField/NumberTextField';
 import RequiredCompletionsForm from '../RequiredCompletionsForm/RequiredCompletionsForm';
+import TrackerColorPicker from '../TrackerColorPicker/TrackerColorPicker';
 import { FormValues } from './types';
 
 const MAX_NUMBER_OF_DAYS_FOR_FREQUENCY = 120;
@@ -38,6 +40,7 @@ const NUMBER_OF_DAYS_FOR_FREQUENCY = Array.from(
 const getDefaultValues = (): FormValues => ({
   id: v4(),
   beginDate: new Date().toString(),
+  color: TrackerColor.YELLOW_CRAYOLA,
   duration: '',
   defaultCompletions: [],
   entries: [],
@@ -71,6 +74,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
   const { control, handleSubmit, reset, setValue, watch } = useForm<FormValues>({
     defaultValues: initialValues ? formatInitialValues(initialValues) : getDefaultValues()
   });
+
   const defaultCompletions = watch('defaultCompletions');
   const requiredCompletions = watch('requiredCompletions');
   const requiredCompletionsFieldArray = useFieldArray({
@@ -217,6 +221,14 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
           <Typography sx={{ fontWeight: 'bold' }}>{"PLUS D'OPTIONS"}</Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ p: 1 }}>
+          <TrackerColorPicker
+            control={control}
+            id="color"
+            label="Couleur"
+            setValue={setValue}
+            sx={{ mb: 2 }}
+            textAlign="left"
+          />
           <Controller
             name={'beginDate'}
             control={control}
