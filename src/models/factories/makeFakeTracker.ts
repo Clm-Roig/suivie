@@ -2,13 +2,16 @@ import { faker } from '@faker-js/faker/locale/fr';
 import { v4 } from 'uuid';
 
 import Tracker from '../Tracker';
+import TrackerColor from '../TrackerColor';
 import TrackerStatus from '../TrackerStatus';
 
 const makeFakeTracker = (tracker?: Partial<Tracker>): Tracker => {
   return {
     id: v4(),
     beginDate: new Date().toString(),
+    color: TrackerColor.YELLOW_CRAYOLA,
     dateHidden: undefined,
+    defaultCompletions: [],
     duration: undefined,
     entries: [],
     frequency: 1,

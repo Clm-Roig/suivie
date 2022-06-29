@@ -1,5 +1,6 @@
 import { format, subDays } from 'date-fns';
 
+import TrackerColor from '../../../src/models/TrackerColor';
 import makeFakeTracker from '../../../src/models/factories/makeFakeTracker';
 
 context('Trackers', () => {
@@ -9,6 +10,7 @@ context('Trackers', () => {
     complexTracker = {
       ...makeFakeTracker({
         beginDate: subDays(new Date(), 2).toString(),
+        color: TrackerColor.MELON_RED,
         duration: 30,
         frequency: 7,
         requiredCompletions: [
@@ -63,6 +65,10 @@ context('Trackers', () => {
       cy.get('#begin-date')
         .clear()
         .type(format(new Date(complexTracker.beginDate), 'ddMMyyyy'));
+      cy.get('#color')
+        .get('button[id="' + complexTracker.color + '"]')
+        .first()
+        .click();
       cy.get('#duration').type(complexTracker.duration);
       // MUI select are not <select>, see https://stackoverflow.com/questions/65363508/how-to-trigger-material-ui-select-in-cypress
       cy.get('#frequency').parent().click();

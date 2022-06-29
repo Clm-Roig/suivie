@@ -2,19 +2,15 @@ import { render, screen } from '@testing-library/react';
 import { subDays } from 'date-fns';
 import { SnackbarProvider } from 'notistack';
 import { Provider } from 'react-redux';
-import { v4 } from 'uuid';
 
-import TrackerStatus from '../../models/TrackerStatus';
+import makeFakeTracker from '../../models/factories/makeFakeTracker';
 import { createTestStore } from '../../store/createTestStore';
 import formatDate from '../../utils/formatDate';
 import TrackerCard from './TrackerCard';
 
-const tracker1 = {
-  id: v4(),
+const tracker1 = makeFakeTracker({
   beginDate: subDays(new Date(), 3).toString(),
   duration: 13,
-  frequency: 1,
-  isDoneForToday: false,
   name: 'Musculation',
   remainingDays: 10,
   requiredCompletions: [
@@ -26,10 +22,8 @@ const tracker1 = {
       quantity: 15,
       unit: 'squats'
     }
-  ],
-  status: TrackerStatus.ACTIVE,
-  entries: []
-};
+  ]
+});
 const setup = () => {
   // TODO: refactor Providers elsewhere
   render(

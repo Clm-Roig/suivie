@@ -1,12 +1,7 @@
-import { Theme } from '@mui/material';
-
-import ThemeMode from '../../models/ThemeMode';
-
-const defaultCardProps = (themeMode: ThemeMode, theme: Theme) => ({
+const defaultCardProps = {
   sx: {
-    mb: 2,
-    bgcolor: themeMode === ThemeMode.LIGHT ? 'secondary.main' : theme.palette.grey[900]
+    mb: 2
   }
-});
+};
 
 export default defaultCardProps;
