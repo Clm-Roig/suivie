@@ -56,17 +56,15 @@ const formatInitialValues = (initialValues: Tracker): FormValues => ({
   ...initialValues,
   defaultCompletions: initialValues.defaultCompletions
     ? initialValues.defaultCompletions.map((dc) => ({
-        creationDate: dc.creationDate,
-        quantity: dc.quantity.toString(),
-        unit: dc.unit
+        ...dc,
+        quantity: dc.quantity.toString()
       }))
     : [],
   duration: initialValues.duration ? initialValues.duration.toString() : '',
   frequency: initialValues.frequency ? initialValues.frequency.toString() : '',
   requiredCompletions: initialValues.requiredCompletions.map((rc) => ({
-    creationDate: rc.creationDate,
-    quantity: rc.quantity.toString(),
-    unit: rc.unit
+    ...rc,
+    quantity: rc.quantity.toString()
   }))
 });
 

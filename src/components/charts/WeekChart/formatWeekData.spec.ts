@@ -1,32 +1,29 @@
 import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import TrackerEntry from '../../../models/TrackerEntry';
+import makeFakeCompletion from '../../../models/factories/makeFakeCompletion';
 import formatWeekData from './formatWeekData';
 import { DataType } from './types';
 
 describe('formatWeekData()', () => {
   const completions = [
-    {
-      creationDate: new Date().toString(),
+    makeFakeCompletion({
       quantity: 10,
       unit: 'push-ups'
-    },
-    {
-      creationDate: new Date().toString(),
+    }),
+    makeFakeCompletion({
       quantity: 5,
       unit: 'squats'
-    }
+    })
   ];
   const partialCompletions = [
-    {
-      creationDate: new Date().toString(),
+    makeFakeCompletion({
       quantity: 5,
       unit: 'push-ups'
-    },
-    {
-      creationDate: new Date().toString(),
+    }),
+    makeFakeCompletion({
       quantity: 2,
       unit: 'squats'
-    }
+    })
   ];
   const weekDate = new Date('04/03/2022');
   const entries: TrackerEntry[] = [

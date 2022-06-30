@@ -1,5 +1,6 @@
 import { isSameDay, subDays } from 'date-fns';
 
+import makeFakeCompletion from '../../../../models/factories/makeFakeCompletion';
 import { testTracker1, testTracker1Id } from '../../FAKE_DATA';
 import trackersReducer, {
   completelyValidate,
@@ -33,16 +34,14 @@ describe('trackers reducer', () => {
 
     it('should handle a tracker partial custom validation at a given date', () => {
       const partialCompletions = [
-        {
-          creationDate: new Date().toString(),
+        makeFakeCompletion({
           quantity: 5,
           unit: 'push-ups'
-        },
-        {
-          creationDate: new Date().toString(),
+        }),
+        makeFakeCompletion({
           quantity: 20,
           unit: 'squats'
-        }
+        })
       ];
       const finalState = trackersReducer(
         { ...initialState, trackers: [testTracker1] },
@@ -65,16 +64,14 @@ describe('trackers reducer', () => {
 
     it('should handle a tracker more than complete custom validation at a given date', () => {
       const partialCompletions = [
-        {
-          creationDate: new Date().toString(),
+        makeFakeCompletion({
           quantity: 20,
           unit: 'push-ups'
-        },
-        {
-          creationDate: new Date().toString(),
+        }),
+        makeFakeCompletion({
           quantity: 30,
           unit: 'squats'
-        }
+        })
       ];
       const finalState = trackersReducer(
         { ...initialState, trackers: [testTracker1] },

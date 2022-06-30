@@ -1,20 +1,19 @@
 import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import TrackerEntry from '../../../models/TrackerEntry';
+import makeFakeCompletion from '../../../models/factories/makeFakeCompletion';
 import formatYearData from './formatYearData';
 import { DataType } from './types';
 
 describe('formatYearData()', () => {
   const completions = [
-    {
-      creationDate: new Date().toString(),
+    makeFakeCompletion({
       quantity: 10,
       unit: 'push-ups'
-    },
-    {
-      creationDate: new Date().toString(),
+    }),
+    makeFakeCompletion({
       quantity: 5,
       unit: 'squats'
-    }
+    })
   ];
   const yearDate = new Date('01/01/2022');
   const entries: TrackerEntry[] = [
