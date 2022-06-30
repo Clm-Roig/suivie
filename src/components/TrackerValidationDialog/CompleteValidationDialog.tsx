@@ -14,6 +14,7 @@ import { FC } from 'react';
 import { useAppSelector } from '../../hooks/redux';
 import Tracker from '../../models/Tracker';
 import { selectSelectedDate } from '../../store/trackers/trackers.selectors';
+import { getDefaultValidationCompletions } from '../../store/trackers/utils';
 import formatDate from '../../utils/formatDate';
 import CompletionChipList from '../CompletionChipList/CompletionChipList';
 
@@ -25,7 +26,8 @@ interface Props {
 
 const CompleteValidationDialog: FC<Props> = ({ dialogProps, onValidation, tracker }) => {
   const selectedDate = new Date(useAppSelector(selectSelectedDate));
-  const { name, requiredCompletions } = tracker;
+  const { name, defaultCompletions, requiredCompletions } = tracker;
+  const completionsUsed = getDefaultValidationCompletions(tracker);
   return (
     <Dialog {...dialogProps}>
       <DialogTitle id="alert-dialog-title">
@@ -36,8 +38,13 @@ const CompleteValidationDialog: FC<Props> = ({ dialogProps, onValidation, tracke
         {requiredCompletions.length > 0 && (
           <>
             <DialogContentText>Valider avec :</DialogContentText>
-            <CompletionChipList sx={{ mb: 1 }} completions={requiredCompletions} />
+            <CompletionChipList sx={{ mb: 1 }} completions={completionsUsed} />
           </>
+        )}
+        {defaultCompletions && defaultCompletions.length > 0 && (
+          <Alert icon={false} severity="info">
+            Cette validation utilise des réalisations par défaut
+          </Alert>
         )}
         {!isToday(selectedDate) && (
           <Alert icon={false} severity="warning">
