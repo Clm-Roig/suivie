@@ -15,10 +15,12 @@ const tracker1 = makeFakeTracker({
   remainingDays: 10,
   requiredCompletions: [
     {
+      creationDate: new Date().toString(),
       quantity: 10,
       unit: 'push-ups'
     },
     {
+      creationDate: new Date().toString(),
       quantity: 15,
       unit: 'squats'
     }

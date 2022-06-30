@@ -13,6 +13,7 @@ import TrackerStatus from './TrackerStatus';
  * @member {TrackerColor} color hexadecimal color of the Tracker
  * @member {string?} dateHidden when not undefined, specify which day the tracker is ignored. The next day, it's automatically set to "undefined".
  * @member {Completion[]} defaultCompletions default completions submitted when validating the tracker
+ * @member {string[]?} doneDays days during which the tracker was validated
  * @member {number?} duration number of days the tracker is active since beginDate
  * @member {string} endDate when the Tracker was archived
  * @member {TrackerEntry[]} entries TrackerEntries related to this Tracker
@@ -29,6 +30,7 @@ export default interface Tracker {
   color: TrackerColor;
   dateHidden?: string;
   defaultCompletions?: Completion[];
+  doneDays: string[];
   duration?: number;
   endDate?: string;
   entries: TrackerEntry[];

@@ -11,10 +11,12 @@ export const testTracker1: Tracker = makeFakeTracker({
   beginDate: subDays(new Date(), 3).toString(),
   defaultCompletions: [
     {
+      creationDate: new Date().toString(),
       quantity: 10,
       unit: 'push-ups'
     },
     {
+      creationDate: new Date().toString(),
       quantity: 15,
       unit: 'squats'
     }
@@ -24,10 +26,12 @@ export const testTracker1: Tracker = makeFakeTracker({
   remainingDays: 10,
   requiredCompletions: [
     {
+      creationDate: new Date().toString(),
       quantity: 10,
       unit: 'push-ups'
     },
     {
+      creationDate: new Date().toString(),
       quantity: 15,
       unit: 'squats'
     }
@@ -42,6 +46,7 @@ export const testTracker2: Tracker = makeFakeTracker({
   name: 'Eat',
   requiredCompletions: [
     {
+      creationDate: new Date().toString(),
       quantity: 6,
       unit: 'vegetables or fruits'
     }
@@ -53,6 +58,7 @@ export const testTracker3: Tracker = makeFakeTracker({
   id: testTracker3Id,
   defaultCompletions: [
     {
+      creationDate: new Date().toString(),
       quantity: 0.5,
       unit: 'L of water'
     }
@@ -60,6 +66,7 @@ export const testTracker3: Tracker = makeFakeTracker({
   name: 'Drink',
   requiredCompletions: [
     {
+      creationDate: new Date().toString(),
       quantity: 2,
       unit: 'L of water'
     }
@@ -79,10 +86,12 @@ export const testTracker5: Tracker = makeFakeTracker({
   beginDate: SEVEN_DAYS_AGO_STRING,
   defaultCompletions: [
     {
+      creationDate: new Date().toString(),
       quantity: 3,
       unit: 'x'
     },
     {
+      creationDate: new Date().toString(),
       quantity: 4,
       unit: 'y'
     }
@@ -92,10 +101,12 @@ export const testTracker5: Tracker = makeFakeTracker({
       id: '1234-5432-azer',
       completions: [
         {
+          creationDate: new Date().toString(),
           quantity: 3,
           unit: 'x'
         },
         {
+          creationDate: new Date().toString(),
           quantity: 4,
           unit: 'y'
         }
@@ -108,10 +119,12 @@ export const testTracker5: Tracker = makeFakeTracker({
   name: 'Tracker 5',
   requiredCompletions: [
     {
+      creationDate: new Date().toString(),
       quantity: 3,
       unit: 'x'
     },
     {
+      creationDate: new Date().toString(),
       quantity: 4,
       unit: 'y'
     }
@@ -123,10 +136,12 @@ export const testEntry1: TrackerEntry = {
   id: testEntry1Id,
   completions: [
     {
+      creationDate: new Date().toString(),
       quantity: 5,
       unit: 'push-ups'
     },
     {
+      creationDate: new Date().toString(),
       quantity: 20,
       unit: 'squats'
     }
@@ -140,10 +155,12 @@ export const testEntry2: TrackerEntry = {
   id: testEntry2Id,
   completions: [
     {
+      creationDate: new Date().toString(),
       quantity: 5,
       unit: 'push-ups'
     },
     {
+      creationDate: new Date().toString(),
       quantity: 5,
       unit: 'squats'
     }
@@ -157,10 +174,12 @@ export const testEntry3: TrackerEntry = {
   id: testEntry3Id,
   completions: [
     {
+      creationDate: new Date().toString(),
       quantity: 5,
       unit: 'push-ups'
     },
     {
+      creationDate: new Date().toString(),
       quantity: 5,
       unit: 'squats'
     }

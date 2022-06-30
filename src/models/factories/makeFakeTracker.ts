@@ -12,6 +12,7 @@ const makeFakeTracker = (tracker?: Partial<Tracker>): Tracker => {
     color: TrackerColor.YELLOW_CRAYOLA,
     dateHidden: undefined,
     defaultCompletions: [],
+    doneDays: [],
     duration: undefined,
     entries: [],
     frequency: 1,

@@ -41,8 +41,9 @@ const getDefaultValues = (): FormValues => ({
   id: v4(),
   beginDate: new Date().toString(),
   color: TrackerColor.YELLOW_CRAYOLA,
-  duration: '',
+  doneDays: [],
   defaultCompletions: [],
+  duration: '',
   entries: [],
   frequency: '1',
   isDoneForToday: false,
@@ -53,9 +54,17 @@ const getDefaultValues = (): FormValues => ({
 
 const formatInitialValues = (initialValues: Tracker): FormValues => ({
   ...initialValues,
+  defaultCompletions: initialValues.defaultCompletions
+    ? initialValues.defaultCompletions.map((dc) => ({
+        creationDate: dc.creationDate,
+        quantity: dc.quantity.toString(),
+        unit: dc.unit
+      }))
+    : [],
   duration: initialValues.duration ? initialValues.duration.toString() : '',
   frequency: initialValues.frequency ? initialValues.frequency.toString() : '',
   requiredCompletions: initialValues.requiredCompletions.map((rc) => ({
+    creationDate: rc.creationDate,
     quantity: rc.quantity.toString(),
     unit: rc.unit
   }))
@@ -105,17 +114,24 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
   }, [requiredCompletions]);
 
   const handleOnSubmit = (data: FormValues) => {
-    const { beginDate, duration, frequency, requiredCompletions } = data;
+    const { beginDate, defaultCompletions, duration, frequency, requiredCompletions } = data;
+
     // Convert FormValues to Tracker
     onSubmit({
       ...data,
       beginDate: beginDate.toString(),
+      defaultCompletions: defaultCompletions
+        ? defaultCompletions.map((c) => ({
+            ...c,
+            quantity: parseInt(c.quantity)
+          }))
+        : [],
       duration: duration ? parseInt(duration) : undefined,
       frequency: frequency ? parseInt(frequency) : undefined,
       requiredCompletions: [
         ...requiredCompletions.map((c) => ({
-          quantity: parseInt(c.quantity),
-          unit: c.unit
+          ...c,
+          quantity: parseInt(c.quantity)
         }))
       ]
     } as Tracker);
@@ -299,7 +315,13 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
               <DefaultCompletionsForm
                 append={defaultCompletionsFieldArray.append}
                 control={control}
-                defaultCompletions={defaultCompletions || []}
+                defaultCompletions={defaultCompletions.map(
+                  (rc) =>
+                    ({
+                      ...rc,
+                      quantity: Number(rc.quantity)
+                    } as Completion)
+                )}
                 fields={defaultCompletionsFieldArray.fields}
                 remove={defaultCompletionsFieldArray.remove}
                 requiredCompletions={requiredCompletions.map(

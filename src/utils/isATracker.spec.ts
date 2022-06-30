@@ -14,10 +14,12 @@ describe('isATracker helper', () => {
     endDate: 'Sun Mar 20 2022 03:50:05 GMT+0100 (Central European Standard Time)',
     requiredCompletions: [
       {
+        creationDate: new Date().toString(),
         quantity: 2,
         unit: 'things'
       },
       {
+        creationDate: new Date().toString(),
         quantity: 20,
         unit: 'minutes'
       }
@@ -30,10 +32,12 @@ describe('isATracker helper', () => {
         date: 'Fri Mar 18 2022 03:50:05 GMT+0100 (Central European Standard Time)',
         completions: [
           {
+            creationDate: new Date().toString(),
             quantity: 1,
             unit: 'things'
           },
           {
+            creationDate: new Date().toString(),
             quantity: 50,
             unit: 'minutes'
           }

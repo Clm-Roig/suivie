@@ -6,10 +6,12 @@ import { DataType } from './types';
 describe('formatYearData()', () => {
   const completions = [
     {
+      creationDate: new Date().toString(),
       quantity: 10,
       unit: 'push-ups'
     },
     {
+      creationDate: new Date().toString(),
       quantity: 5,
       unit: 'squats'
     }

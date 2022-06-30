@@ -6,20 +6,24 @@ import { DataType } from './types';
 describe('formatWeekData()', () => {
   const completions = [
     {
+      creationDate: new Date().toString(),
       quantity: 10,
       unit: 'push-ups'
     },
     {
+      creationDate: new Date().toString(),
       quantity: 5,
       unit: 'squats'
     }
   ];
   const partialCompletions = [
     {
+      creationDate: new Date().toString(),
       quantity: 5,
       unit: 'push-ups'
     },
     {
+      creationDate: new Date().toString(),
       quantity: 2,
       unit: 'squats'
     }

@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import CompletionChip from './CompletionChip';
 
 const completion1 = {
+  creationDate: new Date().toString(),
   quantity: 10,
   unit: 'push-ups'
 };
