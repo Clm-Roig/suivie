@@ -1,18 +1,19 @@
 import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import TrackerEntry from '../../../models/TrackerEntry';
+import makeFakeCompletion from '../../../models/factories/makeFakeCompletion';
 import formatMonthDate from './formatMonthData';
 import { DataType } from './types';
 
 describe('formatMonthData()', () => {
   const completions = [
-    {
+    makeFakeCompletion({
       quantity: 10,
       unit: 'push-ups'
-    },
-    {
+    }),
+    makeFakeCompletion({
       quantity: 5,
       unit: 'squats'
-    }
+    })
   ];
   const monthDate = new Date('04/01/2022');
   const entries: TrackerEntry[] = [

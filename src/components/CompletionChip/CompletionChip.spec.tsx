@@ -1,11 +1,9 @@
 import { render, screen } from '@testing-library/react';
 
+import makeFakeCompletion from '../../models/factories/makeFakeCompletion';
 import CompletionChip from './CompletionChip';
 
-const completion1 = {
-  quantity: 10,
-  unit: 'push-ups'
-};
+const completion1 = makeFakeCompletion();
 
 describe('Simple <CompletionChip />', () => {
   it('shows completion informations', () => {

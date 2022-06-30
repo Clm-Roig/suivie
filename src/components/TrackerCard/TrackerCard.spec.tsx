@@ -3,6 +3,7 @@ import { subDays } from 'date-fns';
 import { SnackbarProvider } from 'notistack';
 import { Provider } from 'react-redux';
 
+import makeFakeCompletion from '../../models/factories/makeFakeCompletion';
 import makeFakeTracker from '../../models/factories/makeFakeTracker';
 import { createTestStore } from '../../store/createTestStore';
 import formatDate from '../../utils/formatDate';
@@ -14,14 +15,14 @@ const tracker1 = makeFakeTracker({
   name: 'Musculation',
   remainingDays: 10,
   requiredCompletions: [
-    {
+    makeFakeCompletion({
       quantity: 10,
       unit: 'push-ups'
-    },
-    {
+    }),
+    makeFakeCompletion({
       quantity: 15,
       unit: 'squats'
-    }
+    })
   ]
 });
 const setup = () => {

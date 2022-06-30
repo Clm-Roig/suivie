@@ -1,5 +1,6 @@
 import { v4 } from 'uuid';
 
+import makeFakeCompletion from '../models/factories/makeFakeCompletion';
 import makeFakeTracker from '../models/factories/makeFakeTracker';
 import isATracker from './isATracker';
 
@@ -13,14 +14,14 @@ describe('isATracker helper', () => {
     duration: 8,
     endDate: 'Sun Mar 20 2022 03:50:05 GMT+0100 (Central European Standard Time)',
     requiredCompletions: [
-      {
+      makeFakeCompletion({
         quantity: 2,
         unit: 'things'
-      },
-      {
+      }),
+      makeFakeCompletion({
         quantity: 20,
         unit: 'minutes'
-      }
+      })
     ],
     remainingDays: 10,
     entries: [
@@ -29,14 +30,14 @@ describe('isATracker helper', () => {
         id: '0987-4567',
         date: 'Fri Mar 18 2022 03:50:05 GMT+0100 (Central European Standard Time)',
         completions: [
-          {
+          makeFakeCompletion({
             quantity: 1,
             unit: 'things'
-          },
-          {
+          }),
+          makeFakeCompletion({
             quantity: 50,
             unit: 'minutes'
-          }
+          })
         ]
       }
     ]
