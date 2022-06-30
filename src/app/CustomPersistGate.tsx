@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -14,29 +14,37 @@ interface Props {
 }
 
 const CustomPersistGate: FC<Props> = ({ children }) => {
+  const [trackersReadyToBeChecked, setTrackersReadyToBeChecked] = useState(false);
   const { trackers } = useAppSelector(selectAllTrackers);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // Change date to today
-    dispatch(setSelectedDate(new Date().toString()));
+    if (trackers.length > 0) {
+      setTrackersReadyToBeChecked(true);
+    }
+  }, [trackers]);
 
-    // Check trackers
-    for (const tracker of trackers) {
-      const data = isATracker(tracker);
-      if (data.errors.length !== 0) {
-        navigate('/data-error', {
-          state: data
-        });
-        return;
+  useEffect(() => {
+    if (trackersReadyToBeChecked) {
+      // Change date to today
+      dispatch(setSelectedDate(new Date().toString()));
+      // Check trackers
+      for (const tracker of trackers) {
+        const data = isATracker(tracker);
+        if (data.errors.length !== 0) {
+          navigate('/data-error', {
+            state: data
+          });
+          return;
+        }
+      }
+      // Move to the validate trackers page
+      if (trackers.length > 0) {
+        navigate('/trackers');
       }
     }
-    // Move to the validate trackers page
-    if (trackers.length > 0) {
-      navigate('/trackers');
-    }
-  }, []);
+  }, [trackersReadyToBeChecked]);
 
   return (
     <PersistGate loading={<FullScreenLoading />} persistor={persistor}>

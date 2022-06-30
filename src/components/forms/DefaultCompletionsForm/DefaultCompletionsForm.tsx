@@ -35,7 +35,10 @@ import Popover from '../../Popover/Popover';
 import { FormValues } from '../TrackerForm/types';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 import CompletionUnitSelect from '../completions/CompletionUnitSelect';
-import { computeDecrementedQuantity, computeIncrementedQuantity } from '../completions/utils';
+import {
+  computeDecrementedStringQuantity,
+  computeIncrementedStringQuantity
+} from '../completions/utils';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -123,9 +126,10 @@ const DefaultCompletionsForm: FC<Props> = ({
                 }
                 return (
                   <CompletionQuantityTextField
-                    onDecrement={() => setValue(name, computeDecrementedQuantity(value))}
-                    onIncrement={() => setValue(name, computeIncrementedQuantity(value))}
+                    onDecrement={() => setValue(name, computeDecrementedStringQuantity(value))}
+                    onIncrement={() => setValue(name, computeIncrementedStringQuantity(value))}
                     textFieldProps={{
+                      id: 'default-completion-quantity-' + index,
                       error: !!error,
                       helperText: error && errorText,
                       onChange: onChange,
@@ -159,6 +163,7 @@ const DefaultCompletionsForm: FC<Props> = ({
                   <FormControl fullWidth error={!!error} size="small">
                     <InputLabel>Unité</InputLabel>
                     <CompletionUnitSelect
+                      id={'default-completion-unit-' + index}
                       required
                       value={(requiredCompletions.find((rc) => rc.unit === value) && value) || ''}
                       label="Unité"

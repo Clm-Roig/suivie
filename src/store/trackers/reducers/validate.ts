@@ -4,6 +4,7 @@ import { v4 } from 'uuid';
 import Completion from '../../../models/Completion';
 import TrackerEntry from '../../../models/TrackerEntry';
 import TrackersState from '../TrackersState';
+import { computeIfDone, getDefaultValidationCompletions } from '../utils';
 import { TrackerIdAndDate } from './types';
 
 const completelyValidateReducer = (
@@ -15,10 +16,11 @@ const completelyValidateReducer = (
   if (trackerFound) {
     trackerFound.entries.push({
       id: v4(),
-      completions: trackerFound.requiredCompletions,
+      completions: getDefaultValidationCompletions(trackerFound),
       date: (date ? date : new Date()).toString(),
       trackerId: trackerFound.id
     } as TrackerEntry);
+    trackerFound.doneDays.push((date ? date : new Date()).toString());
   }
   return state;
 };
@@ -33,13 +35,17 @@ const customValidateReducer = (
 ) => {
   const { id, date, completions } = action.payload;
   const trackerFound = state.trackers.find((t) => t.id === id);
+  const stringDate = (date ? date : new Date()).toString();
   if (trackerFound) {
     trackerFound.entries.push({
       id: v4(),
       completions: completions,
-      date: (date ? date : new Date()).toString(),
+      date: stringDate,
       trackerId: trackerFound.id
     } as TrackerEntry);
+    if (computeIfDone(trackerFound, new Date(stringDate))) {
+      trackerFound.doneDays.push(stringDate);
+    }
   }
   return state;
 };

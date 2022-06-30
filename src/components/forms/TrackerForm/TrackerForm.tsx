@@ -1,4 +1,8 @@
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
   Divider,
@@ -8,7 +12,8 @@ import {
   MenuItem,
   Select,
   Stack,
-  TextField
+  TextField,
+  Typography
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { FC, useEffect } from 'react';
@@ -17,11 +22,13 @@ import { v4 } from 'uuid';
 
 import Completion from '../../../models/Completion';
 import Tracker from '../../../models/Tracker';
+import TrackerColor from '../../../models/TrackerColor';
 import TrackerStatus from '../../../models/TrackerStatus';
 import DefaultCompletionsForm from '../DefaultCompletionsForm/DefaultCompletionsForm';
 import HelperAdornment from '../HelperAdornment/HelperAdornment';
 import NumberTextField from '../NumberTextField/NumberTextField';
 import RequiredCompletionsForm from '../RequiredCompletionsForm/RequiredCompletionsForm';
+import TrackerColorPicker from '../TrackerColorPicker/TrackerColorPicker';
 import { FormValues } from './types';
 
 const MAX_NUMBER_OF_DAYS_FOR_FREQUENCY = 120;
@@ -33,8 +40,10 @@ const NUMBER_OF_DAYS_FOR_FREQUENCY = Array.from(
 const getDefaultValues = (): FormValues => ({
   id: v4(),
   beginDate: new Date().toString(),
-  duration: '',
+  color: TrackerColor.YELLOW_CRAYOLA,
+  doneDays: [],
   defaultCompletions: [],
+  duration: '',
   entries: [],
   frequency: '1',
   isDoneForToday: false,
@@ -45,11 +54,17 @@ const getDefaultValues = (): FormValues => ({
 
 const formatInitialValues = (initialValues: Tracker): FormValues => ({
   ...initialValues,
+  defaultCompletions: initialValues.defaultCompletions
+    ? initialValues.defaultCompletions.map((dc) => ({
+        ...dc,
+        quantity: dc.quantity.toString()
+      }))
+    : [],
   duration: initialValues.duration ? initialValues.duration.toString() : '',
   frequency: initialValues.frequency ? initialValues.frequency.toString() : '',
   requiredCompletions: initialValues.requiredCompletions.map((rc) => ({
-    quantity: rc.quantity.toString(),
-    unit: rc.unit
+    ...rc,
+    quantity: rc.quantity.toString()
   }))
 });
 
@@ -66,6 +81,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
   const { control, handleSubmit, reset, setValue, watch } = useForm<FormValues>({
     defaultValues: initialValues ? formatInitialValues(initialValues) : getDefaultValues()
   });
+
   const defaultCompletions = watch('defaultCompletions');
   const requiredCompletions = watch('requiredCompletions');
   const requiredCompletionsFieldArray = useFieldArray({
@@ -96,17 +112,24 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
   }, [requiredCompletions]);
 
   const handleOnSubmit = (data: FormValues) => {
-    const { beginDate, duration, frequency, requiredCompletions } = data;
+    const { beginDate, defaultCompletions, duration, frequency, requiredCompletions } = data;
+
     // Convert FormValues to Tracker
     onSubmit({
       ...data,
       beginDate: beginDate.toString(),
+      defaultCompletions: defaultCompletions
+        ? defaultCompletions.map((c) => ({
+            ...c,
+            quantity: parseInt(c.quantity)
+          }))
+        : [],
       duration: duration ? parseInt(duration) : undefined,
       frequency: frequency ? parseInt(frequency) : undefined,
       requiredCompletions: [
         ...requiredCompletions.map((c) => ({
-          quantity: parseInt(c.quantity),
-          unit: c.unit
+          ...c,
+          quantity: parseInt(c.quantity)
         }))
       ]
     } as Tracker);
@@ -132,73 +155,6 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
             value={value}
           />
         )}
-      />
-
-      <Controller
-        name={'beginDate'}
-        control={control}
-        rules={{ required: true }}
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <DatePicker
-            onChange={onChange}
-            value={value}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                id="begin-date"
-                error={!!error}
-                fullWidth
-                helperText={error ? 'Une date de début est requise.' : ''}
-                label={'Date de début'}
-                required
-                sx={{ mb: 2 }}
-              />
-            )}
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name={'duration'}
-        rules={{
-          min: 1,
-          pattern: /^\d+$/
-        }}
-        render={({ field: { onChange, value }, fieldState: { error } }) => {
-          let errorText = '';
-          if (error) {
-            if (error.type === 'min') {
-              errorText = 'La durée doit être supérieure ou égale à 1.';
-            }
-            if (error.type === 'pattern') {
-              errorText = 'La durée doit être un nombre (de jours).';
-            }
-          }
-          return (
-            <NumberTextField
-              id="duration"
-              error={!!error}
-              fullWidth
-              helperText={error && errorText}
-              label={'Durée (en jours)'}
-              onChange={onChange}
-              sx={{ mb: 2 }}
-              value={value}
-              InputProps={{
-                endAdornment: (
-                  <HelperAdornment
-                    name={'duration'}
-                    text={
-                      "Une fois la durée écoulée, le tracker sera automatiquement archivé, sans vous que vous n'ayez à le faire manuellement."
-                    }
-                    position={'end'}
-                  />
-                )
-              }}
-            />
-          );
-        }}
       />
 
       <Controller
@@ -274,24 +230,111 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
         setValue={setValue}
       />
 
-      {requiredCompletions.length > 0 &&
-        requiredCompletions.some((rc) => rc.unit !== '' && rc.unit !== undefined) && (
-          <DefaultCompletionsForm
-            append={defaultCompletionsFieldArray.append}
-            control={control}
-            defaultCompletions={defaultCompletions || []}
-            fields={defaultCompletionsFieldArray.fields}
-            remove={defaultCompletionsFieldArray.remove}
-            requiredCompletions={requiredCompletions.map(
-              (rc) =>
-                ({
-                  ...rc,
-                  quantity: Number(rc.quantity)
-                } as Completion)
+      <Accordion sx={{ mb: 2, boxShadow: 'none', bgcolor: 'transparent' }}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />} id="more-options-header">
+          <Typography sx={{ fontWeight: 'bold' }}>{"PLUS D'OPTIONS"}</Typography>
+        </AccordionSummary>
+        <AccordionDetails sx={{ p: 1 }}>
+          {requiredCompletions.length > 0 &&
+            requiredCompletions.some((rc) => rc.unit !== '' && rc.unit !== undefined) && (
+              <DefaultCompletionsForm
+                append={defaultCompletionsFieldArray.append}
+                control={control}
+                defaultCompletions={defaultCompletions.map(
+                  (rc) =>
+                    ({
+                      ...rc,
+                      quantity: Number(rc.quantity)
+                    } as Completion)
+                )}
+                fields={defaultCompletionsFieldArray.fields}
+                remove={defaultCompletionsFieldArray.remove}
+                requiredCompletions={requiredCompletions.map(
+                  (rc) =>
+                    ({
+                      ...rc,
+                      quantity: Number(rc.quantity)
+                    } as Completion)
+                )}
+                setValue={setValue}
+              />
             )}
+
+          <TrackerColorPicker
+            control={control}
+            id="color"
+            label="Couleur"
             setValue={setValue}
+            sx={{ mb: 2 }}
+            textAlign="left"
           />
-        )}
+          <Controller
+            name={'beginDate'}
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <DatePicker
+                onChange={onChange}
+                value={value}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    id="begin-date"
+                    error={!!error}
+                    fullWidth
+                    helperText={error ? 'Une date de début est requise.' : ''}
+                    label={'Date de début'}
+                    required
+                    sx={{ mb: 2 }}
+                  />
+                )}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name={'duration'}
+            rules={{
+              min: 1,
+              pattern: /^\d+$/
+            }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => {
+              let errorText = '';
+              if (error) {
+                if (error.type === 'min') {
+                  errorText = 'La durée doit être supérieure ou égale à 1.';
+                }
+                if (error.type === 'pattern') {
+                  errorText = 'La durée doit être un nombre (de jours).';
+                }
+              }
+              return (
+                <NumberTextField
+                  id="duration"
+                  error={!!error}
+                  fullWidth
+                  helperText={error && errorText}
+                  label={'Durée (en jours)'}
+                  onChange={onChange}
+                  sx={{ mb: 2 }}
+                  value={value}
+                  InputProps={{
+                    endAdornment: (
+                      <HelperAdornment
+                        name={'duration'}
+                        text={
+                          "Une fois la durée écoulée, le tracker sera automatiquement archivé, sans vous que vous n'ayez à le faire manuellement."
+                        }
+                        position={'end'}
+                      />
+                    )
+                  }}
+                />
+              );
+            }}
+          />
+        </AccordionDetails>
+      </Accordion>
 
       <Stack direction="row" justifyContent="center" spacing={1}>
         <Button type="submit" onClick={handleSubmit(handleOnSubmit)} variant={'outlined'}>

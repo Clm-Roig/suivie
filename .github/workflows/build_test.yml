@@ -5,18 +5,20 @@ name: Build & test
 
 on:
   push:
+    branches:
+      - develop
   pull_request:
     branches:
       - develop
 
 jobs:
-  build_and_test:
+  # ========== BUILD APP ========== #
+  build_lint_test:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        task: [run lint, test]
 
     steps:
       - uses: actions/checkout@v3
@@ -25,11 +27,62 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - run: npm test
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Run ${{ matrix.task }}
+        run: npm ${{ matrix.task }}
+
+  # ========== E2E TESTING ========== #
+  cypress_e2e_tests:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node16.5.0-chrome94-ff93
+      options: --user 1001
+    strategy:
+      # when one test fails, DO NOT cancel the other containers, because this will kill Cypress processes
+      # leaving the Dashboard hanging... https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # Containers to run copies of the job in parallel.
+        containers: [1, 2, 3]
+        browsers: [firefox, chrome]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
+          browser: ${{ matrix.browser }}
+          record: true
+          parallel: true
           build: npm run build
           start: npm start
           wait-on: 'http://localhost:3000/suivie'
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # overwrite commit message sent to Dashboard
+          COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
+          # re-enable PR comment bot
+          COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}

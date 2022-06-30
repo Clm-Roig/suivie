@@ -1,51 +1,47 @@
-import TrackerStatus from '../models/TrackerStatus';
+import { v4 } from 'uuid';
+
+import makeFakeCompletion from '../models/factories/makeFakeCompletion';
+import makeFakeTracker from '../models/factories/makeFakeTracker';
 import isATracker from './isATracker';
 
 describe('isATracker helper', () => {
-  const basicTracker = {
-    id: '1234-5678',
-    beginDate: 'Thu Mar 17 2022 12:50:05 GMT+0100 (Central European Standard Time)',
-    defaultCompletions: [],
-    entries: [],
-    frequency: 1,
-    name: 'A basic tracker',
-    requiredCompletions: [],
-    status: TrackerStatus.ACTIVE
-  };
-  const completeTracker = {
-    ...basicTracker,
+  const basicTracker = makeFakeTracker({
+    name: 'A basic tracker'
+  });
+  const complexTrackerId = v4();
+  const completeTracker = makeFakeTracker({
+    id: complexTrackerId,
+    duration: 8,
+    endDate: 'Sun Mar 20 2022 03:50:05 GMT+0100 (Central European Standard Time)',
+    requiredCompletions: [
+      makeFakeCompletion({
+        quantity: 2,
+        unit: 'things'
+      }),
+      makeFakeCompletion({
+        quantity: 20,
+        unit: 'minutes'
+      })
+    ],
+    remainingDays: 10,
     entries: [
       {
+        trackerId: complexTrackerId,
         id: '0987-4567',
         date: 'Fri Mar 18 2022 03:50:05 GMT+0100 (Central European Standard Time)',
         completions: [
-          {
+          makeFakeCompletion({
             quantity: 1,
-            unity: 'things'
-          },
-          {
+            unit: 'things'
+          }),
+          makeFakeCompletion({
             quantity: 50,
-            unity: 'minutes'
-          }
-        ],
-        dateHidden: null,
-        duration: 8,
-        endDate: 'Sun Mar 20 2022 03:50:05 GMT+0100 (Central European Standard Time)',
-        requiredCompletions: [
-          {
-            quantity: 2,
-            unity: 'things'
-          },
-          {
-            quantity: 20,
-            unity: 'minutes'
-          }
-        ],
-        remainingDays: 10,
-        trackerId: basicTracker.id
+            unit: 'minutes'
+          })
+        ]
       }
     ]
-  };
+  });
   it('should validate a minimal tracker', () => {
     expect(isATracker(basicTracker).errors.length).toBe(0);
   });

@@ -34,7 +34,11 @@ const TrackerCard: FC<Props> = ({ dragHandleProps, tracker, ...cardProps }) => {
   };
 
   return (
-    <Card {...cardProps}>
+    <Card
+      style={{ background: tracker.color }}
+      {...cardProps}
+      className="tracker-card"
+      id={'tracker-card-' + tracker.id}>
       <TrackerCardHeader dragHandleProps={dragHandleProps} tracker={tracker} sx={sxProps} />
       {requiredCompletions.length > 0 && (
         <TrackerCardContent

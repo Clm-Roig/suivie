@@ -12,7 +12,7 @@ const DataError = () => {
         Erreur au chargement des données 😔
       </Typography>
       <Typography variant="body1">
-        {`L'application n'a pas réussi à charger les données précédemment stockées sur votre appareil. Vous pouvez envoyer le message ci-dessous à notre support pour essayer de résoudre votre problème.`}
+        {`L'application n'a pas réussi à interpréter les données stockées sur votre appareil. Vous pouvez envoyer le message ci-dessous à notre support pour essayer de résoudre votre problème.`}
       </Typography>
       <Divider sx={{ m: 2 }} />
       {errorData ? (

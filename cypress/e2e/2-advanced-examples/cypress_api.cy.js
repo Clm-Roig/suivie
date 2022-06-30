@@ -18,9 +18,11 @@ context('Cypress.Commands', () => {
         // and the commands arguments are shifted
 
         // allow us to change the console method used
+        // eslint-disable-next-line no-param-reassign
         method = method || 'log';
 
         // log the subject to the console
+        // eslint-disable-next-line no-console
         console[method]('The subject is', subject);
 
         // whatever we return becomes the new subject
@@ -32,6 +34,7 @@ context('Cypress.Commands', () => {
 
     cy.get('button')
       .console('info')
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .then(($button) => {
         // subject is still $button
       });

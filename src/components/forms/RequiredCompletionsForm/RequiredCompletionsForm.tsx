@@ -122,6 +122,7 @@ const RequiredCompletionsForm: FC<Props> = ({
                     onDecrement={() => setValue(name, computeDecrementedStringQuantity(value))}
                     onIncrement={() => setValue(name, computeIncrementedStringQuantity(value))}
                     textFieldProps={{
+                      id: 'required-completion-quantity-' + index,
                       error: !!error,
                       helperText: error && errorText,
                       onChange: onChange,
@@ -160,6 +161,7 @@ const RequiredCompletionsForm: FC<Props> = ({
                 }
                 return (
                   <CompletionUnitTextField
+                    id={'required-completion-unit-' + index}
                     error={!!error}
                     helperText={error && errorText}
                     label={'Unité'}

@@ -61,6 +61,17 @@ export const components = {
       }
     }
   },
+  MuiCard: {
+    styleOverrides: {
+      root: {
+        // Lock font color for card independently from the theme because of varying tracker card color
+        color: CHARCOAL.main,
+        '&.tracker-card button': {
+          color: CHARCOAL.main
+        }
+      }
+    }
+  },
   MuiTab: {
     styleOverrides: {
       root: {

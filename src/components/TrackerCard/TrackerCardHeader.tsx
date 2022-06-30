@@ -78,7 +78,7 @@ const TrackerCardHeader: FC<Props> = ({ dragHandleProps, tracker, ...cardHeaderP
     frequency === 1
       ? 'Quotidien'
       : frequency === 7
-      ? 'Hedbomadaire'
+      ? 'Hebdomadaire'
       : `Tous les ${frequency} jours`;
   const trackerIsArchived = status === TrackerStatus.ARCHIVED;
 

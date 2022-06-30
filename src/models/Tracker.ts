@@ -1,4 +1,5 @@
 import Completion from './Completion';
+import TrackerColor from './TrackerColor';
 import TrackerEntry from './TrackerEntry';
 import TrackerStatus from './TrackerStatus';
 
@@ -9,8 +10,10 @@ import TrackerStatus from './TrackerStatus';
  * @interface Tracker
  * @member {string} id a v4 uuid
  * @member {string} beginDate when the completions start (can be in the past or the future)
+ * @member {TrackerColor} color hexadecimal color of the Tracker
  * @member {string?} dateHidden when not undefined, specify which day the tracker is ignored. The next day, it's automatically set to "undefined".
  * @member {Completion[]} defaultCompletions default completions submitted when validating the tracker
+ * @member {string[]?} doneDays days during which the tracker was validated
  * @member {number?} duration number of days the tracker is active since beginDate
  * @member {string} endDate when the Tracker was archived
  * @member {TrackerEntry[]} entries TrackerEntries related to this Tracker
@@ -24,8 +27,10 @@ import TrackerStatus from './TrackerStatus';
 export default interface Tracker {
   readonly id: string;
   beginDate: string;
+  color: TrackerColor;
   dateHidden?: string;
   defaultCompletions?: Completion[];
+  doneDays: string[];
   duration?: number;
   endDate?: string;
   entries: TrackerEntry[];

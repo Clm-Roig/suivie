@@ -8,6 +8,7 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9f4ce0a620d94a07aad5190f009b9b79)](https://www.codacy.com/gh/Clm-Roig/suivie/dashboard?utm_source=github.com&utm_medium=referral&utm_content=Clm-Roig/suivie&utm_campaign=Badge_Grade)
 ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/clm-roig/suivie/Build%20&%20test/develop)
+[![cypress](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/i4ns1y&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/i4ns1y/runs)
 [![GitHub tag](https://img.shields.io/github/tag/clm-roig/suivie?include_prereleases=&sort=semver&color=blue)](https://github.com/clm-roig/suivie/releases/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-yellow.svg)](https://github.com/prettier/prettier)
 
@@ -23,7 +24,7 @@ This application is inspired by the [Bullet Journal's trackers tool](https://dia
 
 ## Main features
 
-📄 Create tracker with a name, begin date, duration and add as much as objectives as you want
+📄 Create tracker with a name, begin date, color, duration, frequency and add as much objectives as you want
 
 ✅ Validate a tracker today or in the past
 
@@ -59,7 +60,7 @@ The application is deployed on the Github repository page [here](https://clm-roi
 
 ### Why this project? Why I built it this way?
 
-I wanted to build an application with a modern React stack and CI tools I (Typescript, Github Actions, standard-version, Prettier + ESLint). I like stats and I like to organize my life around 2 electronic productivity tools: todo lists and calendars. I thaught Bullet Journal trackers was a good idea to complement them 🙂
+I wanted to build an application with a modern React stack and CI tools I (Typescript, Github Actions, standard-version, Cypress, Prettier & ESLint). I like stats and I like to organize my life around 2 electronic productivity tools: todo lists and calendars. I thaught Bullet Journal trackers was a good idea to complement them 🙂
 
 ### How I work on this project?
 
@@ -86,4 +87,3 @@ More on this later because I have time currently and I'm working on it 😛
 ![eslint](https://user-images.githubusercontent.com/20704943/164058589-a52b0210-1f47-4d8e-a04a-3eff1976dcb7.png)
 ![prettier](https://user-images.githubusercontent.com/20704943/164058595-b2912e5f-1eaa-4200-9cc6-4b84b23804f6.png)
 ![cypress](https://user-images.githubusercontent.com/20704943/174458261-43b98d1c-121c-4750-af50-00f50f87892e.png)
-

@@ -3,155 +3,134 @@ import { addDays, subDays } from 'date-fns';
 import { SEVEN_DAYS_AGO_STRING } from '../../config/Constants';
 import Tracker from '../../models/Tracker';
 import TrackerEntry from '../../models/TrackerEntry';
-import TrackerStatus from '../../models/TrackerStatus';
+import makeFakeCompletion from '../../models/factories/makeFakeCompletion';
+import makeFakeTracker from '../../models/factories/makeFakeTracker';
 
 export const testTracker1Id = '123e4567-e89b-12d3-a456-426614174000';
-export const testTracker1: Tracker = {
+export const testTracker1: Tracker = makeFakeTracker({
   id: testTracker1Id,
   beginDate: subDays(new Date(), 3).toString(),
   defaultCompletions: [
-    {
+    makeFakeCompletion({
       quantity: 10,
       unit: 'push-ups'
-    },
-    {
+    }),
+    makeFakeCompletion({
       quantity: 15,
       unit: 'squats'
-    }
+    })
   ],
   duration: 13,
-  frequency: 1,
-  isDoneForToday: false,
   name: 'Musculation',
   remainingDays: 10,
   requiredCompletions: [
-    {
+    makeFakeCompletion({
       quantity: 10,
       unit: 'push-ups'
-    },
-    {
+    }),
+    makeFakeCompletion({
       quantity: 15,
       unit: 'squats'
-    }
-  ],
-  status: TrackerStatus.ACTIVE,
-  entries: []
-};
+    })
+  ]
+});
 
 export const testTracker2Id = '456e4567-e89b-12d3-b456-426614174000';
-export const testTracker2: Tracker = {
+export const testTracker2: Tracker = makeFakeTracker({
   id: testTracker2Id,
   beginDate: subDays(new Date(), 10).toString(),
   duration: 70,
-  entries: [],
-  frequency: 1,
-  isDoneForToday: false,
   name: 'Eat',
   requiredCompletions: [
-    {
+    makeFakeCompletion({
       quantity: 6,
       unit: 'vegetables or fruits'
-    }
-  ],
-  status: TrackerStatus.ACTIVE
-};
+    })
+  ]
+});
 
 export const testTracker3Id = '656e4567-e89b-12k3-b456-427614174000';
-export const testTracker3: Tracker = {
+export const testTracker3: Tracker = makeFakeTracker({
   id: testTracker3Id,
-  beginDate: new Date().toString(),
   defaultCompletions: [
-    {
+    makeFakeCompletion({
       quantity: 0.5,
       unit: 'L of water'
-    }
+    })
   ],
-  entries: [],
-  frequency: 1,
-  isDoneForToday: false,
   name: 'Drink',
   requiredCompletions: [
-    {
+    makeFakeCompletion({
       quantity: 2,
       unit: 'L of water'
-    }
-  ],
-  status: TrackerStatus.ACTIVE
-};
+    })
+  ]
+});
 
 // Tracker without required and default completions
 export const testTracker4Id = '123e4567-e59b-12k3-a456-429114174000';
-export const testTracker4: Tracker = {
+export const testTracker4: Tracker = makeFakeTracker({
   id: testTracker4Id,
-  beginDate: new Date().toString(),
-  defaultCompletions: [],
-  entries: [],
-  frequency: 1,
-  isDoneForToday: false,
-  name: 'Wake up',
-  requiredCompletions: [],
-  status: TrackerStatus.ACTIVE
-};
+  name: 'Wake up'
+});
 
 export const testTracker5Id = '766e4567-e19b-12k3-x456-427614174570';
-export const testTracker5: Tracker = {
+export const testTracker5: Tracker = makeFakeTracker({
   id: testTracker5Id,
   beginDate: SEVEN_DAYS_AGO_STRING,
   defaultCompletions: [
-    {
+    makeFakeCompletion({
       quantity: 3,
       unit: 'x'
-    },
-    {
+    }),
+    makeFakeCompletion({
       quantity: 4,
       unit: 'y'
-    }
+    })
   ],
   entries: [
     {
       id: '1234-5432-azer',
       completions: [
-        {
+        makeFakeCompletion({
           quantity: 3,
           unit: 'x'
-        },
-        {
+        }),
+        makeFakeCompletion({
           quantity: 4,
           unit: 'y'
-        }
+        })
       ],
       date: subDays(new Date(), 4).toString(),
       trackerId: testTracker5Id
     }
   ],
   frequency: 3,
-  isDoneForToday: false,
   name: 'Tracker 5',
   requiredCompletions: [
-    {
+    makeFakeCompletion({
       quantity: 3,
       unit: 'x'
-    },
-    {
+    }),
+    makeFakeCompletion({
       quantity: 4,
       unit: 'y'
-    }
-  ],
-  status: TrackerStatus.ACTIVE
-};
+    })
+  ]
+});
 
 export const testEntry1Id = '676e4567-e89b-12d3-b456-426614174000';
 export const testEntry1: TrackerEntry = {
   id: testEntry1Id,
   completions: [
-    {
+    makeFakeCompletion({
       quantity: 5,
       unit: 'push-ups'
-    },
-    {
+    }),
+    makeFakeCompletion({
       quantity: 20,
       unit: 'squats'
-    }
+    })
   ],
   date: new Date().toString(),
   trackerId: testTracker1Id
@@ -161,14 +140,14 @@ export const testEntry2Id = '876e4567-e89b-12e3-b456-426615174000';
 export const testEntry2: TrackerEntry = {
   id: testEntry2Id,
   completions: [
-    {
+    makeFakeCompletion({
       quantity: 5,
       unit: 'push-ups'
-    },
-    {
+    }),
+    makeFakeCompletion({
       quantity: 5,
       unit: 'squats'
-    }
+    })
   ],
   date: new Date().toString(),
   trackerId: testTracker1Id
@@ -178,14 +157,14 @@ export const testEntry3Id = '876e4567-e19b-12y3-b456-326515174000';
 export const testEntry3: TrackerEntry = {
   id: testEntry3Id,
   completions: [
-    {
+    makeFakeCompletion({
       quantity: 5,
       unit: 'push-ups'
-    },
-    {
+    }),
+    makeFakeCompletion({
       quantity: 5,
       unit: 'squats'
-    }
+    })
   ],
   date: SEVEN_DAYS_AGO_STRING,
   trackerId: testTracker1Id

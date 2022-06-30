@@ -118,6 +118,23 @@ export const computeNewStatus = (tracker: Tracker) => {
   return newStatus;
 };
 
+/**
+ * Get the completions used by a tracker by default
+ * @param tracker
+ */
+export const getDefaultValidationCompletions = (tracker: Tracker) => {
+  const { defaultCompletions, requiredCompletions } = tracker;
+  const completionsUsed = requiredCompletions.map((rc) => {
+    const defaultComp = defaultCompletions?.find((dc) => dc.unit === rc.unit);
+    if (defaultComp) {
+      return defaultComp;
+    } else {
+      return rc;
+    }
+  });
+  return completionsUsed;
+};
+
 export const formatTrackers = (trackers: Tracker[]) => {
   const newTrackers = trackers.map((t) => {
     let trackerObj = t as Tracker;
