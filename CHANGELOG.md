@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.9](https://github.com/clm-roig/suivie/compare/v0.2.7...v0.2.9) (2022-06-30)
+
+
+### Features
+
+* **#159:** make tracker cards sortable ([7eae90c](https://github.com/clm-roig/suivie/commit/7eae90c580913ad38ecfbfd4f155689bb70ef03b)), closes [#159](https://github.com/clm-roig/suivie/issues/159)
+* **#159:** make tracker cards sortable ([b0c4023](https://github.com/clm-roig/suivie/commit/b0c40237dd92876ecff57803961b9026945f3f60)), closes [#159](https://github.com/clm-roig/suivie/issues/159)
+* **#276:** add a tracker color attribute ([363df90](https://github.com/clm-roig/suivie/commit/363df90131144f7b44a99480d6d4d6593acd4a00)), closes [#276](https://github.com/clm-roig/suivie/issues/276)
+* **#277:** add a "more options" accordion in tracker form ([57bd903](https://github.com/clm-roig/suivie/commit/57bd9037b1170413af5a01dc92e40c32dd900fcd)), closes [#277](https://github.com/clm-roig/suivie/issues/277)
+
+
+### Bug Fixes
+
+* **createTrackerCard:** remove hover color ([09e8e8c](https://github.com/clm-roig/suivie/commit/09e8e8c085c3c31d35590c847523ebc1ff551fe7))
+* **defaultCompletions:** complete validation now uses default completions ([c5c748c](https://github.com/clm-roig/suivie/commit/c5c748cd9ae71b75a9e3093020474c636e0cee07))
+* **e2eTest:** fix getting detached element from DOM issue ([655e7d7](https://github.com/clm-roig/suivie/commit/655e7d7dc1402991b05d889d7ff21af81e71b29e))
+* **e2eTest:** fix getting detached element from DOM issue ([cd4b563](https://github.com/clm-roig/suivie/commit/cd4b563423629281cf53c9fd931dcc86dd9ea688))
+* **e2eTest:** fix getting detached element from DOM issue ([9b5b9bf](https://github.com/clm-roig/suivie/commit/9b5b9bf97b1e0b83828a862ea2b4bf16cd62e686))
+* **e2eTest:** fix getting detached element from DOM issue ([daa00fb](https://github.com/clm-roig/suivie/commit/daa00fb7a256772cda6dc7986268d974a88a8230))
+* **e2eTests:** wait before clicking select element in tracker form ([bf5e9e5](https://github.com/clm-roig/suivie/commit/bf5e9e53ea3213fd0d2e346424a5d5199b2cb10f))
+* **reduxPersist:** fix data check ([cef5d5a](https://github.com/clm-roig/suivie/commit/cef5d5a5732690320669204ff33c49eb8923e278))
+* **trackerCard:** fix button and text color in dark mode ([3682a4a](https://github.com/clm-roig/suivie/commit/3682a4a861c64494427ce9ea7872b6efd68e54ab))
+
 ### [0.2.8](https://github.com/clm-roig/suivie/compare/v0.2.7...v0.2.8) (2022-06-27)
 
 
