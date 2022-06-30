@@ -235,6 +235,31 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
           <Typography sx={{ fontWeight: 'bold' }}>{"PLUS D'OPTIONS"}</Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ p: 1 }}>
+          {requiredCompletions.length > 0 &&
+            requiredCompletions.some((rc) => rc.unit !== '' && rc.unit !== undefined) && (
+              <DefaultCompletionsForm
+                append={defaultCompletionsFieldArray.append}
+                control={control}
+                defaultCompletions={defaultCompletions.map(
+                  (rc) =>
+                    ({
+                      ...rc,
+                      quantity: Number(rc.quantity)
+                    } as Completion)
+                )}
+                fields={defaultCompletionsFieldArray.fields}
+                remove={defaultCompletionsFieldArray.remove}
+                requiredCompletions={requiredCompletions.map(
+                  (rc) =>
+                    ({
+                      ...rc,
+                      quantity: Number(rc.quantity)
+                    } as Completion)
+                )}
+                setValue={setValue}
+              />
+            )}
+
           <TrackerColorPicker
             control={control}
             id="color"
@@ -308,30 +333,6 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
               );
             }}
           />
-          {requiredCompletions.length > 0 &&
-            requiredCompletions.some((rc) => rc.unit !== '' && rc.unit !== undefined) && (
-              <DefaultCompletionsForm
-                append={defaultCompletionsFieldArray.append}
-                control={control}
-                defaultCompletions={defaultCompletions.map(
-                  (rc) =>
-                    ({
-                      ...rc,
-                      quantity: Number(rc.quantity)
-                    } as Completion)
-                )}
-                fields={defaultCompletionsFieldArray.fields}
-                remove={defaultCompletionsFieldArray.remove}
-                requiredCompletions={requiredCompletions.map(
-                  (rc) =>
-                    ({
-                      ...rc,
-                      quantity: Number(rc.quantity)
-                    } as Completion)
-                )}
-                setValue={setValue}
-              />
-            )}
         </AccordionDetails>
       </Accordion>
 

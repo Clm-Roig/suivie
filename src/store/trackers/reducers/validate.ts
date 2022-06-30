@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 import Completion from '../../../models/Completion';
 import TrackerEntry from '../../../models/TrackerEntry';
 import TrackersState from '../TrackersState';
-import { computeIfDone } from '../utils';
+import { computeIfDone, getDefaultValidationCompletions } from '../utils';
 import { TrackerIdAndDate } from './types';
 
 const completelyValidateReducer = (
@@ -16,7 +16,7 @@ const completelyValidateReducer = (
   if (trackerFound) {
     trackerFound.entries.push({
       id: v4(),
-      completions: trackerFound.requiredCompletions,
+      completions: getDefaultValidationCompletions(trackerFound),
       date: (date ? date : new Date()).toString(),
       trackerId: trackerFound.id
     } as TrackerEntry);
