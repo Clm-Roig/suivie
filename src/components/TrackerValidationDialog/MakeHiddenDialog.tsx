@@ -29,7 +29,7 @@ const MakeHiddenDialog: FC<Props> = ({ dialogProps, onValidation, tracker }) => 
         <b>{name}</b>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>Voulez-vous masquer ce tracker ?</DialogContentText>
+        <DialogContentText>Voulez-vous masquer ce tracker pendant un jour ?</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={onValidation} autoFocus>
