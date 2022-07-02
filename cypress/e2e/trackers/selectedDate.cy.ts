@@ -16,10 +16,10 @@ context('Trackers', () => {
   describe('selected date', () => {
     it('has an input with today date', () => {
       const today = new Date();
-      const todayMonth = ('0' + (today.getMonth() + 1)).slice(-2);
+      const todayMonth = `${today.getMonth() + 1}`.padStart(2, '0');
       cy.get('input').should(
         'have.value',
-        today.getDate() + '/' + todayMonth + '/' + today.getFullYear()
+        `${today.getDate()}`.padStart(2, '0') + '/' + todayMonth + '/' + today.getFullYear()
       );
     });
     it('has tomorrow selector disabled', () => {
