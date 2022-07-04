@@ -1,13 +1,11 @@
 import styled from '@emotion/styled';
-import { Button, TextFieldProps } from '@mui/material';
+import { Button, TextField, TextFieldProps } from '@mui/material';
 import React, { FC } from 'react';
-
-import NumberTextField from '../formElements/NumberTextField/NumberTextField';
 
 const StyledButton = styled(Button)`
   min-width: auto;
 `;
-const StyledTextField = styled(NumberTextField)`
+const StyledTextField = styled(TextField)`
   fieldset {
     border-width: 0 1px 1px 0;
     border-top-right-radius: 0;
@@ -26,6 +24,7 @@ const CompletionQuantityTextField: FC<Props> = ({ onDecrement, onIncrement, text
     <StyledTextField
       inputProps={{
         min: 1,
+        inputMode: 'numeric',
         style: {
           textAlign: 'center'
         }

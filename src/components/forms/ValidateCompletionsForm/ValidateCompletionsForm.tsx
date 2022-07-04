@@ -5,6 +5,7 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
 import { useAutoAnimate } from '../../../hooks/useAutoAnimate';
 import Completion from '../../../models/Completion';
+import { validateFacultativePositiveFloat } from '../../../utils/validateNumber';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
 import CompletionUnitTextField from '../completions/CompletionUnitTextField';
 import {
@@ -85,43 +86,27 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
               control={control}
               name={`completions.${index}.quantity` as const}
               rules={{
-                min: 1,
-                pattern: /^\d+$/,
-                required: true
+                min: { value: 1, message: 'La quantité doit être supérieure ou égale à 1.' },
+                required: { value: true, message: 'La quantité est requise.' },
+                validate: (value) =>
+                  validateFacultativePositiveFloat(value) ||
+                  'La quantité doit être un nombre positif.'
               }}
-              render={({ field: { name, onChange, value }, fieldState: { error } }) => {
-                let errorText = '';
-                if (error) {
-                  switch (error.type) {
-                    case 'min':
-                      errorText = 'La quantité doit être supérieure ou égale à 1.';
-                      break;
-
-                    case 'pattern':
-                      errorText = 'La quantité doit être un nombre.';
-                      break;
-
-                    case 'required':
-                      errorText = 'La quantité est requise';
-                      break;
-                  }
-                }
-                return (
-                  <CompletionQuantityTextField
-                    onDecrement={() => setValue(name, computeDecrementedStringQuantity(value))}
-                    onIncrement={() => setValue(name, computeIncrementedStringQuantity(value))}
-                    textFieldProps={{
-                      error: !!error,
-                      helperText: error && errorText,
-                      onChange: onChange,
-                      required: true,
-                      size: 'small',
-                      sx: { mb: 1 },
-                      value: value || ''
-                    }}
-                  />
-                );
-              }}
+              render={({ field: { name, onChange, value }, fieldState: { error } }) => (
+                <CompletionQuantityTextField
+                  onDecrement={() => setValue(name, computeDecrementedStringQuantity(value))}
+                  onIncrement={() => setValue(name, computeIncrementedStringQuantity(value))}
+                  textFieldProps={{
+                    error: !!error,
+                    helperText: error && error.message,
+                    onChange: onChange,
+                    required: true,
+                    size: 'small',
+                    sx: { mb: 1 },
+                    value: value || ''
+                  }}
+                />
+              )}
             />
           </Grid>
           <Grid item xs={1}>
