@@ -36,7 +36,7 @@ const CompletionChip: FC<Props> = ({
     <Chip
       clickable={true}
       color={isSelected ? 'info' : 'primary'}
-      label={quantity.toString() + ' ' + unit}
+      label={quantity + ' ' + unit}
       sx={sxProps}
       {...chipProps}
     />

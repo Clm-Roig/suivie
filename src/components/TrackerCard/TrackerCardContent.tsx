@@ -41,7 +41,7 @@ const TrackerCardContent: FC<Props> = ({
     .map((rc) => {
       const todayCompletion = aggCompletions.find((c) => rc.unit === c.unit);
       if (todayCompletion) {
-        const remain = rc.quantity - todayCompletion.quantity;
+        const remain = Number((rc.quantity - todayCompletion.quantity).toFixed(2));
         return {
           ...rc,
           quantity: remain
