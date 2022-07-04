@@ -4,28 +4,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import HelpIcon from '@mui/icons-material/Help';
 import { Box, Button, Grid, GridProps, IconButton, Typography, useTheme } from '@mui/material';
 import { FC, useRef, useState } from 'react';
-import {
-  Control,
-  Controller,
-  FieldArrayWithId,
-  UseFieldArrayAppend,
-  UseFieldArrayRemove,
-  UseFormSetValue
-} from 'react-hook-form';
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 
-import { useAppSelector } from '../../../hooks/redux';
-import { useAutoAnimate } from '../../../hooks/useAutoAnimate';
-import Completion from '../../../models/Completion';
-import ThemeMode from '../../../models/ThemeMode';
-import { selectThemeMode } from '../../../store/theme/theme.selectors';
-import Popover from '../../Popover/Popover';
-import { FormValues } from '../TrackerForm/types';
-import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
-import CompletionUnitTextField from '../completions/CompletionUnitTextField';
-import {
-  computeDecrementedStringQuantity,
-  computeIncrementedStringQuantity
-} from '../completions/utils';
+import { useAppSelector } from '../../../../hooks/redux';
+import { useAutoAnimate } from '../../../../hooks/useAutoAnimate';
+import Completion from '../../../../models/Completion';
+import ThemeMode from '../../../../models/ThemeMode';
+import { selectThemeMode } from '../../../../store/theme/theme.selectors';
+import { validateFacultativePositiveFloat } from '../../../../utils/validateNumber';
+import Popover from '../../../Popover/Popover';
+import CompletionQuantityTextField from '../CompletionQuantityTextField';
+import CompletionUnitTextField from '../CompletionUnitTextField';
+import { computeDecrementedStringQuantity, computeIncrementedStringQuantity } from '../utils';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -34,27 +24,21 @@ export const FieldsetGrid = styled(Grid)`
 `;
 
 interface Props {
-  append: UseFieldArrayAppend<FormValues, 'requiredCompletions'>;
-  control: Control<FormValues, any> /* eslint-disable-line @typescript-eslint/no-explicit-any */;
-  fields: FieldArrayWithId<FormValues, 'requiredCompletions', 'id'>[];
   gridProps?: GridProps;
-  remove: UseFieldArrayRemove;
   requiredCompletions: Completion[];
-  setValue: UseFormSetValue<FormValues>;
+  valueName: string;
 }
 
 /**
  * This forms is used to create one or many requiredCompletions for a new tracker.
  */
-const RequiredCompletionsForm: FC<Props> = ({
-  append,
-  control,
-  fields,
-  requiredCompletions,
-  gridProps,
-  remove,
-  setValue
-}) => {
+const RequiredCompletionsForm: FC<Props> = ({ requiredCompletions, gridProps, valueName }) => {
+  const { control, setValue } = useFormContext();
+  const { append, fields, remove } = useFieldArray({
+    control,
+    name: valueName
+  });
+
   const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
   const animateRef = useRef(null);
@@ -96,44 +80,28 @@ const RequiredCompletionsForm: FC<Props> = ({
               control={control}
               name={`requiredCompletions.${index}.quantity` as const}
               rules={{
-                min: 1,
-                pattern: /^\d+$/,
-                required: true
+                min: { value: 1, message: 'La quantité doit être supérieure ou égale à 1.' },
+                required: { value: true, message: 'La quantité est requise.' },
+                validate: (value) =>
+                  validateFacultativePositiveFloat(value) ||
+                  'La quantité doit être un nombre positif.'
               }}
-              render={({ field: { onChange, value, name }, fieldState: { error } }) => {
-                let errorText = '';
-                if (error) {
-                  switch (error.type) {
-                    case 'min':
-                      errorText = 'La quantité doit être supérieure ou égale à 1.';
-                      break;
-
-                    case 'pattern':
-                      errorText = 'La quantité doit être un nombre.';
-                      break;
-
-                    case 'required':
-                      errorText = 'La quantité est requise';
-                      break;
-                  }
-                }
-                return (
-                  <CompletionQuantityTextField
-                    onDecrement={() => setValue(name, computeDecrementedStringQuantity(value))}
-                    onIncrement={() => setValue(name, computeIncrementedStringQuantity(value))}
-                    textFieldProps={{
-                      id: 'required-completion-quantity-' + index,
-                      error: !!error,
-                      helperText: error && errorText,
-                      onChange: onChange,
-                      required: true,
-                      size: 'small',
-                      sx: { mb: 1 },
-                      value: value || ''
-                    }}
-                  />
-                );
-              }}
+              render={({ field: { onChange, value, name }, fieldState: { error } }) => (
+                <CompletionQuantityTextField
+                  onDecrement={() => setValue(name, computeDecrementedStringQuantity(value))}
+                  onIncrement={() => setValue(name, computeIncrementedStringQuantity(value))}
+                  textFieldProps={{
+                    id: 'required-completion-quantity-' + index,
+                    error: !!error,
+                    helperText: error && error.message,
+                    onChange: onChange,
+                    required: true,
+                    size: 'small',
+                    sx: { mb: 1 },
+                    value: value || ''
+                  }}
+                />
+              )}
             />
           </Grid>
           <Grid item xs={1}>
