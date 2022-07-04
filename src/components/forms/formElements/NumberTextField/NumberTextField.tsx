@@ -7,9 +7,7 @@ const NumberTextField: FC<TextFieldProps> = (textFieldProps) => {
     <TextField
       inputProps={{
         inputMode: 'numeric',
-        min: 1,
         pattern: '[0-9]*',
-        type: 'number',
         ...inputProps
       }}
       {...otherProps}

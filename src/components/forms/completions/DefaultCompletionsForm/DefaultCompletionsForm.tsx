@@ -17,28 +17,18 @@ import {
   useTheme
 } from '@mui/material';
 import { FC, useRef, useState } from 'react';
-import {
-  Control,
-  Controller,
-  FieldArrayWithId,
-  UseFieldArrayAppend,
-  UseFieldArrayRemove,
-  UseFormSetValue
-} from 'react-hook-form';
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 
-import { useAppSelector } from '../../../hooks/redux';
-import { useAutoAnimate } from '../../../hooks/useAutoAnimate';
-import Completion from '../../../models/Completion';
-import ThemeMode from '../../../models/ThemeMode';
-import { selectThemeMode } from '../../../store/theme/theme.selectors';
-import Popover from '../../Popover/Popover';
-import { FormValues } from '../TrackerForm/types';
-import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
-import CompletionUnitSelect from '../completions/CompletionUnitSelect';
-import {
-  computeDecrementedStringQuantity,
-  computeIncrementedStringQuantity
-} from '../completions/utils';
+import { useAppSelector } from '../../../../hooks/redux';
+import { useAutoAnimate } from '../../../../hooks/useAutoAnimate';
+import Completion from '../../../../models/Completion';
+import ThemeMode from '../../../../models/ThemeMode';
+import { selectThemeMode } from '../../../../store/theme/theme.selectors';
+import { validateFacultativePositiveFloat } from '../../../../utils/validateNumber';
+import Popover from '../../../Popover/Popover';
+import CompletionQuantityTextField from '../CompletionQuantityTextField';
+import CompletionUnitSelect from '../CompletionUnitSelect';
+import { computeDecrementedStringQuantity, computeIncrementedStringQuantity } from '../utils';
 
 export const FieldsetGrid = styled(Grid)`
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -47,26 +37,23 @@ export const FieldsetGrid = styled(Grid)`
 `;
 
 interface Props {
-  append: UseFieldArrayAppend<FormValues, 'defaultCompletions'>;
-  control: Control<FormValues, any> /* eslint-disable-line @typescript-eslint/no-explicit-any */;
   defaultCompletions: Completion[];
-  fields: FieldArrayWithId<FormValues, 'defaultCompletions', 'id'>[];
   gridProps?: GridProps;
-  remove: UseFieldArrayRemove;
   requiredCompletions: Completion[];
-  setValue: UseFormSetValue<FormValues>;
+  valueName: string;
 }
 
 const DefaultCompletionsForm: FC<Props> = ({
-  append,
-  control,
   defaultCompletions,
-  fields,
   gridProps,
-  remove,
   requiredCompletions,
-  setValue
+  valueName
 }) => {
+  const { control, setValue } = useFormContext();
+  const { append, fields, remove } = useFieldArray({
+    control,
+    name: valueName
+  });
   const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
   const animateRef = useRef(null);
@@ -103,44 +90,28 @@ const DefaultCompletionsForm: FC<Props> = ({
               control={control}
               name={`defaultCompletions.${index}.quantity` as const}
               rules={{
-                min: 1,
-                pattern: /^\d+$/,
-                required: true
+                min: { value: 1, message: 'La quantité doit être supérieure ou égale à 1.' },
+                required: { value: true, message: 'La quantité est requise.' },
+                validate: (value) =>
+                  validateFacultativePositiveFloat(value) ||
+                  'La quantité doit être un nombre positif.'
               }}
-              render={({ field: { name, onChange, value }, fieldState: { error } }) => {
-                let errorText = '';
-                if (error) {
-                  switch (error.type) {
-                    case 'min':
-                      errorText = 'La quantité doit être supérieure ou égale à 1.';
-                      break;
-
-                    case 'pattern':
-                      errorText = 'La quantité doit être un nombre.';
-                      break;
-
-                    case 'required':
-                      errorText = 'La quantité est requise';
-                      break;
-                  }
-                }
-                return (
-                  <CompletionQuantityTextField
-                    onDecrement={() => setValue(name, computeDecrementedStringQuantity(value))}
-                    onIncrement={() => setValue(name, computeIncrementedStringQuantity(value))}
-                    textFieldProps={{
-                      id: 'default-completion-quantity-' + index,
-                      error: !!error,
-                      helperText: error && errorText,
-                      onChange: onChange,
-                      required: true,
-                      size: 'small',
-                      sx: { mb: 1 },
-                      value: value || ''
-                    }}
-                  />
-                );
-              }}
+              render={({ field: { name, onChange, value }, fieldState: { error } }) => (
+                <CompletionQuantityTextField
+                  onDecrement={() => setValue(name, computeDecrementedStringQuantity(value))}
+                  onIncrement={() => setValue(name, computeIncrementedStringQuantity(value))}
+                  textFieldProps={{
+                    id: 'default-completion-quantity-' + index,
+                    error: !!error,
+                    helperText: error && error.message,
+                    onChange: onChange,
+                    required: true,
+                    size: 'small',
+                    sx: { mb: 1 },
+                    value: value || ''
+                  }}
+                />
+              )}
             />
           </Grid>
           <Grid item xs={1}>
