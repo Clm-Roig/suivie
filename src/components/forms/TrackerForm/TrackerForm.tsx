@@ -110,7 +110,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
       defaultCompletions: defaultCompletions
         ? defaultCompletions.map((c) => ({
             ...c,
-            quantity: parseInt(c.quantity)
+            quantity: Number(c.quantity)
           }))
         : [],
       duration: duration ? parseInt(duration) : undefined,
@@ -118,7 +118,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
       requiredCompletions: [
         ...requiredCompletions.map((c) => ({
           ...c,
-          quantity: parseInt(c.quantity)
+          quantity: Number(c.quantity)
         }))
       ]
     } as Tracker);

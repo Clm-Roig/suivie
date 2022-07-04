@@ -63,7 +63,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
       completions.map(
         (c) =>
           ({
-            quantity: parseInt(c.quantity),
+            quantity: Number(c.quantity),
             unit: c.unit
           } as Completion)
       )
