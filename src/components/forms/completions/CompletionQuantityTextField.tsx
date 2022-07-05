@@ -34,7 +34,7 @@ const CompletionQuantityTextField: FC<Props> = ({ onDecrement, onIncrement, text
         startAdornment: onDecrement && <StyledButton onClick={() => onDecrement()}>-</StyledButton>,
         sx: { px: 1 }
       }}
-      label={'Quantity'}
+      label={'Quantité'}
       {...textFieldProps}
     />
   );
