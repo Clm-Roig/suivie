@@ -1,4 +1,5 @@
 import BallotIcon from '@mui/icons-material/Ballot';
+import BugReportIcon from '@mui/icons-material/BugReport';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -22,6 +23,7 @@ import TabPanel from '../components/TabPanel/TabPanel';
 import AddTrackerCard from '../components/TrackerCardList/AddTrackerCard';
 import DateSelector from '../components/TrackerCardList/DaySelector';
 import TrackerCardList from '../components/TrackerCardList/TrackerCardList';
+import { BUG_REPORT_FORM_URL } from '../config/Constants';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import {
   selectHiddenTrackers,
@@ -52,6 +54,11 @@ function Trackers() {
       icon: <ViewListIcon />,
       name: 'Voir tous mes trackers',
       onClick: () => navigate('/trackers/manage')
+    },
+    {
+      icon: <BugReportIcon />,
+      name: 'Signaler un bug',
+      onClick: () => window.open(BUG_REPORT_FORM_URL, '_blank')
     }
   ];
 

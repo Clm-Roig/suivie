@@ -1,6 +1,7 @@
 import { format, subDays } from 'date-fns';
 
 import TrackerColor from '../../../src/models/TrackerColor';
+import makeFakeCompletion from '../../../src/models/factories/makeFakeCompletion';
 import makeFakeTracker from '../../../src/models/factories/makeFakeTracker';
 
 context('Trackers', () => {
@@ -14,24 +15,24 @@ context('Trackers', () => {
         duration: 30,
         frequency: 7,
         requiredCompletions: [
-          {
-            quantity: 3,
+          makeFakeCompletion({
+            quantity: 3.6,
             unit: 'x'
-          },
-          {
+          }),
+          makeFakeCompletion({
             quantity: 10,
             unit: 'y'
-          }
+          })
         ],
         defaultCompletions: [
-          {
-            quantity: 1,
+          makeFakeCompletion({
+            quantity: 1.2,
             unit: 'x'
-          },
-          {
+          }),
+          makeFakeCompletion({
             quantity: 5,
             unit: 'y'
-          }
+          })
         ]
       })
     };
@@ -40,8 +41,10 @@ context('Trackers', () => {
 
   describe('trackers creation', () => {
     it('creates a simple tracker with only a name', () => {
-      // Open form and fill it
+      // Open form and "more options" section
       cy.get('.MuiCardContent-root').click();
+      cy.get('#more-options-header').click();
+
       cy.get('#begin-date').should('have.value', format(new Date(), 'dd/MM/yyyy'));
       cy.get('#name').type(simpleTracker.name + '{enter}');
       cy.get('form').should('not.exist');
