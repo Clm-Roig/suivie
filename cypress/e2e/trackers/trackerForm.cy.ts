@@ -16,7 +16,7 @@ context('Trackers', () => {
         frequency: 7,
         requiredCompletions: [
           makeFakeCompletion({
-            quantity: 3,
+            quantity: 3.6,
             unit: 'x'
           }),
           makeFakeCompletion({
@@ -26,7 +26,7 @@ context('Trackers', () => {
         ],
         defaultCompletions: [
           makeFakeCompletion({
-            quantity: 1,
+            quantity: 1.2,
             unit: 'x'
           }),
           makeFakeCompletion({
