@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
@@ -15,6 +15,7 @@ interface Props {
 
 const CustomPersistGate: FC<Props> = ({ children }) => {
   const [trackersReadyToBeChecked, setTrackersReadyToBeChecked] = useState(false);
+  const location = useLocation();
   const { trackers } = useAppSelector(selectAllTrackers);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -26,8 +27,8 @@ const CustomPersistGate: FC<Props> = ({ children }) => {
   }, [trackers]);
 
   useEffect(() => {
-    if (trackersReadyToBeChecked) {
-      // Change date to today
+    // Redirect only if the user is on the homepage (first app loading for example)
+    if (trackersReadyToBeChecked && location.pathname === '/') {
       dispatch(setSelectedDate(new Date().toString()));
       // Check trackers
       for (const tracker of trackers) {
@@ -48,7 +49,6 @@ const CustomPersistGate: FC<Props> = ({ children }) => {
 
   return (
     <PersistGate loading={<FullScreenLoading />} persistor={persistor}>
-      {' '}
       {children}
     </PersistGate>
   );
