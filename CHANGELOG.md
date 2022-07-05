@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/clm-roig/suivie/compare/v0.2.9...v0.3.0) (2022-07-05)
+
+
+### Features
+
+* **#377:** add suivie icon ([bedb6dc](https://github.com/clm-roig/suivie/commit/bedb6dcc014a3a6027d09b001b4b52ec997ffc61)), closes [#377](https://github.com/clm-roig/suivie/issues/377)
+* **#382:** add an improvement suggestion form ([e8fdced](https://github.com/clm-roig/suivie/commit/e8fdced401a48701dc2344038eb8bb8d43d3956b)), closes [#382](https://github.com/clm-roig/suivie/issues/382)
+* **#384:** add bug report form to About page and speed dial ([81b7f62](https://github.com/clm-roig/suivie/commit/81b7f624665d3c58c340850a33e768364b04bae6)), closes [#384](https://github.com/clm-roig/suivie/issues/384)
+* **#92:** add explainations on home page + refactor home page ([98f7a84](https://github.com/clm-roig/suivie/commit/98f7a84bd002a7ffd710c668c0c05f16a4af173c)), closes [#92](https://github.com/clm-roig/suivie/issues/92)
+
+
+### Bug Fixes
+
+* **firstRedirection:** fix bug when creating a tracker from manage page ([b0a58e2](https://github.com/clm-roig/suivie/commit/b0a58e27b2550a886b9b79825f8e54c74bf27fd6))
+* **floatingNumberForm:** fix some issues with floating quantities in form ([c6ad7f9](https://github.com/clm-roig/suivie/commit/c6ad7f9897e70ca27f25c53a7c19c526217054b6))
+* **hideTrackerText:** improve confirmation text ([49d5848](https://github.com/clm-roig/suivie/commit/49d58482e2bbea2275ced54f52bb9aec107ab0a1))
+* **quantityParsing:** parse a number instead of an integer ([93933bb](https://github.com/clm-roig/suivie/commit/93933bb70381b301784b95933ce3ddc9907b56c8))
+
 ### [0.2.9](https://github.com/clm-roig/suivie/compare/v0.2.7...v0.2.9) (2022-06-30)
 
 
