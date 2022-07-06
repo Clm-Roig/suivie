@@ -72,9 +72,9 @@ const Home = () => {
           <ListItem>
             <ListItemText
               primary={
-                <li>
+                <>
                   <b>Prise de médicament</b>
-                </li>
+                </>
               }
               secondary={"Plus d'oubli possible !"}
               secondaryTypographyProps={{ color: 'secondary.light' }}
