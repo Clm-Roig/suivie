@@ -1,19 +1,28 @@
 import { List, ListItem, ListItemText } from '@mui/material';
+import { FC } from 'react';
+
+import ChildrenProp from '../../types/ChildrenProp';
+
+const DenseListItem: FC<ChildrenProp> = ({ children }) => (
+  <ListItem disablePadding disableGutters>
+    {children}
+  </ListItem>
+);
 
 const Features = () => (
   <List>
-    <ListItem disableGutters disablePadding>
+    <DenseListItem>
       <ListItemText primary={'✨ Suivez vos habitudes'} />
-    </ListItem>
-    <ListItem disableGutters disablePadding>
+    </DenseListItem>
+    <DenseListItem>
       <ListItemText primary={'✅ Complétez vos objectifs'} />
-    </ListItem>
-    <ListItem disableGutters disablePadding>
+    </DenseListItem>
+    <DenseListItem>
       <ListItemText primary={'📊 Consultez vos statistiques à tout moment'} />
-    </ListItem>
-    <ListItem disableGutters disablePadding>
+    </DenseListItem>
+    <DenseListItem>
       <ListItemText primary={'🔐 Données stockées sur votre appareil'} />
-    </ListItem>
+    </DenseListItem>
   </List>
 );
 export default Features;

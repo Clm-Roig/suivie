@@ -89,7 +89,7 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width 
           boxSizing: 'border-box'
         }
       }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box display="flex" justifyContent="space-between">
         <IconButton sx={{ ml: 1 }} onClick={toggleThemeMode} color="inherit">
           {themeMode === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
         </IconButton>
