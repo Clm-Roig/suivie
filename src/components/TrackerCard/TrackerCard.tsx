@@ -8,6 +8,8 @@ import TrackerCardActions from './TrackerCardActions';
 import TrackerCardContent from './TrackerCardContent';
 import TrackerCardHeader from './TrackerCardHeader';
 
+const sxProps = { px: 1, py: 1 };
+
 interface Props extends CardProps {
   dragHandleProps?: DraggableProvidedDragHandleProps;
   tracker: Tracker;
@@ -15,7 +17,6 @@ interface Props extends CardProps {
 const TrackerCard: FC<Props> = ({ dragHandleProps, tracker, ...cardProps }) => {
   const { requiredCompletions } = tracker;
   const [selectedCompletions, setSelectedCompletions] = useState<Completion[]>([]);
-  const sxProps = { px: 1, py: 1 };
 
   const addToSelectedCompletions = (completion: Completion) => {
     setSelectedCompletions([...selectedCompletions, completion]);

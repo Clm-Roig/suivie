@@ -1,4 +1,4 @@
-import { Box, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { endOfMonth, startOfMonth } from 'date-fns';
 import { FC } from 'react';
@@ -8,6 +8,7 @@ import { useAppSelector } from '../../../hooks/redux';
 import Tracker from '../../../models/Tracker';
 import { selectMonthEntries } from '../../../store/trackers/trackers.selectors';
 import MonthChart from '../../charts/MonthChart/MonthChart';
+import SpacedBox from '../SpacedBox';
 import TotalText from '../TotalText';
 
 interface Props {
@@ -25,7 +26,7 @@ const MonthPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
 
   return (
     <>
-      <Box sx={{ mb: 1 }}>
+      <SpacedBox>
         <DatePicker
           views={['year', 'month']}
           disableFuture
@@ -35,13 +36,13 @@ const MonthPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
           value={beginDate}
           renderInput={(params) => <TextField sx={{ width: '100%' }} {...params} />}
         />
-      </Box>
-      <Box sx={{ mb: 1 }}>
+      </SpacedBox>
+      <SpacedBox>
         <TotalText
           entries={monthEntries}
           noCompletionsText="Il n'y a pas eu d'activité durant le mois pour le tracker sélectionné."
         />
-      </Box>
+      </SpacedBox>
       {monthEntries.length > 0 && <MonthChart beginDate={beginDate} entries={monthEntries} />}
     </>
   );

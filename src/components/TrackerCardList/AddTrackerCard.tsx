@@ -28,10 +28,7 @@ const AddTrackerCard: FC<Props> = (cardProps) => {
     <Card {...allCardProps}>
       <CardActionArea onClick={() => setDisplayCreateForm(!displayCreateForm)}>
         <CardContent>
-          <Box
-            sx={{
-              textAlign: 'center'
-            }}>
+          <Box textAlign="center">
             {displayCreateForm ? (
               <RemoveCircleOutlineIcon fontSize="large" color="primary" />
             ) : (

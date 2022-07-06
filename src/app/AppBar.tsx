@@ -11,10 +11,7 @@ interface Props {
 
 const AppBar: FC<Props> = ({ toggleDrawerMenu }) => {
   return (
-    <Box
-      sx={{
-        flexGrow: 1
-      }}>
+    <Box flexGrow={1}>
       <MuiAppBar position="static">
         <Toolbar>
           <IconButton
