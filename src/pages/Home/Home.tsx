@@ -5,6 +5,7 @@ import { useAppSelector } from '../../hooks/redux';
 import { selectThemeMode } from '../../store/theme/theme.selectors';
 import Features from './Features';
 import StartBox from './StartBox';
+import { boxType1Props, boxType2Props } from './styles';
 
 const Home = () => {
   const themeMode = useAppSelector(selectThemeMode);
@@ -25,7 +26,7 @@ const Home = () => {
       <Features />
       <StartBox />
 
-      <Box mt={2} mx={-2} p={2} bgcolor={'primary.main'} color="white">
+      <Box {...boxType1Props}>
         <Typography gutterBottom variant="h2">
           {"Qu'est-ce que SuiVie ?"}
         </Typography>
@@ -34,7 +35,7 @@ const Home = () => {
           donner des statistiques sur celles-ci.
         </Typography>
       </Box>
-      <Box mt={2} mx={-2} p={2}>
+      <Box {...boxType2Props}>
         <Typography gutterBottom variant="h2">
           Une application web mobile, c&apos;est-à-dire ?
         </Typography>
@@ -51,7 +52,7 @@ const Home = () => {
         </Typography>
       </Box>
 
-      <Box mt={2} mx={-2} p={2} bgcolor={'primary.main'} color="white">
+      <Box {...boxType1Props}>
         <Typography gutterBottom variant="h2">
           Qu&apos;est-ce que je pourrais bien avoir envie de suivre ?
         </Typography>

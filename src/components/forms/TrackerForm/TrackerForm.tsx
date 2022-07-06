@@ -184,7 +184,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
               id="color"
               label="Couleur"
               setValue={setValue}
-              sx={{ mb: 2 }}
+              mb={2}
               textAlign="left"
             />
 

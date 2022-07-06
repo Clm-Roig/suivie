@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import { startOfDay } from 'date-fns';
 import { FC, useState } from 'react';
 
@@ -7,6 +6,7 @@ import Tracker from '../../../models/Tracker';
 import { selectMonthEntries, selectWeekEntries } from '../../../store/trackers/trackers.selectors';
 import WeekPicker from '../../WeekPicker/WeekPicker';
 import WeekChart from '../../charts/WeekChart/WeekChart';
+import SpacedBox from '../SpacedBox';
 import TotalText from '../TotalText';
 
 interface Props {
@@ -32,20 +32,20 @@ const WeekPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
 
   return (
     <>
-      <Box sx={{ mb: 1 }}>
+      <SpacedBox>
         <WeekPicker
           highlightedDates={monthEntries.map((e) => new Date(e.date))}
           onChange={handleBeginDateChange}
           onMonthChange={handleOnMonthChange}
           value={beginDate}
         />
-      </Box>
-      <Box sx={{ mb: 1 }}>
+      </SpacedBox>
+      <SpacedBox>
         <TotalText
           entries={weekEntries}
           noCompletionsText="Il n'y a pas eu d'activité durant la semaine pour le tracker sélectionné."
         />
-      </Box>
+      </SpacedBox>
       {weekEntries.length > 0 && <WeekChart beginDate={beginDate} entries={weekEntries} />}
     </>
   );
