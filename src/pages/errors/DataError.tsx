@@ -1,4 +1,4 @@
-import { Divider, List, ListItem, ListItemText, Paper, Typography } from '@mui/material';
+import { Box, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { NavigateOptions, useLocation } from 'react-router-dom';
 
 import { NotATrackerResponse } from '../../utils/isATracker';
@@ -7,7 +7,7 @@ const DataError = () => {
   const location: NavigateOptions = useLocation();
   const errorData = location.state;
   return (
-    <Paper sx={{ p: 1 }}>
+    <Box>
       <Typography variant="h2" gutterBottom>
         Erreur au chargement des données 😔
       </Typography>
@@ -38,7 +38,7 @@ const DataError = () => {
       ) : (
         <Typography>Erreur inconnue</Typography>
       )}
-    </Paper>
+    </Box>
   );
 };
 
