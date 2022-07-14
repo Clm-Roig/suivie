@@ -26,7 +26,7 @@ context('Trackers', () => {
         ],
         defaultCompletions: [
           makeFakeCompletion({
-            quantity: 1.2,
+            quantity: 0.1,
             unit: 'x'
           }),
           makeFakeCompletion({

@@ -64,7 +64,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
       completions.map(
         (c) =>
           ({
-            quantity: Number(c.quantity),
+            quantity: Number(c.quantity.replace(',', '.')),
             unit: c.unit
           } as Completion)
       )
@@ -86,7 +86,6 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
               control={control}
               name={`completions.${index}.quantity` as const}
               rules={{
-                min: { value: 1, message: 'La quantité doit être supérieure ou égale à 1.' },
                 required: { value: true, message: 'La quantité est requise.' },
                 validate: (value) =>
                   validateFacultativePositiveFloat(value) ||
