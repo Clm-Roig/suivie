@@ -14,13 +14,16 @@ context('Trackers', () => {
   });
 
   describe('selected date', () => {
-    it('has an input with today date', () => {
+    it('has an input with today date, even after going 2 days before and reloading the page', () => {
       const today = new Date();
       const todayMonth = `${today.getMonth() + 1}`.padStart(2, '0');
-      cy.get('input').should(
-        'have.value',
-        `${today.getDate()}`.padStart(2, '0') + '/' + todayMonth + '/' + today.getFullYear()
-      );
+      const todayString =
+        `${today.getDate()}`.padStart(2, '0') + '/' + todayMonth + '/' + today.getFullYear();
+      cy.get('input').should('have.value', todayString);
+      cy.get('[data-testid="ChevronLeftIcon"]').click();
+      cy.get('[data-testid="ChevronLeftIcon"]').click();
+      cy.reload();
+      cy.get('input').should('have.value', todayString);
     });
     it('has tomorrow selector disabled', () => {
       cy.get('[data-testid="ChevronRightIcon"]').parent().should('be.disabled');
