@@ -11,7 +11,7 @@ import { LocalizationProvider, frFR } from '@mui/x-date-pickers';
 import { AdapterDateFns as DateAdapter } from '@mui/x-date-pickers/AdapterDateFns';
 import frLocale from 'date-fns/locale/fr';
 import { SnackbarKey, SnackbarProvider } from 'notistack';
-import { createRef, useMemo, useState } from 'react';
+import { createRef, useEffect, useMemo, useState } from 'react';
 
 import { DRAWER_MENU_WIDTH } from '../config/Constants';
 import { components, getPalette, typography } from '../config/CustomTheme';
@@ -19,6 +19,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import ThemeMode from '../models/ThemeMode';
 import { selectThemeMode } from '../store/theme/theme.selectors';
 import { toggleThemeMode } from '../store/theme/themeSlice';
+import { setSelectedDate } from '../store/trackers/trackersSlice';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';
@@ -53,6 +54,10 @@ function App() {
   const onClickDismiss = (key: SnackbarKey) => () => {
     notistackRef.current?.closeSnackbar(key);
   };
+
+  useEffect(() => {
+    dispatch(setSelectedDate(new Date().toString()));
+  }, []);
 
   const toggleDrawerMenu = () => {
     setIsMenuOpen(!isMenuOpen);
