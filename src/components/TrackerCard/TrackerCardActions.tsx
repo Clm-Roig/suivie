@@ -58,7 +58,7 @@ const TrackerCardActions: FC<Props> = ({
   };
   const CancelSnackbarActions = (key: SnackbarKey) => (
     <>
-      <Button sx={{ color: 'white' }} onClick={cancelLatestValidation}>
+      <Button sx={{ color: 'common.white' }} onClick={cancelLatestValidation}>
         ANNULER
       </Button>
       <IconButton onClick={() => closeSnackbar(key)} size="small" sx={{ color: 'common.white' }}>
@@ -96,12 +96,7 @@ const TrackerCardActions: FC<Props> = ({
 
   return (
     <CardActions {...cardActionsProps}>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: isHidden ? 'right' : 'space-between',
-          width: '100%'
-        }}>
+      <Box display="flex" justifyContent={isHidden ? 'right' : 'space-between'} width="100%">
         {!isHidden && (
           <>
             <StyledIconButton

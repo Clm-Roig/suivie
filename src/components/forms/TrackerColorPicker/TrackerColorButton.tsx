@@ -22,7 +22,7 @@ interface Props {
 
 const TrackerColorButton: FC<Props> = ({ colorCode, isSelected, onBlockClick }) => {
   return (
-    <Box sx={{ boxShadow: 1 }}>
+    <Box boxShadow={1}>
       <ColorBlockButton
         id={colorCode}
         sx={{ border: isSelected ? 1 : undefined }}

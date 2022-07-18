@@ -110,7 +110,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
       defaultCompletions: defaultCompletions
         ? defaultCompletions.map((c) => ({
             ...c,
-            quantity: Number(c.quantity)
+            quantity: Number(c.quantity.replace(',', '.'))
           }))
         : [],
       duration: duration ? parseInt(duration) : undefined,
@@ -118,7 +118,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
       requiredCompletions: [
         ...requiredCompletions.map((c) => ({
           ...c,
-          quantity: Number(c.quantity)
+          quantity: Number(c.quantity.replace(',', '.'))
         }))
       ]
     } as Tracker);
@@ -184,7 +184,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
               id="color"
               label="Couleur"
               setValue={setValue}
-              sx={{ mb: 2 }}
+              mb={2}
               textAlign="left"
             />
 
@@ -207,7 +207,7 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
                 },
                 validate: (value) =>
                   validateFacultativePositiveInteger(value) ||
-                  'La durée doit être un nombre positif (de jours).'
+                  'La durée doit être un nombre entier positif (de jours).'
               }}
               label={'Durée (en jours)'}
               sx={{ mb: 2 }}

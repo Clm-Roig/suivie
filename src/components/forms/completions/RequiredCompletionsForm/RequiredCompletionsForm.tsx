@@ -80,7 +80,6 @@ const RequiredCompletionsForm: FC<Props> = ({ requiredCompletions, gridProps, va
               control={control}
               name={`requiredCompletions.${index}.quantity` as const}
               rules={{
-                min: { value: 1, message: 'La quantité doit être supérieure ou égale à 1.' },
                 required: { value: true, message: 'La quantité est requise.' },
                 validate: (value) =>
                   validateFacultativePositiveFloat(value) ||

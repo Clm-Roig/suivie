@@ -2,14 +2,14 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import { Box, Button, Divider, Link, Stack, Typography } from '@mui/material';
 
-import packageInfo from '../../package.json';
-import ExternalLink from '../components/ExternalLink/ExternalLink';
+import ExternalLink from '../../components/ExternalLink/ExternalLink';
 import {
   APP_NAME,
   BUG_REPORT_FORM_URL,
   IMPROVEMENT_SUGGESTION_FORM_URL,
   PAYPAL_DONATE_URL
-} from '../config/Constants';
+} from '../../config/Constants';
+import PackageVersion from './PackageVersion';
 
 function About() {
   return (
@@ -76,9 +76,7 @@ function About() {
         </Typography>
       </Box>
 
-      <Box sx={{ mr: 1 }} style={{ bottom: 0, right: 0, position: 'fixed' }}>
-        <Typography>v{packageInfo.version}</Typography>
-      </Box>
+      <PackageVersion />
     </>
   );
 }

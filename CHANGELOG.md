@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/clm-roig/suivie/compare/v0.3.0...v0.3.1) (2022-07-18)
+
+
+### Bug Fixes
+
+* **#395:** allow coma for quantity + delete min value of 1 ([2d15820](https://github.com/clm-roig/suivie/commit/2d158200680db62cd443a919554632ed2b5a68af)), closes [#395](https://github.com/clm-roig/suivie/issues/395)
+* **#402:** set selectedDate to today at launch ([c2f5bcf](https://github.com/clm-roig/suivie/commit/c2f5bcfeb92872f16ccd1cac2f632b91e2360b5e)), closes [#402](https://github.com/clm-roig/suivie/issues/402)
+* **dataErrorPage:** remove paper background ([771ce77](https://github.com/clm-roig/suivie/commit/771ce777469134ca1583b7c9b6a5604fdd67332d))
+* **e2eTest:** use select with typing and appropriate id ([882655e](https://github.com/clm-roig/suivie/commit/882655e5d98e60ba4ac5bd6b44fa731c25034ed0))
+* **qtyLabel:** fix non-translated label ([1c19447](https://github.com/clm-roig/suivie/commit/1c1944767f5a3323b507542fff2ec32d7fc7e2b6))
+* **warning:** remove li child of li ([2affe81](https://github.com/clm-roig/suivie/commit/2affe81ef140faee38c30c71c916e9e373f1fc0b))
+
 ## [0.3.0](https://github.com/clm-roig/suivie/compare/v0.2.9...v0.3.0) (2022-07-05)
 
 

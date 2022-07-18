@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
-import About from '../pages/About';
+import About from '../pages/About/About';
 import Home from '../pages/Home/Home';
 import ManageTrackers from '../pages/ManageTrackers';
 import Settings from '../pages/Settings';
