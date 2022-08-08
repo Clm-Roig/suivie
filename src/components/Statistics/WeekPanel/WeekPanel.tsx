@@ -46,7 +46,7 @@ const WeekPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
           noCompletionsText="Il n'y a pas eu d'activité durant la semaine pour le tracker sélectionné."
         />
       </SpacedBox>
-      {weekEntries.length > 0 && <WeekChart beginDate={beginDate} entries={weekEntries} />}
+      <WeekChart beginDate={beginDate} entries={weekEntries} />
     </>
   );
 };

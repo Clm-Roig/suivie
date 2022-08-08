@@ -1,11 +1,4 @@
-import {
-  addWeeks,
-  getDay,
-  getDaysInMonth,
-  getWeeksInMonth,
-  isSameWeek,
-  startOfMonth
-} from 'date-fns';
+import { addWeeks, getDay, getDaysInMonth, isSameWeek, startOfMonth } from 'date-fns';
 
 import { DEFAULT_COMPLETION_NAME } from '../../../config/Constants';
 import Completion from '../../../models/Completion';
@@ -35,7 +28,7 @@ const getWeekData = (
 
 const formatData = (monthDate: Date, entries: TrackerEntry[]): DataType[] => {
   const data = [];
-  const nbOfWeeks = getWeeksInMonth(monthDate);
+  const nbOfWeeks = Math.ceil(getDaysInMonth(monthDate) / 7);
   const startDay = startOfMonth(monthDate);
   for (let i = 0; i < nbOfWeeks; i += 1) {
     const week = addWeeks(startDay, i);

@@ -43,7 +43,7 @@ const MonthPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
           noCompletionsText="Il n'y a pas eu d'activité durant le mois pour le tracker sélectionné."
         />
       </SpacedBox>
-      {monthEntries.length > 0 && <MonthChart beginDate={beginDate} entries={monthEntries} />}
+      <MonthChart beginDate={beginDate} entries={monthEntries} />
     </>
   );
 };
