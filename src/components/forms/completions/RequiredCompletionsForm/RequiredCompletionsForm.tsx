@@ -157,7 +157,7 @@ const RequiredCompletionsForm: FC<Props> = ({ requiredCompletions, gridProps, va
           anchorEl={anchorEl}
           onClose={handleClose}
           text={
-            "Les objectifs définissent ce que vous devez accomplir pour valider le tracker. Ils se component d'une quantité et d'une unité."
+            "Les objectifs définissent ce que vous devez accomplir pour valider le tracker. Ils se composent d'une quantité et d'une unité."
           }
         />
       </Box>
