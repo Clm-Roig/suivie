@@ -11,8 +11,8 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.10.4",
-    "@formkit/auto-animate": "^1.0.0-beta.1",
     "@mui/icons-material": "^5.10.3",
+    "@formkit/auto-animate": "^1.0.0-beta.3",
     "@mui/material": "^5.10.4",
     "@mui/x-date-pickers": "^5.0.0-alpha.7",
     "@reduxjs/toolkit": "^1.8.5",
