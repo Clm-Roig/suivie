@@ -124,15 +124,11 @@ export const computeNewStatus = (tracker: Tracker) => {
  */
 export const getDefaultValidationCompletions = (tracker: Tracker) => {
   const { defaultCompletions, requiredCompletions } = tracker;
-  const completionsUsed = requiredCompletions.map((rc) => {
-    const defaultComp = defaultCompletions?.find((dc) => dc.unit === rc.unit);
-    if (defaultComp) {
-      return defaultComp;
-    } else {
-      return rc;
-    }
-  });
-  return completionsUsed;
+  if (defaultCompletions && defaultCompletions?.length > 0) {
+    return defaultCompletions;
+  } else {
+    return requiredCompletions;
+  }
 };
 
 export const formatTrackers = (trackers: Tracker[]) => {
