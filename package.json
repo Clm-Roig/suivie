@@ -16,7 +16,7 @@
     "@mui/material": "^5.10.4",
     "@mui/x-date-pickers": "^5.0.0-alpha.7",
     "@reduxjs/toolkit": "^1.8.3",
-    "@types/jest": "^28.1.6",
+    "@types/jest": "^29.0.0",
     "@types/node": "^18.7.6",
     "@types/react": "^18.0.1",
     "@types/uuid": "^8.3.4",
