@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.3](https://github.com/clm-roig/suivie/compare/v0.3.2...v0.3.3) (2022-09-09)
+
+
+### Bug Fixes
+
+* **#435:** fix computation of number of weeks in a month ([11aa7e4](https://github.com/clm-roig/suivie/commit/11aa7e4962330812e4d6aedd562db4164e8350b5))
+* **#470:** fix typos ([67e5788](https://github.com/clm-roig/suivie/commit/67e57885442a0418b5b6e8f77accbb9aa3643e10))
+* **#471:** fix defaultCompletions usage ([ed2404f](https://github.com/clm-roig/suivie/commit/ed2404fcff60e8652bc43429d47ee19788cc9d46))
+* **stats:** display panel even if there is not data ([d29674d](https://github.com/clm-roig/suivie/commit/d29674d6cc6eef6136493cb1db934f21f9075646))
+
 ### [0.3.2](https://github.com/clm-roig/suivie/compare/v0.3.0...v0.3.2) (2022-07-31)
 
 

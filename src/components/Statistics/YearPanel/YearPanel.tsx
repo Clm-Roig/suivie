@@ -43,7 +43,7 @@ const YearPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
           noCompletionsText="Il n'y a pas eu d'activité durant le mois pour le tracker sélectionné."
         />
       </SpacedBox>
-      {yearEntries.length > 0 && <YearChart beginDate={beginDate} entries={yearEntries} />}
+      <YearChart beginDate={beginDate} entries={yearEntries} />
     </>
   );
 };

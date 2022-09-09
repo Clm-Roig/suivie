@@ -43,7 +43,7 @@ const CompleteValidationDialog: FC<Props> = ({ dialogProps, onValidation, tracke
         )}
         {defaultCompletions && defaultCompletions.length > 0 && (
           <Alert icon={false} severity="info">
-            Cette validation utilise des réalisations par défaut
+            Cette validation utilise des réalisations par défaut.
           </Alert>
         )}
         {!isToday(selectedDate) && (
