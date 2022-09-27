@@ -3,16 +3,12 @@
   "homepage": "https://clm-roig.github.io/suivie",
   "version": "0.3.3",
   "private": true,
-  "jest": {
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\](?!(@formkit/auto-animate)).+\\.(js|jsx|mjs|cjs|ts|tsx)$"
-    ]
-  },
+  "jest": {},
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.10.4",
-    "@formkit/auto-animate": "^1.0.0-beta.1",
     "@mui/icons-material": "^5.10.3",
+    "@formkit/auto-animate": "^1.0.0-beta.3",
     "@mui/material": "^5.10.4",
     "@mui/x-date-pickers": "^5.0.0-alpha.7",
     "@reduxjs/toolkit": "^1.8.5",
