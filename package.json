@@ -3,11 +3,7 @@
   "homepage": "https://clm-roig.github.io/suivie",
   "version": "0.3.3",
   "private": true,
-  "jest": {
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\](?!(@formkit/auto-animate)).+\\.(js|jsx|mjs|cjs|ts|tsx)$"
-    ]
-  },
+  "jest": {},
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.10.4",

@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Grid } from '@mui/material';
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
-import { useAutoAnimate } from '../../../hooks/useAutoAnimate';
 import Completion from '../../../models/Completion';
 import { validateFacultativePositiveFloat } from '../../../utils/validateNumber';
 import CompletionQuantityTextField from '../completions/CompletionQuantityTextField';
@@ -38,8 +38,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
     control, // control props comes from useForm
     name: 'completions'
   });
-  const animateRef = useRef(null);
-  useAutoAnimate(animateRef);
+  const [animateRef] = useAutoAnimate<HTMLFormElement>();
 
   useEffect(() => {
     const previousCompletions = getValues().completions;
