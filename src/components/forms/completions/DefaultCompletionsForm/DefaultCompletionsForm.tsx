@@ -56,7 +56,7 @@ const DefaultCompletionsForm: FC<Props> = ({
   });
   const themeMode = useAppSelector(selectThemeMode);
   const theme = useTheme();
-  const animateRef = useAutoAnimate();
+  const [animateRef] = useAutoAnimate();
 
   const fieldsetSx = {
     bgcolor: themeMode === ThemeMode.LIGHT ? theme.palette.grey[100] : theme.palette.grey[900],
