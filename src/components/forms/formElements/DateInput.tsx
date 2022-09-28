@@ -25,7 +25,6 @@ const DateInput: FC<TextInputProps> = (props) => {
               fullWidth
               error={!!error}
               helperText={error ? error.message : ''}
-              onChange={onChange}
               required={!!rules?.required}
               value={value}
               {...textFieldProps}

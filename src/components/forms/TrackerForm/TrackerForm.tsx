@@ -191,7 +191,11 @@ const TrackerForm: FC<Props> = ({ initialValues, onSubmit }) => {
             <DateInput
               id="begin-date"
               name="beginDate"
-              rules={{ required: { value: true, message: 'Une date de début est requise.' } }}
+              rules={{
+                required: { value: true, message: 'Une date de début est requise.' },
+                validate: (value) =>
+                  !Number.isNaN(new Date(value).getTime()) || 'Format de la date incorrect.'
+              }}
               fullWidth
               label="Date de début"
               sx={{ mb: 2 }}
