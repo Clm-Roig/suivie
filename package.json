@@ -10,7 +10,7 @@
     "@mui/icons-material": "^5.10.3",
     "@formkit/auto-animate": "^1.0.0-beta.3",
     "@mui/material": "^5.10.7",
-    "@mui/x-date-pickers": "^5.0.0-alpha.7",
+    "@mui/x-date-pickers": "^5.0.3",
     "@reduxjs/toolkit": "^1.8.5",
     "@types/jest": "^29.0.0",
     "@types/node": "^18.7.6",
@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.0.3",
+    "@commitlint/config-conventional": "^17.1.0",
     "@faker-js/faker": "^7.5.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
@@ -70,7 +70,7 @@
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.38.1",
     "cypress": "^10.3.1",
-    "eslint": "^8.21.0",
+    "eslint": "^8.24.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.5.1",
@@ -80,7 +80,7 @@
     "eslint-plugin-react": "^7.31.7",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.1",
-    "jest-watch-typeahead": "^2.0.0",
+    "jest-watch-typeahead": "^2.2.0",
     "prettier": "^2.7.1",
     "standard-version": "^9.5.0"
   }
