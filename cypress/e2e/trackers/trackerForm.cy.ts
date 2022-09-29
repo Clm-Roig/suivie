@@ -11,7 +11,7 @@ context('Trackers', () => {
     complexTracker = {
       ...makeFakeTracker({
         beginDate: subDays(new Date(), 2).toString(),
-        color: TrackerColor.MELON_RED,
+        color: TrackerColor.RED_PINK,
         duration: 30,
         frequency: 7,
         requiredCompletions: [
