@@ -30,7 +30,7 @@ import { FormValues } from './types';
 const getDefaultValues = (): FormValues => ({
   id: v4(),
   beginDate: new Date().toString(),
-  color: TrackerColor.YELLOW_CRAYOLA,
+  color: TrackerColor.YELLOW_CORN,
   doneDays: [],
   defaultCompletions: [],
   duration: '',

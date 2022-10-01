@@ -1,6 +1,7 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import { Box, Button, Divider, Link, Stack, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 import ExternalLink from '../../components/ExternalLink/ExternalLink';
 import {
@@ -30,6 +31,9 @@ function About() {
           <Typography>
             Merci à <ExternalLink href="https://laurakaczmarek.fr">Laura KACZMAREK</ExternalLink>{' '}
             pour le logo et le design ❤
+          </Typography>
+          <Typography component={RouterLink} to="/graphical-charter">
+            Charte Graphique
           </Typography>
           <Typography>
             Code source disponible sur{' '}

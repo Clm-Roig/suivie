@@ -24,6 +24,24 @@ import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
 import Router from './Router';
 
+const StyledSnackbarProvider = styled(SnackbarProvider)`
+  &.SnackbarItem-variantInfo {
+    background-color: ${({ theme }) => theme.palette.info.main};
+  }
+  ,
+  &.SnackbarItem-variantError {
+    background-color: ${({ theme }) => theme.palette.error.main};
+  }
+  ,
+  &.SnackbarItem-variantSuccess {
+    background-color: ${({ theme }) => theme.palette.success.main};
+  }
+  ,
+  &.SnackbarItem-variantWarning {
+    background-color: ${({ theme }) => theme.palette.warning.main};
+  }
+`;
+
 const MainContent = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2)
 }));
@@ -71,7 +89,7 @@ function App() {
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <MainContainer disableGutters maxWidth={'md'}>
-            <SnackbarProvider
+            <StyledSnackbarProvider
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'center'
@@ -97,7 +115,7 @@ function App() {
               <MainContent>
                 <Router />
               </MainContent>
-            </SnackbarProvider>
+            </StyledSnackbarProvider>
           </MainContainer>
         </ThemeProvider>
       </StyledEngineProvider>

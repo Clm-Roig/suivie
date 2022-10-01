@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import About from '../pages/About/About';
+import GraphicalCharter from '../pages/GraphicalCharter/GraphicalCharter';
 import Home from '../pages/Home/Home';
 import ManageTrackers from '../pages/ManageTrackers';
 import Settings from '../pages/Settings';
@@ -13,6 +14,7 @@ function Router() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
+      <Route path="/graphical-charter" element={<GraphicalCharter />} />
       <Route path="/trackers/manage" element={<ManageTrackers />} />
       <Route path="/data-error" element={<DataError />} />
       <Route path="/settings" element={<Settings />} />

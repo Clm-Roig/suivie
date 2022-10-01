@@ -11,8 +11,8 @@ const CHARCOAL = {
   main: '#2E4057',
   contrastText: WHITE
 };
-const YELLOW_CRAYOLA = {
-  main: '#FFE66D'
+const YELLOW_CORN = {
+  main: '#FFEf8D'
 };
 /*
 const WHITE = {
@@ -86,7 +86,7 @@ export const components = {
 const commonTheme = {
   accent: MIDDLE_BLUE,
   primary: CHARCOAL,
-  secondary: YELLOW_CRAYOLA,
+  secondary: YELLOW_CORN,
   text: {
     primary: CHARCOAL.main
   },
@@ -101,7 +101,20 @@ export const getPalette = (mode: PaletteMode): PaletteOptions => ({
   ...(mode === ThemeMode.LIGHT
     ? {
         // palette values for light mode
-        ...commonTheme
+        ...commonTheme,
+        info: {
+          main: '#5fa7ce',
+          contrastText: WHITE
+        },
+        warning: {
+          main: '#ffba55'
+        },
+        error: {
+          main: '#db5f5f'
+        },
+        success: {
+          main: '#67916a'
+        }
       }
     : {
         // palette values for dark mode
@@ -119,7 +132,22 @@ export const getPalette = (mode: PaletteMode): PaletteOptions => ({
 export const typography = {
   fontFamily: ['Poppins', 'sans-serif'].join(','),
   h1: {
-    fontSize: '4.3rem'
+    fontSize: '4.2rem'
+  },
+  h2: {
+    fontSize: '3rem'
+  },
+  h3: {
+    fontSize: '2.5rem'
+  },
+  h4: {
+    fontSize: '2.1rem'
+  },
+  h5: {
+    fontSize: '1.7rem'
+  },
+  h6: {
+    fontSize: '1.4rem'
   },
   caption: {
     color: grey[700]
