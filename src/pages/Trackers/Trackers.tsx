@@ -71,54 +71,58 @@ function Trackers() {
   };
 
   return (
-    <DefaultPageLayout>
-      <DateSelector date={selectedDate} setDate={handleSetDate} />
+    <>
+      <DefaultPageLayout>
+        <DateSelector date={selectedDate} setDate={handleSetDate} />
 
-      {doneTrackers.length + hiddenTrackers.length + todoTrackers.length === 0 && (
-        <Typography align="center">{'Aucun tracker pour ce jour-ci.'}</Typography>
-      )}
-
-      <Tabs
-        aria-label="icon label tabs"
-        centered
-        onChange={handleTabChange}
-        sx={{ mb: 2 }}
-        TabIndicatorProps={{ style: { backgroundColor: 'main.accent' } }}
-        variant="fullWidth"
-        value={selectedTab}>
-        <Tab icon={<BallotIcon />} label="À FAIRE" />
-        <Tab icon={<CheckIcon />} label="FAIT(S)" />
-        {isTodaySelected && <Tab icon={<VisibilityOffIcon />} label="MASQUÉ(S)" />}
-      </Tabs>
-
-      <TabPanel value={selectedTab} index={0}>
-        <AddTrackerCard sx={{ mb: 2 }} />
-        {todoTrackers.length === 0 ? (
-          <Alert severity="info">{"Vous n'avez aucun tracker à compléter pour ce jour-ci."}</Alert>
-        ) : (
-          <TrackerCardList trackers={todoTrackers} />
+        {doneTrackers.length + hiddenTrackers.length + todoTrackers.length === 0 && (
+          <Typography align="center">{'Aucun tracker pour ce jour-ci.'}</Typography>
         )}
-      </TabPanel>
-      <TabPanel value={selectedTab} index={1}>
-        {doneTrackers.length === 0 ? (
-          <Alert severity="info">{"Vous n'avez complété aucun tracker pour ce jour-ci."}</Alert>
-        ) : (
-          <TrackerCardList trackers={doneTrackers} />
-        )}
-      </TabPanel>
-      {isTodaySelected && (
-        <TabPanel value={selectedTab} index={2}>
-          {hiddenTrackers.length === 0 ? (
-            <Alert severity="info">{"Vous n'avez aucun tracker masqué pour ce jour-ci."}</Alert>
+
+        <Tabs
+          aria-label="icon label tabs"
+          centered
+          onChange={handleTabChange}
+          sx={{ mb: 2 }}
+          TabIndicatorProps={{ style: { backgroundColor: 'main.accent' } }}
+          variant="fullWidth"
+          value={selectedTab}>
+          <Tab icon={<BallotIcon />} label="À FAIRE" />
+          <Tab icon={<CheckIcon />} label="FAIT(S)" />
+          {isTodaySelected && <Tab icon={<VisibilityOffIcon />} label="MASQUÉ(S)" />}
+        </Tabs>
+
+        <TabPanel value={selectedTab} index={0}>
+          <AddTrackerCard sx={{ mb: 2 }} />
+          {todoTrackers.length === 0 ? (
+            <Alert severity="info">
+              {"Vous n'avez aucun tracker à compléter pour ce jour-ci."}
+            </Alert>
           ) : (
-            <TrackerCardList trackers={hiddenTrackers} />
+            <TrackerCardList trackers={todoTrackers} />
           )}
         </TabPanel>
-      )}
-
+        <TabPanel value={selectedTab} index={1}>
+          {doneTrackers.length === 0 ? (
+            <Alert severity="info">{"Vous n'avez complété aucun tracker pour ce jour-ci."}</Alert>
+          ) : (
+            <TrackerCardList trackers={doneTrackers} />
+          )}
+        </TabPanel>
+        {isTodaySelected && (
+          <TabPanel value={selectedTab} index={2}>
+            {hiddenTrackers.length === 0 ? (
+              <Alert severity="info">{"Vous n'avez aucun tracker masqué pour ce jour-ci."}</Alert>
+            ) : (
+              <TrackerCardList trackers={hiddenTrackers} />
+            )}
+          </TabPanel>
+        )}
+      </DefaultPageLayout>
       <SpeedDial
+        direction="down"
         ariaLabel="SuiVie SpeedDial menu"
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        sx={{ position: 'fixed', top: 16 + 64, right: 16 }}
         icon={<SpeedDialIcon icon={<MoreVertIcon />} openIcon={<CloseIcon />} />}>
         {actions.map((action) => (
           <SpeedDialAction
@@ -129,7 +133,7 @@ function Trackers() {
           />
         ))}
       </SpeedDial>
-    </DefaultPageLayout>
+    </>
   );
 }
 export default Trackers;

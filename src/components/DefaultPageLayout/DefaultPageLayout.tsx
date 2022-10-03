@@ -23,7 +23,7 @@ interface AnimatedPageProps {
 }
 const AnimatedPage: FC<AnimatedPageProps> = ({ children }) => {
   return (
-    <motion.div key={3} initial="initial" animate="animate" exit="exit" variants={pageAnimation}>
+    <motion.div initial="initial" animate="animate" exit="exit" variants={pageAnimation}>
       {children}
     </motion.div>
   );
