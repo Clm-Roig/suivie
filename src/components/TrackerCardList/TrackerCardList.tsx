@@ -6,7 +6,6 @@ import { useAppDispatch } from '../../hooks/redux';
 import Tracker from '../../models/Tracker';
 import { orderTracker } from '../../store/trackers/trackersSlice';
 import TrackerCard from '../TrackerCard/TrackerCard';
-import defaultCardProps from '../TrackerCard/defaultCardProps';
 
 interface Props {
   trackers: Tracker[];
@@ -15,7 +14,7 @@ interface Props {
 const TrackerCardList: FC<Props> = ({ trackers }) => {
   const dispatch = useAppDispatch();
   const [animateRef] = useAutoAnimate<HTMLDivElement>();
-  const allCardProps = defaultCardProps;
+  const allCardProps = { sx: { mb: 2 } };
 
   const handleOnDragUpdate = (updateResult: DragUpdate) => {
     const { draggableId: draggedTrackerId, destination } = updateResult;

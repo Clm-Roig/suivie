@@ -6,7 +6,6 @@ import { FC, useState } from 'react';
 import { useAppDispatch } from '../../hooks/redux';
 import Tracker from '../../models/Tracker';
 import { createTracker } from '../../store/trackers/trackersSlice';
-import defaultCardProps from '../TrackerCard/defaultCardProps';
 import TrackerForm from '../forms/TrackerForm/TrackerForm';
 
 type Props = CardProps;
@@ -15,7 +14,6 @@ const AddTrackerCard: FC<Props> = (cardProps) => {
   const [displayCreateForm, setDisplayCreateForm] = useState(false);
 
   const allCardProps = {
-    ...defaultCardProps,
     ...cardProps
   };
 

@@ -92,7 +92,7 @@ function Trackers() {
       </Tabs>
 
       <TabPanel value={selectedTab} index={0}>
-        <AddTrackerCard />
+        <AddTrackerCard sx={{ mb: 2 }} />
         {todoTrackers.length === 0 ? (
           <Alert severity="info">{"Vous n'avez aucun tracker à compléter pour ce jour-ci."}</Alert>
         ) : (
