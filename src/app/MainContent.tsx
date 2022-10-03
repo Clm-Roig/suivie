@@ -1,41 +1,40 @@
 import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { Box } from '@mui/system';
 import { FC, ReactNode } from 'react';
 
-import { useAppSelector } from '../hooks/redux';
-import ThemeMode from '../models/ThemeMode';
-import { selectThemeMode } from '../store/theme/theme.selectors';
+import background from '../images/texture_yellow_blue.jpg';
 
-interface ContentPaperProps {
-  themeMode: ThemeMode;
-}
-
-const ContentPaper = styled(Paper, {
-  shouldForwardProp: (prop) => prop !== 'themeMode'
-})<ContentPaperProps>(({ theme, themeMode }) => ({
+const ContentPaper = styled(Paper)(({ theme }) => ({
   borderRadius: 0,
   flex: 1,
+  overflow: 'hidden',
   padding: theme.spacing(2),
-  backgroundImage: `radial-gradient(at 0% 100%, ${
-    themeMode === ThemeMode.DARK ? 'rgba(20, 40, 50, 0.2)' : 'rgba(255, 255, 200, 0.2)'
-  } 0px, transparent 30%),
-  radial-gradient(at 100% 0%, ${
-    themeMode === ThemeMode.DARK ? 'rgba(20, 40, 50, 0.2)' : 'rgba(255, 255, 200, 0.2)'
-  } 0px, transparent 30%),
-  radial-gradient(at 0% 0%, ${
-    themeMode === ThemeMode.DARK ? 'rgba(20, 40, 50, 0.2)' : 'rgba(255, 255, 200, 0.2)'
-  } 0px, transparent 30%),
-  radial-gradient(at 100% 100%, ${
-    themeMode === ThemeMode.DARK ? 'rgba(20, 40, 50, 0.2)' : 'rgba(255, 255, 200, 0.2)'
-  } 0px, transparent 30%)`
+  position: 'relative'
+}));
+
+const ImgWrapper = styled(Box)(({ theme }) => ({
+  filter: 'blur(5px) brightness(150%)',
+  height: '100%',
+  margin: '-' + theme.spacing(2),
+  opacity: 0.15,
+  overflow: 'hidden',
+  position: 'absolute',
+  width: '100%'
 }));
 
 interface Props {
   children: ReactNode;
 }
 const MainContent: FC<Props> = ({ children }) => {
-  const themeMode = useAppSelector(selectThemeMode);
-  return <ContentPaper themeMode={themeMode}>{children}</ContentPaper>;
+  return (
+    <ContentPaper>
+      <ImgWrapper>
+        <img src={background} style={{ height: '100%' }} />
+      </ImgWrapper>
+      {children}
+    </ContentPaper>
+  );
 };
 
 export default MainContent;
