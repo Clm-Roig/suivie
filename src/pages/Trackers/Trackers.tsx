@@ -72,7 +72,8 @@ function Trackers() {
 
   return (
     <>
-      <DefaultPageLayout>
+      {/* Add a little margin to avoid the speed dial button to overlap the last tracker card */}
+      <DefaultPageLayout sx={{ mb: 10 }}>
         <DateSelector date={selectedDate} setDate={handleSetDate} />
 
         {doneTrackers.length + hiddenTrackers.length + todoTrackers.length === 0 && (
@@ -120,9 +121,9 @@ function Trackers() {
         )}
       </DefaultPageLayout>
       <SpeedDial
-        direction="down"
+        direction="up"
         ariaLabel="SuiVie SpeedDial menu"
-        sx={{ position: 'fixed', top: 16 + 64, right: 16 }}
+        sx={{ position: 'fixed', bottom: 16, right: 16 }}
         icon={<SpeedDialIcon icon={<MoreVertIcon />} openIcon={<CloseIcon />} />}>
         {actions.map((action) => (
           <SpeedDialAction

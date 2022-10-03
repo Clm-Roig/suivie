@@ -1,3 +1,4 @@
+import { Box, BoxProps } from '@mui/material';
 import { motion } from 'framer-motion';
 import { FC } from 'react';
 
@@ -18,15 +19,16 @@ const pageAnimation = {
   }
 };
 
-interface AnimatedPageProps {
+interface DefaultPageLayoutProps {
   children: React.ReactNode;
 }
-const AnimatedPage: FC<AnimatedPageProps> = ({ children }) => {
+const DefaultPageLayout: FC<DefaultPageLayoutProps & BoxProps> = (props) => {
+  const { children, ...boxProps } = props;
   return (
     <motion.div initial="initial" animate="animate" exit="exit" variants={pageAnimation}>
-      {children}
+      <Box {...boxProps}>{children}</Box>
     </motion.div>
   );
 };
 
-export default AnimatedPage;
+export default DefaultPageLayout;
