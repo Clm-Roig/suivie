@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Container, IconButton, Paper } from '@mui/material';
+import { Container, IconButton } from '@mui/material';
 import {
   StyledEngineProvider,
   ThemeProvider,
@@ -14,7 +14,7 @@ import { SnackbarKey, SnackbarProvider } from 'notistack';
 import { createRef, useEffect, useMemo, useState } from 'react';
 
 import { DRAWER_MENU_WIDTH } from '../config/Constants';
-import { components, getPalette, typography } from '../config/CustomTheme';
+import { components, getPalette, shadows, shape, typography } from '../config/CustomTheme';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import ThemeMode from '../models/ThemeMode';
 import { selectThemeMode } from '../store/theme/theme.selectors';
@@ -22,6 +22,7 @@ import { toggleThemeMode } from '../store/theme/themeSlice';
 import { setSelectedDate } from '../store/trackers/trackersSlice';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
+import MainContent from './MainContent';
 import Router from './Router';
 
 const StyledSnackbarProvider = styled(SnackbarProvider)`
@@ -42,31 +43,15 @@ const StyledSnackbarProvider = styled(SnackbarProvider)`
   }
 `;
 
-const MainContent = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(2)
-}));
-
 const MainContainer = styled(Container)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
+  display: 'flex',
+  flexDirection: 'column',
   minHeight: '100vh'
 }));
 
-// Main component
-function App() {
-  // Theme configuration
-  const themeMode = useAppSelector(selectThemeMode);
+const App = () => {
   const dispatch = useAppDispatch();
-
-  let theme = useMemo(() => {
-    return createTheme({
-      components,
-      palette: getPalette(themeMode === ThemeMode.LIGHT ? 'light' : 'dark'),
-      typography: typography
-    });
-  }, [themeMode]);
-
-  theme = responsiveFontSizes(theme);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const notistackRef = createRef<SnackbarProvider>();
   const onClickDismiss = (key: SnackbarKey) => () => {
@@ -80,6 +65,19 @@ function App() {
   const toggleDrawerMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Theme configuration
+  const themeMode = useAppSelector(selectThemeMode);
+  let theme = useMemo(() => {
+    return createTheme({
+      components,
+      palette: getPalette(themeMode === ThemeMode.LIGHT ? 'light' : 'dark'),
+      shadows: shadows,
+      shape: shape,
+      typography: typography
+    });
+  }, [themeMode]);
+  theme = responsiveFontSizes(theme);
 
   return (
     <LocalizationProvider
@@ -121,6 +119,6 @@ function App() {
       </StyledEngineProvider>
     </LocalizationProvider>
   );
-}
+};
 
 export default App;
