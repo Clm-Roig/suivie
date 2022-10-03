@@ -1,4 +1,5 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
+import PaletteIcon from '@mui/icons-material/Palette';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import { Box, Button, Divider, Link, Stack, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
@@ -30,15 +31,18 @@ function About() {
           </Typography>
           <Typography>
             Merci à <ExternalLink href="https://laurakaczmarek.fr">Laura KACZMAREK</ExternalLink>{' '}
-            pour le logo et le design ❤
+            pour le logo ❤
           </Typography>
-          <Typography component={RouterLink} to="/graphical-charter">
-            Charte Graphique
-          </Typography>
+          <Link component={RouterLink} to="/graphical-charter">
+            <Box display="flex" justifyContent="center">
+              <PaletteIcon sx={{ mr: 1 }} />
+              <Typography>Charte Graphique</Typography>
+            </Box>
+          </Link>
           <Typography>
+            <GitHubIcon sx={{ mr: 1 }} />
             Code source disponible sur{' '}
             <ExternalLink href="https://github.com/clm-roig/suivie">Github</ExternalLink>
-            <GitHubIcon />
           </Typography>
           <Link sx={{ mx: 'auto' }} target="_blank" rel="noreferrer" href={PAYPAL_DONATE_URL}>
             <Button color="secondary" variant="contained" endIcon={<VolunteerActivismIcon />}>
@@ -80,7 +84,7 @@ function About() {
         </Typography>
       </Box>
 
-      <PackageVersion />
+      <PackageVersion style={{ bottom: 0, right: 0, position: 'fixed' }} />
     </>
   );
 }

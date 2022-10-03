@@ -13,6 +13,7 @@ interface ContentPaperProps {
 const ContentPaper = styled(Paper, {
   shouldForwardProp: (prop) => prop !== 'themeMode'
 })<ContentPaperProps>(({ theme, themeMode }) => ({
+  borderRadius: 0,
   flex: 1,
   padding: theme.spacing(2),
   backgroundImage: `radial-gradient(at 0% 100%, ${

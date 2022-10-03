@@ -18,7 +18,7 @@ const complexTracker = makeFakeTracker({
 });
 
 const trackers = [1, 2, 3, 4].map((i) =>
-  makeFakeTracker({ name: 'Tracker ' + i, color: Object.values(TrackerColor)[i] })
+  makeFakeTracker({ name: 'Tracker ' + i, color: Object.values(TrackerColor)[i - 1] })
 );
 
 const Components = () => {

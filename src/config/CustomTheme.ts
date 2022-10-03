@@ -308,11 +308,12 @@ export const shadows: Shadows = [
     ''
 ];
 
-const titleFont = 'Merriweather Sans';
+const fallbackFont = 'sans-serif';
+const titleFont = ['Merriweather Sans', fallbackFont].join(',');
 export const typography = {
-  fontFamily: ['Poppins', 'sans-serif'].join(','),
+  fontFamily: ['Poppins', fallbackFont].join(','),
   h1: {
-    fontSize: '4.2rem',
+    fontSize: '4rem',
     fontFamily: titleFont
   },
   h2: {

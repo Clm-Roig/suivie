@@ -1,4 +1,4 @@
-import { Box, Button, styled } from '@mui/material';
+import { Button, styled } from '@mui/material';
 import { FC } from 'react';
 
 interface BlockProps {
@@ -22,15 +22,13 @@ interface Props {
 
 const TrackerColorButton: FC<Props> = ({ colorCode, isSelected, onBlockClick }) => {
   return (
-    <Box boxShadow={1}>
-      <ColorBlockButton
-        id={colorCode}
-        sx={{ border: isSelected ? 1 : undefined }}
-        bg={colorCode}
-        onClick={onBlockClick}>
-        {isSelected && '✓'}
-      </ColorBlockButton>
-    </Box>
+    <ColorBlockButton
+      id={colorCode}
+      sx={{ border: isSelected ? 2 : undefined, boxShadow: 1 }}
+      bg={colorCode}
+      onClick={onBlockClick}>
+      {isSelected && '✓'}
+    </ColorBlockButton>
   );
 };
 export default TrackerColorButton;

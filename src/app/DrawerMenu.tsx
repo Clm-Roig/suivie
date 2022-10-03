@@ -21,6 +21,8 @@ import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { useAppSelector } from '../hooks/redux';
+import ThemeMode from '../models/ThemeMode';
+import PackageVersion from '../pages/About/PackageVersion';
 import { selectThemeMode } from '../store/theme/theme.selectors';
 
 interface MenuItemProps {
@@ -30,12 +32,16 @@ interface MenuItemProps {
   selected: boolean;
   url: string;
 }
-const MenuItem: FC<MenuItemProps> = ({ icon, name, onClick, selected, url }) => (
-  <ListItemButton selected={selected} component={Link} to={url} key={name} onClick={onClick}>
-    <ListItemIcon>{icon}</ListItemIcon>
-    <ListItemText primary={name} />
-  </ListItemButton>
-);
+const MenuItem: FC<MenuItemProps> = ({ icon, name, onClick, selected, url }) => {
+  const themeMode = useAppSelector(selectThemeMode);
+  const isDarkMode = themeMode === ThemeMode.DARK;
+  return (
+    <ListItemButton selected={selected} component={Link} to={url} key={name} onClick={onClick}>
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primaryTypographyProps={{ color: isDarkMode ? '#fff' : '' }} primary={name} />
+    </ListItemButton>
+  );
+};
 
 interface Props {
   open: boolean;
@@ -49,27 +55,27 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width 
   const currentPathName = useLocation().pathname;
   const menuItems = [
     {
-      icon: <HomeIcon />,
+      icon: <HomeIcon color="primary" />,
       name: 'Accueil',
       url: '/'
     },
     {
-      icon: <CheckIcon />,
+      icon: <CheckIcon color="primary" />,
       name: 'Valider mes trackers',
       url: '/trackers'
     },
     {
-      icon: <ListAltIcon />,
+      icon: <ListAltIcon color="primary" />,
       name: 'Tous mes trackers',
       url: '/trackers/manage'
     },
     {
-      icon: <TimelineIcon />,
+      icon: <TimelineIcon color="primary" />,
       name: 'Statistiques',
       url: '/stats'
     },
     {
-      icon: <SettingsIcon />,
+      icon: <SettingsIcon color="primary" />,
       name: 'Paramètres',
       url: '/settings'
     }
@@ -89,6 +95,7 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width 
           boxSizing: 'border-box'
         }
       }}>
+      <PackageVersion style={{ bottom: 0, right: 0, position: 'absolute' }} />
       <Box display="flex" justifyContent="space-between">
         <IconButton sx={{ ml: 1 }} onClick={toggleThemeMode} color="inherit">
           {themeMode === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
