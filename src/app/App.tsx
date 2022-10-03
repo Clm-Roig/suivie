@@ -14,7 +14,7 @@ import { SnackbarKey, SnackbarProvider } from 'notistack';
 import { createRef, useEffect, useMemo, useState } from 'react';
 
 import { DRAWER_MENU_WIDTH } from '../config/Constants';
-import { components, getPalette, typography } from '../config/CustomTheme';
+import { components, getPalette, shadows, shape, typography } from '../config/CustomTheme';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import ThemeMode from '../models/ThemeMode';
 import { selectThemeMode } from '../store/theme/theme.selectors';
@@ -60,6 +60,8 @@ function App() {
     return createTheme({
       components,
       palette: getPalette(themeMode === ThemeMode.LIGHT ? 'light' : 'dark'),
+      shadows: shadows,
+      shape: shape,
       typography: typography
     });
   }, [themeMode]);
