@@ -65,11 +65,10 @@ const Colors = () => {
             Trackers
           </Typography>
           <Stack direction="row" gap={2}>
-            <ColorBlock color={TrackerColor.BLIZZARD_BLUE} legend="Bleu" />
-            <ColorBlock color={TrackerColor.RED_PINK} legend="Rouge" />
-            <ColorBlock color={TrackerColor.SEA_FOG_GREY} legend="Gris" />
-            <ColorBlock color={TrackerColor.SULU_GREEN} legend="Vert" />
-            <ColorBlock color={TrackerColor.YELLOW_CORN} legend="Jaune" />
+            <ColorBlock color={TrackerColor.BLUE} legend="Bleu" />
+            <ColorBlock color={TrackerColor.PURPLE} legend="Violet" />
+            <ColorBlock color={TrackerColor.GREEN} legend="Vert" />
+            <ColorBlock color={TrackerColor.YELLOW} legend="Jaune" />
           </Stack>
         </Box>
       </Box>
