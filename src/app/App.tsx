@@ -50,24 +50,8 @@ const MainContainer = styled(Container)(({ theme }) => ({
   minHeight: '100vh'
 }));
 
-// Main component
-function App() {
-  // Theme configuration
-  const themeMode = useAppSelector(selectThemeMode);
+const App = () => {
   const dispatch = useAppDispatch();
-
-  let theme = useMemo(() => {
-    return createTheme({
-      components,
-      palette: getPalette(themeMode === ThemeMode.LIGHT ? 'light' : 'dark'),
-      shadows: shadows,
-      shape: shape,
-      typography: typography
-    });
-  }, [themeMode]);
-
-  theme = responsiveFontSizes(theme);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const notistackRef = createRef<SnackbarProvider>();
   const onClickDismiss = (key: SnackbarKey) => () => {
@@ -81,6 +65,19 @@ function App() {
   const toggleDrawerMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Theme configuration
+  const themeMode = useAppSelector(selectThemeMode);
+  let theme = useMemo(() => {
+    return createTheme({
+      components,
+      palette: getPalette(themeMode === ThemeMode.LIGHT ? 'light' : 'dark'),
+      shadows: shadows,
+      shape: shape,
+      typography: typography
+    });
+  }, [themeMode]);
+  theme = responsiveFontSizes(theme);
 
   return (
     <LocalizationProvider
@@ -122,6 +119,6 @@ function App() {
       </StyledEngineProvider>
     </LocalizationProvider>
   );
-}
+};
 
 export default App;

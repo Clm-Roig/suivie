@@ -4,6 +4,7 @@ import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import { Box, Button, Divider, Link, Stack, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
+import DefaultPageLayout from '../../components/DefaultPageLayout/DefaultPageLayout';
 import ExternalLink from '../../components/ExternalLink/ExternalLink';
 import {
   APP_NAME,
@@ -15,7 +16,7 @@ import PackageVersion from './PackageVersion';
 
 function About() {
   return (
-    <>
+    <DefaultPageLayout>
       <Box display="flex" flexDirection="column">
         <Typography gutterBottom variant="h1">
           À propos de {APP_NAME}
@@ -85,7 +86,7 @@ function About() {
       </Box>
 
       <PackageVersion style={{ bottom: 0, right: 0, position: 'fixed' }} />
-    </>
+    </DefaultPageLayout>
   );
 }
 export default About;

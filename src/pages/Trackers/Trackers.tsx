@@ -7,7 +7,6 @@ import ViewListIcon from '@mui/icons-material/ViewList';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
   Alert,
-  Box,
   SpeedDial,
   SpeedDialAction,
   SpeedDialIcon,
@@ -19,19 +18,20 @@ import { isToday } from 'date-fns';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import TabPanel from '../components/TabPanel/TabPanel';
-import AddTrackerCard from '../components/TrackerCardList/AddTrackerCard';
-import DateSelector from '../components/TrackerCardList/DaySelector';
-import TrackerCardList from '../components/TrackerCardList/TrackerCardList';
-import { BUG_REPORT_FORM_URL } from '../config/Constants';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import DefaultPageLayout from '../../components/DefaultPageLayout/DefaultPageLayout';
+import TabPanel from '../../components/TabPanel/TabPanel';
+import AddTrackerCard from '../../components/TrackerCardList/AddTrackerCard';
+import DateSelector from '../../components/TrackerCardList/DaySelector';
+import TrackerCardList from '../../components/TrackerCardList/TrackerCardList';
+import { BUG_REPORT_FORM_URL } from '../../config/Constants';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   selectHiddenTrackers,
   selectSelectedDate,
   selectTodoTrackers,
   selectTrackersDone
-} from '../store/trackers/trackers.selectors';
-import { setSelectedDate } from '../store/trackers/trackersSlice';
+} from '../../store/trackers/trackers.selectors';
+import { setSelectedDate } from '../../store/trackers/trackersSlice';
 
 function Trackers() {
   const selectedDate = new Date(useAppSelector(selectSelectedDate));
@@ -71,7 +71,7 @@ function Trackers() {
   };
 
   return (
-    <Box>
+    <DefaultPageLayout>
       <DateSelector date={selectedDate} setDate={handleSetDate} />
 
       {doneTrackers.length + hiddenTrackers.length + todoTrackers.length === 0 && (
@@ -129,7 +129,7 @@ function Trackers() {
           />
         ))}
       </SpeedDial>
-    </Box>
+    </DefaultPageLayout>
   );
 }
 export default Trackers;

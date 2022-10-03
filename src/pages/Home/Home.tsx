@@ -1,6 +1,7 @@
 import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
 
 import AppLogo from '../../components/AppLogo';
+import DefaultPageLayout from '../../components/DefaultPageLayout/DefaultPageLayout';
 import { useAppSelector } from '../../hooks/redux';
 import { selectThemeMode } from '../../store/theme/theme.selectors';
 import Features from './Features';
@@ -10,7 +11,7 @@ import { boxType1Props, boxType2Props } from './styles';
 const Home = () => {
   const themeMode = useAppSelector(selectThemeMode);
   return (
-    <>
+    <DefaultPageLayout>
       <Typography
         align="center"
         variant="h2"
@@ -99,7 +100,7 @@ const Home = () => {
       </Box>
 
       <StartBox mt={2} />
-    </>
+    </DefaultPageLayout>
   );
 };
 
