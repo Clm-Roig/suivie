@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Container, IconButton, Paper } from '@mui/material';
+import { Container, IconButton } from '@mui/material';
 import {
   StyledEngineProvider,
   ThemeProvider,
@@ -22,6 +22,7 @@ import { toggleThemeMode } from '../store/theme/themeSlice';
 import { setSelectedDate } from '../store/trackers/trackersSlice';
 import AppBar from './AppBar';
 import DrawerMenu from './DrawerMenu';
+import MainContent from './MainContent';
 import Router from './Router';
 
 const StyledSnackbarProvider = styled(SnackbarProvider)`
@@ -42,12 +43,10 @@ const StyledSnackbarProvider = styled(SnackbarProvider)`
   }
 `;
 
-const MainContent = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(2)
-}));
-
 const MainContainer = styled(Container)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
+  display: 'flex',
+  flexDirection: 'column',
   minHeight: '100vh'
 }));
 

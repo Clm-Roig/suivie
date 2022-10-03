@@ -54,10 +54,7 @@ export const components = {
   MuiTabs: {
     styleOverrides: {
       indicator: {
-        backgroundColor: MIDDLE_BLUE.main
-      },
-      root: {
-        color: MIDDLE_BLUE.main
+        backgroundColor: LIGHT_BLUE.main
       }
     }
   },
@@ -76,7 +73,7 @@ export const components = {
     styleOverrides: {
       root: {
         '&.Mui-selected': {
-          color: MIDDLE_BLUE.main
+          color: LIGHT_BLUE.main
         }
       }
     }
@@ -93,6 +90,19 @@ const commonTheme = {
   common: {
     white: WHITE,
     black: BLACK
+  },
+  info: {
+    main: '#5fa7ce',
+    contrastText: WHITE
+  },
+  warning: {
+    main: '#ffba55'
+  },
+  error: {
+    main: '#db5f5f'
+  },
+  success: {
+    main: '#67916a'
   }
 };
 
@@ -101,20 +111,7 @@ export const getPalette = (mode: PaletteMode): PaletteOptions => ({
   ...(mode === ThemeMode.LIGHT
     ? {
         // palette values for light mode
-        ...commonTheme,
-        info: {
-          main: '#5fa7ce',
-          contrastText: WHITE
-        },
-        warning: {
-          main: '#ffba55'
-        },
-        error: {
-          main: '#db5f5f'
-        },
-        success: {
-          main: '#67916a'
-        }
+        ...commonTheme
       }
     : {
         // palette values for dark mode
