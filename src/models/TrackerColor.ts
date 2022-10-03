@@ -1,9 +1,8 @@
 enum TrackerColor {
-  YELLOW_CRAYOLA = '#FFE66D',
-  MELON_RED = '#FFB9AD',
-  BLIZZARD_BLUE = '#9FEFFF',
-  SULU_GREEN = '#D1FF81',
-  SEA_FOG_GREY = '#E1DDD2'
+  YELLOW = '#ffebba',
+  BLUE = '#bde0f7',
+  GREEN = '#e1f3c1',
+  PURPLE = '#d7cbe5'
 }
 
 export default TrackerColor;

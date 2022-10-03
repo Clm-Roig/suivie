@@ -9,7 +9,7 @@ const makeFakeTracker = (tracker?: Partial<Tracker>): Tracker => {
   return {
     id: v4(),
     beginDate: new Date().toString(),
-    color: TrackerColor.YELLOW_CRAYOLA,
+    color: TrackerColor.YELLOW,
     dateHidden: undefined,
     defaultCompletions: [],
     doneDays: [],

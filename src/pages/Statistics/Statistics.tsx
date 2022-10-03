@@ -2,15 +2,16 @@ import { SelectChangeEvent, Tab, Tabs, Typography } from '@mui/material';
 import { addDays, startOfDay } from 'date-fns';
 import { useState } from 'react';
 
-import MonthPanel from '../components/Statistics/MonthPanel/MonthPanel';
-import WeekPanel from '../components/Statistics/WeekPanel/WeekPanel';
-import YearPanel from '../components/Statistics/YearPanel/YearPanel';
-import TabPanel from '../components/TabPanel/TabPanel';
-import TrackerSelect from '../components/TrackerSelect/TrackerSelect';
-import { SEVEN_DAYS_AGO_DATE } from '../config/Constants';
-import { useAppSelector } from '../hooks/redux';
-import Tracker from '../models/Tracker';
-import { selectAllTrackers } from '../store/trackers/trackers.selectors';
+import DefaultPageLayout from '../../components/DefaultPageLayout/DefaultPageLayout';
+import MonthPanel from '../../components/Statistics/MonthPanel/MonthPanel';
+import WeekPanel from '../../components/Statistics/WeekPanel/WeekPanel';
+import YearPanel from '../../components/Statistics/YearPanel/YearPanel';
+import TabPanel from '../../components/TabPanel/TabPanel';
+import TrackerSelect from '../../components/TrackerSelect/TrackerSelect';
+import { SEVEN_DAYS_AGO_DATE } from '../../config/Constants';
+import { useAppSelector } from '../../hooks/redux';
+import Tracker from '../../models/Tracker';
+import { selectAllTrackers } from '../../store/trackers/trackers.selectors';
 
 const defaultBeginDate = startOfDay(addDays(SEVEN_DAYS_AGO_DATE, 1));
 
@@ -39,7 +40,7 @@ function Statistics() {
   ];
 
   return (
-    <>
+    <DefaultPageLayout>
       <Typography gutterBottom variant="h1">
         Statistiques
       </Typography>
@@ -84,7 +85,7 @@ function Statistics() {
           <Typography>Veuillez sélectionner un tracker.</Typography>
         )}
       </TabPanel>
-    </>
+    </DefaultPageLayout>
   );
 }
 export default Statistics;

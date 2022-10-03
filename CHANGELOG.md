@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.4](https://github.com/clm-roig/suivie/compare/v0.3.3...v0.3.4) (2022-10-03)
+
+
+### Features
+
+* **appStyle:** add title font ([6baceda](https://github.com/clm-roig/suivie/commit/6bacedac011fde8d23aa65ca41cc7c0dd5323b45))
+* **appStyle:** animate the app ([287acf3](https://github.com/clm-roig/suivie/commit/287acf355678d60d8039decc386c0b9e5e85bcb3))
+* **appStyle:** change tracker colors ([1f0646b](https://github.com/clm-roig/suivie/commit/1f0646bfc4131483f5a2cb0f2e84d9b433d6dd01))
+* **appStyle:** increase border radius, add blue to shadows ([04f4b39](https://github.com/clm-roig/suivie/commit/04f4b39f9d1ddabe83b158be012d83c179806f39))
+* **appStyle:** rework the app style ([e64af5f](https://github.com/clm-roig/suivie/commit/e64af5fec949a197e1f6f050990b3d0791487961))
+* **graphicalCharter:** add a graphical charter page ([02a44d6](https://github.com/clm-roig/suivie/commit/02a44d664ae5102addad730ebc238a123186df41))
+
+
+### Bug Fixes
+
+* **appStyle:** various fixes & minor tweaks ([575ab74](https://github.com/clm-roig/suivie/commit/575ab74b38413b35afa2319196991d330f495056))
+* **autoAnimate:** fix code to work with beta 3 + delete custom hook ([8edc8a9](https://github.com/clm-roig/suivie/commit/8edc8a99bc1dd183123173fcb784adf0b1e454cc))
+* **autoAnimate:** fix incorrect destructuring of auto animate ([c578705](https://github.com/clm-roig/suivie/commit/c578705855f9db9b0c94ce18307bcce4f1feac92))
+* **cardStyles:** remove defaultCradProps ([ca036bf](https://github.com/clm-roig/suivie/commit/ca036bf191c7e89826bda37ae87186d1d31d0f51))
+* **dateInput:** fix bad date handling ([5707803](https://github.com/clm-roig/suivie/commit/570780384e4df81c73d4c7d9b12582dcb847f1d3))
+* **editorConfig:** fix file ([cc3ac92](https://github.com/clm-roig/suivie/commit/cc3ac92baad49219f568633ea8b53f7cf0597dea))
+* **trackers:** fix speed dial position ([a51cd9c](https://github.com/clm-roig/suivie/commit/a51cd9c18645229ca6f5f5845a97a98f6dcb75f3))
+
 ### [0.3.3](https://github.com/clm-roig/suivie/compare/v0.3.2...v0.3.3) (2022-09-09)
 
 

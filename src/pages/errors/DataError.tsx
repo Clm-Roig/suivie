@@ -1,13 +1,14 @@
-import { Box, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { NavigateOptions, useLocation } from 'react-router-dom';
 
+import DefaultPageLayout from '../../components/DefaultPageLayout/DefaultPageLayout';
 import { NotATrackerResponse } from '../../utils/isATracker';
 
 const DataError = () => {
   const location: NavigateOptions = useLocation();
   const errorData = location.state;
   return (
-    <Box>
+    <DefaultPageLayout>
       <Typography variant="h2" gutterBottom>
         Erreur au chargement des données 😔
       </Typography>
@@ -38,7 +39,7 @@ const DataError = () => {
       ) : (
         <Typography>Erreur inconnue</Typography>
       )}
-    </Box>
+    </DefaultPageLayout>
   );
 };
 
