@@ -14,6 +14,8 @@ const ContentPaper = styled(Paper)(({ theme }) => ({
 }));
 
 const ImgWrapper = styled(Box)(({ theme }) => ({
+  backgroundImage: `url(${background})`,
+  backgroundAttachment: 'fixed',
   filter: 'blur(5px) brightness(150%)',
   height: '100%',
   margin: '-' + theme.spacing(2),
@@ -29,9 +31,7 @@ interface Props {
 const MainContent: FC<Props> = ({ children }) => {
   return (
     <ContentPaper>
-      <ImgWrapper>
-        <img src={background} style={{ height: '100%' }} />
-      </ImgWrapper>
+      <ImgWrapper />
       {children}
     </ContentPaper>
   );

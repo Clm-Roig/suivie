@@ -13,7 +13,7 @@ const AppBar: FC<Props> = ({ toggleDrawerMenu }) => {
   return (
     <Box>
       <MuiAppBar position="static">
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
           <IconButton
             size="large"
             edge="start"

@@ -36,6 +36,13 @@ const LIGHT_BLUE = {
 const THEME_MODE_TRANSITION = '0.5s ease';
 
 export const components = {
+  MuiTypography: {
+    styleOverrides: {
+      h1: {
+        fontWeight: 'bold'
+      }
+    }
+  },
   MuiPaper: {
     styleOverrides: {
       root: {
@@ -313,19 +320,19 @@ const titleFont = ['Merriweather Sans', fallbackFont].join(',');
 export const typography = {
   fontFamily: ['Poppins', fallbackFont].join(','),
   h1: {
-    fontSize: '4rem',
+    fontSize: '3.1rem',
     fontFamily: titleFont
   },
   h2: {
-    fontSize: '3rem',
+    fontSize: '2.6em',
     fontFamily: titleFont
   },
   h3: {
-    fontSize: '2.5rem',
+    fontSize: '2.3rem',
     fontFamily: titleFont
   },
   h4: {
-    fontSize: '2.1rem',
+    fontSize: '2rem',
     fontFamily: titleFont
   },
   h5: {

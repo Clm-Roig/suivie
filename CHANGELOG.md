@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.5](https://github.com/clm-roig/suivie/compare/v0.3.4...v0.3.5) (2022-10-04)
+
+
+### Features
+
+* **background:** add a background image to the whole app ([de875fa](https://github.com/clm-roig/suivie/commit/de875fa5c4baa6f64ded5bc08cdbd3f9285cce3d))
+
+
+### Bug Fixes
+
+* **appBackground:** add paralax effect and clean code ([228bfe3](https://github.com/clm-roig/suivie/commit/228bfe3d1a2382588f558f2e917be6b4992c419b))
+* **appBarLogo:** put it on the right ([43170d8](https://github.com/clm-roig/suivie/commit/43170d831b95f264abb1df32249825e192e4176e))
+* **graphicalCharter:** fix floating button position ([7d6b111](https://github.com/clm-roig/suivie/commit/7d6b11154a057572628163a31bae20e3c7285c11))
+* **packageVersion:** fix packageVersion position in About page ([dba5183](https://github.com/clm-roig/suivie/commit/dba5183af2020b334cfc338f999eeb99d5ddf6c3))
+* **trackers:** fix bottom margin for speed dial button ([b4ecd5d](https://github.com/clm-roig/suivie/commit/b4ecd5dbd52d7ae79b6acedb4082f7bf786bee84))
+* **typography:** reduce typo sizes, add a title to manage trackers page ([ac426cc](https://github.com/clm-roig/suivie/commit/ac426cc079877bd146122ec9fb2dc86a8f9402cb))
+
 ### [0.3.4](https://github.com/clm-roig/suivie/compare/v0.3.3...v0.3.4) (2022-10-03)
 
 

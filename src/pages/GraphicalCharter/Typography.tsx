@@ -33,7 +33,7 @@ const Typography = () => {
     <Stack spacing={1}>
       <MuiTypography variant="h2">Typographie</MuiTypography>
       {[1, 2, 3, 4, 5, 6].map((x) => (
-        <MuiTypography key={x} variant={('h' + x) as TypographyVariant} component="p">
+        <MuiTypography key={x} variant={('h' + x) as TypographyVariant}>
           Titre {x}
         </MuiTypography>
       ))}
