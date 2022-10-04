@@ -1,14 +1,12 @@
 import { styled } from '@mui/material/styles';
+import { DatePicker } from '@mui/x-date-pickers';
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
-import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { addDays, isBefore, isSameDay, isWithinInterval } from 'date-fns';
 import * as React from 'react';
 import { FC } from 'react';
 
 import { TRACKERS_BEGIN_IN } from '../../config/Constants';
-import './WeekPicker.css';
 import WeekPickerInput from './WeekPickerInput';
-import WeekPickerToolbar from './WeekPickerToolbar';
 
 type CustomPickerDayProps = PickersDayProps<Date> & {
   dayIsBetween: boolean;
@@ -101,7 +99,7 @@ const WeekPicker: FC<Props> = ({ highlightedDates, onChange, onMonthChange, valu
 
   return (
     <div className="weekPicker">
-      <StaticDatePicker
+      <DatePicker
         label="Choix de la semaine"
         maxDate={new Date()}
         minDate={TRACKERS_BEGIN_IN}
@@ -109,7 +107,6 @@ const WeekPicker: FC<Props> = ({ highlightedDates, onChange, onMonthChange, valu
         onMonthChange={onMonthChange}
         renderDay={renderWeekPickerDay}
         renderInput={(params) => <WeekPickerInput {...params} />}
-        ToolbarComponent={(params) => <WeekPickerToolbar {...params} />}
         value={value}
       />
     </div>
