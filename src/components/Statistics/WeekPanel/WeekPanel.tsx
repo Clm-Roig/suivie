@@ -7,7 +7,7 @@ import { selectMonthEntries, selectWeekEntries } from '../../../store/trackers/t
 import WeekPicker from '../../WeekPicker/WeekPicker';
 import WeekChart from '../../charts/WeekChart/WeekChart';
 import SpacedBox from '../SpacedBox';
-import TotalText from '../TotalText';
+import TotalText from '../TotalText/TotalText';
 
 interface Props {
   beginDate: Date;

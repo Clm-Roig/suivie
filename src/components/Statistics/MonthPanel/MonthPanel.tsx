@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { endOfMonth, startOfMonth } from 'date-fns';
 import { FC } from 'react';
@@ -9,7 +9,8 @@ import Tracker from '../../../models/Tracker';
 import { selectMonthEntries } from '../../../store/trackers/trackers.selectors';
 import MonthChart from '../../charts/MonthChart/MonthChart';
 import SpacedBox from '../SpacedBox';
-import TotalText from '../TotalText';
+import { getFavoriteDays } from '../Stats';
+import TotalText from '../TotalText/TotalText';
 
 interface Props {
   beginDate: Date;
@@ -23,6 +24,9 @@ const MonthPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
   const handleOnMonthChange = (date: unknown) => {
     if (date) setBeginDate(startOfMonth(date as Date));
   };
+
+  const favoriteDaysStats = getFavoriteDays(monthEntries);
+  const plural = favoriteDaysStats.days.length > 1 ? 's' : '';
 
   return (
     <>
@@ -44,6 +48,14 @@ const MonthPanel: FC<Props> = ({ beginDate, setBeginDate, tracker }) => {
         />
       </SpacedBox>
       <MonthChart beginDate={beginDate} entries={monthEntries} />
+      {favoriteDaysStats.days.length > 0 && (
+        <Typography>
+          <b>
+            Jour{plural} favori{plural} :
+          </b>{' '}
+          {favoriteDaysStats.days.join(' - ')}
+        </Typography>
+      )}
     </>
   );
 };

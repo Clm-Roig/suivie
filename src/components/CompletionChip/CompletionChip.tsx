@@ -3,6 +3,8 @@ import { FC } from 'react';
 
 import Completion from '../../models/Completion';
 
+const roundTo2DigitsAfterComma = (x: number) => Math.round(x * 100) / 100;
+
 interface Props extends ChipProps {
   completion: Completion;
   isSelected?: boolean;
@@ -36,7 +38,7 @@ const CompletionChip: FC<Props> = ({
     <Chip
       clickable={true}
       color={isSelected ? 'info' : 'primary'}
-      label={quantity + ' ' + unit}
+      label={roundTo2DigitsAfterComma(quantity) + ' ' + unit}
       sx={sxProps}
       {...chipProps}
     />
