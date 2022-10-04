@@ -11,6 +11,9 @@ function ManageTrackers() {
 
   return (
     <DefaultPageLayout>
+      <Typography gutterBottom variant="h1">
+        Gérer mes trackers
+      </Typography>
       {trackers.length === 0 && (
         <Typography align="center">{"Vous n'avez pas encore de trackers."}</Typography>
       )}
