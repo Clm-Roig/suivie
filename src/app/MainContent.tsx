@@ -19,7 +19,7 @@ const ImgWrapper = styled(Box)(({ theme }) => ({
   filter: 'blur(5px) brightness(150%)',
   height: '100%',
   margin: '-' + theme.spacing(2),
-  opacity: 0.15,
+  opacity: 0.14,
   overflow: 'hidden',
   position: 'absolute',
   width: '100%'
