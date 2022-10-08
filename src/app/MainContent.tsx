@@ -2,6 +2,7 @@ import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/system';
 import { FC, ReactNode } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import background from '../images/texture_yellow_blue.jpg';
 
@@ -15,7 +16,8 @@ const ContentPaper = styled(Paper)(({ theme }) => ({
 
 const ImgWrapper = styled(Box)(({ theme }) => ({
   backgroundImage: `url(${background})`,
-  backgroundAttachment: 'fixed',
+  // background-attachment is not well supported on mobiles browsers or perform badly (FPS drop): https://caniuse.com/background-attachment
+  backgroundAttachment: isMobile ? 'scroll' : 'fixed',
   filter: 'blur(5px) brightness(150%)',
   height: '100%',
   margin: '-' + theme.spacing(2),
