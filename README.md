@@ -73,10 +73,6 @@ I wanted to focus on Github tools in order to have everything I need in one plac
 - I merge the PR after rereading my code.
 - Eventually, I create a new version of the application (see [CHANGELOG.md](https://github.com/Clm-Roig/suivie/blob/develop/CHANGELOG.md))
 
-### If I had more time, I would change...
-
-More on this later because I have time currently and I'm working on it 😛
-
 ### This project uses
 
 ![React_logo_wordmark](https://user-images.githubusercontent.com/20704943/164058596-3816998c-7d62-4ac9-89ce-e46cb61213db.png)

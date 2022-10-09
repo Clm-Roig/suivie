@@ -32,7 +32,9 @@ const WeekChart: FC<Props> = ({ beginDate, entries }) => {
   const CHART_COLORS = useMemo(() => getChartColors(theme), [theme]);
 
   useEffect(() => {
-    setData(formatData(beginDate, entries));
+    if (new Date(beginDate).toString() !== 'Invalid Date') {
+      setData(formatData(beginDate, entries));
+    }
   }, [beginDate, entries]);
 
   useEffect(() => {

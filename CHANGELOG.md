@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.6](https://github.com/clm-roig/suivie/compare/v0.3.5...v0.3.6) (2022-10-09)
+
+
+### Features
+
+* **#390:** add favorite days stat ([9542e20](https://github.com/clm-roig/suivie/commit/9542e20940cc31a64e4b19d186fdd6b517c8ca59)), closes [#390](https://github.com/clm-roig/suivie/issues/390)
+* **card:** add card animations ([1b05404](https://github.com/clm-roig/suivie/commit/1b0540400327c0d427ab19a7e7a2bfd6dbd6a93f))
+
+
+### Bug Fixes
+
+* **bg:**  reduce opacity ([dfe1aa5](https://github.com/clm-roig/suivie/commit/dfe1aa57e22b9b3aef3634ab325ff837a86745de))
+* **bgAttachment:** disable fixed bg attachment on mobile (fps drop) ([4e73a90](https://github.com/clm-roig/suivie/commit/4e73a905741eaee44fec9016ba72e047381afb9a))
+* **weekPicker:** refactor and simplify weekpicker implementation ([d61ffaa](https://github.com/clm-roig/suivie/commit/d61ffaa76864543a6988f6cd8b8e8ea1e2849a5d))
+
 ### [0.3.5](https://github.com/clm-roig/suivie/compare/v0.3.4...v0.3.5) (2022-10-04)
 
 

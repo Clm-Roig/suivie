@@ -15,7 +15,7 @@ const TotalText: FC<Props> = ({ entries, noCompletionsText }) => {
     <>
       {entries.length > 0 ? (
         <>
-          <Typography gutterBottom>Vous avez effectué :</Typography>
+          <Typography gutterBottom>Total :</Typography>
           <CompletionChipList completions={getAggregatedCompletions(entries)}></CompletionChipList>
         </>
       ) : (
