@@ -1,6 +1,5 @@
 import { Card, CardProps } from '@mui/material';
 import { FC, useState } from 'react';
-import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
@@ -11,10 +10,9 @@ import TrackerCardHeader from './TrackerCardHeader';
 const sxProps = { px: 1, py: 1 };
 
 interface Props extends CardProps {
-  dragHandleProps?: DraggableProvidedDragHandleProps;
   tracker: Tracker;
 }
-const TrackerCard: FC<Props> = ({ dragHandleProps, tracker, ...cardProps }) => {
+const TrackerCard: FC<Props> = ({ tracker, ...cardProps }) => {
   const { requiredCompletions } = tracker;
   const [selectedCompletions, setSelectedCompletions] = useState<Completion[]>([]);
 
@@ -40,7 +38,7 @@ const TrackerCard: FC<Props> = ({ dragHandleProps, tracker, ...cardProps }) => {
       {...cardProps}
       className="tracker-card"
       id={'tracker-card-' + tracker.id}>
-      <TrackerCardHeader dragHandleProps={dragHandleProps} tracker={tracker} sx={sxProps} />
+      <TrackerCardHeader tracker={tracker} sx={sxProps} />
       {requiredCompletions.length > 0 && (
         <TrackerCardContent
           sx={{ sxProps }}
