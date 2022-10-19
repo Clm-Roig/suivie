@@ -60,7 +60,7 @@ The application is deployed on the Github repository page [here](https://clm-roi
 
 ### Why this project? Why I built it this way?
 
-I wanted to build an application with a modern React stack and CI tools I (Typescript, Github Actions, standard-version, Cypress, Prettier & ESLint). I like stats and I like to organize my life around 2 electronic productivity tools: todo lists and calendars. I thaught Bullet Journal trackers was a good idea to complement them 🙂
+I wanted to build an application with a modern React stack and CI tools (Typescript, Github Actions, standard-version, Cypress, Prettier & ESLint). I like stats and I like to organize my life around 2 electronic productivity tools: todo lists and calendars. I thaught Bullet Journal trackers was a good idea to complement them 🙂
 
 ### How I work on this project?
 
