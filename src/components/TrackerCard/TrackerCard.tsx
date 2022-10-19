@@ -1,21 +1,39 @@
 import { Card, CardProps } from '@mui/material';
+import { Reorder, useDragControls, useMotionValue } from 'framer-motion';
 import { FC, useState } from 'react';
-import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 
+import { useRaisedShadow } from '../../hooks/useRaisedShadow';
 import Completion from '../../models/Completion';
 import Tracker from '../../models/Tracker';
 import TrackerCardActions from './TrackerCardActions';
 import TrackerCardContent from './TrackerCardContent';
 import TrackerCardHeader from './TrackerCardHeader';
 
+const cardAnimations = {
+  initial: {
+    opacity: 0,
+    scale: 0
+  },
+  animate: {
+    opacity: 1,
+    scale: 1
+  },
+  exit: {
+    height: 0,
+    opacity: 0,
+    scale: 0
+  }
+};
 const sxProps = { px: 1, py: 1 };
 
 interface Props extends CardProps {
-  dragHandleProps?: DraggableProvidedDragHandleProps;
   tracker: Tracker;
 }
-const TrackerCard: FC<Props> = ({ dragHandleProps, tracker, ...cardProps }) => {
+const TrackerCard: FC<Props> = ({ tracker, ...cardProps }) => {
   const { requiredCompletions } = tracker;
+  const dragControls = useDragControls();
+  const y = useMotionValue(0);
+  const boxShadow = useRaisedShadow(y);
   const [selectedCompletions, setSelectedCompletions] = useState<Completion[]>([]);
 
   const addToSelectedCompletions = (completion: Completion) => {
@@ -35,28 +53,38 @@ const TrackerCard: FC<Props> = ({ dragHandleProps, tracker, ...cardProps }) => {
   };
 
   return (
-    <Card
-      style={{ background: tracker.color }}
-      {...cardProps}
-      className="tracker-card"
-      id={'tracker-card-' + tracker.id}>
-      <TrackerCardHeader dragHandleProps={dragHandleProps} tracker={tracker} sx={sxProps} />
-      {requiredCompletions.length > 0 && (
-        <TrackerCardContent
-          sx={{ sxProps }}
+    <Reorder.Item
+      key={tracker.id}
+      value={tracker}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      style={{ boxShadow, y }}
+      variants={cardAnimations}
+      transition={{ duration: 0.6 }}>
+      <Card
+        style={{ background: tracker.color }}
+        {...cardProps}
+        className="tracker-card"
+        id={'tracker-card-' + tracker.id}>
+        <TrackerCardHeader dragControls={dragControls} tracker={tracker} sx={sxProps} />
+        {requiredCompletions.length > 0 && (
+          <TrackerCardContent
+            sx={{ sxProps }}
+            onChipClick={onChipClick}
+            tracker={tracker}
+            selectedCompletions={selectedCompletions}
+          />
+        )}
+        <TrackerCardActions
+          sx={sxProps}
           onChipClick={onChipClick}
-          tracker={tracker}
           selectedCompletions={selectedCompletions}
+          setSelectedCompletions={setSelectedCompletions}
+          tracker={tracker}
         />
-      )}
-      <TrackerCardActions
-        sx={sxProps}
-        onChipClick={onChipClick}
-        selectedCompletions={selectedCompletions}
-        setSelectedCompletions={setSelectedCompletions}
-        tracker={tracker}
-      />
-    </Card>
+      </Card>
+    </Reorder.Item>
   );
 };
 

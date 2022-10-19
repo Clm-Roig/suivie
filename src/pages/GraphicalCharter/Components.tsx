@@ -2,6 +2,7 @@ import { Button, Divider, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import { useSnackbar } from 'notistack';
 
+import FakeReorderGroup from '../../components/FakeReorderGroup/FakeReorderGroup';
 import TrackerCard from '../../components/TrackerCard/TrackerCard';
 import TrackerList from '../../components/TrackerList/TrackerList';
 import TrackerColor from '../../models/TrackerColor';
@@ -32,15 +33,21 @@ const Components = () => {
       <Stack divider={<Divider />} spacing={4}>
         <Box>
           <Typography>Carte de tracker simple</Typography>
-          <TrackerCard tracker={tracker} />
+          <FakeReorderGroup values={[tracker]}>
+            <TrackerCard tracker={tracker} />
+          </FakeReorderGroup>
         </Box>
         <Box>
           <Typography>Carte de tracker complexe</Typography>
-          <TrackerCard tracker={complexTracker} />
+          <FakeReorderGroup values={[complexTracker]}>
+            <TrackerCard tracker={complexTracker} />
+          </FakeReorderGroup>
         </Box>
         <Box>
           <Typography>Liste de trackers</Typography>
-          <TrackerList trackers={trackers} />
+          <FakeReorderGroup values={trackers}>
+            <TrackerList trackers={trackers} />
+          </FakeReorderGroup>
         </Box>
         <Box>
           <Typography>Notifications</Typography>
