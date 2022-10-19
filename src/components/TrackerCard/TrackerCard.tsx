@@ -61,7 +61,9 @@ const TrackerCard: FC<Props> = ({ tracker, ...cardProps }) => {
       exit="exit"
       style={{ boxShadow, y }}
       variants={cardAnimations}
-      transition={{ duration: 0.6 }}>
+      dragListener={false}
+      dragControls={dragControls}
+      transition={{ duration: 0.4 }}>
       <Card
         style={{ background: tracker.color }}
         {...cardProps}
