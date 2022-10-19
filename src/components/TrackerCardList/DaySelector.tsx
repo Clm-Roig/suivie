@@ -21,7 +21,7 @@ const DaySelector: FC<Props> = ({ date, setDate }) => {
       <MobileDatePicker
         componentsProps={{
           actionBar: {
-            actions: ['cancel', 'today']
+            actions: ['cancel', 'today', 'accept']
           }
         }}
         value={date}

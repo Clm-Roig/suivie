@@ -14,10 +14,11 @@ import {
   Stack,
   Typography
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { isAfter } from 'date-fns';
+import { DragControls } from 'framer-motion';
 import { useSnackbar } from 'notistack';
 import React, { FC, useState } from 'react';
-import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 
 import { useAppDispatch } from '../../hooks/redux';
 import Tracker from '../../models/Tracker';
@@ -27,12 +28,18 @@ import formatDate from '../../utils/formatDate';
 import Emoji from '../Emoji/Emoji';
 import TrackerEditDialog from '../TrackerEditDialog/TrackerEditDialog';
 
+const StyledDragIndicator = styled(DragIndicatorIcon)(() => ({
+  '&:hover': {
+    cursor: 'grab'
+  }
+}));
+
 interface Props extends CardHeaderProps {
-  dragHandleProps?: DraggableProvidedDragHandleProps;
+  dragControls: DragControls;
   tracker: Tracker;
 }
 
-const TrackerCardHeader: FC<Props> = ({ dragHandleProps, tracker, ...cardHeaderProps }) => {
+const TrackerCardHeader: FC<Props> = ({ dragControls, tracker, ...cardHeaderProps }) => {
   const { beginDate, frequency, id, name, remainingDays, status } = tracker;
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -123,11 +130,10 @@ const TrackerCardHeader: FC<Props> = ({ dragHandleProps, tracker, ...cardHeaderP
         }
         title={
           <Stack direction="row" alignItems="center" gap={1}>
-            {dragHandleProps && (
-              <span {...dragHandleProps}>
-                <DragIndicatorIcon sx={{ fontSize: 18 }} aria-label="tracker-drag-handle" />
-              </span>
-            )}
+            <StyledDragIndicator
+              sx={{ fontSize: 18 }}
+              onPointerDown={(e) => dragControls.start(e)}
+            />
             <Typography variant="h5">{name}</Typography>
           </Stack>
         }
