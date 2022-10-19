@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { subDays } from 'date-fns';
+import { Reorder } from 'framer-motion';
 import { SnackbarProvider } from 'notistack';
 import { Provider } from 'react-redux';
 
@@ -30,7 +31,13 @@ const setup = () => {
   render(
     <Provider store={createTestStore()}>
       <SnackbarProvider>
-        <TrackerCard tracker={tracker1} />
+        <Reorder.Group
+          values={[tracker1]}
+          onReorder={() => {
+            return;
+          }}>
+          <TrackerCard tracker={tracker1} />
+        </Reorder.Group>
       </SnackbarProvider>
     </Provider>
   );

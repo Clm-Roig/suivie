@@ -1,5 +1,6 @@
 import ArchiveIcon from '@mui/icons-material/Archive';
 import DeleteIcon from '@mui/icons-material/Delete';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {
@@ -10,9 +11,12 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  Stack,
   Typography
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { isAfter } from 'date-fns';
+import { DragControls } from 'framer-motion';
 import { useSnackbar } from 'notistack';
 import React, { FC, useState } from 'react';
 
@@ -24,11 +28,18 @@ import formatDate from '../../utils/formatDate';
 import Emoji from '../Emoji/Emoji';
 import TrackerEditDialog from '../TrackerEditDialog/TrackerEditDialog';
 
+const StyledDragIndicator = styled(DragIndicatorIcon)(() => ({
+  '&:hover': {
+    cursor: 'grab'
+  }
+}));
+
 interface Props extends CardHeaderProps {
+  dragControls: DragControls;
   tracker: Tracker;
 }
 
-const TrackerCardHeader: FC<Props> = ({ tracker, ...cardHeaderProps }) => {
+const TrackerCardHeader: FC<Props> = ({ dragControls, tracker, ...cardHeaderProps }) => {
   const { beginDate, frequency, id, name, remainingDays, status } = tracker;
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -117,7 +128,15 @@ const TrackerCardHeader: FC<Props> = ({ tracker, ...cardHeaderProps }) => {
             </Menu>
           </>
         }
-        title={<Typography variant="h5">{name}</Typography>}
+        title={
+          <Stack direction="row" alignItems="center" gap={1}>
+            <StyledDragIndicator
+              sx={{ fontSize: 18 }}
+              onPointerDown={(e) => dragControls.start(e)}
+            />
+            <Typography variant="h5">{name}</Typography>
+          </Stack>
+        }
         subheader={
           <>
             <Typography display="block" variant="subtitle2">

@@ -10,13 +10,13 @@ import trackersReducer, { initialState, orderTracker } from '../../trackersSlice
 
 describe('trackers reducer', () => {
   describe('Move a tracker', () => {
-    it('should not do anything if the new index is the same as the previous one', () => {
+    it("should not do anything if the trackers order didn't change", () => {
       const finalState = trackersReducer(
         {
           ...initialState,
           trackers: [testTracker1, testTracker2, testTracker3]
         },
-        orderTracker({ sourceTrackerId: testTracker1Id, destinationTrackerId: testTracker1Id })
+        orderTracker([testTracker1, testTracker2, testTracker3])
       );
       const { trackers: trackers } = finalState;
       expect(trackers[0].id).toBe(testTracker1Id);
@@ -29,7 +29,7 @@ describe('trackers reducer', () => {
           ...initialState,
           trackers: [testTracker1, testTracker2, testTracker3]
         },
-        orderTracker({ sourceTrackerId: testTracker1Id, destinationTrackerId: testTracker3Id })
+        orderTracker([testTracker2, testTracker3, testTracker1])
       );
       const { trackers: trackers } = finalState;
       expect(trackers[0].id).toBe(testTracker2Id);
@@ -42,7 +42,7 @@ describe('trackers reducer', () => {
           ...initialState,
           trackers: [testTracker1, testTracker2, testTracker3]
         },
-        orderTracker({ sourceTrackerId: testTracker3Id, destinationTrackerId: testTracker1Id })
+        orderTracker([testTracker3, testTracker1, testTracker2])
       );
       const { trackers: trackers } = finalState;
       expect(trackers[0].id).toBe(testTracker3Id);
