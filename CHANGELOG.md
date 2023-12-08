@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.9](https://github.com/clm-roig/suivie/compare/v0.3.8...v0.3.9) (2023-12-08)
+
+
+### Bug Fixes
+
+* **trackerCard:** move drag icon to the center of the card ([070a3fa](https://github.com/clm-roig/suivie/commit/070a3fa0a3587af183f917a0f47b08227ddbe975))
+
+### [0.3.8](https://github.com/clm-roig/suivie/compare/v0.3.7...v0.3.8) (2023-10-01)
+
+
+### Bug Fixes
+
+* **badge:** fix badges shields issue (https://github.com/badges/shields/issues/8671) ([f7b9932](https://github.com/clm-roig/suivie/commit/f7b993292cb0a6bb1a4d110cb0829e31e110da77))
+* **dnd:** allow drag n drop only if using the handler ([681dae4](https://github.com/clm-roig/suivie/commit/681dae4f9c9e621cfb76285d716dbcceca1bbe2d))
+
 ### [0.3.7](https://github.com/clm-roig/suivie/compare/v0.3.5...v0.3.7) (2022-10-19)
 
 
