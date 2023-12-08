@@ -7,7 +7,7 @@
   </i></p>
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9f4ce0a620d94a07aad5190f009b9b79)](https://www.codacy.com/gh/Clm-Roig/suivie/dashboard?utm_source=github.com&utm_medium=referral&utm_content=Clm-Roig/suivie&utm_campaign=Badge_Grade)
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/clm-roig/suivie/Build%20&%20test/develop)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/clm-roig/suivie/build_test.yml?branch=develop)
 [![cypress](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/i4ns1y&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/i4ns1y/runs)
 [![GitHub tag](https://img.shields.io/github/tag/clm-roig/suivie?include_prereleases=&sort=semver&color=blue)](https://github.com/clm-roig/suivie/releases/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-yellow.svg)](https://github.com/prettier/prettier)

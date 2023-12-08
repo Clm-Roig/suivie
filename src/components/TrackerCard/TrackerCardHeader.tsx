@@ -130,11 +130,11 @@ const TrackerCardHeader: FC<Props> = ({ dragControls, tracker, ...cardHeaderProp
         }
         title={
           <Stack direction="row" alignItems="center" gap={1}>
+            <Typography variant="h5">{name}</Typography>
             <StyledDragIndicator
               sx={{ fontSize: 18 }}
               onPointerDown={(e) => dragControls.start(e)}
             />
-            <Typography variant="h5">{name}</Typography>
           </Stack>
         }
         subheader={
