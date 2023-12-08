@@ -1,17 +1,12 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PaletteIcon from '@mui/icons-material/Palette';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import { Box, Button, Divider, Link, Stack, Typography } from '@mui/material';
+import { Box, Button, Link, Stack, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 import DefaultPageLayout from '../../components/DefaultPageLayout/DefaultPageLayout';
 import ExternalLink from '../../components/ExternalLink/ExternalLink';
-import {
-  APP_NAME,
-  BUG_REPORT_FORM_URL,
-  IMPROVEMENT_SUGGESTION_FORM_URL,
-  PAYPAL_DONATE_URL
-} from '../../config/Constants';
+import { APP_NAME, PAYPAL_DONATE_URL } from '../../config/Constants';
 import PackageVersion from './PackageVersion';
 
 function About() {
@@ -52,38 +47,6 @@ function About() {
               </Button>
             </Link>
           </Stack>
-        </Box>
-
-        <Divider sx={{ my: 2 }} />
-
-        <Box>
-          <Typography variant="h2" gutterBottom>
-            Suggérer une amélioration
-          </Typography>
-          <iframe src={IMPROVEMENT_SUGGESTION_FORM_URL} width="100%" height="600"></iframe>
-          <Typography>
-            {
-              "Si le formulaire n'apparaît pas ci-dessus, vous pouvez le remplir en suivant ce lien : "
-            }
-            <ExternalLink href={IMPROVEMENT_SUGGESTION_FORM_URL}>
-              {"SuiVie - Suggestion d'amélioration"}
-            </ExternalLink>
-          </Typography>
-        </Box>
-
-        <Divider sx={{ my: 2 }} />
-
-        <Box>
-          <Typography variant="h2" gutterBottom>
-            Signaler un bug
-          </Typography>
-          <iframe src={BUG_REPORT_FORM_URL} width="100%" height="600"></iframe>
-          <Typography>
-            {
-              "Si le formulaire n'apparaît pas ci-dessus, vous pouvez le remplir en suivant ce lien : "
-            }
-            <ExternalLink href={BUG_REPORT_FORM_URL}>SuiVie - Rapport de bug</ExternalLink>
-          </Typography>
         </Box>
       </DefaultPageLayout>
       <PackageVersion style={{ bottom: 0, right: 0, position: 'fixed' }} />

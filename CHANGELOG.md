@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.9](https://github.com/clm-roig/suivie/compare/v0.3.8...v0.3.9) (2023-12-08)
+
+
+### Bug Fixes
+
+* **trackerCard:** move drag icon to the center of the card ([070a3fa](https://github.com/clm-roig/suivie/commit/070a3fa0a3587af183f917a0f47b08227ddbe975))
+
+### [0.3.8](https://github.com/clm-roig/suivie/compare/v0.3.7...v0.3.8) (2023-10-01)
+
+
+### Bug Fixes
+
+* **badge:** fix badges shields issue (https://github.com/badges/shields/issues/8671) ([f7b9932](https://github.com/clm-roig/suivie/commit/f7b993292cb0a6bb1a4d110cb0829e31e110da77))
+* **dnd:** allow drag n drop only if using the handler ([681dae4](https://github.com/clm-roig/suivie/commit/681dae4f9c9e621cfb76285d716dbcceca1bbe2d))
+
+### [0.3.7](https://github.com/clm-roig/suivie/compare/v0.3.5...v0.3.7) (2022-10-19)
+
+
+### Features
+
+* **#390:** add favorite days stat ([13af6f8](https://github.com/clm-roig/suivie/commit/13af6f897a62e8191bc4d7d10aeb34e7213923df)), closes [#390](https://github.com/clm-roig/suivie/issues/390)
+* **card:** add card animations ([582fd8e](https://github.com/clm-roig/suivie/commit/582fd8e4c71714935ba4a89220408cd54ec1bcf5))
+
+
+### Bug Fixes
+
+* **bg:**  reduce opacity ([f35b4da](https://github.com/clm-roig/suivie/commit/f35b4daa80aed4f44ac747b644bb2aa50dea9301))
+* **bgAttachment:** disable fixed bg attachment on mobile (fps drop) ([b3c1475](https://github.com/clm-roig/suivie/commit/b3c1475c7e7a35f18aeb131d46e3974d8b445d6d))
+* **daySelector:** add accept button ([0b8dfce](https://github.com/clm-roig/suivie/commit/0b8dfce83846a081423ae6c69c2d3876cb04ff4b))
+* **dnd:** re-enable drag n drop using framer-motion ([3e3151d](https://github.com/clm-roig/suivie/commit/3e3151df3e9350807ef01e81d03b584e7e0edb63))
+* **dnd:** remove beautiful dnd ([8515949](https://github.com/clm-roig/suivie/commit/85159495041a35b6ba59fd61f0264c9e43783b5f))
+* **weekPicker:** refactor and simplify weekpicker implementation ([d57bbae](https://github.com/clm-roig/suivie/commit/d57bbae8641a471ba48f18e8bc9821228f4cf48b))
+
 ### [0.3.6](https://github.com/clm-roig/suivie/compare/v0.3.5...v0.3.6) (2022-10-09)
 
 

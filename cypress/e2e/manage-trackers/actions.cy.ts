@@ -47,6 +47,7 @@ context('Manage trackers', () => {
       cy.get('#notistack-snackbar').should('contain.text', 'Tracker archivé');
       cy.get('[data-testid="CloseIcon"]').click();
       cy.get('.MuiListSubheader-root').contains('ARCHIVÉS');
+      cy.wait(800); // Wait for the animation to end
     });
 
     it('deletes one tracker', () => {
