@@ -1,8 +1,8 @@
 import BallotIcon from '@mui/icons-material/Ballot';
-import BugReportIcon from '@mui/icons-material/BugReport';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import TimelineIcon from '@mui/icons-material/Timeline';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
@@ -23,7 +23,6 @@ import TabPanel from '../../components/TabPanel/TabPanel';
 import AddTrackerCard from '../../components/TrackerCardList/AddTrackerCard';
 import DateSelector from '../../components/TrackerCardList/DaySelector';
 import TrackerCardList from '../../components/TrackerCardList/TrackerCardList';
-import { BUG_REPORT_FORM_URL } from '../../config/Constants';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   selectHiddenTrackers,
@@ -56,9 +55,9 @@ function Trackers() {
       onClick: () => navigate('/trackers/manage')
     },
     {
-      icon: <BugReportIcon />,
-      name: 'Signaler un bug',
-      onClick: () => window.open(BUG_REPORT_FORM_URL, '_blank')
+      icon: <TimelineIcon />,
+      name: 'Statistiques',
+      onClick: () => navigate('/stats')
     }
   ];
 
@@ -77,7 +76,7 @@ function Trackers() {
         <DateSelector date={selectedDate} setDate={handleSetDate} />
 
         {doneTrackers.length + hiddenTrackers.length + todoTrackers.length === 0 && (
-          <Typography align="center">{'Aucun tracker pour ce jour-ci.'}</Typography>
+          <Typography align="center">Aucun tracker pour ce jour-ci.</Typography>
         )}
 
         <Tabs
