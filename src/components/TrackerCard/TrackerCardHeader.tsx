@@ -4,6 +4,7 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {
+  Box,
   CardHeader,
   CardHeaderProps,
   IconButton,
@@ -129,12 +130,34 @@ const TrackerCardHeader: FC<Props> = ({ dragControls, tracker, ...cardHeaderProp
           </>
         }
         title={
-          <Stack direction="row" alignItems="center" gap={1}>
-            <Typography variant="h5">{name}</Typography>
-            <StyledDragIndicator
-              sx={{ fontSize: 18 }}
+          <Stack direction="row" alignItems="center" gap={1} position="relative">
+            <Box
               onPointerDown={(e) => dragControls.start(e)}
-            />
+              style={{
+                touchAction: 'none' // needed to make drag n drop working on touch screens
+              }}
+              sx={{
+                // See : https://ishadeed.com/article/clickable-area#using-pseudo-elements-to-increase-the-clickable-area
+                '&:after': {
+                  content: '""',
+                  position: 'absolute',
+                  // Manually tested values to have a larger clickable area
+                  top: '-8px',
+                  left: '-8px',
+                  height: '42px',
+                  width: '42px'
+                  // Uncomment to see the clickable area
+                  // ,background: 'red',
+                  // opacity: 0.3
+                }
+              }}>
+              <StyledDragIndicator
+                sx={{
+                  fontSize: 18
+                }}
+              />
+            </Box>
+            <Typography variant="h5">{name}</Typography>
           </Stack>
         }
         subheader={
