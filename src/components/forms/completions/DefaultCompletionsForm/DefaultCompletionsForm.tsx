@@ -75,9 +75,7 @@ const DefaultCompletionsForm: FC<Props> = ({
   const id = open ? 'popover-' + name : undefined;
 
   return (
-    // Little hack on Box ref to make it work with TS: https://github.com/mui/material-ui/issues/17010#issuecomment-615577360
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    <Box {...({ ref: animateRef } as any)}>
+    <Box ref={animateRef}>
       {fields.map((field, index) => (
         <FieldsetGrid columns={2} container key={field.id} sx={fieldsetSx} {...gridProps}>
           <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
