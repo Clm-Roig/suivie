@@ -143,6 +143,7 @@ const TrackerCardActions: FC<Props> = ({
         onChipClick={onChipClick}
         onValidation={handleCustomValidation}
         selectedCompletions={selectedCompletions}
+        setSelectedCompletions={setSelectedCompletions}
         tracker={tracker}
       />
       <MakeVisibleValidationDialog
