@@ -10,12 +10,12 @@ import {
   Box,
   Button,
   Divider,
+  Drawer,
   IconButton,
   List,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
-  SwipeableDrawer
+  ListItemText
 } from '@mui/material';
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -82,12 +82,10 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width 
   ];
 
   return (
-    <SwipeableDrawer
+    <Drawer
       anchor="left"
       onClose={toggleDrawerMenu}
-      onOpen={toggleDrawerMenu}
       open={open}
-      swipeAreaWidth={70}
       sx={{
         width: width,
         flexShrink: 0,
@@ -124,7 +122,7 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width 
           À Propos
         </Button>
       </Box>
-    </SwipeableDrawer>
+    </Drawer>
   );
 };
 
