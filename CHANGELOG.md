@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.10](https://github.com/clm-roig/suivie/compare/v0.3.9...v0.3.10) (2024-02-06)
+
+
+### Features
+
+* **customCompletion:** automatically select & focus the only completion if unique when opening dialogue ([f72e82c](https://github.com/clm-roig/suivie/commit/f72e82c88c08de5ce0bea820bb7a946814199b69))
+
+
+### Bug Fixes
+
+* **animatedBox:** remove now useless hack ([40b951f](https://github.com/clm-roig/suivie/commit/40b951f5bc1b11a90268fab7dd59ae0602cf5522))
+* **drawerMenu:** increase swip area width ([39584fe](https://github.com/clm-roig/suivie/commit/39584fe19e094d0545ae9f78006eca50e713280f))
+* **trackerCard:** fix dndrop issue ([130dd08](https://github.com/clm-roig/suivie/commit/130dd08163797a395c16284ba3adc7a606ceccff))
+
 ### [0.3.9](https://github.com/clm-roig/suivie/compare/v0.3.8...v0.3.9) (2023-12-08)
 
 
