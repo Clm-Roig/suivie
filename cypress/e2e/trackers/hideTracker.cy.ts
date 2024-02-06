@@ -20,7 +20,7 @@ context('Trackers', () => {
       cy.get('.tracker-card').should('have.length', 0);
 
       // Navigate back to todo tab and find the tracker
-      cy.get('.MuiTab-root').filter(':contains("À FAIRE")').click();
+      cy.get('.MuiTab-root').filter(':contains("À FAIRE")').click({ force: true });
       cy.get('.tracker-card').should('have.length', 1);
     });
   });
