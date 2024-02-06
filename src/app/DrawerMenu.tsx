@@ -87,6 +87,7 @@ const DrawerMenu: FC<Props> = ({ open, toggleDrawerMenu, toggleThemeMode, width 
       onClose={toggleDrawerMenu}
       onOpen={toggleDrawerMenu}
       open={open}
+      swipeAreaWidth={70}
       sx={{
         width: width,
         flexShrink: 0,

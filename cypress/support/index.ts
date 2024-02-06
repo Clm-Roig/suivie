@@ -15,16 +15,6 @@ declare global {
        * @example cy.createTracker({ name: 'my tracker' })
        */
       createTracker(trackerValues?: Partial<Tracker>): Chainable<Element>;
-      /**
-       * get() command for detached element from here => https://github.com/cypress-io/cypress/issues/5743#issuecomment-650421731
-       * Waits until the selector finds an attached element, then yields it (wrapped).
-       * selectorFn, if provided, is passed $(document). Don't use cy methods inside selectorFn.
-       *
-       * Workaround of this issue: https://github.com/cypress-io/cypress/issues/7306
-       * Remove it when the issue is solved.
-       * @example cy.getAttached('#myButton')
-       */
-      getAttached(selector: string): Chainable<unknown>;
     }
   }
 }

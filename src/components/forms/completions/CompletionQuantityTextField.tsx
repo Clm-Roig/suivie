@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button, TextField, TextFieldProps } from '@mui/material';
+import { Button, InputProps, TextField, TextFieldProps } from '@mui/material';
 import React, { FC } from 'react';
 
 const StyledButton = styled(Button)`
@@ -14,12 +14,18 @@ const StyledTextField = styled(TextField)`
 `;
 
 interface Props {
+  autoFocus?: InputProps['autoFocus'];
   onDecrement?: () => void;
   onIncrement?: () => void;
   textFieldProps: TextFieldProps;
 }
 
-const CompletionQuantityTextField: FC<Props> = ({ onDecrement, onIncrement, textFieldProps }) => {
+const CompletionQuantityTextField: FC<Props> = ({
+  autoFocus,
+  onDecrement,
+  onIncrement,
+  textFieldProps
+}) => {
   return (
     <StyledTextField
       inputProps={{
@@ -30,6 +36,7 @@ const CompletionQuantityTextField: FC<Props> = ({ onDecrement, onIncrement, text
         }
       }}
       InputProps={{
+        autoFocus: autoFocus,
         endAdornment: onIncrement && <StyledButton onClick={() => onIncrement()}>+</StyledButton>,
         startAdornment: onDecrement && <StyledButton onClick={() => onDecrement()}>-</StyledButton>,
         sx: { px: 1 }

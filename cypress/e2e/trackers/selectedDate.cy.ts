@@ -20,8 +20,8 @@ context('Trackers', () => {
       const todayString =
         `${today.getDate()}`.padStart(2, '0') + '/' + todayMonth + '/' + today.getFullYear();
       cy.get('input').should('have.value', todayString);
-      cy.get('[data-testid="ChevronLeftIcon"]').click();
-      cy.get('[data-testid="ChevronLeftIcon"]').click();
+      cy.get('[data-testid="ChevronLeftIcon"]').click({ force: true });
+      cy.get('[data-testid="ChevronLeftIcon"]').click({ force: true });
       cy.reload();
       cy.get('input').should('have.value', todayString);
     });
@@ -30,9 +30,9 @@ context('Trackers', () => {
     });
     it('has one tracker created and visible today and yesterday only', () => {
       cy.get('.tracker-card').should('have.length', 1);
-      cy.get('[data-testid="ChevronLeftIcon"]').click();
+      cy.get('[data-testid="ChevronLeftIcon"]').click({ force: true });
       cy.get('.tracker-card').should('have.length', 1);
-      cy.get('[data-testid="ChevronLeftIcon"]').click();
+      cy.get('[data-testid="ChevronLeftIcon"]').click({ force: true });
       cy.get('.tracker-card').should('have.length', 0);
     });
   });

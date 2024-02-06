@@ -52,15 +52,3 @@ Cypress.Commands.add('createTracker', (trackerValues?: Partial<Tracker>) => {
   const tracker = makeFakeTracker(trackerValues);
   cy.window().its('store').invoke('dispatch', createTracker(tracker));
 });
-
-Cypress.Commands.add('getAttached', (selector: string) => {
-  const getElement = typeof selector === 'function' ? selector : ($d) => $d.find(selector);
-  let $el = null;
-  return cy
-    .document()
-    .should(($d) => {
-      $el = getElement(Cypress.$($d));
-      expect(Cypress.dom.isDetached($el)).to.be.false;
-    })
-    .then(() => cy.wrap($el));
-});
