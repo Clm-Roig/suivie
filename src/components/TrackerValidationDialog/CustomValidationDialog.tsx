@@ -9,7 +9,7 @@ import {
   DialogTitle
 } from '@mui/material';
 import { isToday } from 'date-fns';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import { useAppSelector } from '../../hooks/redux';
 import Completion from '../../models/Completion';
@@ -24,6 +24,7 @@ interface Props {
   onChipClick?: (completion: Completion) => void;
   onValidation: (completions: Completion[]) => void;
   selectedCompletions?: Completion[];
+  setSelectedCompletions: (completions: Completion[]) => void;
   tracker: Tracker;
 }
 
@@ -32,10 +33,19 @@ const CustomValidationDialog: FC<Props> = ({
   onChipClick,
   onValidation,
   selectedCompletions,
+  setSelectedCompletions,
   tracker
 }) => {
   const selectedDate = new Date(useAppSelector(selectSelectedDate));
   const { name, requiredCompletions } = tracker;
+
+  useEffect(() => {
+    // Default select the only completion when opening (and unselect it when closing)
+    if (requiredCompletions?.length === 1) {
+      setSelectedCompletions(dialogProps.open ? requiredCompletions : []);
+    }
+  }, [setSelectedCompletions, requiredCompletions, dialogProps.open]);
+
   return (
     <Dialog {...dialogProps}>
       <DialogTitle id="alert-dialog-title">

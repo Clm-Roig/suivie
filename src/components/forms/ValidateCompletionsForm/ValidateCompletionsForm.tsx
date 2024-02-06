@@ -92,6 +92,7 @@ const ValidateCompletionsForm: FC<Props> = ({ completions, formId, onSubmit }) =
               }}
               render={({ field: { name, onChange, value }, fieldState: { error } }) => (
                 <CompletionQuantityTextField
+                  autoFocus={completions?.length === 1}
                   onDecrement={() => setValue(name, computeDecrementedStringQuantity(value))}
                   onIncrement={() => setValue(name, computeIncrementedStringQuantity(value))}
                   textFieldProps={{
